@@ -5,13 +5,14 @@ import { Avatar } from '@chakra-ui/react'
 import { Link } from 'react-router-dom';
 import { IconButton } from '@chakra-ui/react';
 import { Button} from '@chakra-ui/react';
+import "./TopBar.css"
 const TopBar = () => {
   const [userLogged, setUserLogged]=useState(false);
   return (
     <div className='flex flex-row justify-between items-center m-1 mt-2 border-b-2 border-[#77717150] p-2 pl-10 pr-10 rounded-full'>
       <Link href="/">
       <div className='flex flex-row justify-center items-center'>
-          <div className='flex flex-row justify-center items-center text-2xl font-ubuntu'>GrabWay</div>
+          <div className='logo-text flex flex-row justify-center items-center text-2xl font-ubuntu'>GrabWay</div>
           <div className='flex justify-center items-center'>
           <img src={Logo}/>
           </div>
