@@ -1,12 +1,12 @@
-import "./App.css";
-import Sidebar from "./components/Sidebar/sidebar";
-
-function Home() {
+import React from "react";
+import TopBar from "./components/Navbar/TopNavBar/TopBar";
+import BannerImage from "./Assets/images/loginImage.jpg";
+const Home = () => {
   return (
-    <>
-      <Sidebar />
-    </>
+    <div>
+      <TopBar />
+    </div>
   );
-}
+};
 
 export default Home;
