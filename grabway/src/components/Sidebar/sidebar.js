@@ -28,6 +28,15 @@ export default function Sidebar() {
         <ul class="nav-list">
           <li>
             <Link to="/">
+              <div className="items-list-side-book-ride">
+                <i class="bx bx-car" style={{ color: "#000000" }}></i>
+                <span class="links_name">Book Ride</span>
+              </div>
+              <span class="tooltip">Book Ride</span>
+            </Link>
+          </li>
+          <li>
+            <Link to="/">
               <div className="items-list-side">
                 <i class="bx bx-grid-alt"></i>
                 <span class="links_name">Dashboard</span>
