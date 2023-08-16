@@ -1,12 +1,13 @@
-import React from 'react'
-import TopBar from './components/Navbar/TopNavBar/TopBar';
-import BannerImage from "./Assets/images/loginImage.jpg"
+import React from "react";
+import TopBar from "./components/Navbar/TopNavBar/TopBar";
+import Sidebar from "./components/Sidebar/sidebar";
 const Home = () => {
   return (
     <div>
-      <TopBar/>
+      <TopBar />
+      <Sidebar />
     </div>
-  )
-}
+  );
+};
 
-export default Home
+export default Home;
