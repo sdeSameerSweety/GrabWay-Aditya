@@ -150,6 +150,18 @@
   background: #e51b23;
   cursor: pointer;
 }
+.sidebar .items-list-side-book-ride {
+  display: flex;
+  height: 100%;
+  width: 100%;
+  border-radius: 12px;
+  align-items: center;
+  text-decoration: none;
+  transition: all 0.4s ease;
+  background: #f7ff05;
+  cursor: pointer;
+}
+
 .sidebar .items-list-side:hover {
   background: #fff;
 }
@@ -259,4 +271,26 @@
 
 .bx-log-out:hover {
   cursor: pointer;
+}
+
+.sidebar .items-list-side-book-ride:hover {
+  background: #fff;
+}
+.sidebar .items-list-side-book-ride .links_name {
+  color: #000000;
+  font-size: 15px;
+  font-weight: 400;
+  white-space: nowrap;
+  opacity: 0;
+  pointer-events: none;
+  transition: 0.4s;
+}
+.sidebar.open .items-list-side-book-ride .links_name {
+  opacity: 1;
+  pointer-events: auto;
+}
+.sidebar .items-list-side-book-ride:hover .links_name,
+.sidebar .items-list-side-book-ride:hover i {
+  transition: all 0.5s ease;
+  color: #000000;
 }
