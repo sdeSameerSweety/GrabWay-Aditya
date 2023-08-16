@@ -3,8 +3,6 @@
 @import url("https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css");
 .sidebar {
   position: fixed;
-  left: 0;
-  top: 0;
   height: 100%;
   width: 78px;
   background: #ffffff;
@@ -17,15 +15,23 @@
   width: 250px;
 }
 .sidebar .logo-details {
-  height: 60px;
+  height: 28px;
   display: flex;
   align-items: center;
   position: relative;
 }
+.sidebar.open .logo-details {
+  height: 28px;
+  display: flex;
+  position: relative;
+  justify-content: flex-end;
+}
+
 .sidebar .logo-details .icon {
   opacity: 0;
   transition: all 0.5s ease;
 }
+
 .sidebar .logo-details .logo_name {
   color: #000000;
   font-size: 20px;
@@ -33,6 +39,7 @@
   opacity: 0;
   transition: all 0.5s ease;
 }
+
 .sidebar.open .logo-details .icon,
 .sidebar.open .logo-details .logo_name {
   opacity: 1;
@@ -47,10 +54,11 @@
   font-size: 23px;
   text-align: center;
   cursor: pointer;
-  transition: all 0.5s ease;
+  transition: all 0.3s ease;
 }
 .sidebar.open .logo-details #btn {
   text-align: right;
+  transition: all 0.3s ease;
 }
 .sidebar i {
   color: #fff;
@@ -69,6 +77,7 @@
   margin: 8px 0;
   list-style: none;
 }
+
 .sidebar li .tooltip {
   position: absolute;
   top: -20px;

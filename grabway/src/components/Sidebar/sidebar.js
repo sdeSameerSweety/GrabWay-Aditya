@@ -17,11 +17,15 @@ export default function Sidebar() {
   return (
     <>
       <div class={sidebarClass}>
+        <div class="logo-details">
+          <i
+            class={sidebarClass === "sidebar" ? "bx bx-menu" : "bx bx-x-circle"}
+            style={{ color: "black" }}
+            id="btn"
+            onClick={toggleClass}
+          ></i>
+        </div>
         <ul class="nav-list">
-          <li>
-            <Switch size="lg" colorScheme="purple" onChange={toggleClass} />
-          </li>
-          <Divider colorScheme="red" />
           <li>
             <Link to="/">
               <div className="items-list-side">
