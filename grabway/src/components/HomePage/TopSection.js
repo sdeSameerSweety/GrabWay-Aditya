@@ -17,7 +17,7 @@ import { FaCircleDot } from "react-icons/fa6";
 const TopSection = () => {
   return (
     <>
-      <div className="dekstop-view">
+      <div className="relative dekstop-view">
         <div className="flex justify-center items-center w-auto h-auto ml-14">
           <div className="flex justify-center items-center h-[80vh] w-[100%] z-10">
             <img
@@ -145,7 +145,7 @@ const TopSection = () => {
 
       <div className="mobile-view mt-[2vh] flex flex-col justify-center items-center">
         <div>
-            <img className="h-[20vh]" src="/assets/images/loginImage.jpg"/>
+          <img className="h-[20vh]" src="/assets/images/loginImage.jpg" />
         </div>
         <div className="flex justify-center items-center">
           <Card variant="filled" sx={{ boxShadow: "0px 0px 0px 10px white" }}>
