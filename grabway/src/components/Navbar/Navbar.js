@@ -1,14 +1,14 @@
-import React from 'react'
-import TopBar from './TopNavBar/TopBar'
-import Sidebar from './Sidebar/sidebar'
+import React from "react";
+import TopBar from "./TopNavBar/TopBar";
+import Sidebar from "./Sidebar/sidebar";
 
-const Navbar = () => {
+const Navbar = ({ classDisplay, setClassDislay }) => {
   return (
     <div>
-      <TopBar/>
-      <Sidebar/>
+      <TopBar />
+      <Sidebar classDisplay={classDisplay} setClassDisplay={setClassDislay} />
     </div>
-  )
-}
+  );
+};
 
-export default Navbar
+export default Navbar;

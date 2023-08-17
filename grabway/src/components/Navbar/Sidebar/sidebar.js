@@ -3,11 +3,16 @@ import "./sidebar.css";
 import { Switch, Divider } from "@chakra-ui/react";
 import { Link } from "react-router-dom";
 
-export default function Sidebar() {
+export default function Sidebar({ classDisplay, setClassDisplay }) {
   const [sidebarClass, setSidebarClass] = useState("sidebar");
   const toggleClass = () => {
-    if (sidebarClass === "sidebar open") setSidebarClass("sidebar");
-    else setSidebarClass("sidebar open");
+    if (sidebarClass === "sidebar open") {
+      setSidebarClass("sidebar");
+      setClassDisplay("sidebar");
+    } else {
+      setSidebarClass("sidebar open");
+      setClassDisplay("sidebar open");
+    }
   };
 
   const handleSignout = () => {
