@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import "./sidebar.css";
-import { Switch, Divider } from "@chakra-ui/react";
 import { Link } from "react-router-dom";
 
 export default function Sidebar({ classDisplay, setClassDisplay }) {
