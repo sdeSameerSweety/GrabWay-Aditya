@@ -1,11 +1,11 @@
 import React from "react";
-import TopBar from "./components/Navbar/TopNavBar/TopBar";
-import Sidebar from "./components/Sidebar/sidebar";
+import Navbar from "./components/Navbar/Navbar";
+import TopSection from "./components/HomePage/TopSection";
 const Home = () => {
   return (
     <div>
-      <TopBar />
-      <Sidebar />
+      <Navbar/>
+      <TopSection/>
     </div>
   );
 };
