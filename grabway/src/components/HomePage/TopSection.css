@@ -1,23 +1,22 @@
 @media only screen and (max-width: 900px) {
-    .input-main-div{
-        display: flex;
-        flex-direction: column;
-        margin-top: 9%;
-    }
+  .input-main-div {
+    display: flex;
+    flex-direction: column;
+    margin-top: 9%;
   }
+}
 
-  @media only screen and (max-width: 600px) {
-    .dekstop-view{
-        display: none;
-    }
+@media only screen and (max-width: 600px) {
+  .dekstop-view {
+    display: none;
   }
+}
 @media only screen and (min-width: 600px) {
-    .mobile-view{
-        display: none;
-    }
+  .mobile-view {
+    display: none;
+  }
 }
 @media only screen and (max-width: 600px) {
-    .mobile-view{
-     
-    }
+  .mobile-view {
   }
+}
