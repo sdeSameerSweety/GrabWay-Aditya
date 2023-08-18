@@ -294,3 +294,9 @@
   transition: all 0.5s ease;
   color: #000000;
 }
+
+@media only screen and (max-width: 900px) {
+  .logo-details {
+    display: none;
+  }
+}
