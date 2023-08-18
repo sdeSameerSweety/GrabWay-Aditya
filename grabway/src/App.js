@@ -3,6 +3,7 @@ import { Routes, Route, BrowserRouter } from "react-router-dom";
 import Navbar from "./components/Navbar/Navbar";
 import TopSection from "./components/HomePage/TopSection";
 import Footer from "./components/Footer/footer";
+import TopScroller from "./components/TopScroller/TopSlider";
 function App() {
   const [classDisplay, setClassDisplay] = useState("sidebar");
   const intDivStyle = {
@@ -15,6 +16,7 @@ function App() {
     <BrowserRouter>
       <Navbar classDisplay={classDisplay} setClassDislay={setClassDisplay} />
       <div style={intDivStyle}>
+        <TopScroller/>
         <Routes>
           <Route path="/" element={<TopSection />} />
         </Routes>
