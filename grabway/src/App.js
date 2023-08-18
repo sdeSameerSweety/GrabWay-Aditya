@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { Routes, Route, BrowserRouter } from "react-router-dom";
 import Navbar from "./components/Navbar/Navbar";
 import TopSection from "./components/HomePage/TopSection";
-
+import Footer from "./components/Footer/footer";
 function App() {
   const [classDisplay, setClassDisplay] = useState("sidebar");
   const intDivStyle = {
@@ -18,6 +18,7 @@ function App() {
         <Routes>
           <Route path="/" element={<TopSection />} />
         </Routes>
+        <Footer />
       </div>
     </BrowserRouter>
   );
