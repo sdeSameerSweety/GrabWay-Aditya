@@ -15,7 +15,7 @@ const TopBar = () => {
             GrabWay
           </div>
           <div className="flex justify-center items-center">
-            <img src="/assets/images/logo.png"/>
+            <img src="/assets/images/logo.png" />
           </div>
         </div>
       </Link>
