@@ -11,7 +11,6 @@ function App() {
     marginLeft: classDisplay === "sidebar" ? "78px" : "250px",
     transition: "all 0.5s ease",
   };
-  console.log(classDisplay);
   return (
     <BrowserRouter>
       <Navbar classDisplay={classDisplay} setClassDislay={setClassDisplay} />
