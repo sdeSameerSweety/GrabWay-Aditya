@@ -158,7 +158,7 @@ const TopSection = () => {
               />
             </div>
             <div>
-              <Card className="w-[50vw]" variant={'filled'}>
+              <Card className="w-[50vw]" sx={{border:"none",boxShadow:"none"}}>
                 <CardHeader>
                   <Heading><div className="flex justify-center items-center font-ubuntu">
                     <div className="mr-[1%]"><PiMountainsDuotone fill="#E51B23"/></div>Our Mission</div></Heading>
@@ -180,7 +180,7 @@ const TopSection = () => {
         
           <div className="flex flex-row justify-center items-center">
             <div>
-              <Card className="w-[50vw]" variant={'filled'}>
+              <Card className="w-[50vw]" sx={{border:"none",boxShadow:"none"}}>
                 <CardHeader>
                   <Heading><div className="flex justify-center items-center font-ubuntu">
                     <div className="mr-[1%]"><BiLeaf fill="#E51B23"/></div>Our Vission</div></Heading>
@@ -214,10 +214,10 @@ const TopSection = () => {
               />
             </div>
             <div>
-              <Card className="w-[50vw] mt-[4%]" variant={'filled'}>
+              <Card className="w-[50vw] mt-[4%]" sx={{border:"none",boxShadow:"none"}}>
                 <CardHeader>
                   <Heading><div className="flex justify-center items-center font-ubuntu">
-                    <div className="mr-[1%]"><GiGlassBall fill="#E51B23"/></div>Our Mission</div></Heading>
+                    <div className="mr-[1%]"><GiGlassBall fill="#E51B23"/></div>Our Goal</div></Heading>
                 </CardHeader>
                 <CardBody>
                   <Text>
@@ -387,7 +387,7 @@ const TopSection = () => {
               <Card className="w-[90vw] mt-[4%]" variant={'filled'}>
                 <CardHeader>
                   <Heading><div className="flex justify-center items-center font-ubuntu">
-                    <div className="mr-[1%]"><GiGlassBall fill="#E51B23"/></div>Our Mission</div></Heading>
+                    <div className="mr-[1%]"><GiGlassBall fill="#E51B23"/></div>Our Goal</div></Heading>
                 </CardHeader>
                 <CardBody>
                   <Text>
