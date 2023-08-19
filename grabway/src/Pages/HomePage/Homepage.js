@@ -148,7 +148,7 @@ const TopSection = () => {
             </div>
           </div>
         </div>
-        <div><TopScroller /></div>
+        <div className="scroller"><TopScroller /></div>
         <div className="info-section mt-[5%] flex flex-col justify-center items-center gap-10">
           <div className="flex flex-row justify-center items-center">
             <div>
