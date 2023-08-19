@@ -1,9 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { Routes, Route, BrowserRouter } from "react-router-dom";
 import Navbar from "./components/Navbar/Navbar";
-import TopSection from "./components/HomePage/TopSection";
 import Footer from "./components/Footer/footer";
-import TopScroller from "./components/TopScroller/TopSlider";
+import Homepage from "./Pages/HomePage/Homepage";
 function App() {
   const [windowSize, setWindowSize] = useState(window.innerWidth);
 
@@ -35,9 +34,8 @@ function App() {
     <BrowserRouter>
       <Navbar classDisplay={classDisplay} setClassDislay={setClassDisplay} />
       <div style={intDivStyle}>
-        {/* <TopScroller /> */}
         <Routes>
-          {/* <Route path="/" element={<TopSection />} /> */}
+          <Route path="/" element={<Homepage />} />
         </Routes>
         <Footer />
       </div>
