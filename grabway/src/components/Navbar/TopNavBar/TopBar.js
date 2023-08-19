@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 import { IconButton } from "@chakra-ui/react";
 import { Button } from "@chakra-ui/react";
 import "./TopBar.css";
-const TopBar = () => {
+const TopBar = ({ counter, setCounter }) => {
   const [userLogged, setUserLogged] = useState(false);
   return (
     <div className="flex flex-row justify-between items-center m-1 mt-2 border-b-2 border-[#77717150] p-2 pl-10 pr-10 rounded-full">
@@ -42,6 +42,7 @@ const TopBar = () => {
                   _hover: `bgColor:"#E51B23"`,
                   color: "white",
                 }}
+                onClick={() => setCounter(counter + 1)}
               >
                 Sign In
               </Button>
