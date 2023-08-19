@@ -9,7 +9,7 @@ const Navbar = ({
   displayVal,
   setDisplayVal,
 }) => {
-  const [counter, setCounter] = useState(0);
+  const [counter, setCounter] = useState(false);
   return (
     <div>
       <div>

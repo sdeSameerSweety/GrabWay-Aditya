@@ -28,9 +28,9 @@ export default function Sidebar({
     window.innerHeight,
   ]);
 
-  const [showState, setShowState] = useState(false);
+  const [showState, setShowState] = useState(counter);
   useEffect(() => {
-    setShowState(!showState);
+    setShowState(counter);
     if (showState === true) setDisplayVal("no");
     else setDisplayVal("yes");
   }, [counter]);

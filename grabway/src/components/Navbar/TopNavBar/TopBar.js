@@ -26,7 +26,7 @@ import {
   Radio,
   Stack,
 } from "@chakra-ui/react";
-const TopBar = () => {
+const TopBar = ({ counter, setCounter }) => {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const [userLogged, setUserLogged] = useState(false);
   const [showSignIn, setShowSignIn] = useState(true);
@@ -92,6 +92,7 @@ const TopBar = () => {
         position: "top-right",
       });
     }
+    setCounter(true);
   }
   function handleSignup() {
     if (
@@ -180,7 +181,6 @@ const TopBar = () => {
                     _hover: `bgColor:"#E51B23"`,
                     color: "white",
                   }}
-                  onClick={() => setCounter(counter + 1)}
                 >
                   Sign In
                 </Button>
