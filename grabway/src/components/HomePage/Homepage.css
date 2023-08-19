@@ -4,6 +4,9 @@
     flex-direction: column;
     margin-top: 9%;
   }
+  .info-section{
+    margin-top:10%;
+  }
 }
 
 @media only screen and (max-width: 600px) {
