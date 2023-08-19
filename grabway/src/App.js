@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Routes, Route, BrowserRouter } from "react-router-dom";
 import Navbar from "./components/Navbar/Navbar";
 import Footer from "./components/Footer/footer";
-import Homepage from "./components/HomePage/Homepage";
+import Homepage from "./Pages/HomePage/Homepage";
 function App() {
   const [windowSize, setWindowSize] = useState(window.innerWidth);
 
