@@ -35,9 +35,9 @@ function App() {
     <BrowserRouter>
       <Navbar classDisplay={classDisplay} setClassDislay={setClassDisplay} />
       <div style={intDivStyle}>
-        <TopScroller />
+        {/* <TopScroller /> */}
         <Routes>
-          <Route path="/" element={<TopSection />} />
+          {/* <Route path="/" element={<TopSection />} /> */}
         </Routes>
         <Footer />
       </div>
