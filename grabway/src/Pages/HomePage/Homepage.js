@@ -24,7 +24,7 @@ const TopSection = () => {
   return (
     <>
       <div className="relative dekstop-view">
-        <TopScroller />
+        
         <div className="flex justify-center items-center w-auto h-auto ml-14">
           <div className="flex justify-center items-center h-[80vh] w-[100%] z-10">
             <img
@@ -148,6 +148,7 @@ const TopSection = () => {
             </div>
           </div>
         </div>
+        <div><TopScroller /></div>
         <div className="info-section mt-[5%] flex flex-col justify-center items-center gap-10">
           <div className="flex flex-row justify-center items-center">
             <div>
