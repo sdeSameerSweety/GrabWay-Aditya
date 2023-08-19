@@ -1,12 +1,26 @@
 import React from "react";
 import TopBar from "./TopNavBar/TopBar";
 import Sidebar from "./Sidebar/sidebar";
+import { useState } from "react";
 
-const Navbar = ({ classDisplay, setClassDislay }) => {
+const Navbar = ({
+  classDisplay,
+  setClassDislay,
+  displayVal,
+  setDisplayVal,
+}) => {
+  const [counter, setCounter] = useState(false);
   return (
     <div>
-      <div><TopBar /></div>
-      <Sidebar classDisplay={classDisplay} setClassDisplay={setClassDislay} />
+      <div>
+        <TopBar counter={counter} setCounter={setCounter} />
+      </div>
+      <Sidebar
+        classDisplay={classDisplay}
+        setClassDisplay={setClassDislay}
+        counter={counter}
+        setDisplayVal={setDisplayVal}
+      />
     </div>
   );
 };
