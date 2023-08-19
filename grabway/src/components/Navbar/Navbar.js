@@ -5,7 +5,7 @@ import Sidebar from "./Sidebar/sidebar";
 const Navbar = ({ classDisplay, setClassDislay }) => {
   return (
     <div>
-      <TopBar />
+      <div><TopBar /></div>
       <Sidebar classDisplay={classDisplay} setClassDisplay={setClassDislay} />
     </div>
   );
