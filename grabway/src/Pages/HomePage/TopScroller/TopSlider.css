@@ -1,8 +1,8 @@
 .slider {
   overflow: hidden;
   position: relative;
-  width: 100%;
-  margin-left: 3%;
+  width: 90%;
+  padding-left: 5%;
   height: 35vh;
   background-size: cover;
   background-position: center center;
