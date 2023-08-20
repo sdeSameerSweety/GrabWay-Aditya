@@ -4,6 +4,7 @@ import Navbar from "./components/Navbar/Navbar";
 import Footer from "./components/Footer/footer";
 import Homepage from "./Pages/HomePage/Homepage";
 import Support from "./Pages/Support/Support.jsx";
+import Map from "./components/Map/Map.js";
 
 
 function App() {
@@ -49,6 +50,7 @@ function App() {
         <Routes>
           <Route path="/" element={<Homepage />} />
           <Route path="/support" element={<Support />} />
+          <Route path="/maps" element={<Map />} />
         </Routes>
         <Footer />
       </div>
