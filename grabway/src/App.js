@@ -6,6 +6,7 @@ import Homepage from "./Pages/HomePage/Homepage";
 import Support from "./Pages/Support/Support.jsx";
 
 
+
 function App() {
   const [windowSize, setWindowSize] = useState(window.innerWidth);
 
@@ -49,6 +50,7 @@ function App() {
         <Routes>
           <Route path="/" element={<Homepage />} />
           <Route path="/support" element={<Support />} />
+         
         </Routes>
         <Footer />
       </div>
