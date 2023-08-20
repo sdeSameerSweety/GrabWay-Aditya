@@ -32,7 +32,7 @@ function App() {
     transition: "all 0.5s ease",
   };
 
-  console.log(classDisplay);
+  console.log(classDisplay, displayVal);
   return (
     <BrowserRouter>
       <Navbar

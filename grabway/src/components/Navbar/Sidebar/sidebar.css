@@ -8,7 +8,6 @@
   padding: 6px 14px;
   z-index: 99;
   transition: all 0.5s ease;
-  overflow: hidden;
 }
 
 .sidebar-hide {
@@ -23,7 +22,6 @@
 }
 
 .sidebar.open {
-  overflow: hidden;
 }
 .sidebar .logo-details {
   height: 28px;
