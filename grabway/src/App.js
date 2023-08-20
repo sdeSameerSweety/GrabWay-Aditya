@@ -3,6 +3,9 @@ import { Routes, Route, BrowserRouter } from "react-router-dom";
 import Navbar from "./components/Navbar/Navbar";
 import Footer from "./components/Footer/footer";
 import Homepage from "./Pages/HomePage/Homepage";
+
+
+
 function App() {
   const [windowSize, setWindowSize] = useState(window.innerWidth);
 
@@ -35,6 +38,7 @@ function App() {
   console.log(classDisplay, displayVal);
   return (
     <BrowserRouter>
+    
       <Navbar
         classDisplay={classDisplay}
         setClassDislay={setClassDisplay}
@@ -47,6 +51,7 @@ function App() {
         </Routes>
         <Footer />
       </div>
+      
     </BrowserRouter>
   );
 }
