@@ -14,7 +14,7 @@ import {
   signInWithEmailAndPassword,
   createUserWithEmailAndPassword,
 } from "firebase/auth";
-import {signInWithPopup, GoogleAuthProvider } from "firebase/auth";
+import { signInWithPopup, GoogleAuthProvider } from "firebase/auth";
 import "./TopBar.css";
 import axios from "axios";
 import {
@@ -31,17 +31,18 @@ import {
   Input,
   RadioGroup,
   Radio,
-  Stack,Text
+  Stack,
+  Text,
 } from "@chakra-ui/react";
 import { initializeApp } from "firebase/app";
 import { firebaseConfig } from "../../../firebase";
-import {FcGoogle} from "react-icons/fc";
+import { FcGoogle } from "react-icons/fc";
 
-const TopBar = ({ counter, setCounter }) => {
+const TopBar = ({ counter, setCounter, setLoginState }) => {
   const app = initializeApp(firebaseConfig);
   const auth = getAuth();
   const provider = new GoogleAuthProvider();
-  
+
   const { isOpen, onOpen, onClose } = useDisclosure();
   const [userLogged, setUserLogged] = useState(false);
   const [showSignIn, setShowSignIn] = useState(true);
@@ -82,9 +83,9 @@ const TopBar = ({ counter, setCounter }) => {
   function handleSignIn() {
     if (isEmail(loginEmail) && isTextField(loginPassword)) {
       signInWithEmailAndPassword(auth, loginEmail, loginPassword)
-        .then(async(userCredential) => {
+        .then(async (userCredential) => {
           const user = userCredential.user;
-          
+
           onClose();
           toast({
             title: "Login Successful",
@@ -94,6 +95,8 @@ const TopBar = ({ counter, setCounter }) => {
             isClosable: true,
           });
           setCounter(true);
+          setLoginState(true);
+          localStorage.setItem("userLoggedToken");
           setUserLogged(true);
         })
         .catch((error) => {
@@ -202,40 +205,42 @@ const TopBar = ({ counter, setCounter }) => {
     }
   }
 
-  function handleGoogleSignIn(){
+  function handleGoogleSignIn() {
     signInWithPopup(auth, provider)
-    .then((result) => {
-    // This gives you a Google Access Token. You can use it to access the Google API.
-    const credential = GoogleAuthProvider.credentialFromResult(result);
-    const token = credential.accessToken;
-    // The signed-in user info.
-    const user = result.user;
-    // IdP data available using getAdditionalUserInfo(result)
-    // ...
-    onClose();
-          toast({
-            title: "Account Verifed",
-            description: "Welcome Back !",
-            status: "success",
-            duration: 3000,
-            isClosable: true,
-          });
-          setCounter(true);
-          setUserLogged(true);
-  }).catch((error) => {
-    const errorCode = error.code;
-    const errorMessage = error.message;
-    const email = error.customData.email;
-    const credential = GoogleAuthProvider.credentialFromError(error);
-    toast({
-      title: "We are having some Trouble now",
-      description: "Try Other Login Methods",
-      status: "error",
-      duration: 3000,
-      isClosable: true,
-    });
-    // ...
-  });
+      .then((result) => {
+        // This gives you a Google Access Token. You can use it to access the Google API.
+        const credential = GoogleAuthProvider.credentialFromResult(result);
+        const token = credential.accessToken;
+        // The signed-in user info.
+        const user = result.user;
+        // IdP data available using getAdditionalUserInfo(result)
+        // ...
+        onClose();
+        toast({
+          title: "Account Verifed",
+          description: "Welcome Back !",
+          status: "success",
+          duration: 3000,
+          isClosable: true,
+        });
+        setCounter(true);
+        setLoginState(true);
+        setUserLogged(true);
+      })
+      .catch((error) => {
+        const errorCode = error.code;
+        const errorMessage = error.message;
+        const email = error.customData.email;
+        const credential = GoogleAuthProvider.credentialFromError(error);
+        toast({
+          title: "We are having some Trouble now",
+          description: "Try Other Login Methods",
+          status: "error",
+          duration: 3000,
+          isClosable: true,
+        });
+        // ...
+      });
   }
   return (
     <>
@@ -328,7 +333,7 @@ const TopBar = ({ counter, setCounter }) => {
                                 />
                               </InputGroup>
                             </div>
-                            <div >
+                            <div>
                               <InputGroup>
                                 <InputLeftElement pointerEvents="none">
                                   <div className="flex justify-center items-center mt-2">
@@ -349,7 +354,7 @@ const TopBar = ({ counter, setCounter }) => {
                             </div>
                             <div className="mb-[5%]">
                               <Button
-                                leftIcon={<FcGoogle/>}
+                                leftIcon={<FcGoogle />}
                                 colorScheme="gray"
                                 onClick={handleGoogleSignIn}
                               >
