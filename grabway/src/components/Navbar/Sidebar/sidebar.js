@@ -31,8 +31,8 @@ export default function Sidebar({
   const [showState, setShowState] = useState(counter);
   useEffect(() => {
     setShowState(counter);
-    if (showState === true) setDisplayVal("no");
-    else setDisplayVal("yes");
+    if (counter === true) setDisplayVal("yes");
+    else setDisplayVal("no");
   }, [counter]);
   console.log(counter, showState);
   useEffect(() => {
@@ -55,24 +55,31 @@ export default function Sidebar({
     return sidebarClass;
   }
 
+  function getWidth() {
+    if (sidebarClass === "sidebar") {
+      if (showState === true) return "w-[78px] ";
+      else return "w-[0px] ";
+    } else {
+      if (showState === true) return "w-[250px] ";
+      else return "w-[0px] ";
+    }
+  }
   return (
     <>
       {windowSize[0] > 600 && (
         <div
-          class={
+          className={
             windowSize[0] > 900
-              ? `w-[${
-                  sidebarClass === "sidebar"
-                    ? `${showState === true ? 78 : 0}`
-                    : `${showState === true ? 250 : 0}`
-                }px] ` + handleBigChange()
-              : `w-[${showState === true ? 78 : 0}px] ` + handleSmallChange()
+              ? getWidth() + handleBigChange()
+              : showState === true
+              ? "w-[78px] " + handleSmallChange()
+              : "w-[0px] " + handleSmallChange()
           }
         >
           {windowSize[0] > 900 && (
-            <div class={showState === true ? "logo-details" : "hidden"}>
+            <div className={showState === true ? "logo-details" : "hidden"}>
               <i
-                class={
+                className={
                   sidebarClass === "sidebar" ? "bx bx-menu" : "bx bx-x-circle"
                 }
                 style={{ color: "black" }}
@@ -81,73 +88,88 @@ export default function Sidebar({
               ></i>
             </div>
           )}
-          <ul class="nav-list">
+          <ul className="nav-list">
             <li>
               <Link to="/">
                 <div className="items-list-side-book-ride">
-                  <i class="bx bx-car" style={{ color: "#000000" }}></i>
-                  <span class="links_name">Book Ride</span>
+                  <i
+                    className={showState === true ? "bx bx-car" : "hidden"}
+                    style={{ color: "#ffffff" }}
+                  ></i>
+                  <span className="links_name">Book Ride</span>
                 </div>
-                <span class="tooltip">Book Ride</span>
+                <span className="tooltip">Book Ride</span>
               </Link>
             </li>
             <li>
               <Link to="/">
                 <div className="items-list-side">
-                  <i class="bx bx-grid-alt"></i>
-                  <span class="links_name">Dashboard</span>
+                  <i
+                    className={showState === true ? "bx bx-grid-alt" : "hidden"}
+                  ></i>
+                  <span className="links_name">Dashboard</span>
                 </div>
-                <span class="tooltip">Dashboard</span>
+                <span className="tooltip">Dashboard</span>
               </Link>
             </li>
             <li>
               <Link to="/">
                 <div className="items-list-side">
-                  <i class="bx bx-user"></i>
-                  <span class="links_name">Ride History</span>
+                  <i
+                    className={showState === true ? "bx bx-user" : "hidden"}
+                  ></i>
+                  <span className="links_name">Ride History</span>
                 </div>
-                <span class="tooltip">Ride History</span>
+                <span className="tooltip">Ride History</span>
               </Link>
             </li>
             <li>
               <Link to="/">
                 <div className="items-list-side">
-                  <i class="bx bx-pie-chart-alt-2"></i>
-                  <span class="links_name">Analytics</span>
+                  <i
+                    className={
+                      showState === true ? "bx bx-pie-chart-alt-2" : "hidden"
+                    }
+                  ></i>
+                  <span className="links_name">Analytics</span>
                 </div>
-                <span class="tooltip">Analytics</span>
+                <span className="tooltip">Analytics</span>
               </Link>
             </li>
             <li>
               <Link to="/">
                 <div className="items-list-side">
-                  <i class="bx bx-chat"></i>
-                  <span class="links_name">Packages</span>
+                  <i
+                    className={showState === true ? "bx bx-chat" : "hidden"}
+                  ></i>
+                  <span className="links_name">Packages</span>
                 </div>
-                <span class="tooltip">Packages</span>
+                <span className="tooltip">Packages</span>
               </Link>
             </li>
 
             <li>
               <Link to="/">
                 <div className="items-list-side">
-                  <i class="bx bx-folder"></i>
-                  <span class="links_name">Support</span>
+                  <i
+                    className={showState === true ? "bx bx-folder" : "hidden"}
+                  ></i>
+                  <span className="links_name">Support</span>
                 </div>
-                <span class="tooltip">Support</span>
+                <span className="tooltip">Support</span>
               </Link>
             </li>
 
-            <li class={showState === true ? "profile" : "hidden"}>
-              <div class="profile-details">
+            <li className={showState === true ? "profile" : "hidden"}>
+              <div className="profile-details">
                 <img src="/assets/images/user.png" alt="profileImg" />
-                <div class="name_job">
-                  <div class="name">Demo Person</div>
-                  <div class="job">Customer</div>
+                <div className="name_job">
+                  <div className="name">Demo Person</div>
+                  <div className="job">Customer</div>
                 </div>
               </div>
               <i
-                class="bx bx-log-out"
+                className="bx bx-log-out"
                 id="log_out"
                 role="button"
                 onClick={handleSignout}
