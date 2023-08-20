@@ -9,7 +9,14 @@ import { RiLockPasswordLine } from "react-icons/ri";
 import { BsTelephone } from "react-icons/bs";
 import { AiFillCar, AiOutlineUser } from "react-icons/ai";
 import { useToast } from "@chakra-ui/react";
+import {
+  getAuth,
+  signInWithEmailAndPassword,
+  createUserWithEmailAndPassword,
+} from "firebase/auth";
+import {signInWithPopup, GoogleAuthProvider } from "firebase/auth";
 import "./TopBar.css";
+import axios from "axios";
 import {
   Modal,
   ModalOverlay,
@@ -24,9 +31,17 @@ import {
   Input,
   RadioGroup,
   Radio,
-  Stack,
+  Stack,Text
 } from "@chakra-ui/react";
+import { initializeApp } from "firebase/app";
+import { firebaseConfig } from "../../../firebase";
+import {FcGoogle} from "react-icons/fc";
+
 const TopBar = ({ counter, setCounter }) => {
+  const app = initializeApp(firebaseConfig);
+  const auth = getAuth();
+  const provider = new GoogleAuthProvider();
+  
   const { isOpen, onOpen, onClose } = useDisclosure();
   const [userLogged, setUserLogged] = useState(false);
   const [showSignIn, setShowSignIn] = useState(true);
@@ -66,15 +81,39 @@ const TopBar = ({ counter, setCounter }) => {
   }
   function handleSignIn() {
     if (isEmail(loginEmail) && isTextField(loginPassword)) {
-      //proceed with login
-      onClose();
-      toast({
-        title: "Login Successful",
-        description: "Welcome",
-        status: "success",
-        duration: 3000,
-        isClosable: true,
-      });
+      signInWithEmailAndPassword(auth, loginEmail, loginPassword)
+        .then(async(userCredential) => {
+          const user = userCredential.user;
+          
+          onClose();
+          toast({
+            title: "Login Successful",
+            description: "Welcome",
+            status: "success",
+            duration: 3000,
+            isClosable: true,
+          });
+          setCounter(true);
+          setUserLogged(true);
+        })
+        .catch((error) => {
+          if (error.message === "Firebase: Error (auth/wrong-password).") {
+            toast({
+              title: "Wrong Password",
+              status: "error",
+              isClosable: true,
+              position: "top-right",
+            });
+          }
+          if (error.message === "Firebase: Error (auth/user-not-found).") {
+            toast({
+              title: "User Doesn't Exist",
+              status: "error",
+              isClosable: true,
+              position: "top-right",
+            });
+          }
+        });
     }
     if (!isEmail(loginEmail)) {
       toast({
@@ -92,7 +131,6 @@ const TopBar = ({ counter, setCounter }) => {
         position: "top-right",
       });
     }
-    setCounter(true);
   }
   function handleSignup() {
     if (
@@ -102,14 +140,33 @@ const TopBar = ({ counter, setCounter }) => {
       isTextField(signupUserType)
     ) {
       //proceed with signup
-      onClose();
-      toast({
-        title: "Account created.",
-        description: "We've created your account for you.",
-        status: "success",
-        duration: 3000,
-        isClosable: true,
-      });
+      createUserWithEmailAndPassword(auth, signupEmail, signupPassword)
+        .then((userCredential) => {
+          // Signed in
+          const user = userCredential.user;
+          onClose();
+          toast({
+            title: "Account created.",
+            description: "We've created your account for you.",
+            status: "success",
+            duration: 3000,
+            isClosable: true,
+          });
+          setCounter(true);
+          setUserLogged(true);
+        })
+        .catch((error) => {
+          if (
+            error.message === "Firebase: Error (auth/email-already-in-use)."
+          ) {
+            toast({
+              title: `User Already Exists`,
+              status: "error",
+              isClosable: true,
+              position: "top-right",
+            });
+          }
+        });
     }
     if (!isEmail(signupEmail)) {
       toast({
@@ -143,6 +200,42 @@ const TopBar = ({ counter, setCounter }) => {
         position: "top-right",
       });
     }
+  }
+
+  function handleGoogleSignIn(){
+    signInWithPopup(auth, provider)
+    .then((result) => {
+    // This gives you a Google Access Token. You can use it to access the Google API.
+    const credential = GoogleAuthProvider.credentialFromResult(result);
+    const token = credential.accessToken;
+    // The signed-in user info.
+    const user = result.user;
+    // IdP data available using getAdditionalUserInfo(result)
+    // ...
+    onClose();
+          toast({
+            title: "Account Verifed",
+            description: "Welcome Back !",
+            status: "success",
+            duration: 3000,
+            isClosable: true,
+          });
+          setCounter(true);
+          setUserLogged(true);
+  }).catch((error) => {
+    const errorCode = error.code;
+    const errorMessage = error.message;
+    const email = error.customData.email;
+    const credential = GoogleAuthProvider.credentialFromError(error);
+    toast({
+      title: "We are having some Trouble now",
+      description: "Try Other Login Methods",
+      status: "success",
+      duration: 3000,
+      isClosable: true,
+    });
+    // ...
+  });
   }
   return (
     <>
@@ -235,7 +328,7 @@ const TopBar = ({ counter, setCounter }) => {
                                 />
                               </InputGroup>
                             </div>
-                            <div className="mb-[5%]">
+                            <div >
                               <InputGroup>
                                 <InputLeftElement pointerEvents="none">
                                   <div className="flex justify-center items-center mt-2">
@@ -253,6 +346,15 @@ const TopBar = ({ counter, setCounter }) => {
                                   placeholder="Enter Your Password"
                                 />
                               </InputGroup>
+                            </div>
+                            <div className="mb-[5%]">
+                              <Button
+                                leftIcon={<FcGoogle/>}
+                                colorScheme="gray"
+                                onClick={handleGoogleSignIn}
+                              >
+                                <Text>Sign In with Google</Text>
+                              </Button>
                             </div>
                           </div>
                           <div className="flex justify-center items-center">

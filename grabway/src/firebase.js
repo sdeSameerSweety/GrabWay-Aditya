@@ -4,7 +4,7 @@ import { getAuth } from "firebase/auth";
 import { getDatabase } from "firebase/database";
 import { getFirestore } from "firebase/firestore";
 
-const firebaseConfig = {
+export const firebaseConfig = {
   apiKey: "AIzaSyBIsUfrQ-S-k5NJGQGvVdOmJ4Z0Y8-NqDM",
   authDomain: "grabway-8e3d1.firebaseapp.com",
   databaseURL: "https://grabway-8e3d1-default-rtdb.firebaseio.com",
@@ -18,8 +18,6 @@ const firebaseConfig = {
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
 const analytics = getAnalytics(app);
-const auth = getAuth(app);
-const database = getDatabase(app);
-const firestore = getFirestore(app);
-
-export { app, analytics, auth, database, firestore };
+export const auth=getAuth(app);
+export const db=getFirestore(app);
+export const database=getDatabase(app);
