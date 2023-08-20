@@ -230,7 +230,7 @@ const TopBar = ({ counter, setCounter }) => {
     toast({
       title: "We are having some Trouble now",
       description: "Try Other Login Methods",
-      status: "success",
+      status: "error",
       duration: 3000,
       isClosable: true,
     });
