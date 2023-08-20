@@ -5,7 +5,6 @@ import Footer from "./components/Footer/footer";
 import Homepage from "./Pages/HomePage/Homepage";
 import Support from "./Pages/Support/Support.jsx";
 
-
 function App() {
   const [windowSize, setWindowSize] = useState(window.innerWidth);
 
@@ -38,7 +37,6 @@ function App() {
   console.log(classDisplay, displayVal);
   return (
     <BrowserRouter>
-    
       <Navbar
         classDisplay={classDisplay}
         setClassDislay={setClassDisplay}
@@ -52,7 +50,6 @@ function App() {
         </Routes>
         <Footer />
       </div>
-      
     </BrowserRouter>
   );
 }
