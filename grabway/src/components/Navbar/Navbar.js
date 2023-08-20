@@ -6,14 +6,18 @@ import { useState } from "react";
 const Navbar = ({
   classDisplay,
   setClassDislay,
-  displayVal,
   setDisplayVal,
+  setLoginState,
 }) => {
   const [counter, setCounter] = useState(false);
   return (
     <div>
       <div>
-        <TopBar counter={counter} setCounter={setCounter} />
+        <TopBar
+          counter={counter}
+          setCounter={setCounter}
+          setLoginState={setLoginState}
+        />
       </div>
       <Sidebar
         classDisplay={classDisplay}
