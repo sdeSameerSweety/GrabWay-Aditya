@@ -5,10 +5,10 @@ import Footer from "./components/Footer/footer";
 import Homepage from "./Pages/HomePage/Homepage";
 import Support from "./Pages/Support/Support.jsx";
 
-
-
 function App() {
   const [windowSize, setWindowSize] = useState(window.innerWidth);
+  const [loginState, setLoginState] = useState(false);
+  console.log(loginState);
 
   useEffect(() => {
     const handleWindowResize = () => {
@@ -35,26 +35,22 @@ function App() {
         : "0px",
     transition: "all 0.5s ease",
   };
-
-  console.log(classDisplay, displayVal);
   return (
     <BrowserRouter>
-    
       <Navbar
         classDisplay={classDisplay}
         setClassDislay={setClassDisplay}
         displayVal={displayVal}
         setDisplayVal={setDisplayVal}
+        setLoginState={setLoginState}
       />
       <div style={intDivStyle}>
         <Routes>
-          <Route path="/" element={<Homepage />} />
+          <Route path="/" element={<Homepage loginState={loginState} />} />
           <Route path="/support" element={<Support />} />
-         
         </Routes>
         <Footer />
       </div>
-      
     </BrowserRouter>
   );
 }

@@ -34,7 +34,6 @@ export default function Sidebar({
     if (counter === true) setDisplayVal("yes");
     else setDisplayVal("no");
   }, [counter]);
-  console.log(counter, showState);
   useEffect(() => {
     const handleWindowResize = () => {
       setWindowSize([window.innerWidth, window.innerHeight]);
@@ -116,7 +115,8 @@ export default function Sidebar({
               <Link to="/">
                 <div className="items-list-side">
                   <i
-                    className={showState === true ? "bx bx-user" : "hidden"}
+                    className={showState === true ? "bx bx-history" : "hidden"}
+                    style={{ color: "#ffffff" }}
                   ></i>
                   <span className="links_name">Ride History</span>
                 </div>
