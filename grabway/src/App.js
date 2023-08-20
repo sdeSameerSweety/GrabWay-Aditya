@@ -3,7 +3,7 @@ import { Routes, Route, BrowserRouter } from "react-router-dom";
 import Navbar from "./components/Navbar/Navbar";
 import Footer from "./components/Footer/footer";
 import Homepage from "./Pages/HomePage/Homepage";
-
+import Support from "./Pages/Support/Support.jsx";
 
 
 function App() {
@@ -48,6 +48,7 @@ function App() {
       <div style={intDivStyle}>
         <Routes>
           <Route path="/" element={<Homepage />} />
+          <Route path="/support" element={<Support />} />
         </Routes>
         <Footer />
       </div>

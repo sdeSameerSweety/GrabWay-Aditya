@@ -149,7 +149,7 @@ export default function Sidebar({
             </li>
 
             <li>
-              <Link to="/">
+              <Link to="/support">
                 <div className="items-list-side">
                   <i
                     className={showState === true ? "bx bx-folder" : "hidden"}
