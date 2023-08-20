@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
 import {
-  Stack,
   Flex,
   Button,
   Text,
@@ -16,17 +15,17 @@ export default function TopSlider() {
   const slides = [
     {
       image:
-        "https://images.pexels.com/photos/2662116/pexels-photo-2662116.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+        "",
       text: "Slide 1: Kaisa hai Aditya?",
     },
     {
       image:
-        "https://images.pexels.com/photos/808465/pexels-photo-808465.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+        "",
       text: "Slide 2: Kya hal chal Kittu",
     },
     {
       image:
-        "https://images.pexels.com/photos/808465/pexels-photo-808465.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+        "",
       text: "Slide 3: Rajiv Mast hai",
     },
   ];
@@ -44,12 +43,14 @@ export default function TopSlider() {
   useEffect(() => {
     const interval = setInterval(() => {
       nextSlide();
-    }, 3000); //timer
+    }, 5000); //timer
 
     return () => {
       clearInterval(interval);
     };
   }, [slideIndex]);
+
+  // ... (previous code)
 
   return (
     <Flex className="slider">
@@ -59,43 +60,63 @@ export default function TopSlider() {
         px={useBreakpointValue({ base: 4, md: 8 })}
         rounded="1.5rem"
         bgGradient={"linear(to-r, blackAlpha.600, transparent)"}
+        position="relative"
       >
-        <Stack maxW={"2xl"} align={"flex-start"} spacing={6}>
-          <Image
-            src={slides[slideIndex].image} 
-            alt={`Slide ${slideIndex + 1}`}
-            borderRadius="1.5rem"
-            boxShadow="xl"
-          />
-          <Text
-            color={"white"}
-            fontWeight={700}
-            lineHeight={1.2}
-            fontSize={useBreakpointValue({ base: "3xl", md: "4xl" })}
-          >
-            {slides[slideIndex].text}
-          </Text>
-          <Stack direction={"row"}>
-            <Button
-              onClick={nextSlide}
-              bg={"blue.400"}
-              rounded={"full"}
-              color={"white"}
-              _hover={{ bg: "blue.500" }}
-            >
-              Show me more
-            </Button>
-            <Button
-              onClick={prevSlide}
-              bg={"whiteAlpha.300"}
-              rounded={"full"}
-              color={"white"}
-              _hover={{ bg: "whiteAlpha.500" }}
-            >
-              Show me more
-            </Button>
-          </Stack>
-        </Stack>
+        <Image
+          src={slides[slideIndex].image}
+          alt={`Slide ${slideIndex + 1}`}
+          borderRadius="1.5rem"
+          boxShadow="xl"
+        />
+        <Text
+          position="absolute"
+          bottom="2rem"
+          left="2rem"
+          color={"white"}
+          fontWeight={700}
+          lineHeight={1.2}
+          fontSize={useBreakpointValue({ base: "3xl", md: "4xl" })}
+          zIndex={1}
+        >
+          {slides[slideIndex].text}
+        </Text>
+        <Button
+          onClick={prevSlide}
+          bg={"whiteAlpha.300"}
+          rounded={"full"}
+          color={"white"}
+          _hover={{ bg: "whiteAlpha.500" }}
+          position="absolute"
+          bottom="1rem"
+          right="1rem"
+        >
+          Previous
+        </Button>
+        <Button
+          onClick={nextSlide}
+          bg={"blue.400"}
+          rounded={"full"}
+          color={"white"}
+          _hover={{ bg: "blue.500" }}
+          position="absolute"
+          bottom="1rem"
+          right="6rem"
+        >
+          Next
+        </Button>
+        <Button
+          onClick={handleButtonClick} // Driver click login
+          bg={"green.400"}
+          rounded={"full"}
+          color={"white"}
+          _hover={{ bg: "green.500" }}
+          position="absolute"
+          bottom="1rem"
+          left="50%"
+          transform="translateX(-50%)"
+        >
+          Action Button
+        </Button>
       </VStack>
     </Flex>
   );
