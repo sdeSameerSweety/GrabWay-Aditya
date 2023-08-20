@@ -14,7 +14,7 @@ import {
   Button,
 } from "@chakra-ui/react";
 import { FaCircleDot } from "react-icons/fa6";
-import TopScroller from "./TopScroller/TopSlider";
+import TopSlider from "./TopScroller/TopSlider";
 import { PiMountainsDuotone } from "react-icons/pi";
 import { BiLeaf } from "react-icons/bi";
 import { GiGlassBall } from "react-icons/gi";
@@ -150,7 +150,7 @@ const TopSection = ({ loginState }) => {
         {loginState === false && (
           <>
             <div className="scroller">
-              <TopScroller />
+              <TopSlider />
             </div>
             <div className="info-section mt-[5%] flex flex-col justify-center items-center gap-10">
               <div className="flex flex-row justify-center items-center">

@@ -6,10 +6,11 @@ import {
   Text,
   VStack,
   useBreakpointValue,
+  Image,
 } from "@chakra-ui/react";
-import "./TopScroller.css"; // Import your CSS file
+import "./TopSlider.css";
 
-export default function TopScroller() {
+export default function TopSlider() {
   const [slideIndex, setSlideIndex] = useState(0);
 
   const slides = [
@@ -60,6 +61,12 @@ export default function TopScroller() {
         bgGradient={"linear(to-r, blackAlpha.600, transparent)"}
       >
         <Stack maxW={"2xl"} align={"flex-start"} spacing={6}>
+          <Image
+            src={slides[slideIndex].image} 
+            alt={`Slide ${slideIndex + 1}`}
+            borderRadius="1.5rem"
+            boxShadow="xl"
+          />
           <Text
             color={"white"}
             fontWeight={700}
