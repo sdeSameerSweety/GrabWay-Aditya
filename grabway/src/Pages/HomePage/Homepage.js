@@ -20,7 +20,17 @@ import { BiLeaf } from "react-icons/bi";
 import { GiGlassBall } from "react-icons/gi";
 import { AiFillHeart, AiOutlineThunderbolt } from "react-icons/ai";
 import { FaRoad } from "react-icons/fa6";
+import { useJsApiLoader } from "@react-google-maps/api";
+import { Autocomplete } from "@react-google-maps/api";
 const TopSection = ({ loginState }) => {
+  const {isLoaded}=useJsApiLoader({
+    googleMapsApiKey:"AIzaSyAfuFBhydCeCnk1Kl1c6u_1SfrIyXlReh0",
+    libraries:['places'],
+  }) 
+  
+  if(!isLoaded){
+    return <>Loading...</>
+  }
   return (
     <>
       <div className="relative dekstop-view">
@@ -59,6 +69,7 @@ const TopSection = ({ loginState }) => {
                             >
                               <FaCircleDot fill="green" />
                             </InputLeftElement>
+                           <Autocomplete className="font-ubuntu text-center">
                             <Input
                               className="card"
                               variant="filled"
@@ -70,6 +81,8 @@ const TopSection = ({ loginState }) => {
                               type="text"
                               placeholder="From where ?"
                             />
+                            </Autocomplete>
+                            
                           </InputGroup>
                         </div>
                       </div>
@@ -112,6 +125,7 @@ const TopSection = ({ loginState }) => {
                             >
                               <FaCircleDot fill="red" />
                             </InputLeftElement>
+                            <Autocomplete className="font-ubuntu text-center">
                             <Input
                               variant="filled"
                               sx={{
@@ -122,7 +136,9 @@ const TopSection = ({ loginState }) => {
                               type="text"
                               placeholder="Where to ?"
                             />
+                            </Autocomplete>
                           </InputGroup>
+                          
                         </div>
                       </div>
                     </Text>
