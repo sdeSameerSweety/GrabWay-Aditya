@@ -11,23 +11,22 @@ import "./TopSlider.css";
 
 export default function TopSlider() {
   const [slideIndex, setSlideIndex] = useState(0);
-  const sidebarWidth = useBreakpointValue({ base: "100%", md: "100%",sm: "none" });
 
   const slides = [
     {
       image:
-        "https://media.istockphoto.com/id/1205122850/vector/modern-grandmother-driving-sports-car-on-city-road.jpg?s=612x612&w=0&k=20&c=3L3UrKzl8wjTaRfwFZq5qKl-xOkzZMt_vwkK3wA22IA=",
-      text: "Slide 1: Kaisa hai Aditya?",
+        "https://static.vecteezy.com/system/resources/previews/007/523/317/non_2x/travaling-of-sport-roster-car-driving-on-tha-asphalt-road-path-sized-a-ocean-beach-with-sandy-beaches-and-a-background-of-island-under-a-blue-sky-illustrator-and-for-summer-posters-vector.jpg",
+      text: "1. Drive, Earn, and Share the Ride with Grabway Carpooling!",
     },
     {
       image:
-        "https://media.istockphoto.com/id/1179640327/vector/group-of-people-sharing-car-online-car-sharing-service-vector-happy-friend-with-multi-ethnic.jpg?s=612x612&w=0&k=20&c=22qYP3RU42CY_dZ22YgeToTU527eEnJtvo-8YOZDNFQ=",
-      text: "Slide 2: Kya hal chal Kittu",
+        "https://img.freepik.com/premium-vector/big-semi-truck-trailer-driving-coutryside-road-nature-landscape-horizontal-banner_48369-13353.jpg?w=2000",
+      text: "2. Cut Costs, Connect, and Contribute: Grabway Carpooling!",
     },
     {
       image:
-        "https://media.istockphoto.com/id/1163993432/vector/car-sharing-illustration-young-people-are-ready-to-move-off.jpg?s=612x612&w=0&k=20&c=u4Mjn7Aa4OCQJv-fzSR6oCxz99SeZdyCiU5Ffbn7jP4=",
-      text: "Slide 3: Rajiv Mast hai",
+        "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTAp-a2nDcV-73s-VEmgO85PvjZQGkwE6PSPA&usqp=CAU",
+      text: "3. Carpooling Redefined: Grabway - Your Daily Solution!",
     },
   ];
 
@@ -52,36 +51,41 @@ export default function TopSlider() {
   }, [slideIndex]);
 
   return (
-    <VStack w={sidebarWidth}>
-      <Flex className="slider">
-        <VStack
-          w={"full"}
-          justify={"center"}
-          px={useBreakpointValue({ base: 4, md: 8 })}
-          rounded="1.5rem"
-          bgGradient={"linear(to-r, blackAlpha.600, transparent)"}
-          position="relative"
+    <Flex className="slider">
+      <VStack
+        w={"full"}
+        justify={"center"}
+        // px={useBreakpointValue({ base: 2, md: 1 })}
+        // py={useBreakpointValue({ base: 2, md: 1 })}
+        rounded="1.5rem"
+        bg={"transparent"}
+        position="relative"
+      >
+        <Image
+          src={slides[slideIndex].image}
+          alt={`Slide ${slideIndex + 1}`}
+          borderRadius="0"
+          boxShadow="sm"
+          maxWidth="100%"
+          maxH={"100%"}
+          w="100%"
+          h="auto"
+          objectFit={"fill"}
+        />
+        <div className="dark-overlay"></div>
+        <Text
+          position="absolute"
+          bottom="4rem"
+          left="3rem"
+          color={"white"}
+          fontWeight={700}
+          lineHeight={1.5}
+          fontSize={useBreakpointValue({ base: "2xl", md: "3xl" })}
+          zIndex={1}
         >
-          <Image
-            src={slides[slideIndex].image}
-            alt={`Slide ${slideIndex + 1}`}
-            borderRadius="1.5rem"
-            boxShadow="xl"
-            maxWidth="100%"
-          />
-          <Text
-            position="absolute"
-            bottom="2rem"
-            left="2rem"
-            color={"white"}
-            fontWeight={700}
-            lineHeight={1.2}
-            fontSize={useBreakpointValue({ base: "3xl", md: "4xl" })}
-            zIndex={1}
-          >
-            {slides[slideIndex].text}
-          </Text>
-          {/* <Button
+          {slides[slideIndex].text}
+        </Text>
+        {/* <Button
           onClick={prevSlide}
           bg={"whiteAlpha.300"}
           rounded={"full"}
@@ -105,21 +109,21 @@ export default function TopSlider() {
         >
           Next
         </Button> */}
-          <Button
-            onClick={null} // Driver click to signup
-            bg={"green.400"}
-            rounded={"full"}
-            color={"white"}
-            _hover={{ bg: "green.500" }}
-            position="absolute"
-            bottom="1rem"
-            left="50%"
-            transform="translateX(-50%)"
-          >
-            Action Button
-          </Button>
-        </VStack>
-      </Flex>
-    </VStack>
+        <Button
+          onClick={null} // Driver click to signup
+          bg={"red.500"}
+          rounded={"full"}
+          color={"white"}
+          _hover={{ bg: "green.500" }}
+          position="absolute"
+          bottom="1rem"
+          left="13%"
+          transform="translateX(-50%)"
+          shadow={2}
+        >
+          Join Now
+        </Button>
+      </VStack>
+    </Flex>
   );
 }
