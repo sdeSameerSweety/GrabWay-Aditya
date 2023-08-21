@@ -85,7 +85,7 @@ const TopBar = ({ counter, setCounter, setLoginState }) => {
       signInWithEmailAndPassword(auth, loginEmail, loginPassword)
         .then(async (userCredential) => {
           const user = userCredential.user;
-
+          // console.log(user.uid);
           onClose();
           toast({
             title: "Login Successful",
@@ -96,7 +96,7 @@ const TopBar = ({ counter, setCounter, setLoginState }) => {
           });
           setCounter(true);
           setLoginState(true);
-          localStorage.setItem("userLoggedToken");
+          localStorage.setItem("userLoggedToken", JSON.stringify(user.uid));
           setUserLogged(true);
         })
         .catch((error) => {
