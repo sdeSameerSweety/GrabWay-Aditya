@@ -184,16 +184,6 @@ const Registration = () => {
                 <Heading size="md" mt={4}>
                   Apply as User
                 </Heading>
-                {/* <Box mt={4}>
-                  <Input type="text" placeholder="First Name *" />
-                  <Input type="text" placeholder="Last Name *" />
-                  <Input type="password" placeholder="Password *" />
-                  <Input type="password" placeholder="Confirm Password *" />
-                  <RadioGroup defaultValue="male">
-                    <Radio value="male">Male</Radio>
-                    <Radio value="female">Female</Radio>
-                  </RadioGroup>
-                </Box> */}
                 <Box mt={4}>
                   <Avatar size="xl" mb={4} src={profilePhoto} />
                   <FormControl>
@@ -335,23 +325,6 @@ const Registration = () => {
                       />
                     </Flex>
                   </FormControl>
-
-                  {/* Commute Frequency */}
-                  {/* <FormControl mt={4}>
-                    <FormLabel>Commute Frequency</FormLabel>
-                    <Input
-                      type="text"
-                      placeholder="Commute Frequency"
-                      value={formData.commuteFrequency}
-                      onChange={(e) =>
-                        setFormData({
-                          ...formData,
-                          commuteFrequency: e.target.value,
-                        })
-                      }
-                    />
-                  </FormControl> */}
-
                   {/* Preferred Gender */}
                   <FormControl mt={4}>
                     <FormLabel>Preferred Gender</FormLabel>
@@ -372,23 +345,6 @@ const Registration = () => {
                       </Stack>
                     </RadioGroup>
                   </FormControl>
-
-                  {/* Music Preferences */}
-                  {/* <FormControl mt={4}>
-                    <FormLabel>Music Preferences</FormLabel>
-                    <Input
-                      type="text"
-                      placeholder="Music Preferences"
-                      value={formData.musicPreferences}
-                      onChange={(e) =>
-                        setFormData({
-                          ...formData,
-                          musicPreferences: e.target.value,
-                        })
-                      }
-                    />
-                  </FormControl> */}
-
                   {/* Smoking Preferences */}
                   <FormControl mt={4}>
                     <FormLabel>Smoking Preferences</FormLabel>
@@ -458,20 +414,6 @@ const Registration = () => {
                   Apply as a Driver
                 </Heading>
                 <Box mt={4}>
-                  {/* <Input type="text" placeholder="First Name *" />
-                  <Input type="text" placeholder="Last Name *" />
-                  <Input type="email" placeholder="Email *" />
-                  <Input type="text" placeholder="Phone *" />
-                  <Input type="password" placeholder="Password *" />
-                  <Input type="password" placeholder="Confirm Password *" />
-                  <Select placeholder="Select your Security Question">
-                    <option value="birthdate">What is your Birthdate?</option>
-                    <option value="oldPhone">
-                      What is Your old Phone Number
-                    </option>
-                    <option value="petName">What is your Pet Name?</option>
-                  </Select>
-                  <Input type="text" placeholder="Answer *" /> */}
                   <Avatar size="xl" mb={4} src={profilePhoto} />
                   <FormControl>
                     <FormLabel>Profile Photo</FormLabel>
