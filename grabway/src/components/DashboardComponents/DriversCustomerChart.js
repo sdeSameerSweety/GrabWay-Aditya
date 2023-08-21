@@ -1,7 +1,7 @@
 import React, { useState } from "react";
-import Chart from "chart.js";
 
-export default function DriversCustomerChart() {
+
+function DriversCustomerChart() {
   const [graphData, setGraphData] = useState([65, 78, 66, 44, 56, 67, 75]);
   React.useEffect(() => {
     var config = {
