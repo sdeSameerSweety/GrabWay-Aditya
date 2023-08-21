@@ -5,6 +5,7 @@ import Footer from "./components/Footer/footer";
 import Homepage from "./Pages/HomePage/Homepage";
 import Support from "./Pages/Support/Support.jsx";
 import MapLayout from "./components/Map/MapLayout";
+import Registeration from "./components/Registeration/Registeration";
 
 
 function App() {
@@ -47,6 +48,7 @@ function App() {
         setLoginState={setLoginState}
       />
       <div style={intDivStyle}>
+        <Registeration/>
         <Routes>
           <Route path="/" element={<Homepage loginState={loginState} />} />
           <Route path="/support" element={<Support />} />
