@@ -7,6 +7,7 @@ import Support from "./Pages/Support/Support.jsx";
 import MapLayout from "./components/Map/MapLayout";
 import Dashboard from "./Pages/DashboardPage";
 
+
 function App() {
   const [windowSize, setWindowSize] = useState(window.innerWidth);
   const [loginState, setLoginState] = useState(false);
