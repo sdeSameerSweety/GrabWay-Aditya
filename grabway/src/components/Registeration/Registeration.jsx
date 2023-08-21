@@ -19,7 +19,7 @@ import {
 
 const Registration = () => {
   return (
-    <Container className="container" maxW="xl" mt={8}>
+    <Container className="container" maxW="75%" mt={8}>
       <Box
         className="tab-list"
         display="flex"
@@ -29,22 +29,22 @@ const Registration = () => {
         <Box flex={1} p={8}>
           <Heading className="heading">Welcome</Heading>
           <Text className="text">
-            You are 30 seconds away from earning your own money!
+            You are 30 seconds away from saving environment and money!
           </Text>
-          <Button className="button" colorScheme="teal" size="md">
+          <Button className="button" colorScheme="blue" size="md">
             Login
           </Button>
         </Box>
         <Box flex={3} p={8}>
           <Tabs isFitted variant="enclosed-colored" colorScheme="teal">
             <TabList>
-              <Tab>Employee</Tab>
-              <Tab>Hirer</Tab>
+              <Tab>User Registration</Tab>
+              <Tab>Driver Registration</Tab>
             </TabList>
             <TabPanels>
               <TabPanel>
                 <Heading size="md" mt={4}>
-                  Apply as an Employee
+                  Apply as User
                 </Heading>
                 <Box mt={4}>
                   <Input type="text" placeholder="First Name *" />
@@ -56,13 +56,13 @@ const Registration = () => {
                     <Radio value="female">Female</Radio>
                   </RadioGroup>
                 </Box>
-                <Button colorScheme="teal" mt={4}>
+                <Button colorScheme="blue" mt={4}>
                   Register
                 </Button>
               </TabPanel>
               <TabPanel>
                 <Heading size="md" mt={4}>
-                  Apply as a Hirer
+                  Apply as a Driver
                 </Heading>
                 <Box mt={4}>
                   <Input type="text" placeholder="First Name *" />
