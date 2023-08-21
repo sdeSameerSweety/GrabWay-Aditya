@@ -5,6 +5,7 @@ import Footer from "./components/Footer/footer";
 import Homepage from "./Pages/HomePage/Homepage";
 import Support from "./Pages/Support/Support.jsx";
 import MapLayout from "./components/Map/MapLayout";
+import Dashboard from "./Pages/DashboardPage";
 
 
 function App() {
@@ -51,6 +52,7 @@ function App() {
           <Route path="/" element={<Homepage loginState={loginState} />} />
           <Route path="/support" element={<Support />} />
           <Route path="/maps" element={<MapLayout />} />
+          <Route path="/dashboard" element={<Dashboard />} />
         </Routes>
         <Footer />
       </div>
