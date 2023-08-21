@@ -1,5 +1,5 @@
 import React from "react";
-import "./Registeration.css"
+import "./Registeration.css";
 import {
   Container,
   Box,
@@ -25,7 +25,21 @@ const Registration = () => {
         display="flex"
         alignItems="center"
         justifyContent="center"
+        // bgImg="url('https://img.freepik.com/free-vector/car-driving-concept-illustration_114360-8001.jpg?w=2000')"
+        // bgSize="cover"
+        // bgPosition="center"
+        // bgRepeat="no-repeat"
+        // w="100%"
+        // h="100%"
       >
+        {/* <Box
+          position="absolute"
+          top="0"
+          left="0"
+          w="100%"
+          h="100%"
+          bg="rgba(0, 0, 0, 0.2)" // Adjust the opacity here
+        /> */}
         <Box flex={1} p={8}>
           <Heading className="heading">Welcome</Heading>
           <Text className="text">
@@ -80,7 +94,7 @@ const Registration = () => {
                   </Select>
                   <Input type="text" placeholder="Answer *" />
                 </Box>
-                <Button colorScheme="teal" mt={4}>
+                <Button colorScheme="blue" mt={4}>
                   Register
                 </Button>
               </TabPanel>
