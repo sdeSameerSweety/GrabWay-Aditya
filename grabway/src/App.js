@@ -4,6 +4,7 @@ import Navbar from "./components/Navbar/Navbar";
 import Footer from "./components/Footer/footer";
 import Homepage from "./Pages/HomePage/Homepage";
 import Support from "./Pages/Support/Support.jsx";
+import Dashboard from "./Pages/DashboardPage";
 
 function App() {
   const [windowSize, setWindowSize] = useState(window.innerWidth);
@@ -48,6 +49,7 @@ function App() {
         <Routes>
           <Route path="/" element={<Homepage loginState={loginState} />} />
           <Route path="/support" element={<Support />} />
+          <Route path="/dashboard" element={<Dashboard />} />
         </Routes>
         <Footer />
       </div>

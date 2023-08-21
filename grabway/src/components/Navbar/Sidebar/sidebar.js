@@ -101,7 +101,7 @@ export default function Sidebar({
               </Link>
             </li>
             <li>
-              <Link to="/">
+              <Link to="/dashboard">
                 <div className="items-list-side">
                   <i
                     className={showState === true ? "bx bx-grid-alt" : "hidden"}
@@ -128,7 +128,7 @@ export default function Sidebar({
                 <div className="items-list-side">
                   <i
                     className={
-                      showState === true ? "bx bx-pie-chart-alt-2" : "hidden"
+                      showState === true ? "bx bx-line-chart" : "hidden"
                     }
                   ></i>
                   <span className="links_name">Analytics</span>
@@ -140,7 +140,7 @@ export default function Sidebar({
               <Link to="/">
                 <div className="items-list-side">
                   <i
-                    className={showState === true ? "bx bx-chat" : "hidden"}
+                    className={showState === true ? "bx bx-cart" : "hidden"}
                   ></i>
                   <span className="links_name">Packages</span>
                 </div>
@@ -152,7 +152,7 @@ export default function Sidebar({
               <Link to="/support">
                 <div className="items-list-side">
                   <i
-                    className={showState === true ? "bx bx-folder" : "hidden"}
+                    className={showState === true ? "bx bx-support" : "hidden"}
                   ></i>
                   <span className="links_name">Support</span>
                 </div>
