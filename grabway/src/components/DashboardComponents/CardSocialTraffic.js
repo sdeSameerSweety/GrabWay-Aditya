@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Avatar, Divider } from "@chakra-ui/react";
 
-export default function CardSocialTraffic() {
+export default function TopDrivers() {
   const [topDrivers, setTopDrivers] = useState([
     {
       img: "https://bit.ly/kent-c-dodds",
@@ -28,11 +28,6 @@ export default function CardSocialTraffic() {
       status: "online",
     },
   ]);
-
-  function getStatus(item) {
-    if (item.status === "online") return "bg-green-500";
-    else return "bg-red-500";
-  }
   return (
     <>
       <div className="relative flex flex-col min-w-0 break-words bg-white w-full mb-6 shadow-lg rounded">
@@ -78,8 +73,9 @@ export default function CardSocialTraffic() {
                           <div
                             style={{ width: "100%" }}
                             className={
-                              "shadow-none flex flex-col text-center whitespace-nowrap text-white justify-center " +
-                              getStatus(item)
+                              "shadow-none flex flex-col text-center whitespace-nowrap text-white justify-center bg-" +
+                              `${item.status === "online" ? "green" : "red"}` +
+                              "-500"
                             }
                           ></div>
                         </div>
