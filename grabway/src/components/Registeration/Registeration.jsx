@@ -167,8 +167,11 @@ const Registration = () => {
         <Box flex={1} p={8}>
           <Heading className="heading">Welcome</Heading>
           <Text className="text">
-            You are 30 seconds away from saving environment and money!
+            Step into Grabway, where your commute becomes a canvas of
+            connections, savings, and sustainability – all painted in shared
+            journeys.
           </Text>
+          <Text className="text-sm" color={'black'}>Already have a account?</Text>
           <Button className="button" colorScheme="blue" size="md">
             Login
           </Button>
