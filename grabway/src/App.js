@@ -49,7 +49,8 @@ function App() {
         setLoginState={setLoginState}
       />
       <div style={intDivStyle}>
-        <Registeration />
+        {/* <Registeration /> */}
+        <Support/>
         <Routes>
           <Route path="/" element={<Homepage loginState={loginState} />} />
           <Route path="/support" element={<Support />} />
