@@ -35,6 +35,7 @@ const TopSection = ({ nonceVal, loginState }) => {
     id: "google-map-script",
     googleMapsApiKey: "AIzaSyDJaFr-HFXGBOg8pUSdQfGjGwGdIwtbXhY",
     libraries: ["maps", "places"],
+    mapIds: ["7e437361629e930a"],
     nonce: nonceVal,
   });
 
