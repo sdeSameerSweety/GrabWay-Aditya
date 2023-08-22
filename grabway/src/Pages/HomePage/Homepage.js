@@ -26,7 +26,8 @@ import { Autocomplete } from "@react-google-maps/api";
 const TopSection = ({ loginState }) => {
   const { isLoaded } = useJsApiLoader({
     googleMapsApiKey: "AIzaSyAfuFBhydCeCnk1Kl1c6u_1SfrIyXlReh0",
-    libraries: ["places"],
+    libraries: ['maps',"places"],
+    mapIds:['7e437361629e930a']
   });
   if (!isLoaded) {
     return (
