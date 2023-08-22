@@ -1,31 +1,36 @@
 import React, { useState } from "react";
 import { GoogleMap, MarkerF, useJsApiLoader } from "@react-google-maps/api";
 import { Button, Mark } from "@chakra-ui/react";
-
+import { useLocation } from "react-router-dom";
 const containerStyle = {
   width: "1000px",
   height: "500px",
   border: "1px solid white",
   borderRadius: "30px",
 };
-const iconBase =
-  "https://e7.pngegg.com/pngimages/230/877/png-clipart-character-cartoon-drawing-illustration-cartoon-camera-man-painted-hat-watercolor-painting-hat-vector.png";
 
 const center = {
   lat: 20.350898582501245,
   lng: 85.8063896401287,
 };
 
-function MyComponent() {
-  let initialPosition = { lat: 20.350898582501245, lng: 85.8063896401287 };
-  let finalPosition = { lat: 20.350898582501245, lng: 85.9063896401287 };
+function MyComponent({nonceVal}) {
+  const location = useLocation();
+
+  const rideData = {
+    source: center,
+    destination: center,
+  };
+  console.log(rideData);
+  let initialPosition = rideData.source;
+  let finalPosition = rideData.destination;
   const [fromVerifed, setFromVerified] = useState(false);
   const { isLoaded } = useJsApiLoader({
-    id: "google-map-script",
     id: "google-map-script",
     googleMapsApiKey: "AIzaSyDJaFr-HFXGBOg8pUSdQfGjGwGdIwtbXhY",
     libraries: ["maps", "places"],
     mapIds: ["7e437361629e930a"],
+    nonce: nonceVal,
   });
   const mapOptions = {
     mapId: "7e437361629e930a",
@@ -57,6 +62,7 @@ function MyComponent() {
                 
               >
                 <MarkerF position={fromVerifed?initialPosition:finalPosition} />
+                
               </GoogleMap>
             </div>
       </div>
