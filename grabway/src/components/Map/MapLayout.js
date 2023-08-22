@@ -22,6 +22,7 @@ function MyComponent() {
   const [fromVerifed, setFromVerified] = useState(false);
   const { isLoaded } = useJsApiLoader({
     id: "google-map-script",
+    id: "google-map-script",
     googleMapsApiKey: "AIzaSyDJaFr-HFXGBOg8pUSdQfGjGwGdIwtbXhY",
     libraries: ["maps", "places"],
     mapIds: ["7e437361629e930a"],

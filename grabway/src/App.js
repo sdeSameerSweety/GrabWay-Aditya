@@ -7,10 +7,10 @@ import Support from "./Pages/Support/Support.jsx";
 import MapLayout from "./components/Map/MapLayout";
 import Dashboard from "./Pages/DashboardPage";
 
-
 function App() {
   const [windowSize, setWindowSize] = useState(window.innerWidth);
   const [loginState, setLoginState] = useState(false);
+  const [nonce, setNonce] = useState("grabway@123");
   console.log(loginState);
 
   useEffect(() => {
@@ -49,9 +49,12 @@ function App() {
       />
       <div style={intDivStyle}>
         <Routes>
-          <Route path="/" element={<Homepage loginState={loginState} />} />
+          <Route
+            path="/"
+            element={<Homepage nonceVal={nonce} loginState={loginState} />}
+          />
           <Route path="/support" element={<Support />} />
-          <Route path="/maps" element={<MapLayout />} />
+          <Route path="/maps" element={<MapLayout nonceVal={nonce} />} />
           <Route path="/dashboard" element={<Dashboard />} />
         </Routes>
         <Footer />

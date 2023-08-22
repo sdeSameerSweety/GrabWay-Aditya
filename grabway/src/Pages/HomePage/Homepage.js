@@ -1,4 +1,5 @@
-import React, { useRef } from "react";
+import React, { useEffect, useRef, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import "./Homepage.css";
 import {
   Input,
@@ -23,12 +24,34 @@ import { AiFillHeart, AiOutlineThunderbolt } from "react-icons/ai";
 import { FaRoad } from "react-icons/fa6";
 import { useJsApiLoader } from "@react-google-maps/api";
 import { Autocomplete } from "@react-google-maps/api";
-const TopSection = ({ loginState }) => {
+const TopSection = ({ nonceVal, loginState }) => {
+  const navigate = useNavigate();
+  const [searchResult, setSearchResult] = useState();
+  const sourceDesk = useRef();
+  const destinationDesk = useRef();
+  const sourceMob = useRef();
+  const destinationMob = useRef();
   const { isLoaded } = useJsApiLoader({
-    googleMapsApiKey: "AIzaSyAfuFBhydCeCnk1Kl1c6u_1SfrIyXlReh0",
-    libraries: ['maps',"places"],
-    mapIds:['7e437361629e930a']
+    id: "google-map-script",
+    googleMapsApiKey: "AIzaSyDJaFr-HFXGBOg8pUSdQfGjGwGdIwtbXhY",
+    libraries: ["maps", "places"],
+    nonce: nonceVal,
   });
+
+  const handleSearchDesk = () => {
+    console.log(sourceDesk.current.value, destinationDesk.current.value);
+    navigate("/maps", {
+      state: {
+        source: sourceDesk.current.value,
+        destination: destinationDesk.current.value,
+      },
+    });
+  };
+
+  const handleSearchMob = () => {
+    console.log(sourceMob.current.value, destinationMob.current.value);
+  };
+
   if (!isLoaded) {
     return (
       <div className="h-[100vh] flex justify-center items-center">
@@ -92,6 +115,7 @@ const TopSection = ({ loginState }) => {
                                 }}
                                 type="text"
                                 placeholder="From where ?"
+                                ref={sourceDesk}
                               />
                             </Autocomplete>
                           </InputGroup>
@@ -146,6 +170,7 @@ const TopSection = ({ loginState }) => {
                                 }}
                                 type="text"
                                 placeholder="Where to ?"
+                                ref={destinationDesk}
                               />
                             </Autocomplete>
                           </InputGroup>
@@ -167,6 +192,7 @@ const TopSection = ({ loginState }) => {
                   borderRadius: "9px",
                   boxShadow: "10px 10px #824244",
                 }}
+                onClick={handleSearchDesk}
               >
                 <div className="font-ubuntu text-2xl">Search GrabWay</div>
               </Button>
@@ -331,17 +357,20 @@ const TopSection = ({ loginState }) => {
                       >
                         <FaCircleDot fill="green" />
                       </InputLeftElement>
-                      <Input
-                        className="card"
-                        variant="filled"
-                        sx={{
-                          border: "2px solid grey",
-                          padding: "15px",
-                          paddingLeft: "40px",
-                        }}
-                        type="text"
-                        placeholder="Where to ?"
-                      />
+                      <Autocomplete className="font-ubuntu text-center">
+                        <Input
+                          className="card"
+                          variant="filled"
+                          sx={{
+                            border: "2px solid grey",
+                            padding: "15px",
+                            paddingLeft: "40px",
+                          }}
+                          type="text"
+                          placeholder="Where to ?"
+                          ref={sourceMob}
+                        />
+                      </Autocomplete>
                     </InputGroup>
                   </div>
                 </div>
@@ -372,17 +401,20 @@ const TopSection = ({ loginState }) => {
                       >
                         <FaCircleDot fill="red" />
                       </InputLeftElement>
-                      <Input
-                        className="card"
-                        variant="filled"
-                        sx={{
-                          border: "2px solid grey",
-                          padding: "15px",
-                          paddingLeft: "40px",
-                        }}
-                        type="text"
-                        placeholder="Where to ?"
-                      />
+                      <Autocomplete className="font-ubuntu text-center">
+                        <Input
+                          className="card"
+                          variant="filled"
+                          sx={{
+                            border: "2px solid grey",
+                            padding: "15px",
+                            paddingLeft: "40px",
+                          }}
+                          type="text"
+                          placeholder="Where to ?"
+                          ref={destinationMob}
+                        />
+                      </Autocomplete>
                     </InputGroup>
                   </div>
                 </div>
@@ -401,6 +433,7 @@ const TopSection = ({ loginState }) => {
               borderRadius: "9px",
               boxShadow: "5px 5px #824244",
             }}
+            onClick={handleSearchMob}
           >
             <div className="font-ubuntu text-2xl">Search GrabWay</div>
           </Button>
