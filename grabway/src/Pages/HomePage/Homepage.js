@@ -115,6 +115,7 @@ const TopSection = ({ nonceVal, loginState }) => {
                                   paddingLeft: "40px",
                                 }}
                                 type="text"
+                                w={400}
                                 placeholder="From where ?"
                                 ref={sourceDesk}
                               />
@@ -169,6 +170,7 @@ const TopSection = ({ nonceVal, loginState }) => {
                                   padding: "30px",
                                   paddingLeft: "40px",
                                 }}
+                                w={400}
                                 type="text"
                                 placeholder="Where to ?"
                                 ref={destinationDesk}
