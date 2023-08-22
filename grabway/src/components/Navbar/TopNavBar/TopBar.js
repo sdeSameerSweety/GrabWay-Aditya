@@ -85,7 +85,7 @@ const TopBar = ({ counter, setCounter, setLoginState }) => {
       signInWithEmailAndPassword(auth, loginEmail, loginPassword)
         .then(async (userCredential) => {
           const user = userCredential.user;
-
+          // console.log(user.uid);
           onClose();
           toast({
             title: "Login Successful",
@@ -96,7 +96,7 @@ const TopBar = ({ counter, setCounter, setLoginState }) => {
           });
           setCounter(true);
           setLoginState(true);
-          localStorage.setItem("userLoggedToken");
+          localStorage.setItem("userLoggedToken", JSON.stringify(user.uid));
           setUserLogged(true);
         })
         .catch((error) => {
@@ -245,7 +245,7 @@ const TopBar = ({ counter, setCounter, setLoginState }) => {
   return (
     <>
       <div className="flex flex-row justify-between items-center m-1 mt-2 border-b-2 border-[#77717150] p-2 pl-10 pr-10 rounded-full">
-        <Link href="/">
+        <Link to="/">
           <div className="flex flex-row justify-center items-center">
             <div className="logo-text flex flex-row justify-center items-center text-2xl font-ubuntu">
               GrabWay

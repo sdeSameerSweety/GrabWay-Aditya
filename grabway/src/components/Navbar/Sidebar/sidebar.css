@@ -137,8 +137,8 @@
   left: 0;
   transform: translateY(-50%);
   font-size: 22px;
-  background: #1d1b31;
-  color: #fff;
+  background: #272446;
+  color: #ffffff;
 }
 .sidebar.open .bx-search:hover {
   background: #1d1b31;

@@ -31,9 +31,13 @@ const TopSection = ({ loginState }) => {
   if (!isLoaded) {
     return (
       <div className="h-[100vh] flex justify-center items-center">
-        <Button size={'lg'} isLoading colorScheme="red" color={"red"} bgColor={"white"}>
-          
-        </Button>
+        <Button
+          size={"lg"}
+          isLoading
+          colorScheme="red"
+          color={"red"}
+          bgColor={"white"}
+        ></Button>
       </div>
     );
   }
