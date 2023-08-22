@@ -26,3 +26,35 @@
   .mobile-view {
   }
 }
+
+.pac-container{
+  margin-left: -0.6%;
+  box-sizing: content-box;
+  display: flex;
+  flex-direction: column;
+  padding: 10px;
+  border: 2px solid white;
+  border-radius: 10px;
+  height: 200px;
+}
+.pac-icon{
+  display: none;
+
+}
+.pac-item{
+  padding:5px;
+  border: none;
+  border-radius: 5px;
+}
+.pac-item:hover{
+ background-color: rgba(68, 61, 61, 0.279);
+}
+.pac-item-selected{
+  
+}
+.pac-item-query{
+  color: rgb(129, 118, 118);
+}
+.pac-matched{
+  color: black;
+}
