@@ -38,7 +38,9 @@ const TopSection = ({ nonceVal, loginState }) => {
     mapIds: ["7e437361629e930a"],
     nonce: nonceVal,
   });
-
+  const pacItemQuery={
+    padding:"20px",
+  }
   const handleSearchDesk = () => {
     console.log(destinationDesk.current.value);
     navigate("/maps", {
@@ -92,7 +94,7 @@ const TopSection = ({ nonceVal, loginState }) => {
                   <CardBody>
                     <Text>
                       <div className="flex flex-row">
-                        <div className="flex justify-center items-center">
+                        <div className="source flex justify-center items-center">
                           <InputGroup>
                             <InputLeftElement
                               sx={{
@@ -105,7 +107,7 @@ const TopSection = ({ nonceVal, loginState }) => {
                             >
                               <FaCircleDot fill="green" />
                             </InputLeftElement>
-                            <Autocomplete className="font-ubuntu text-center">
+                            <Autocomplete className=" font-ubuntu text-center">
                               <Input
                                 className="card"
                                 variant="filled"
