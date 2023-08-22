@@ -90,6 +90,7 @@ const TopSection = ({ loginState }) => {
                                   paddingLeft: "40px",
                                 }}
                                 type="text"
+                                w={400}
                                 placeholder="From where ?"
                               />
                             </Autocomplete>
@@ -143,6 +144,7 @@ const TopSection = ({ loginState }) => {
                                   padding: "30px",
                                   paddingLeft: "40px",
                                 }}
+                                w={400}
                                 type="text"
                                 placeholder="Where to ?"
                               />
