@@ -40,7 +40,7 @@ const TopSection = ({ nonceVal, loginState }) => {
   });
 
   const handleSearchDesk = () => {
-    console.log(sourceDesk.current.value, destinationDesk.current.value);
+    console.log(destinationDesk.current.value);
     navigate("/maps", {
       state: {
         source: sourceDesk.current.value,
@@ -66,7 +66,7 @@ const TopSection = ({ nonceVal, loginState }) => {
       </div>
     );
   }
-
+  
   return (
     <>
       <div className="relative dekstop-view">
