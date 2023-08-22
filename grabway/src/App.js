@@ -8,10 +8,10 @@ import MapLayout from "./components/Map/MapLayout";
 import Registeration from "./components/Registeration/Registeration";
 import Dashboard from "./Pages/DashboardPage";
 
-
 function App() {
   const [windowSize, setWindowSize] = useState(window.innerWidth);
   const [loginState, setLoginState] = useState(false);
+  const [nonce, setNonce] = useState("grabway@123");
   console.log(loginState);
 
   useEffect(() => {
@@ -52,9 +52,12 @@ function App() {
         {/* <Registeration /> */}
         <Support/>
         <Routes>
-          <Route path="/" element={<Homepage loginState={loginState} />} />
+          <Route
+            path="/"
+            element={<Homepage nonceVal={nonce} loginState={loginState} />}
+          />
           <Route path="/support" element={<Support />} />
-          <Route path="/maps" element={<MapLayout />} />
+          <Route path="/maps" element={<MapLayout nonceVal={nonce} />} />
           <Route path="/dashboard" element={<Dashboard />} />
         </Routes>
         <Footer />
