@@ -61,6 +61,7 @@ function App() {
           <Route path="/support" element={<Support />} />
           <Route path="/maps" element={<MapLayout nonceVal={nonce} />} />
           <Route path="/dashboard" element={<Dashboard />} />
+          <Route path="/userprofile" element={<UserProfile />} />
         </Routes>
         <Footer />
       </div>
