@@ -1,11 +1,13 @@
 .slider {
   overflow: hidden;
   position: relative;
-  width: 90%;
-  padding-left: 5%;
+  width: 100%;
+  padding-left: 2%;
+  padding-right: 2%;
   height: 35vh;
   background-size: cover;
   background-position: center center;
+  text-align: center;
 }
 
 .slider .slider-content {

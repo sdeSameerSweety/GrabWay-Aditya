@@ -1,0 +1,112 @@
+/* Registration.css */
+
+/* Style for the whole container */
+.container {
+  background-color: #f7f7f7;
+  padding: 40px;
+}
+
+/* Style for the heading */
+.heading {
+  font-size: 36px;
+  margin-bottom: 20px;
+  color: #333;
+}
+
+/* Style for the text */
+.text {
+  font-size: 18px;
+  margin-bottom: 30px;
+  color: #666;
+}
+
+/* Style for the buttons */
+.button {
+  margin-top: 20px;
+  background-color: teal;
+  color: #fff;
+  padding: 12px 24px;
+  border: none;
+  border-radius: 5px;
+  font-size: 18px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.button:hover {
+  background-color: #008080;
+}
+
+/* Style for the tab list */
+.tab-list {
+  background-color: #fff;
+  border-radius: 10px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+  margin-bottom: 40px;
+}
+
+/* Style for the individual tabs */
+.tab {
+  padding: 12px 24px;
+  font-size: 18px;
+  border: none;
+  background-color: #f0f0f0;
+  color: #444;
+  cursor: pointer;
+  transition: background-color 0.3s, color 0.3s;
+}
+
+.tab:focus {
+  outline: none;
+}
+
+.tab:hover {
+  background-color: #e0e0e0;
+  color: #333;
+}
+
+/* Style for the tab panels */
+.tab-panel {
+  padding: 30px;
+  background-color: #fff;
+  border-radius: 10px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+/* Style for input fields */
+.input {
+  margin-bottom: 20px;
+  padding: 12px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  width: 100%;
+  font-size: 16px;
+}
+
+/* Style for the radio buttons */
+.radio-group {
+  margin-bottom: 20px;
+}
+
+/* Style for the select input */
+.select {
+  margin-bottom: 20px;
+  font-size: 16px;
+}
+
+/* Style for the submit button */
+.submit-button {
+  background-color: teal;
+  color: #fff;
+  padding: 14px 28px;
+  border: none;
+  border-radius: 5px;
+  font-size: 18px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.submit-button:hover {
+  background-color: #008080;
+}
