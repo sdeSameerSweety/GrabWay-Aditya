@@ -5,7 +5,7 @@ import Footer from "./components/Footer/footer";
 import Homepage from "./Pages/HomePage/Homepage";
 import Support from "./Pages/Support/Support.jsx";
 import MapLayout from "./components/Map/MapLayout";
-import Registeration from "./components/Registeration/Registeration";
+import Registeration from "./Pages/Registeration/Registeration";
 import Dashboard from "./Pages/DashboardPage";
 
 function App() {
@@ -49,8 +49,6 @@ function App() {
         setLoginState={setLoginState}
       />
       <div style={intDivStyle}>
-        {/* <Registeration /> */}
-        <Support/>
         <Routes>
           <Route
             path="/"
@@ -59,6 +57,7 @@ function App() {
           <Route path="/support" element={<Support />} />
           <Route path="/maps" element={<MapLayout nonceVal={nonce} />} />
           <Route path="/dashboard" element={<Dashboard />} />
+          <Route path="/registration" element={<Registeration />} />
         </Routes>
         <Footer />
       </div>
