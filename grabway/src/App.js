@@ -7,6 +7,7 @@ import Support from "./Pages/Support/Support.jsx";
 import MapLayout from "./components/Map/MapLayout";
 import Registeration from "./components/Registeration/Registeration";
 import Dashboard from "./Pages/DashboardPage";
+import UserProfile from "./Pages/ProfilePages/user";
 
 function App() {
   const [windowSize, setWindowSize] = useState(window.innerWidth);
@@ -59,6 +60,7 @@ function App() {
           <Route path="/support" element={<Support />} />
           <Route path="/maps" element={<MapLayout nonceVal={nonce} />} />
           <Route path="/dashboard" element={<Dashboard />} />
+          <Route path="/userprofile" element={<UserProfile />} />
         </Routes>
         <Footer />
       </div>
