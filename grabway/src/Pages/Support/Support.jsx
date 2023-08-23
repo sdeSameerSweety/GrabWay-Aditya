@@ -25,6 +25,9 @@ import {
   useColorModeValue,
   Image,
   Center,
+  seClipboard,
+  useToast,
+  useClipboard
 } from "@chakra-ui/react";
 import {
   MdPhone,
@@ -33,10 +36,29 @@ import {
   MdFacebook,
   MdOutlineEmail,
 } from "react-icons/md";
-// import { ChevronDownIcon } from "@chakra-ui/icons";
 import { BsGithub, BsDiscord, BsPerson } from "react-icons/bs";
 import { BiCaretDownCircle } from "react-icons/bi";
 export default function ContactFaq() {
+
+  const phone = "+91-9696969696";
+  const email = "grabwayhelpdesk@gmail.com";
+  const address = "Bhubneswar, India";
+
+  const { onCopy } = useClipboard(phone);
+  const toast = useToast();
+
+  const handleCopyClick = (text) => {
+    onCopy();
+    toast({
+      title: "Text Copied",
+      description: `${text} has been copied to clipboard.`,
+      status: "success",
+      duration: 3000,
+      isClosable: true,
+    });
+  };
+
+
   return (
     <>
       <Container
@@ -74,35 +96,38 @@ export default function ContactFaq() {
                         <Button
                           size="md"
                           height="48px"
-                          width="200px"
+                          width="auto"
                           variant="ghost"
                           color="#DCE2FF"
-                          _hover={{ border: "2px solid #1C6FEB" }}
+                          _hover={{ border: "0px solid #1C6FEB" }}
                           leftIcon={<MdPhone color="Azure" size="20px" />}
+                          onClick={() => handleCopyClick(phone)}
                         >
-                          +91-9696969696
+                          {phone}
                         </Button>
                         <Button
                           size="md"
                           height="48px"
-                          width="200px"
+                          width="auto"
                           variant="ghost"
                           color="#DCE2FF"
-                          _hover={{ border: "2px solid #1C6FEB" }}
+                          _hover={{ border: "0px solid #1C6FEB" }}
                           leftIcon={<MdEmail color="Azure" size="20px" />}
+                          onClick={() => handleCopyClick(email)}
                         >
-                          grabwayhelpdesk@gmail.com
+                          {email}
                         </Button>
                         <Button
                           size="md"
                           height="48px"
-                          width="200px"
+                          width="auto"
                           variant="ghost"
                           color="#DCE2FF"
-                          _hover={{ border: "2px solid #1C6FEB" }}
+                          _hover={{ border: "0px solid #1C6FEB" }}
                           leftIcon={<MdLocationOn color="Azure" size="20px" />}
+                          onClick={() => handleCopyClick(address)}
                         >
-                          Bhubneswar, India
+                          {address}
                         </Button>
                       </VStack>
                     </Box>

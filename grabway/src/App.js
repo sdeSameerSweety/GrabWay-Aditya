@@ -5,6 +5,7 @@ import Footer from "./components/Footer/footer";
 import Homepage from "./Pages/HomePage/Homepage";
 import Support from "./Pages/Support/Support.jsx";
 import MapLayout from "./components/Map/MapLayout";
+import Registeration from "./components/Registeration/Registeration";
 import Dashboard from "./Pages/DashboardPage";
 import UserProfile from "./Pages/ProfilePages/user";
 
@@ -49,6 +50,8 @@ function App() {
         setLoginState={setLoginState}
       />
       <div style={intDivStyle}>
+        {/* <Registeration /> */}
+        <Support/>
         <Routes>
           <Route
             path="/"

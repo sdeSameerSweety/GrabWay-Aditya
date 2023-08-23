@@ -43,7 +43,7 @@ export default function TopSlider() {
   useEffect(() => {
     const interval = setInterval(() => {
       nextSlide();
-    }, 5000); //timer
+    }, 1000); //timer
 
     return () => {
       clearInterval(interval);
