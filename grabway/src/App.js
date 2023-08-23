@@ -7,6 +7,7 @@ import Support from "./Pages/Support/Support.jsx";
 import MapLayout from "./components/Map/MapLayout";
 import Registeration from "./components/Registeration/Registeration";
 import Dashboard from "./Pages/DashboardPage";
+import DriverCard from "./components/Cards/DriverCards/DriverCards";
 
 function App() {
   const [windowSize, setWindowSize] = useState(window.innerWidth);
@@ -50,7 +51,8 @@ function App() {
       />
       <div style={intDivStyle}>
         {/* <Registeration /> */}
-        <Support/>
+        {/* <Support/> */}
+        <DriverCard/>
         <Routes>
           <Route
             path="/"
