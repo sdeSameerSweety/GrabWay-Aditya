@@ -32,60 +32,35 @@ function DriverCard() {
           </Tab>
         </TabList>
         <TabPanels mt={4}>
-          {/* <TabPanel>
-            <Heading size="md" mb={2}>
-              Special Title Treatment
-            </Heading>
-            <Text fontSize="md" color="gray.600">
-              With supporting text below as a natural lead-in to additional
-              content.
-            </Text>
-          </TabPanel>
-          <TabPanel>
-            <Heading size="md" mb={2}>
-              Tab 2 Content
-            </Heading>
-            <Text fontSize="md" color="gray.600">
-              Content for the second tab.
-            </Text>
-          </TabPanel>
-          <TabPanel>
-            <Heading size="md" mb={2}>
-              Tab 3 Content
-            </Heading>
-            <Text fontSize="md" color="gray.600">
-              Content for the third tab.
-            </Text>
-          </TabPanel> */}
-
           <Box
-            width="75%" // Taking 75% of the left space
+            width="75%"
             borderWidth="1px"
             borderRadius="lg"
             overflow="hidden"
-            boxShadow="lg" // Slightly more pronounced box shadow
-            display="flex" // Displaying elements in a row
+            boxShadow="lg"
+            display="flex"
+            bg="gray.100"
+            p={4}
           >
             <Image
-              src="https://via.placeholder.com/300x180?text=Car" // Larger placeholder image
-              alt="Luxury Car Service" // Updated alt text
+              src="https://via.placeholder.com/300x180?text=Car"
+              alt="Luxury Car Service"
               objectFit="cover"
-              width="40%" // Taking 40% of the width for the image
+              width="40%"
+              borderRadius="md"
             />
-            <VStack spacing={4} p={4} align="left">
-              <Text fontSize="xl" fontWeight="bold">
-                Luxury Car Service
-              </Text>
+            <VStack spacing={4} pl={4} align="start">
+              <Heading size="lg">Luxury Car Service</Heading>
               <Text color="gray.600">
                 Providing top-notch car services for your luxury vehicle. Our
                 skilled professionals ensure your car's peak performance.
               </Text>
               <UnorderedList listStyleType="none" p={0}>
-                <ListItem p={2}>🛠️ Engine Maintenance</ListItem>
-                <ListItem p={2}>🚗 Exterior Detailing</ListItem>
-                <ListItem p={2}>🛋️ Interior Cleaning</ListItem>
+                <ListItem>🛠️ Engine Maintenance</ListItem>
+                <ListItem>🚗 Exterior Detailing</ListItem>
+                <ListItem>🛋️ Interior Cleaning</ListItem>
               </UnorderedList>
-              <VStack spacing={2}>
+              <VStack spacing={2} align="start">
                 <Link
                   href="#"
                   color="blue.500"
@@ -94,14 +69,16 @@ function DriverCard() {
                 >
                   Learn More
                 </Link>
-                <Link
+                <Button
                   href="#"
-                  color="blue.500"
-                  _hover={{ color: "blue.700" }}
+                  colorScheme="blue"
+                  size="md"
                   fontWeight="bold"
+                  _hover={{ color: "blue.700" }}
+                  _focus={{ boxShadow: "none" }}
                 >
                   Book Now
-                </Link>
+                </Button>
               </VStack>
             </VStack>
           </Box>
@@ -112,68 +89,3 @@ function DriverCard() {
 }
 
 export default DriverCard;
-
-// import React from "react";
-// import {
-//   Box,
-//   Image,
-//   Text,
-//   VStack,
-//   Link,
-//   UnorderedList,
-//   ListItem,
-// } from "@chakra-ui/react";
-
-// function DriverCard() {
-//   return (
-//     <Box
-//       width="75%" // Taking 75% of the left space
-//       borderWidth="1px"
-//       borderRadius="lg"
-//       overflow="hidden"
-//       boxShadow="lg" // Slightly more pronounced box shadow
-//       display="flex" // Displaying elements in a row
-//     >
-//       <Image
-//         src="https://via.placeholder.com/300x180?text=Car" // Larger placeholder image
-//         alt="Luxury Car Service" // Updated alt text
-//         objectFit="cover"
-//         width="40%" // Taking 40% of the width for the image
-//       />
-//       <VStack spacing={4} p={4} align="left">
-//         <Text fontSize="xl" fontWeight="bold">
-//           Luxury Car Service
-//         </Text>
-//         <Text color="gray.600">
-//           Providing top-notch car services for your luxury vehicle. Our skilled
-//           professionals ensure your car's peak performance.
-//         </Text>
-//         <UnorderedList listStyleType="none" p={0}>
-//           <ListItem p={2}>🛠️ Engine Maintenance</ListItem>
-//           <ListItem p={2}>🚗 Exterior Detailing</ListItem>
-//           <ListItem p={2}>🛋️ Interior Cleaning</ListItem>
-//         </UnorderedList>
-//         <VStack spacing={2}>
-//           <Link
-//             href="#"
-//             color="blue.500"
-//             _hover={{ color: "blue.700" }}
-//             fontWeight="bold"
-//           >
-//             Learn More
-//           </Link>
-//           <Link
-//             href="#"
-//             color="blue.500"
-//             _hover={{ color: "blue.700" }}
-//             fontWeight="bold"
-//           >
-//             Book Now
-//           </Link>
-//         </VStack>
-//       </VStack>
-//     </Box>
-//   );
-// }
-
-// export default DriverCard;
