@@ -37,6 +37,7 @@ import {
 import { initializeApp } from "firebase/app";
 import { firebaseConfig } from "../../../firebase";
 import { FcGoogle } from "react-icons/fc";
+import Cookies from "js-cookie";
 
 const TopBar = ({ counter, setCounter, setLoginState }) => {
   const app = initializeApp(firebaseConfig);
@@ -96,8 +97,8 @@ const TopBar = ({ counter, setCounter, setLoginState }) => {
           });
           setCounter(true);
           setLoginState(true);
-          localStorage.setItem("userLoggedToken", JSON.stringify(user.uid));
           setUserLogged(true);
+          Cookies.set('grabwayToken', loginEmail,7);
         })
         .catch((error) => {
           if (error.message === "Firebase: Error (auth/wrong-password).") {
@@ -157,6 +158,13 @@ const TopBar = ({ counter, setCounter, setLoginState }) => {
           });
           setCounter(true);
           setUserLogged(true);
+          Cookies.set('grabwayToken', signupEmail,7);
+          if(signupUserType==='user'){
+            axios.post(`/createUser/${signupEmail}/${signupPhone}`);
+          }
+          if(signupUserType==='driver'){
+            axios.post(`/createDriver/${signupEmail}/${signupPhone}`);
+          }
         })
         .catch((error) => {
           if (
@@ -213,6 +221,9 @@ const TopBar = ({ counter, setCounter, setLoginState }) => {
         const token = credential.accessToken;
         // The signed-in user info.
         const user = result.user;
+        console.log(user);
+        console.log(result);
+       Cookies.set('grabwayToken', user.email,7);
         // IdP data available using getAdditionalUserInfo(result)
         // ...
         onClose();

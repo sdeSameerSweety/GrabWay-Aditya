@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import { Routes, Route, BrowserRouter } from "react-router-dom";
 import Navbar from "./components/Navbar/Navbar";
 import Footer from "./components/Footer/footer";
@@ -8,13 +8,18 @@ import MapLayout from "./components/Map/MapLayout";
 import Registeration from "./Pages/Registeration/Registeration";
 import Dashboard from "./Pages/DashboardPage";
 import DriverCard from "./components/Cards/DriverCards/DriverCards";
-// import { UserProfile } from "firebase/auth";
+import axios from "axios";
+import { UserContext, UserContextProvider } from "./context/Context";
+import Cookies from "js-cookie";
+axios.defaults.url="https://localhost:8080";
+axios.defaults.withCredentials=true;
 function App() {
   const [windowSize, setWindowSize] = useState(window.innerWidth);
   const [loginState, setLoginState] = useState(false);
   const [nonce, setNonce] = useState("grabway@123");
   console.log(loginState);
-
+  const {userEmail,setUserEmail}=useContext(UserContext);
+  console.log(userEmail);
   useEffect(() => {
     const handleWindowResize = () => {
       setWindowSize(window.innerWidth);
@@ -42,6 +47,7 @@ function App() {
   };
   return (
     <BrowserRouter>
+    <UserContextProvider>
       <Navbar
         classDisplay={classDisplay}
         setClassDislay={setClassDisplay}
@@ -66,6 +72,7 @@ function App() {
         </Routes>
         <Footer />
       </div>
+      </UserContextProvider>
     </BrowserRouter>
   );
 }

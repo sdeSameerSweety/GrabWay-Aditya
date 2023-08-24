@@ -1,0 +1,53 @@
+{
+    "user": {
+      "username": "",
+      "profilepic": "",
+      "email": "",
+      "phoneno": "",
+      "address": "",
+      "routes": [
+        {
+          "from": "",
+          "to": "",
+          "plan": ""
+        }
+      ],
+      "credit": "",
+      "payment": "",
+      "rideHistory": [
+        {
+          "rideid": "",
+          "from": "",
+          "to": "",
+          "otp": ""
+        }
+      ]
+    },
+    "driver": {
+      "username": "",
+      "email": "",
+      "profilepic": "",
+      "phoneno": "",
+      "address": "",
+      "drivinglcNo": "",
+      "vehicleNo": "",
+      "routes": [
+        {
+          "from": "",
+          "to": "",
+          "plan": ""
+        }
+      ],
+      "rating": "",
+      "credit": "",
+      "payment": "",
+      "rideHistory": [
+        {
+          "rideid": "",
+          "from": "",
+          "to": "",
+          "otp": ""
+        }
+      ]
+    }
+  }
