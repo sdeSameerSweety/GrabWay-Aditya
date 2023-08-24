@@ -15,6 +15,8 @@ import {
   UnorderedList,
   ListItem,
 } from "@chakra-ui/react";
+import SideCard from "./SideCard/SideCard";
+import "./DriverCard.css"
 
 const sections = ["Essential Commuter", "Comfort Traveler", "Premier Business"];
 
@@ -31,7 +33,6 @@ const cardData = {
         "🛋️ Interior Cleaning",
       ],
     },
-    // Add more cards for this section if needed
   ],
   "Comfort Traveler": [
     {
@@ -45,7 +46,6 @@ const cardData = {
         "🛋️ Interior Cleaning",
       ],
     },
-    // Add more cards for this section if needed
   ],
   "Premier Business": [
     {
@@ -59,7 +59,6 @@ const cardData = {
         "🛋️ Comfortable Interior",
       ],
     },
-    // Add more cards for this section if needed
   ],
 };
 
@@ -71,7 +70,10 @@ function DriverCard() {
           {sections.map((section, index) => (
             <Tab
               key={index}
-              _selected={{ color: "blue.500", borderBottomWidth: "2px" }}
+              _selected={{
+                color: "blue.500",
+                borderBottomWidth: "2px",
+              }}
             >
               {section}
             </Tab>
@@ -81,25 +83,14 @@ function DriverCard() {
           {sections.map((section, index) => (
             <TabPanel key={index}>
               {cardData[section].map((card, cardIndex) => (
-                <Box
-                  key={cardIndex}
-                  width="75%"
-                  borderWidth="1px"
-                  borderRadius="lg"
-                  overflow="hidden"
-                  boxShadow="lg"
-                  display="flex"
-                  bg="gray.100"
-                  p={4}
-                >
+                <Box key={cardIndex} className="responsive-card">
                   <Image
                     src={card.imageSrc}
                     alt={card.title}
                     objectFit="cover"
-                    width="40%"
                     borderRadius="md"
                   />
-                  <VStack spacing={4} pl={4} align="start">
+                  <div className="card-content">
                     <Heading size="lg">{card.title}</Heading>
                     <Text color="gray.600">{card.description}</Text>
                     <UnorderedList listStyleType="none" p={0}>
@@ -121,13 +112,17 @@ function DriverCard() {
                         colorScheme="blue"
                         size="md"
                         fontWeight="bold"
+                        rounded={10}
                         _hover={{ color: "blue.700" }}
                         _focus={{ boxShadow: "none" }}
                       >
                         Book Now
                       </Button>
                     </VStack>
-                  </VStack>
+                  </div>
+                  <Box mx={8} my={6} className="sideCardCss" >
+                    <SideCard />
+                  </Box>
                 </Box>
               ))}
             </TabPanel>
