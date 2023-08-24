@@ -37,7 +37,8 @@ const cardData = {
     },
     {
       title: "Exquisite Detailing Package",
-      imageSrc: "https://via.placeholder.com/300x180?text=Detailing",
+      imageSrc:
+        "https://img.freepik.com/free-vector/black-sedan-car-isolated-white-vector_53876-67358.jpg?w=900&t=st=1692897448~exp=1692898048~hmac=7e90a67d3923bc1896de058d53392a6b6a27271511aead624547e907e97bd235",
       description:
         "Indulge your luxury vehicle with our meticulous detailing services. Every curve and finish will shine like new.",
       services: [
@@ -48,7 +49,8 @@ const cardData = {
     },
     {
       title: "Interior Opulence Renewal",
-      imageSrc: "https://via.placeholder.com/300x180?text=Interior",
+      imageSrc:
+        "https://img.freepik.com/free-vector/brown-hatchback-car-isolated-white-vector_53876-64374.jpg?w=900&t=st=1692897495~exp=1692898095~hmac=8f4351da7ded634d18aa452c1385c32536aca92822d3b360d5f3e8667d5729a6",
       description:
         "Elevate your driving experience with a rejuvenated interior. Our experts will transform your luxury car's cabin to perfection.",
       services: [
@@ -64,7 +66,8 @@ const cardData = {
   "Comfort Traveler": [
     {
       title: "TuneUp Auto Care",
-      imageSrc: "https://via.placeholder.com/300x180?text=TuneUp",
+      imageSrc:
+        "https://img.freepik.com/free-vector/green-sedan-car-isolated-white-vector_53876-64375.jpg?w=900&t=st=1692897544~exp=1692898144~hmac=f2626631b222c15b8055d7803230b3bfe84ad7611db6e9534afcad140499ecb2",
       description:
         "Experience top-notch auto care services that prioritize your vehicle's performance and your satisfaction.",
       services: [
@@ -75,7 +78,8 @@ const cardData = {
     },
     {
       title: "Luxury Wheels Workshop",
-      imageSrc: "https://via.placeholder.com/300x180?text=Luxury+Wheels",
+      imageSrc:
+        "https://img.freepik.com/free-vector/black-sedan-car-isolated-white-vector_53876-67358.jpg?w=900&t=st=1692897623~exp=1692898223~hmac=f8cbf876f78b723db46aa126316762217d833bcdbf99a310505dd98400403210",
       description:
         "Elevate your driving experience with specialized services dedicated to luxury vehicles. Your comfort and style matter.",
       services: [
@@ -86,7 +90,8 @@ const cardData = {
     },
     {
       title: "Green Mile Electric Autos",
-      imageSrc: "https://via.placeholder.com/300x180?text=Electric",
+      imageSrc:
+        "https://img.freepik.com/free-vector/green-sedan-car-green-background-vector_53876-67345.jpg?w=900&t=st=1692897571~exp=1692898171~hmac=faaa068b7a89f361ce36bc489f1b8c1464806500853944163d97de48cddb82d3",
       description:
         "Pioneering the future of automotive services with a focus on electric vehicles. Join the eco-friendly revolution.",
       services: [
@@ -101,7 +106,8 @@ const cardData = {
   "Premier Business": [
     {
       title: "Luxury Business Travel",
-      imageSrc: "https://via.placeholder.com/300x180?text=Luxury",
+      imageSrc:
+        "https://img.freepik.com/free-vector/modern-blue-urban-adventure-suv-vehicle-illustration_1344-205.jpg?w=740&t=st=1692897613~exp=1692898213~hmac=11371b9a4f0383a73b7a5d5c12e309a02a2b1b7cc99fb9dfaeef80f43f0f2263",
       description:
         "Elevate your business trips with our luxury car services. Experience top-tier comfort and professionalism.",
       services: [
@@ -112,7 +118,8 @@ const cardData = {
     },
     {
       title: "Explore the City in Style",
-      imageSrc: "https://via.placeholder.com/300x180?text=City",
+      imageSrc:
+        "https://img.freepik.com/free-vector/white-convertible-car-isolated-white-vector_53876-66815.jpg?w=1060&t=st=1692897673~exp=1692898273~hmac=e78d5294d3efbfee48e9ce9c07e75af5023bb8dbb2751bcead39222ab177b3bd",
       description:
         "Discover the city in ultimate style and convenience. Our fleet ensures an unforgettable urban experience.",
       services: [
@@ -123,7 +130,8 @@ const cardData = {
     },
     {
       title: "Relaxation on the Road",
-      imageSrc: "https://via.placeholder.com/300x180?text=Relax",
+      imageSrc:
+        "https://img.freepik.com/free-vector/black-convertible-car_53876-64027.jpg?w=1060&t=st=1692897694~exp=1692898294~hmac=421abb699e15c0b2c9f18123957a4555409adc8fa52d62a4c2b0b21b1f628b6f",
       description:
         "Unwind during your travels with our relaxation-focused car services. Enjoy a peaceful journey like never before.",
       services: [
