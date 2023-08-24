@@ -51,7 +51,6 @@ function App() {
       />
       <div style={intDivStyle}>
         {/* <Registeration /> */}
-        <Support/>
         <Routes>
           <Route
             path="/"
