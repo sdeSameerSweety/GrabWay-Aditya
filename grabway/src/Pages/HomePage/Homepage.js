@@ -38,9 +38,9 @@ const TopSection = ({ nonceVal, loginState }) => {
     mapIds: ["7e437361629e930a"],
     nonce: nonceVal,
   });
-  const pacItemQuery={
-    padding:"20px",
-  }
+  const pacItemQuery = {
+    padding: "20px",
+  };
   const handleSearchDesk = () => {
     console.log(destinationDesk.current.value);
     navigate("/maps", {
@@ -52,7 +52,13 @@ const TopSection = ({ nonceVal, loginState }) => {
   };
 
   const handleSearchMob = () => {
-    console.log(sourceMob.current.value, destinationMob.current.value);
+    console.log(destinationDesk.current.value);
+    navigate("/maps", {
+      state: {
+        source: sourceMob.current.value,
+        destination: destinationMob.current.value,
+      },
+    });
   };
 
   if (!isLoaded) {
@@ -68,7 +74,7 @@ const TopSection = ({ nonceVal, loginState }) => {
       </div>
     );
   }
-  
+
   return (
     <>
       <div className="relative dekstop-view">
