@@ -8,19 +8,36 @@ import {
 import { Button, Mark } from "@chakra-ui/react";
 import { useLocation } from "react-router-dom";
 import { Card, CardBody } from "@chakra-ui/react";
+import axios from "axios";
 const containerStyle = {
   width: "1000px",
   height: "500px",
   border: "1px solid white",
   borderRadius: "30px",
 };
-const center = {
-  lat: 20.350898582501245,
-  lng: 85.8063996401287,
-};
 
 function MyComponent({ nonceVal }, { route, state }) {
-  const location = useLocation()
+  const location = useLocation();
+  const [srcCord, setsrcCord] = useState({});
+  const [destCord, setDestCord] = useState({});
+
+  //geocode convert function
+  async function getgeoCode(place, type) {
+    await axios
+      .get("https://maps.googleapis.com/maps/api/geocode/json", {
+        params: {
+          address: place,
+          key: "AIzaSyDJaFr-HFXGBOg8pUSdQfGjGwGdIwtbXhY",
+        },
+      })
+      .then((res) => {
+        if (type === "source")
+          setsrcCord(res.data.results[0].geometry.location);
+        else setDestCord(res.data.results[0].geometry.location);
+      })
+      .catch((err) => console.log(err));
+  }
+  console.log({ srcCord, destCord });
   const { isLoaded } = useJsApiLoader({
     id: "google-map-script",
     googleMapsApiKey: "AIzaSyDJaFr-HFXGBOg8pUSdQfGjGwGdIwtbXhY",
@@ -31,21 +48,14 @@ function MyComponent({ nonceVal }, { route, state }) {
 
   //recieving text
   const rideDataText = {
-    source:
-      "Silicon Institute of Technology, near DLF cybercity, Chandaka Industrial Estate, Infocity, Patia, Bhubaneswar, Odisha, India",
-    destination:
-      "Master Canteen, Master Canteen Chowk, Kharvela Nagar, Bhubaneswar, Odisha, India",
+    source: location.state.source,
+    destination: location.state.destination,
   };
 
-
-
-
-  //converting to Longitute/Lattitude for markers to display
-  
-
-
-
-
+  useEffect(() => {
+    getgeoCode(location.state.source, "source");
+    getgeoCode(location.state.destination, "destination");
+  }, [location]);
 
   //Route setup and display function
   const [directionResponse, setDirectionResponse] = useState("");
@@ -63,10 +73,6 @@ function MyComponent({ nonceVal }, { route, state }) {
     });
     setDirectionResponse(results);
   }
-
-
-
-
 
   //calculating distance matrix
   const [distanceText, setDistanceText] = useState(null);
@@ -87,23 +93,21 @@ function MyComponent({ nonceVal }, { route, state }) {
       avoidHighways: false,
       avoidTolls: false,
     };
-    const responseDistanceMatrix = await service.getDistanceMatrix(request).then((res) => {
-      setDistanceNum(res.rows[0].elements[0].distance.value);
-      setDistanceText(res.rows[0].elements[0].distance.text);
-      setDurationNum(res.rows[0].elements[0].duration.value);
-      setDurationText(res.rows[0].elements[0].duration.text);
-      console.log(res);
-    });
+    const responseDistanceMatrix = await service
+      .getDistanceMatrix(request)
+      .then((res) => {
+        setDistanceNum(res.rows[0].elements[0].distance.value);
+        setDistanceText(res.rows[0].elements[0].distance.text);
+        setDurationNum(res.rows[0].elements[0].duration.value);
+        setDurationText(res.rows[0].elements[0].duration.text);
+        console.log(res);
+      });
   }
 
-
-
-
-
   //Contents for map container
-  let initialPosition = center;
-  let finalPosition =center;
- 
+  let initialPosition = srcCord;
+  let finalPosition = destCord;
+
   const mapOptions = {
     mapId: "7e437361629e930a",
     disableDefaultUI: true,
@@ -122,26 +126,20 @@ function MyComponent({ nonceVal }, { route, state }) {
     setMap(null);
   }, []);
 
-
-
-
-
-
   //const declaration for display outputs
   const [fromVerifed, setFromVerified] = useState(false);
   const [showFinalButtonDisplay, setShowFinalButtonDisplay] = useState(true);
-
   return isLoaded ? (
     <>
       <div className="flex justify-center items-center ">
         <div>
           <GoogleMap
             mapContainerStyle={containerStyle}
-            center={fromVerifed ? initialPosition : finalPosition}
+            center={fromVerifed ? finalPosition : initialPosition}
             zoom={14}
             options={mapOptions}
           >
-            <MarkerF position={fromVerifed ? initialPosition : finalPosition} />
+            <MarkerF position={fromVerifed ? finalPosition : initialPosition} />
             {directionResponse && (
               <DirectionsRenderer directions={directionResponse} />
             )}
@@ -179,29 +177,35 @@ function MyComponent({ nonceVal }, { route, state }) {
 
       {!showFinalButtonDisplay && (
         <>
-          {distanceText!==null?<div className="mt-[3%] flex justify-center items-center">
-            <Card sx={{
-              bgColor:'#E51B23',
-              color:"white",
-              borderRadius:"30px",
-            }}>
-              <CardBody>
-                <div className="flex flex-row justify-center items-center gap-20">
-                <div className="flex justify-center items-center">
-                    <div className="font-ubuntu text-3xl">Price - 4999</div>
-                </div>
-                <div className="flex flex-col justify-center items-center gap-3">
-                  <div className="font-ubuntu text-2xl">
-                    Distance - {distanceText} 
+          {distanceText !== null ? (
+            <div className="mt-[3%] flex justify-center items-center">
+              <Card
+                sx={{
+                  bgColor: "#E51B23",
+                  color: "white",
+                  borderRadius: "30px",
+                }}
+              >
+                <CardBody>
+                  <div className="flex flex-row justify-center items-center gap-20">
+                    <div className="flex justify-center items-center">
+                      <div className="font-ubuntu text-3xl">Price - 4999</div>
+                    </div>
+                    <div className="flex flex-col justify-center items-center gap-3">
+                      <div className="font-ubuntu text-2xl">
+                        Distance - {distanceText}
+                      </div>
+                      <div className="font-ubuntu text-2xl">
+                        Travel Time - {durationText}
+                      </div>
+                    </div>
                   </div>
-                  <div className="font-ubuntu text-2xl">
-                    Travel Time - {durationText}
-                  </div>
-                </div>
-                </div>
-              </CardBody>
-            </Card>
-          </div> : <></>}
+                </CardBody>
+              </Card>
+            </div>
+          ) : (
+            <></>
+          )}
         </>
       )}
     </>

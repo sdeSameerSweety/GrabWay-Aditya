@@ -1,0 +1,32 @@
+/* Add this CSS to your stylesheets or components */
+
+.responsive-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center; /* Center content on small screens */
+  text-align: center; /* Center text on small screens */
+  margin-bottom: 20px; /* Add some space between cards */
+}
+
+.responsive-card .card-content {
+  margin-top: 20px; /* Add space between image and content */
+}
+
+
+@media screen and (min-width: 768px) {
+  /* Apply this style for medium screens and above */
+  .responsive-card {
+    flex-direction: row;
+    align-items: flex-start;
+    text-align: left;
+    margin-top: 30px;
+  }
+
+  .responsive-card .card-content {
+    margin-top: 0;
+    margin-left: 20px;
+  }
+  /* .sideCardCss{
+    padding-top: 100%;
+  } */
+}
