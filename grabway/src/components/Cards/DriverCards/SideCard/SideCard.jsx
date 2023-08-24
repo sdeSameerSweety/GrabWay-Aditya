@@ -1,14 +1,28 @@
-import React, { useState, useRef } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import "./SideCard.css";
+
 export default function SideCard() {
   const [xRotation, setXRotation] = useState(0);
   const [yRotation, setYRotation] = useState(0);
+  const [cardData, setCardData] = useState({});
   const cardRef = useRef(null);
   const imgRef = useRef(null);
   const titleRef = useRef(null);
   const descRef = useRef(null);
   const sizesboxRef = useRef(null);
   const purchaseRef = useRef(null);
+
+  useEffect(() => {
+    //API Logic
+    const backendResponse = {
+      image:
+        "https://www.transparentpng.com/thumb/car-png/car-free-transparent-png-8.png",
+      title: "Premimum Sedan",
+      description:
+        "Description lops lorem",
+    };
+    setCardData(backendResponse);
+  }, []);
 
   function handleMouseMove(event) {
     const card = cardRef.current;
@@ -20,6 +34,7 @@ export default function SideCard() {
     setXRotation((y / height) * mult);
     setYRotation((x / width) * mult);
   }
+
   function handleMouseEnter() {
     const img = imgRef.current;
     const title = titleRef.current;
@@ -27,13 +42,13 @@ export default function SideCard() {
     const purchase = purchaseRef.current;
     const desc = descRef.current;
     title.style.transform = "translateZ(150px)";
-    // img.style.transform = "translateZ(100px) rotateX(0deg)";
     img.style.transform =
       "translateX(-25px) translateY(25px) translateZ(50px) rotateZ(5deg)";
     sizesBox.style.transform = "translateZ(100px)";
     purchase.style.transform = "translateZ(75px)";
     desc.style.transform = "translateZ(75px)";
   }
+
   function handleMouseLeave() {
     setXRotation(0);
     setYRotation(0);
@@ -47,6 +62,7 @@ export default function SideCard() {
     sizesBox.style.transform = "translateZ(0px)";
     purchase.style.transform = "translateZ(0px)";
   }
+
   return (
     <>
       <div
@@ -60,20 +76,15 @@ export default function SideCard() {
         onMouseLeave={handleMouseLeave}
       >
         <img
-          src="https://www.transparentpng.com/thumb/car-png/car-free-transparent-png-8.png"
-          alt="car free transparent png @transparentpng.com"
+          src={cardData.image}
+          alt={cardData.title}
           ref={imgRef}
-          // src={require("./Shoe-img/Nike-Shoe.PNG")}
-          // alt="Nike-Shoe"
           className="car-img"
         />
         <h2 className="title" ref={titleRef}>
-          Nike Dunk High
+          {cardData.title}
         </h2>
-        <p ref={descRef}>
-          Nike Dunk High is a high-top version of the classic Nike Dunk sneaker,
-          featuring a padded collar for added support and comfort.
-        </p>
+        <p ref={descRef}>{cardData.description}</p>
         <ul className="sizes-box" ref={sizesboxRef}>
           <li>38</li>
           <li>40</li>

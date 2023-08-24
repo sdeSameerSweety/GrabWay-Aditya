@@ -120,7 +120,7 @@ function DriverCard() {
                       </Button>
                     </VStack>
                   </div>
-                  <Box mx={8} my={6} className="sideCardCss" >
+                  <Box mx={6} my={4} className="sideCardCss" >
                     <SideCard />
                   </Box>
                 </Box>
