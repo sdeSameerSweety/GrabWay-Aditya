@@ -16,47 +16,119 @@ import {
   ListItem,
 } from "@chakra-ui/react";
 import SideCard from "./SideCard/SideCard";
-import "./DriverCard.css"
+import "./DriverCard.css";
 
 const sections = ["Essential Commuter", "Comfort Traveler", "Premier Business"];
 
 const cardData = {
+  /* Essential Commuter Data */
   "Essential Commuter": [
     {
-      title: "Luxury Car Service",
-      imageSrc: "https://via.placeholder.com/300x180?text=Car",
+      title: "Engine Performance Boost",
+      imageSrc: "https://via.placeholder.com/300x180?text=Engine",
       description:
-        "Providing top-notch car services for your luxury vehicle. Our skilled professionals ensure your car's peak performance.",
+        "Experience the thrill of driving with our engine performance enhancement services. Unlock your luxury car's true potential.",
       services: [
-        "🛠️ Engine Maintenance",
-        "🚗 Exterior Detailing",
-        "🛋️ Interior Cleaning",
+        "🔧 High-Performance Engine Tuning",
+        "⚙️ Advanced Fuel Injection System",
+        "🌪️ Turbocharger Upgrade",
+      ],
+    },
+    {
+      title: "Exquisite Detailing Package",
+      imageSrc: "https://via.placeholder.com/300x180?text=Detailing",
+      description:
+        "Indulge your luxury vehicle with our meticulous detailing services. Every curve and finish will shine like new.",
+      services: [
+        "🚿 Premium Hand Wash and Wax",
+        "🛁 Deep Interior Vacuuming",
+        "💎 Paint Correction and Ceramic Coating",
+      ],
+    },
+    {
+      title: "Interior Opulence Renewal",
+      imageSrc: "https://via.placeholder.com/300x180?text=Interior",
+      description:
+        "Elevate your driving experience with a rejuvenated interior. Our experts will transform your luxury car's cabin to perfection.",
+      services: [
+        "🛋️ Deep Leather Cleaning and Conditioning",
+        "✨ Wood and Metal Trim Restoration",
+        "🎵 High-End Audio System Upgrade",
       ],
     },
   ],
+
+  /* Comfort Traveler Data */
+
   "Comfort Traveler": [
     {
-      title: "Good Car Service",
-      imageSrc: "https://via.placeholder.com/300x180?text=Car",
+      title: "TuneUp Auto Care",
+      imageSrc: "https://via.placeholder.com/300x180?text=TuneUp",
       description:
-        "Providing good car services for your travel needs. Our professionals ensure your comfort and safety.",
+        "Experience top-notch auto care services that prioritize your vehicle's performance and your satisfaction.",
       services: [
-        "🛠️ Engine Check",
-        "🚗 Regular Maintenance",
-        "🛋️ Interior Cleaning",
+        "🛠️ Engine Diagnostics",
+        "🚗 Full Service Inspection",
+        "🧼 Exterior Detailing",
+      ],
+    },
+    {
+      title: "Luxury Wheels Workshop",
+      imageSrc: "https://via.placeholder.com/300x180?text=Luxury+Wheels",
+      description:
+        "Elevate your driving experience with specialized services dedicated to luxury vehicles. Your comfort and style matter.",
+      services: [
+        "🔧 Performance Upgrades",
+        "🚓 Advanced Electronics",
+        "🏁 Precision Alignment",
+      ],
+    },
+    {
+      title: "Green Mile Electric Autos",
+      imageSrc: "https://via.placeholder.com/300x180?text=Electric",
+      description:
+        "Pioneering the future of automotive services with a focus on electric vehicles. Join the eco-friendly revolution.",
+      services: [
+        "🔌 Battery Diagnostics",
+        "🔋 Range Optimization",
+        "🌿 Sustainable Materials",
       ],
     },
   ],
+
+  /* Premier Business Data */
   "Premier Business": [
     {
-      title: "Try Car Service",
-      imageSrc: "https://via.placeholder.com/300x180?text=Car",
+      title: "Luxury Business Travel",
+      imageSrc: "https://via.placeholder.com/300x180?text=Luxury",
       description:
-        "Experience our premier car services for your business trips. Our fleet guarantees style and reliability.",
+        "Elevate your business trips with our luxury car services. Experience top-tier comfort and professionalism.",
       services: [
-        "🛠️ Business-Class Maintenance",
-        "🚗 Chauffeur Service",
-        "🛋️ Comfortable Interior",
+        "🎩 Executive-Class Vehicles",
+        "👔 Professional Chauffeurs",
+        "🥂 Complimentary Refreshments",
+      ],
+    },
+    {
+      title: "Explore the City in Style",
+      imageSrc: "https://via.placeholder.com/300x180?text=City",
+      description:
+        "Discover the city in ultimate style and convenience. Our fleet ensures an unforgettable urban experience.",
+      services: [
+        "🏙️ City Tour Packages",
+        "🛍️ Shopping Excursions",
+        "🍽️ Gourmet Dining Reservations",
+      ],
+    },
+    {
+      title: "Relaxation on the Road",
+      imageSrc: "https://via.placeholder.com/300x180?text=Relax",
+      description:
+        "Unwind during your travels with our relaxation-focused car services. Enjoy a peaceful journey like never before.",
+      services: [
+        "🎵 Ambient Relaxation",
+        "📚 Reading Material Selection",
+        "🌸 Aromatherapy Options",
       ],
     },
   ],
@@ -120,7 +192,7 @@ function DriverCard() {
                       </Button>
                     </VStack>
                   </div>
-                  <Box mx={6} my={4} className="sideCardCss" >
+                  <Box mx={6} my={4} className="sideCardCss">
                     <SideCard />
                   </Box>
                 </Box>
