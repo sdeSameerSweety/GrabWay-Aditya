@@ -7,8 +7,8 @@ import Support from "./Pages/Support/Support.jsx";
 import MapLayout from "./components/Map/MapLayout";
 import Registeration from "./components/Registeration/Registeration";
 import Dashboard from "./Pages/DashboardPage";
-import UserProfile from "./Pages/ProfilePages/user";
-
+import DriverCard from "./components/Cards/DriverCards/DriverCards";
+// import { UserProfile } from "firebase/auth";
 function App() {
   const [windowSize, setWindowSize] = useState(window.innerWidth);
   const [loginState, setLoginState] = useState(false);
@@ -51,6 +51,8 @@ function App() {
       />
       <div style={intDivStyle}>
         {/* <Registeration /> */}
+        {/* <Support/> */}
+        <DriverCard/>
         <Routes>
           <Route
             path="/"
@@ -59,7 +61,7 @@ function App() {
           <Route path="/support" element={<Support />} />
           <Route path="/maps" element={<MapLayout nonceVal={nonce} />} />
           <Route path="/dashboard" element={<Dashboard />} />
-          <Route path="/userprofile" element={<UserProfile />} />
+          {/* <Route path="/userprofile" element={<UserProfile />} /> */}
         </Routes>
         <Footer />
       </div>
