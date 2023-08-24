@@ -126,3 +126,32 @@
     text-align: center;
   }
 }
+
+/* .main {
+    position: relative;
+    top: 10px; right: 10px;
+    width: 200px;
+    height: 200px;
+    background: #ccc; 
+
+}*/
+.badge {
+  position: absolute;
+  top: -30px;
+  width: 35%;
+  right: -10px;
+  background-color: #2879fe;
+  padding: 15px;
+  border-radius: 50px 0 0 10px;
+  font-family: cursive;
+}
+.badge:after {
+  position: absolute;
+  top: 100%;
+  right: 0;
+  width: 0;
+  height: 0;
+  border-bottom: 10px solid transparent;
+  border-left: 10px solid #2879fe;
+  content: "";
+}

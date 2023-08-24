@@ -25,7 +25,8 @@ const cardData = {
   "Essential Commuter": [
     {
       title: "Engine Performance Boost",
-      imageSrc: "https://via.placeholder.com/300x180?text=Engine",
+      imageSrc:
+        "https://img.freepik.com/free-vector/red-sedan-car-isolated-white-vector_53876-64366.jpg?w=900&t=st=1692895124~exp=1692895724~hmac=9084cfe1f9e13be10c20ff75317e808efbecd741a345ac619f7814540a6abf66",
       description:
         "Experience the thrill of driving with our engine performance enhancement services. Unlock your luxury car's true potential.",
       services: [
@@ -161,6 +162,7 @@ function DriverCard() {
                     alt={card.title}
                     objectFit="cover"
                     borderRadius="md"
+                    w={400}
                   />
                   <div className="card-content">
                     <Heading size="lg">{card.title}</Heading>

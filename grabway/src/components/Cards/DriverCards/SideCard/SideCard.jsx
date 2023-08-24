@@ -75,12 +75,21 @@ export default function SideCard() {
         onMouseEnter={handleMouseEnter}
         onMouseLeave={handleMouseLeave}
       >
+        <span
+          className="badge"
+          // style="font-family: cursive; background-color: gold; color: navy; padding: 5px 10px; border-radius: 3px;"
+        >
+          Sponsored
+        </span>
+        {/* <div className="main"> */}
+
         <img
           src={cardData.image}
           alt={cardData.title}
           ref={imgRef}
           className="car-img"
         />
+        {/* </div> */}
         <h2 className="title" ref={titleRef}>
           {cardData.title}
         </h2>
