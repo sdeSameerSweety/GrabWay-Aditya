@@ -8,6 +8,7 @@ const Navbar = ({
   setClassDislay,
   setDisplayVal,
   setLoginState,
+  loginState
 }) => {
   const [counter, setCounter] = useState(false);
   return (
@@ -17,6 +18,7 @@ const Navbar = ({
           counter={counter}
           setCounter={setCounter}
           setLoginState={setLoginState}
+          loginState={loginState}
         />
       </div>
       <Sidebar
@@ -24,6 +26,9 @@ const Navbar = ({
         setClassDisplay={setClassDislay}
         counter={counter}
         setDisplayVal={setDisplayVal}
+        setCounter={setCounter}
+        setLoginState={setLoginState}
+        
       />
     </div>
   );

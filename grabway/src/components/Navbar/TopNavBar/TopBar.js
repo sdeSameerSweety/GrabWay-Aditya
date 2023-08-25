@@ -1,6 +1,6 @@
-import React, { useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { IoNotificationsSharp } from "react-icons/io5";
-import { Avatar } from "@chakra-ui/react";
+import { Avatar, useConst } from "@chakra-ui/react";
 import { Link } from "react-router-dom";
 import { IconButton } from "@chakra-ui/react";
 import { Button } from "@chakra-ui/react";
@@ -38,14 +38,14 @@ import { initializeApp } from "firebase/app";
 import { firebaseConfig } from "../../../firebase";
 import { FcGoogle } from "react-icons/fc";
 import Cookies from "js-cookie";
+import { UserContext } from "../../../context/Context";
 
-const TopBar = ({ counter, setCounter, setLoginState }) => {
+const TopBar = ({ counter, setCounter, setLoginState,loginState }) => {
   const app = initializeApp(firebaseConfig);
   const auth = getAuth();
   const provider = new GoogleAuthProvider();
-
+  const {userEmail,setUserEmail,setRunContext}=useContext(UserContext);
   const { isOpen, onOpen, onClose } = useDisclosure();
-  const [userLogged, setUserLogged] = useState(false);
   const [showSignIn, setShowSignIn] = useState(true);
   const [loginEmail, setLoginEmail] = useState("");
   const [loginPassword, setLoginPassword] = useState("");
@@ -81,6 +81,13 @@ const TopBar = ({ counter, setCounter, setLoginState }) => {
       }
     }
   }
+  useEffect(()=>{
+    if(userEmail){
+      setCounter(true);
+      setLoginState(true)
+    }
+  },[userEmail])
+
   function handleSignIn() {
     if (isEmail(loginEmail) && isTextField(loginPassword)) {
       signInWithEmailAndPassword(auth, loginEmail, loginPassword)
@@ -95,10 +102,8 @@ const TopBar = ({ counter, setCounter, setLoginState }) => {
             duration: 3000,
             isClosable: true,
           });
-          setCounter(true);
-          setLoginState(true);
-          setUserLogged(true);
           Cookies.set('grabwayToken', loginEmail,7);
+          setRunContext('login');
         })
         .catch((error) => {
           if (error.message === "Firebase: Error (auth/wrong-password).") {
@@ -145,7 +150,7 @@ const TopBar = ({ counter, setCounter, setLoginState }) => {
     ) {
       //proceed with signup
       createUserWithEmailAndPassword(auth, signupEmail, signupPassword)
-        .then((userCredential) => {
+        .then(async(userCredential) => {
           // Signed in
           const user = userCredential.user;
           onClose();
@@ -156,14 +161,19 @@ const TopBar = ({ counter, setCounter, setLoginState }) => {
             duration: 3000,
             isClosable: true,
           });
-          setCounter(true);
-          setUserLogged(true);
+          setRunContext('signup');
           Cookies.set('grabwayToken', signupEmail,7);
+          //console.log(signupUserType);
           if(signupUserType==='user'){
-            axios.post(`/createUser/${signupEmail}/${signupPhone}`);
+            console.log("inside user if");
+            const res= await axios.post(`/createUser`,{signupEmail,signupPhone});
+            const userMongo=res.data.email;
+            setUserEmail(userMongo);
           }
           if(signupUserType==='driver'){
-            axios.post(`/createDriver/${signupEmail}/${signupPhone}`);
+            const res=await axios.post(`/createDriver`,{signupEmail,signupPhone});
+            const driverMongo=res.data.email;
+            setUserEmail(driverMongo);
           }
         })
         .catch((error) => {
@@ -212,7 +222,6 @@ const TopBar = ({ counter, setCounter, setLoginState }) => {
       });
     }
   }
-
   function handleGoogleSignIn() {
     signInWithPopup(auth, provider)
       .then((result) => {
@@ -223,7 +232,7 @@ const TopBar = ({ counter, setCounter, setLoginState }) => {
         const user = result.user;
         console.log(user);
         console.log(result);
-       Cookies.set('grabwayToken', user.email,7);
+        Cookies.set('grabwayToken', user.email,7);
         // IdP data available using getAdditionalUserInfo(result)
         // ...
         onClose();
@@ -236,7 +245,6 @@ const TopBar = ({ counter, setCounter, setLoginState }) => {
         });
         setCounter(true);
         setLoginState(true);
-        setUserLogged(true);
       })
       .catch((error) => {
         const errorCode = error.code;
@@ -280,7 +288,7 @@ const TopBar = ({ counter, setCounter, setLoginState }) => {
             />
           </div>
           <div>
-            {!userLogged && (
+            {!loginState && (
               <>
                 <Button
                   onClick={onOpen}
@@ -558,7 +566,7 @@ const TopBar = ({ counter, setCounter, setLoginState }) => {
               </>
             )}
 
-            {userLogged && (
+            {loginState && (
               <>
                 <Avatar name="Kent Dodds" src="https://bit.ly/kent-c-dodds" />
               </>

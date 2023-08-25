@@ -37,7 +37,7 @@ const DriverSchema = new mongoose.Schema({
     userName:{type:String,unique:true},
     profilePicture:{type:String, unique:true},
     name:{type:String},
-    email:{type:String},
+    email:{type:String,unique:true},
     phoneNumber:{type:Number},
     drivingLicenseNumber:{type:String},
     VehicleNumber:{type:String},

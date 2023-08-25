@@ -54,6 +54,7 @@ function App() {
         displayVal={displayVal}
         setDisplayVal={setDisplayVal}
         setLoginState={setLoginState}
+        loginState={loginState}
       />
       <div style={intDivStyle}>
         {/* <Registeration /> */}

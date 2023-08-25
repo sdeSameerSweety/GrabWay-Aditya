@@ -37,7 +37,7 @@ const UserSchema = new mongoose.Schema({
     userName:{type:String,unique:true},
     profilePicture:{type:String, unique:true},
     name:{type:String},
-    email:{type:String},
+    email:{type:String,unique:true},
     phoneNumber:{type:Number},
     address:[AddressSchema],
     paymentInfo:[PaymentSchema],
