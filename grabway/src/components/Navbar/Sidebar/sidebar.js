@@ -1,12 +1,16 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import "./sidebar.css";
 import { Link } from "react-router-dom";
+import { UserContext } from "../../../context/Context";
+import Cookies from "js-cookie";
 
 export default function Sidebar({
   classDisplay,
   setClassDisplay,
   counter,
   setDisplayVal,
+  setLoginState,
+  setCounter
 }) {
   const [sidebarClass, setSidebarClass] = useState("sidebar");
   const toggleClass = () => {
@@ -18,9 +22,13 @@ export default function Sidebar({
       setClassDisplay("sidebar open");
     }
   };
-
+  const {userEmail,setUserEmail}= useContext(UserContext);
   const handleSignout = () => {
     console.log("Signout Successfull");
+    Cookies.set('grabwayToken', null);
+    setUserEmail(null);
+    setCounter(false);
+    setLoginState(false);
   };
 
   const [windowSize, setWindowSize] = useState([

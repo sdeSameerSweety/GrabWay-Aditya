@@ -4,13 +4,13 @@ import { useState } from "react";
 import axios from "axios";
 export const UserContext=createContext({});
 export function UserContextProvider({children}){
-    const [userEmail,setUserEmail]=useState(null);
+    const [userEmail,setUserEmail]=useState('');
     useEffect(()=>{
         const email=Cookies.get('grabwayToken');
         if(email){
-            axios.get('/checkuser',{email}).then((res)=>{
-                const temp=res.data;
-                setUserEmail(temp.email);
+            axios.post('/checkuser',{email}).then((res)=>{
+                console.log(res.data);
+                //res===null means first time login.
             })
         }
     },[userEmail])

@@ -6,13 +6,13 @@ const jwt = require("jsonwebtoken");
 require("dotenv").config();
 const cookieParser = require("cookie-parser");
 const bcrypt = require("bcryptjs");
-const { error } = require("console");
 const UserModel = require("./Schema/User");
 const DriverModel = require("./Schema/Driver");
+const EmailModel = require("./Schema/Email");
 
 //environment variables
 const MONGO_URL = process.env.MONGO_URL;
-const PUBLIC_URL = "https://localhost:3000";
+const PUBLIC_URL = 'http://localhost:3000';
 const PORT = process.env.PORT;
 const jwtSecretKey = process.env.JWT_SECRET;
 
@@ -20,44 +20,68 @@ const jwtSecretKey = process.env.JWT_SECRET;
 const app = express();
 app.use(cookieParser());
 app.use(express.json());
-app.use(
-  cors({
-    origin: [PUBLIC_URL],
-    methods: ["GET", "POST", "PUT", "PATCH", "DELETE"],
-    credentials: true,
-    allowedHeaders: ['Content-Type', 'Origin', 'X-Requested-With', 'Accept', 'x-client-key', 'x-client-token', 'x-client-secret', 'Authorization'],
-  })
-);
+app.use(cors({
+  methods: 'GET,POST,PATCH,DELETE,OPTIONS',
+  optionsSuccessStatus: 200,
+  origin: PUBLIC_URL,
+  credentials:true
+}));
+app.options('*', cors());
 
-app.get("/checkuser", async (req, res) => {
+app.post("/checkuser", async (req, res) => {
   await mongoose.connect(MONGO_URL);
   if (req.body.email) {
   const email  = req.body.email;
   console.log(email);
     try{
-    const UserEmail = await UserModel.findOne({ email: email });
-    res.status(200).json(UserEmail);
-    console.log(UserEmail);
+    const UserEmail = await EmailModel.findOne({ email: email });
+    if(UserEmail!==null){
+      console.log("UserEmail found");
+      const userType=UserEmail.userType;
+      const email=UserEmail.email;
+      if(userType==='user'){
+        console.log('user');
+        const UserData=await UserModel.findOne({email});
+        res.status(200).json(UserData);
+      }
+      if(userType==='driver'){
+        console.log('driver');
+        const UserData=await DriverModel.findOne({email});
+        res.status(200).json(UserData);
+      }
+      }
+      else{
+        console.log(UserEmail);
+        res.status(200).json(null);
+      }
+      
     }
+    
     catch(err){
       res.status(200).send(err);
       console.log(err);
     }
   } else {
     res.status(200).json(null);
-    console.log('not found');
+    console.log('email not found in body');
   }
 });
-
-app.post("/createUser/:email/:phoneNumber", async (req, res) => {
+//all the data will be coming to user context function
+app.post("/createUser", async (req, res) => {
   await mongoose.connect(MONGO_URL);
-  const email=req.params.email;
-  const phoneNumber=req.params.phoneNumber;
-  if(email && phone){
+  const email=req.body.signupEmail;
+  const phoneNumber=req.body.signupPhone;
+  if(email && phoneNumber){
     try{
+      console.log('trying to create user model')
+      const EmailRes=await EmailModel.create({
+        email:email,
+        userType:'user'
+      })
       const User = await UserModel.create({
         email:email,
         phoneNumber:phoneNumber,
+        userType:'user'
       });
       return res.status(200).json(User);
     }
@@ -67,17 +91,23 @@ app.post("/createUser/:email/:phoneNumber", async (req, res) => {
   }
 });
 
-app.post("/createDriver/:email/:phoneNumber", async (req, res) => {
+app.post("/createDriver", async (req, res) => {
   await mongoose.connect(MONGO_URL);
   const email=req.params.email;
   const phoneNumber=req.params.phoneNumber;
-  if(email && phone){
+  if(email && phoneNumber){
     try{
-      const User = await DriverModel.create({
+      const EmailRes=await EmailModel.create({
+        email:email,
+        userType:'driver'
+      })
+
+      const Driver = await UserModel.create({
         email:email,
         phoneNumber:phoneNumber,
+        userType:'driver'
       });
-      return res.status(200).json(User);
+      return res.status(200).json(Driver);
     }
     catch(err){
       res.status(500).send("Internal Server Error");
@@ -86,6 +116,8 @@ app.post("/createDriver/:email/:phoneNumber", async (req, res) => {
 });
 
 //api for google login left
+
+
 
 maxAge = 24 * 60 * 60;
 
