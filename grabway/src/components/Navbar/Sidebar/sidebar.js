@@ -22,11 +22,11 @@ export default function Sidebar({
       setClassDisplay("sidebar open");
     }
   };
-  const {userEmail,setUserEmail}= useContext(UserContext);
+  const {userEmail,setUserEmail,setRunContext}= useContext(UserContext);
   const handleSignout = () => {
     console.log("Signout Successfull");
     Cookies.set('grabwayToken', null);
-    setUserEmail(null);
+    setRunContext('logout');
     setCounter(false);
     setLoginState(false);
   };

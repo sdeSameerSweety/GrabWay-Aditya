@@ -44,7 +44,7 @@ const TopBar = ({ counter, setCounter, setLoginState,loginState }) => {
   const app = initializeApp(firebaseConfig);
   const auth = getAuth();
   const provider = new GoogleAuthProvider();
-  const {userEmail,setUserEmail}=useContext(UserContext);
+  const {userEmail,setUserEmail,setRunContext}=useContext(UserContext);
   const { isOpen, onOpen, onClose } = useDisclosure();
   const [showSignIn, setShowSignIn] = useState(true);
   const [loginEmail, setLoginEmail] = useState("");
@@ -82,10 +82,9 @@ const TopBar = ({ counter, setCounter, setLoginState,loginState }) => {
     }
   }
   useEffect(()=>{
-    if(userEmail!==null || userEmail!==''){
+    if(userEmail){
       setCounter(true);
-      setLoginState(true);
-      
+      setLoginState(true)
     }
   },[userEmail])
 
@@ -104,7 +103,7 @@ const TopBar = ({ counter, setCounter, setLoginState,loginState }) => {
             isClosable: true,
           });
           Cookies.set('grabwayToken', loginEmail,7);
-          setUserEmail(loginEmail);
+          setRunContext('login');
         })
         .catch((error) => {
           if (error.message === "Firebase: Error (auth/wrong-password).") {
@@ -162,7 +161,7 @@ const TopBar = ({ counter, setCounter, setLoginState,loginState }) => {
             duration: 3000,
             isClosable: true,
           });
-          setUserEmail(signupEmail);
+          setRunContext('signup');
           Cookies.set('grabwayToken', signupEmail,7);
           //console.log(signupUserType);
           if(signupUserType==='user'){
