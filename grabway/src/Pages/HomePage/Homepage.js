@@ -61,6 +61,7 @@ const TopSection = ({ nonceVal, loginState }) => {
       },
     });
   };
+
   const userData=(Cookies.get('grabwayUser'));
   if(userData){
     if(!(JSON.parse(userData)).name){
