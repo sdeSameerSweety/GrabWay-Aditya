@@ -4,8 +4,14 @@ import React from "react";
 
 import UserSettings from "../../components/Profile/User/userSettings";
 import UserProfile from "../../components/Profile/User/userProfile";
+import Cookies from "js-cookie";
+import { Navigate } from "react-router-dom";
 
 export default function Settings() {
+  const userData=Cookies.get('grabwayUser');
+  if(!userData){
+      return <Navigate to={"/"}/>
+  }
   return (
     <>
       <div className="flex flex-wrap">

@@ -13,6 +13,7 @@ export function UserContextProvider({ children }) {
         axios.post("/checkuser", { email }).then((res) => {
           console.log(res.data);
           setUserEmail(res.data);
+          Cookies.set('grabwayUser',(JSON.stringify(res.data)),7);
         });
       }
   }, []);
@@ -22,6 +23,7 @@ export function UserContextProvider({ children }) {
       axios.post("/checkuser", { email }).then((res) => {
         console.log(res.data);
         setUserEmail(res.data);
+        Cookies.set('grabwayUser', (JSON.stringify(res.data)),7);
       });
     }
 }, [runContext]);

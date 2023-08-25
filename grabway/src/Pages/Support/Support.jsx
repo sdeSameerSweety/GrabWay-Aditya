@@ -38,6 +38,8 @@ import {
 } from "react-icons/md";
 import { BsGithub, BsDiscord, BsPerson } from "react-icons/bs";
 import { BiCaretDownCircle } from "react-icons/bi";
+import Cookies from "js-cookie";
+import { Navigate } from "react-router-dom";
 export default function ContactFaq() {
 
   const phone = "+91-9696969696";
@@ -58,7 +60,10 @@ export default function ContactFaq() {
     });
   };
 
-
+  const userData=Cookies.get('grabwayUser');
+  if(!userData){
+      return <Navigate to={"/"}/>
+  }
   return (
     <>
       <Container

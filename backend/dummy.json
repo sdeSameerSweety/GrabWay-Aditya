@@ -17,8 +17,8 @@
       "rideHistory": [
         {
           "rideid": "",
-          "from": "",
-          "to": "",
+          "from": {"text":"autocomplete", "lat":123,"long":123},
+          "to":{"text":"autocomplete", "lat":123,"long":123},
           "otp": ""
         }
       ]
