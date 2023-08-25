@@ -25,10 +25,12 @@ export default function Sidebar({
   const {userEmail,setUserEmail,setRunContext}= useContext(UserContext);
   const handleSignout = () => {
     console.log("Signout Successfull");
-    Cookies.set('grabwayToken', null);
+    Cookies.remove('grabwayToken');
+    Cookies.remove('grabwayUser');
     setRunContext('logout');
     setCounter(false);
     setLoginState(false);
+    window.location.reload(false);
   };
 
   const [windowSize, setWindowSize] = useState([

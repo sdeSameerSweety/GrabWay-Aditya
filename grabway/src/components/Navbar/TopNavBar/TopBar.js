@@ -161,8 +161,9 @@ const TopBar = ({ counter, setCounter, setLoginState,loginState }) => {
             duration: 3000,
             isClosable: true,
           });
-          setRunContext('signup');
           Cookies.set('grabwayToken', signupEmail,7);
+          setRunContext('signup');
+          
           //console.log(signupUserType);
           if(signupUserType==='user'){
             console.log("inside user if");

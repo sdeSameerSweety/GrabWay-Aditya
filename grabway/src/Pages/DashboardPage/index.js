@@ -4,8 +4,14 @@ import GrabWayVisits from "../../components/DashboardComponents/GrabWayVisits";
 import DashBoardMap from "../../components/DashboardComponents/DashBoardMap";
 import TopDrivers from "../../components/DashboardComponents/TopDrivers";
 import DriversCustomerChart from "../../components/DashboardComponents/DriversCustomerChart";
+import Cookies from "js-cookie";
+import { Navigate } from "react-router-dom";
 
 export default function Dashboard() {
+  const userData=Cookies.get('grabwayUser');
+  if(!userData){
+      return <Navigate to={"/"}/>
+  }
   return (
     <>
       <HeaderStats />

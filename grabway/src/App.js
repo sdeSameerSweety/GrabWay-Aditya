@@ -10,6 +10,7 @@ import Dashboard from "./Pages/DashboardPage";
 import DriverCard from "./components/Cards/DriverCards/DriverCards";
 import axios from "axios";
 import { UserContext, UserContextProvider } from "./context/Context";
+import ProfilePage from "./Pages/ProfilePages/index";
 import Cookies from "js-cookie";
 axios.defaults.baseURL="http://localhost:8080";
 axios.defaults.withCredentials=true;
@@ -70,6 +71,7 @@ function App() {
           <Route path="/dashboard" element={<Dashboard />} />
           {/* <Route path="/userprofile" element={<UserProfile />} /> */}
           <Route path="/registration" element={<Registeration />} />
+          <Route path="/profile" element={<ProfilePage />} />
         </Routes>
         <Footer />
       </div>
