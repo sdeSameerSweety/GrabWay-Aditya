@@ -35,8 +35,8 @@ const Registration = () => {
   const [formData, setFormData] = useState({
     firstName: "",
     lastName: "",
-    email: userData.email,
-    phoneNumber: userData.phoneNumber,
+    email: "",
+    phoneNumber: "",
     location: "",
   });
   const [errors, setErrors] = useState({});

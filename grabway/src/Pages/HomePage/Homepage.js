@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { Navigate, useNavigate } from "react-router-dom";
 import "./Homepage.css";
 import {
   Input,
@@ -24,6 +24,7 @@ import { AiFillHeart, AiOutlineThunderbolt } from "react-icons/ai";
 import { FaRoad } from "react-icons/fa6";
 import { useJsApiLoader } from "@react-google-maps/api";
 import { Autocomplete } from "@react-google-maps/api";
+import Cookies from "js-cookie";
 const TopSection = ({ nonceVal, loginState }) => {
   const navigate = useNavigate();
   const [searchResult, setSearchResult] = useState();
@@ -60,7 +61,12 @@ const TopSection = ({ nonceVal, loginState }) => {
       },
     });
   };
-
+  const userData=Cookies.get('grabwayUser');
+  if(userData){
+    if(!userData.name){
+      return <Navigate to={"/registration"}/>
+    }
+  }
   if (!isLoaded) {
     return (
       <div className="h-[100vh] flex justify-center items-center">
@@ -74,7 +80,7 @@ const TopSection = ({ nonceVal, loginState }) => {
       </div>
     );
   }
-
+  
   return (
     <>
       <div className="relative dekstop-view">

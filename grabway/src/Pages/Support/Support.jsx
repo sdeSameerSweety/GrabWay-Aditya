@@ -61,6 +61,11 @@ export default function ContactFaq() {
   };
 
   const userData=Cookies.get('grabwayUser');
+  if(userData){
+    if(!userData.name){
+      return <Navigate to={"/registration"}/>
+    }
+  }
   if(!userData){
       return <Navigate to={"/"}/>
   }

@@ -9,9 +9,16 @@ import { Navigate } from "react-router-dom";
 
 export default function Settings() {
   const userData=Cookies.get('grabwayUser');
+  if(userData){
+    if(!userData.name){
+      return <Navigate to={"/registration"}/>
+    }
+  }
+  
   if(!userData){
       return <Navigate to={"/"}/>
   }
+
   return (
     <>
       <div className="flex flex-wrap">
