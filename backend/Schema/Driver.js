@@ -20,16 +20,24 @@ const AddressSchema=new mongoose.Schema({
     isDefault:{type:Boolean}
 })
 
+const LocationSchema=new mongoose.Schema({
+    text:{type:String},
+    lat:{type:Number},
+    long:{type:Number}
+});
+
 const RouteSchema=new mongoose.Schema({
-    origin:{type:String},
-    destination:{type:String},
+    origin:{LocationSchema},
+    destination:{LocationSchema},
     plan:{type:String},
+    seats:{type:Number}
 })
+
 
 const RideHistorySchema=new mongoose.Schema({
     rideId:{type:String},
-    origin:{type:String},
-    destination:{type:String},
+    origin:{LocationSchema},
+    destination:{LocationSchema},
     otp:{type:Number}
 })
 
@@ -47,7 +55,8 @@ const DriverSchema = new mongoose.Schema({
     routes:[RouteSchema],
     rideHistory:[RideHistorySchema],
     credits:{type:Number},
-    userType:{type:String}
+    userType:{type:String},
+    experience:{type:Number},
 });
 
 const DriverModel = mongoose.model('Driver', DriverSchema);
