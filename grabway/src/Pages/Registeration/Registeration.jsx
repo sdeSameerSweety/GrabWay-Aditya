@@ -30,8 +30,7 @@ import Cookies from "js-cookie";
 import { Navigate } from "react-router-dom";
 
 const Registration = () => {
-  const userData=Cookies.get('grabwayUser');
-  console.log(userData);
+  const userData=JSON.parse(Cookies.get('grabwayUser'));
   const [formData, setFormData] = useState({
     firstName: "",
     lastName: "",
