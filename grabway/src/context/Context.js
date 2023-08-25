@@ -6,9 +6,9 @@ export const UserContext=createContext({});
 export function UserContextProvider({children}){
     const [userEmail,setUserEmail]=useState(null);
     useEffect(()=>{
-        const token=Cookies.get('grabwayToken');
-        if(token){
-            axios.post(`/checkuser/${token}`).then((res)=>{
+        const email=Cookies.get('grabwayToken');
+        if(email){
+            axios.get('/checkuser',{email}).then((res)=>{
                 const temp=res.data;
                 setUserEmail(temp.email);
             })

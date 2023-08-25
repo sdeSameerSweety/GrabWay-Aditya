@@ -11,7 +11,7 @@ import DriverCard from "./components/Cards/DriverCards/DriverCards";
 import axios from "axios";
 import { UserContext, UserContextProvider } from "./context/Context";
 import Cookies from "js-cookie";
-axios.defaults.url="https://localhost:8080";
+axios.defaults.baseURL="http://localhost:8080";
 axios.defaults.withCredentials=true;
 function App() {
   const [windowSize, setWindowSize] = useState(window.innerWidth);

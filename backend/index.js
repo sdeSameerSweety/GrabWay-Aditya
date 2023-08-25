@@ -25,18 +25,27 @@ app.use(
     origin: [PUBLIC_URL],
     methods: ["GET", "POST", "PUT", "PATCH", "DELETE"],
     credentials: true,
+    allowedHeaders: ['Content-Type', 'Origin', 'X-Requested-With', 'Accept', 'x-client-key', 'x-client-token', 'x-client-secret', 'Authorization'],
   })
 );
 
-app.post("/checkuser/:email", async (req, res) => {
+app.get("/checkuser", async (req, res) => {
   await mongoose.connect(MONGO_URL);
-  const email  = req.params.email;
-  if (email) {
+  if (req.body.email) {
+  const email  = req.body.email;
+  console.log(email);
+    try{
     const UserEmail = await UserModel.findOne({ email: email });
     res.status(200).json(UserEmail);
     console.log(UserEmail);
+    }
+    catch(err){
+      res.status(200).send(err);
+      console.log(err);
+    }
   } else {
     res.status(200).json(null);
+    console.log('not found');
   }
 });
 
