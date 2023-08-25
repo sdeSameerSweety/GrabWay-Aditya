@@ -60,7 +60,7 @@ function App() {
       <div style={intDivStyle}>
         {/* <Registeration /> */}
         {/* <Support/> */}
-        <DriverCard/>
+        
         <Routes>
           <Route
             path="/"

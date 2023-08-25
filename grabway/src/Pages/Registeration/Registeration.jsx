@@ -26,22 +26,18 @@ import {
   Checkbox,
   Avatar,
 } from "@chakra-ui/react";
+import Cookies from "js-cookie";
+import { Navigate } from "react-router-dom";
 
 const Registration = () => {
+  const userData=Cookies.get('grabwayUser');
+  console.log(userData);
   const [formData, setFormData] = useState({
     firstName: "",
     lastName: "",
-    email: "",
-    password: "",
-    phoneNumber: "",
+    email: userData.email,
+    phoneNumber: userData.phoneNumber,
     location: "",
-    workplace: "",
-    workSchedule: "",
-    commuteFrequency: "",
-    preferredGender: "",
-    musicPreferences: "",
-    smokingPreferences: "",
-    accessibilityNeeds: "",
   });
   const [errors, setErrors] = useState({});
   const [isChecked, setIsChecked] = useState(false);
@@ -141,7 +137,9 @@ const Registration = () => {
   //     return;
   //   }
   //   };
-
+  if(!userData){
+    return <Navigate to={'/'}/>
+  }
   return (
     <Container className="container" maxW="75%" mt={8}>
       <Box
@@ -282,109 +280,19 @@ const Registration = () => {
                   </FormControl>
 
                   {/* Location */}
-                  <FormControl mt={4} isRequired>
-                    <FormLabel>Pickup Location</FormLabel>
-                    <Input
-                      type="text"
-                      placeholder="Location"
-                      value={formData.location}
-                      onChange={(e) =>
-                        setFormData({ ...formData, location: e.target.value })
-                      }
-                    />
-                  </FormControl>
+
 
                   {/* Workplace */}
-                  <FormControl mt={4} isRequired>
-                    <FormLabel>Workplace Location</FormLabel>
-                    <Input
-                      type="text"
-                      placeholder="Workplace"
-                      value={formData.workplace}
-                      onChange={(e) =>
-                        setFormData({ ...formData, workplace: e.target.value })
-                      }
-                    />
-                  </FormControl>
+                  
 
                   {/* Work Schedule */}
-                  <FormControl mt={4} isRequired>
-                    <FormLabel>Work Schedule</FormLabel>
-                    <Flex>
-                      <Input
-                        type="time"
-                        placeholder="From"
-                        value={workSchedule.from}
-                        onChange={(e) =>
-                          handleTimeChange("from", e.target.value)
-                        }
-                      />
-                      <Input
-                        type="time"
-                        placeholder="To"
-                        value={workSchedule.to}
-                        onChange={(e) => handleTimeChange("to", e.target.value)}
-                        ml={4} // Add some margin for spacing
-                      />
-                    </Flex>
-                  </FormControl>
+                 
                   {/* Preferred Gender */}
-                  <FormControl mt={4}>
-                    <FormLabel>Preferred Gender</FormLabel>
-                    <RadioGroup
-                      value={formData.preferredGender}
-                      onChange={(value) =>
-                        setFormData({
-                          ...formData,
-                          preferredGender: value,
-                        })
-                      }
-                    >
-                      <Stack direction="row">
-                        <Radio value="male">Male</Radio>
-                        <Radio value="female">Female</Radio>
-                        <Radio value="nonBinary">Non-binary</Radio>
-                        <Radio value="other">Other</Radio>
-                      </Stack>
-                    </RadioGroup>
-                  </FormControl>
+                  
                   {/* Smoking Preferences */}
-                  <FormControl mt={4}>
-                    <FormLabel>Smoking Preferences</FormLabel>
-                    <RadioGroup
-                      value={formData.smokingPreferences}
-                      onChange={(value) =>
-                        setFormData({
-                          ...formData,
-                          smokingPreferences: value,
-                        })
-                      }
-                    >
-                      <HStack spacing="24px">
-                        <Radio value="non-smoker">Non-Smoker</Radio>
-                        <Radio value="occasional-smoker">
-                          Occasional Smoker
-                        </Radio>
-                        <Radio value="regular-smoker">Regular Smoker</Radio>
-                      </HStack>
-                    </RadioGroup>
-                  </FormControl>
-
+                  
                   {/* Accessibility Needs */}
-                  <FormControl mt={4}>
-                    <FormLabel>Accessibility Needs</FormLabel>
-                    <Input
-                      type="text"
-                      placeholder="Accessibility Needs"
-                      value={formData.accessibilityNeeds}
-                      onChange={(e) =>
-                        setFormData({
-                          ...formData,
-                          accessibilityNeeds: e.target.value,
-                        })
-                      }
-                    />
-                  </FormControl>
+                  
                   <FormControl isInvalid={!!error} mt={4}>
                     <Checkbox
                       isChecked={isChecked}
