@@ -8,9 +8,11 @@ import Cookies from "js-cookie";
 import { Navigate } from "react-router-dom";
 
 export default function Settings() {
-  const userData=JSON.parse(Cookies.get('grabwayUser'));
+
+  const userData=(Cookies.get('grabwayUser'));
   if(userData){
-    if(!userData.name){
+    if(!(JSON.parse(userData)).name){
+
       return <Navigate to={"/registration"}/>
     }
   }

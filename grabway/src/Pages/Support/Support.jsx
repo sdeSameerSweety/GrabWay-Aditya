@@ -60,9 +60,9 @@ export default function ContactFaq() {
     });
   };
 
-  const userData=JSON.parse(Cookies.get('grabwayUser'));
+  const userData=(Cookies.get('grabwayUser'));
   if(userData){
-    if(!userData.name){
+    if(!(JSON.parse(userData)).name){
       return <Navigate to={"/registration"}/>
     }
   }
