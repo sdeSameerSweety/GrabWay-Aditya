@@ -110,23 +110,23 @@ const UserRegistration = () => {
     }
   };
 
-const handleSubmit = (e) => {
-  e.preventDefault(); // Prevent the default form submission behavior
+  const handleSubmit = (e) => {
+    e.preventDefault(); // Prevent the default form submission behavior
 
-  const newErrors = validateForm();
-  if (Object.keys(newErrors).length === 0) {
-    // Implement form submission logic here
-    console.log("Form submitted successfully:", formData);
-    setErrors({}); // Reset errors to clear any existing error messages
-  } else {
-    setErrors(newErrors);
-  }
-};
+    const newErrors = validateForm();
+    if (Object.keys(newErrors).length === 0) {
+      //Submission logic here
+      console.log("Form submitted successfully:", formData);
+      setErrors({});
+    } else {
+      setErrors(newErrors);
+    }
+  };
 
-if (!userData) {
-  return <Navigate to={"/"} />;
+  if (!userData) {
+    return <Navigate to={"/"} />;
   }
-  
+
   return (
     <Container className="container-reg" maxW="80%" mt={8}>
       <Box
@@ -134,21 +134,7 @@ if (!userData) {
         display="flex"
         alignItems="center"
         justifyContent="center"
-        // bgImg="url('https://img.freepik.com/free-vector/car-driving-concept-illustration_114360-8001.jpg?w=2000')"
-        // bgSize="cover"
-        // bgPosition="center"
-        // bgRepeat="no-repeat"
-        // w="100%"
-        // h="100%"
       >
-        {/* <Box
-          position="absolute"
-          top="0"
-          left="0"
-          w="100%"
-          h="100%"
-          bg="rgba(0, 0, 0, 0.2)" // Adjust the opacity here
-        /> */}
         <Box flex={1} p={8}>
           <Heading className="heading">Welcome</Heading>
           <Text className="text">
@@ -197,19 +183,6 @@ if (!userData) {
                     />
                     <FormErrorMessage>{errors.name}</FormErrorMessage>
                   </FormControl>
-                  {/* Last Name */}
-                  {/* <FormControl mt={4} isRequired isInvalid={!!errors.lastName}>
-                    <FormLabel>Last Name</FormLabel>
-                    <Input
-                      type="text"
-                      placeholder="Last Name"
-                      value={formData.lastName}
-                      onChange={(e) =>
-                        setFormData({ ...formData, lastName: e.target.value })
-                      }
-                    />
-                    <FormErrorMessage>{errors.lastName}</FormErrorMessage>
-                  </FormControl> */}
 
                   {/* Email */}
                   <FormControl mt={4} isRequired isInvalid={!!errors.email}>
@@ -303,6 +276,8 @@ if (!userData) {
                         setFormData({ ...formData, pin: e.target.value });
                         handlePincodeChange(e);
                       }}
+                      minLength={6}
+                      maxLength={6}
                     />
                     <FormErrorMessage>{errors.pin}</FormErrorMessage>
                   </FormControl>
