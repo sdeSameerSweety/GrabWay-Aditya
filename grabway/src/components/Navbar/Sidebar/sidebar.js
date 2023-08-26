@@ -12,6 +12,7 @@ export default function Sidebar({
   setLoginState,
   setCounter
 }) {
+
   const [sidebarClass, setSidebarClass] = useState("sidebar");
   const toggleClass = () => {
     if (sidebarClass === "sidebar open") {
@@ -73,6 +74,19 @@ export default function Sidebar({
       else return "w-[0px] ";
     }
   }
+  const [name,setName]=useState("Hello !");
+  const [userType,setUserType]=useState('Customer');
+  const userData = Cookies.get("grabwayUser");
+  useEffect(()=>{
+    if (userData !== undefined) {
+      if ((JSON.parse(userData)).name!=='') {
+        setName(`${(JSON.parse(userData)).name}`)
+        setUserType(`${(JSON.parse(userData)).userType}`);
+      }
+    }
+  })
+  
+
   return (
     <>
       {windowSize[0] > 600 && (
@@ -174,8 +188,8 @@ export default function Sidebar({
               <div className="profile-details">
                 <img src="/assets/images/user.png" alt="profileImg" />
                 <div className="name_job">
-                  <div className="name">Demo Person</div>
-                  <div className="job">Customer</div>
+                  <div className="name">{name}</div>
+                  <div className="job">{userType.toUpperCase()}</div>
                 </div>
               </div>
               <i
