@@ -133,7 +133,7 @@ const UserRegistration = () => {
           <Heading className="heading">Welcome</Heading>
           <Text className="text">
             Step into Grabway, where your commute becomes a canvas of
-            connections, savings, and sustainability – all painted in shared
+            connections, savings, and sustainability - all painted in shared
             journeys.
           </Text>
           <Text className="text-sm" color={"black"}>

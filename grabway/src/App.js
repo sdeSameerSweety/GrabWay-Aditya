@@ -58,7 +58,7 @@ function App() {
         loginState={loginState}
       />
       <div style={intDivStyle}>
-        {/* <Registeration /> */}
+        <Registeration />
         {/* <Support/> */}
         
         <Routes>
