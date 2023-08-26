@@ -30,17 +30,51 @@ import Cookies from "js-cookie";
 import { Navigate } from "react-router-dom";
 
 const DriverRegistration = () => {
-  // const userData = Cookies.get('grabwayUser');
   const userData = Cookies.get("grabwayUser");
   const hasUserData = userData !== undefined;
   console.log(userData);
   const [formData, setFormData] = useState({
-    firstName: "",
+    name: "",
     lastName: "",
     email: hasUserData ? JSON.parse(userData).email : "",
     phoneNumber: hasUserData ? JSON.parse(userData).phoneNumber : "",
     location: "",
+    addressLine1: "",
+    addressLine2: "",
+    city: "",
+    state: "",
+    pin: "",
+    carNumber: "",
+    carSeats: "",
+    drivingExp: "",
+    bio: "",
   });
+
+  const handlePincodeChange = async (e) => {
+    const pincode = e.target.value;
+    setFormData({
+      ...formData,
+      pin: pincode,
+    });
+
+    try {
+      const response = await fetch(
+        `https://api.postalpincode.in/pincode/${pincode}`
+      );
+      const data = await response.json();
+
+      if (data && data[0].Status === "Success") {
+        const postOffice = data[0].PostOffice[0];
+        setFormData({
+          ...formData,
+          city: postOffice.District,
+          state: postOffice.State,
+        });
+      }
+    } catch (error) {
+      console.error("Error fetching data:", error);
+    }
+  };
 
   const [errors, setErrors] = useState({});
   const [isChecked, setIsChecked] = useState(false);
@@ -56,22 +90,27 @@ const DriverRegistration = () => {
     if (!isChecked) {
       setError("Please accept the terms and conditions.");
     } else {
-      // Proceed with your desired action here, since terms are accepted.
       console.log("Terms accepted, proceed with further actions.");
     }
   };
+
   const validateForm = () => {
     const newErrors = {};
-    if (!formData.firstName) newErrors.firstName = "First Name is required";
-    if (!formData.lastName) newErrors.lastName = "Last Name is required";
-    if (!formData.email) newErrors.email = "Email is required";
-    if (!formData.password) newErrors.password = "Password is required";
-    // Add more validation rules here
+    if (!formData.name) newErrors.name = "Full Name is required";
+    if (!formData.addressLine1) newErrors.addressLine1 = "Address is required";
+    if (!formData.city) newErrors.city = "City is required";
+    if (!formData.state) newErrors.state = "State is required";
+    if (!formData.pinCode) newErrors.pinCode = "Pin Code is required";
+    if (!formData.carNumber) newErrors.carNumber = "Vehicle Number is required";
+    if (!formData.carSeats) newErrors.carSeats = "Seat Number is required";
+    if (!formData.drivingExp) newErrors.drivingExp = "Experience is required";
+    // else if (!/^\d{6}$/.test(formData.pinCode))
+    //   newErrors.pinCode = "Pin Code should be a 6-digit number";
 
     return newErrors;
   };
-  const [profilePhoto, setProfilePhoto] = useState(null);
 
+  const [profilePhoto, setProfilePhoto] = useState(null);
   const handlePhotoChange = (event) => {
     const file = event.target.files[0];
     if (file) {
@@ -84,51 +123,43 @@ const DriverRegistration = () => {
   };
 
   const handleSubmit = (e) => {
-    e.preventDefault();
+    e.preventDefault(); // Prevent the default form submission behavior
+
     const newErrors = validateForm();
     if (Object.keys(newErrors).length === 0) {
-      // Implement form submission logic here
+      //Submission logic here
       console.log("Form submitted successfully:", formData);
+      setErrors({});
     } else {
       setErrors(newErrors);
     }
-
-    e.preventDefault();
-
-    const carNumberRegex = /^[A-Z]{2}\s?\d{1,2}\s?[A-Z]{1,2}\s?\d{4}$/;
-
-    if (!carNumberRegex.test(formData.carNumber)) {
-      setError("Invalid car number format. Please use XX00 XX0000 format.");
-      return;
-    }
-    setError("");
   };
 
-  const [workSchedule, setWorkSchedule] = useState({
-    from: "",
-    to: "",
-  });
+  // const [workSchedule, setWorkSchedule] = useState({
+  //   from: "",
+  //   to: "",
+  // });
 
-  const handleTimeChange = (field, value) => {
-    setWorkSchedule((prevSchedule) => ({
-      ...prevSchedule,
-      [field]: value,
-    }));
-  };
+  // const handleTimeChange = (field, value) => {
+  //   setWorkSchedule((prevSchedule) => ({
+  //     ...prevSchedule,
+  //     [field]: value,
+  //   }));
+  // };
 
-  const [formDataCarno, setFormDataCarno] = useState({
-    location: "",
-    carType: "",
-    carNumber: "",
-  });
+  // const [formDataCarno, setFormDataCarno] = useState({
+  //   location: "",
+  //   carType: "",
+  //   carNumber: "",
+  // });
 
-  const handleCarTypeChange = (e) => {
-    setFormDataCarno({ ...formDataCarno, carType: e.target.value });
-  };
+  // const handleCarTypeChange = (e) => {
+  //   setFormDataCarno({ ...formDataCarno, carType: e.target.value });
+  // };
 
-  const handleCarNumberChange = (e) => {
-    setFormDataCarno({ ...formDataCarno, carNumber: e.target.value });
-  };
+  // const handleCarNumberChange = (e) => {
+  //   setFormDataCarno({ ...formDataCarno, carNumber: e.target.value });
+  // };
 
   if (!userData) {
     return <Navigate to={"/"} />;
@@ -178,34 +209,17 @@ const DriverRegistration = () => {
                       mb={4}
                     />
                   </FormControl>
-                  <FormControl
-                    isRequired
-                    isInvalid={!!errors.firstName}
-                    onSubmit={handleSubmit}
-                  >
-                    <FormLabel>First Name</FormLabel>
+                  <FormControl isRequired isInvalid={!!errors.name}>
+                    <FormLabel>Full Name</FormLabel>
                     <Input
                       type="text"
-                      placeholder="First Name"
-                      value={formData.firstName}
+                      placeholder="Full Name"
+                      value={formData.name}
                       onChange={(e) =>
-                        setFormData({ ...formData, firstName: e.target.value })
+                        setFormData({ ...formData, name: e.target.value })
                       }
                     />
-                    <FormErrorMessage>{errors.firstName}</FormErrorMessage>
-                  </FormControl>
-                  {/* Last Name */}
-                  <FormControl mt={4} isRequired isInvalid={!!errors.lastName}>
-                    <FormLabel>Last Name</FormLabel>
-                    <Input
-                      type="text"
-                      placeholder="Last Name"
-                      value={formData.lastName}
-                      onChange={(e) =>
-                        setFormData({ ...formData, lastName: e.target.value })
-                      }
-                    />
-                    <FormErrorMessage>{errors.lastName}</FormErrorMessage>
+                    <FormErrorMessage>{errors.name}</FormErrorMessage>
                   </FormControl>
 
                   {/* Email */}
@@ -221,20 +235,6 @@ const DriverRegistration = () => {
                       disabled={hasUserData}
                     />
                     <FormErrorMessage>{errors.email}</FormErrorMessage>
-                  </FormControl>
-
-                  {/* Password */}
-                  <FormControl mt={4} isRequired isInvalid={!!errors.password}>
-                    <FormLabel>Password</FormLabel>
-                    <Input
-                      type="password"
-                      placeholder="Password"
-                      value={formData.password}
-                      onChange={(e) =>
-                        setFormData({ ...formData, password: e.target.value })
-                      }
-                    />
-                    <FormErrorMessage>{errors.password}</FormErrorMessage>
                   </FormControl>
 
                   {/* Phone Number */}
@@ -266,57 +266,147 @@ const DriverRegistration = () => {
 
                     <FormErrorMessage>{errors.phoneNumber}</FormErrorMessage>
                   </FormControl>
-
-                  {/* Location */}
-                  <FormControl mt={4} isRequired>
-                    <FormLabel>Residance Location</FormLabel>
+                  {/* Address Line 1 */}
+                  <FormControl
+                    mt={4}
+                    isRequired
+                    isInvalid={!!errors.addressLine1}
+                  >
+                    <FormLabel>Address Line 1</FormLabel>
                     <Input
                       type="text"
-                      placeholder="Location"
-                      value={formData.location}
+                      placeholder="Address Line 1"
+                      value={formData.addressLine1}
                       onChange={(e) =>
-                        setFormData({ ...formData, location: e.target.value })
+                        setFormData({
+                          ...formData,
+                          addressLine1: e.target.value,
+                        })
+                      }
+                    />
+                    <FormErrorMessage>{errors.addressLine1}</FormErrorMessage>
+                  </FormControl>
+
+                  {/* Address Line 2 */}
+                  <FormControl mt={4}>
+                    <FormLabel>Address Line 2</FormLabel>
+                    <Input
+                      type="text"
+                      placeholder="Address Line 2"
+                      value={formData.addressLine2}
+                      onChange={(e) =>
+                        setFormData({
+                          ...formData,
+                          addressLine2: e.target.value,
+                        })
                       }
                     />
                   </FormControl>
+
+                  {/* PIN */}
+                  <FormControl mt={4} isRequired isInvalid={!!errors.pin}>
+                    <FormLabel>PIN</FormLabel>
+                    <Input
+                      type="text"
+                      placeholder="PIN"
+                      value={formData.pin}
+                      onChange={(e) => {
+                        setFormData({ ...formData, pin: e.target.value });
+                        handlePincodeChange(e);
+                      }}
+                      minLength={6}
+                      maxLength={6}
+                    />
+                    <FormErrorMessage>{errors.pin}</FormErrorMessage>
+                  </FormControl>
+
+                  {/* City */}
+                  <FormControl mt={4} isRequired isInvalid={!!errors.city}>
+                    <FormLabel>City</FormLabel>
+                    <Input
+                      type="text"
+                      placeholder="City"
+                      value={formData.city}
+                      onChange={(e) =>
+                        setFormData({ ...formData, city: e.target.value })
+                      }
+                    />
+                    <FormErrorMessage>{errors.city}</FormErrorMessage>
+                  </FormControl>
+
+                  {/* State */}
+                  <FormControl mt={4} isRequired isInvalid={!!errors.state}>
+                    <FormLabel>State</FormLabel>
+                    <Input
+                      type="text"
+                      placeholder="State"
+                      value={formData.state}
+                      onChange={(e) =>
+                        setFormData({
+                          ...formData,
+                          state: e.target.value,
+                        })
+                      }
+                    />
+                    <FormErrorMessage>{errors.state}</FormErrorMessage>
+                  </FormControl>
+
+                  {/* Number Plate */}
                   <FormControl mt={4} isRequired>
                     <FormLabel>Vehicle Number Plate</FormLabel>
                     <Input
                       type="text"
                       placeholder="Enter car number"
-                      value={formDataCarno.carNumber}
-                      onChange={handleCarNumberChange}
+                      value={formData.carNumber}
+                      onChange={(e) =>
+                        setFormData({ ...formData, carNumber: e.target.value })
+                      }
                     />
+                    <FormErrorMessage>{errors.carNumber}</FormErrorMessage>
                   </FormControl>
 
                   <FormControl mt={4} isRequired>
                     <FormLabel>Vehicle Seats</FormLabel>
                     <Select
                       placeholder="How many seaters do you have?"
-                      value={formDataCarno.carType}
-                      onChange={handleCarTypeChange}
+                      value={formData.carSeats}
+                      onChange={(e) =>
+                        setFormData({ ...formData, carSeats: e.target.value })
+                      }
                     >
                       <option value="3">3</option>
                       <option value="4">4</option>
                       <option value="5">5</option>
                       <option value="6">6</option>
-                      {/* Add more options as needed */}
                     </Select>
+                    <FormErrorMessage>{errors.carSeats}</FormErrorMessage>
                   </FormControl>
+
                   <FormControl mt={4} isRequired>
-                    <FormLabel>Driving Experiance(Years)</FormLabel>
-                    <Select placeholder="Driving experiance in years">
-                      <option value="1L">1 or Less</option>
-                      <option value="12">1-2</option>
-                      <option value="23">2-3</option>
-                      <option value="35">3-5</option>
-                      <option value="2M">5 or More</option>
-                      {/* Add more options as needed */}
+                    <FormLabel>Driving Experiance</FormLabel>
+                    <Select
+                      placeholder="Driving experiance in years"
+                      value={formData.drivingExp}
+                      onChange={(e) =>
+                        setFormData({ ...formData, drivingExp: e.target.value })
+                      }
+                    >
+                      <option value="1L">1 or Less Year</option>
+                      <option value="12">1-2 Years</option>
+                      <option value="23">2-3 Years</option>
+                      <option value="35">3-5 Years</option>
+                      <option value="2M">5 or More Years</option>
                     </Select>
+                    <FormErrorMessage>{errors.drivingExp}</FormErrorMessage>
                   </FormControl>
-                  <FormControl mt={4} isRequired>
+
+                  <FormControl mt={4}>
                     <FormLabel>Bio</FormLabel>
-                    <Input type="text" placeholder="Your Bio" />
+                    <Input
+                      type="text"
+                      placeholder="Your Bio (Can be edited later)"
+                      value={formData.bio}
+                    />
                   </FormControl>
                   <FormControl isInvalid={!!error} mt={4}>
                     <Checkbox

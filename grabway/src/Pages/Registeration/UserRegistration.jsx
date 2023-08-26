@@ -91,8 +91,8 @@ const UserRegistration = () => {
     if (!formData.city) newErrors.city = "City is required";
     if (!formData.state) newErrors.state = "State is required";
     if (!formData.pinCode) newErrors.pinCode = "Pin Code is required";
-    else if (!/^\d{6}$/.test(formData.pinCode))
-      newErrors.pinCode = "Pin Code should be a 6-digit number";
+    // else if (!/^\d{6}$/.test(formData.pinCode))
+    //   newErrors.pinCode = "Pin Code should be a 6-digit number";
 
     return newErrors;
   };
