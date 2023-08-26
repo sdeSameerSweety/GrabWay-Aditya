@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { Navigate, useNavigate } from "react-router-dom";
 import "./Homepage.css";
 import Geocode from "react-geocode";
 import {
@@ -27,7 +27,7 @@ import { AiFillHeart, AiOutlineThunderbolt } from "react-icons/ai";
 import { FaRoad } from "react-icons/fa6";
 import { useJsApiLoader } from "@react-google-maps/api";
 import { Autocomplete } from "@react-google-maps/api";
-import { get } from "firebase/database";
+import Cookies from "js-cookie";
 const TopSection = ({ nonceVal, loginState }) => {
   const navigate = useNavigate();
   const sourceDesk = useRef();
@@ -174,6 +174,12 @@ const TopSection = ({ nonceVal, loginState }) => {
     }
   };
 
+  const userData = Cookies.get("grabwayUser");
+  if (userData !== undefined) {
+    if (!JSON.parse(userData).name) {
+      return <Navigate to={"/registration"} />;
+    }
+  }
   if (!isLoaded) {
     return (
       <div className="h-[100vh] flex justify-center items-center">
