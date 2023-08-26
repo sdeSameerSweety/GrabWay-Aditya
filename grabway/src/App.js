@@ -20,9 +20,9 @@ function App() {
   const [windowSize, setWindowSize] = useState(window.innerWidth);
   const [loginState, setLoginState] = useState(false);
   const [nonce, setNonce] = useState("grabway@123");
-  console.log(loginState);
+  //console.log(loginState);
   const { userEmail, setUserEmail } = useContext(UserContext);
-  console.log(userEmail);
+  //console.log(userEmail);
   useEffect(() => {
     const handleWindowResize = () => {
       setWindowSize(window.innerWidth);
