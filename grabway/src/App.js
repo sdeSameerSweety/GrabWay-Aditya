@@ -65,7 +65,7 @@ function App() {
           loginState={loginState}
         />
         <div style={intDivStyle}>
-          <Registeration />
+          {/* <Registeration /> */}
           {/* <Support/> */}
           <Routes>
             {/* <Route path="/nearby" element={<NearbyMap nonceVal={nonce} />} /> */}

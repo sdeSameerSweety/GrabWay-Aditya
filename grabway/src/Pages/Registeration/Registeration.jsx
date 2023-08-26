@@ -14,7 +14,10 @@ const Registration = () => {
 
   const user = JSON.parse(userData);
   const targetPath =
-    user.userType === "driver" ? "./DriverRegistration" : "./UserRegistration"; //Not able to get path
+    user.userType === "driver" ? "./DriverRegistration" : "./UserRegistration";//Not able to get path
 
   return <Navigate to={targetPath} />;
 };
+
+export default Registration;
+
