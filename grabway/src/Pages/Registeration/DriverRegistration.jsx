@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import "./Registeration.css";
 import {
   Container,
@@ -20,11 +20,14 @@ import {
 } from "@chakra-ui/react";
 import Cookies from "js-cookie";
 import { Navigate } from "react-router-dom";
+import axios from "axios";
+import { UserContext } from "../../context/Context";
 
 const DriverRegistration = () => {
+  const {setRunContext}=useContext(UserContext);
   const userData = Cookies.get("grabwayUser");
   const hasUserData = userData !== undefined;
-  console.log(userData);
+  //console.log(userData);
   const [formData, setFormData] = useState({
     name: "",
     lastName: "",
@@ -78,7 +81,6 @@ const DriverRegistration = () => {
 
   const handleFormSubmit = (event) => {
     event.preventDefault();
-
     if (!isChecked) {
       setError("Please accept the terms and conditions.");
     } else {
@@ -92,7 +94,7 @@ const DriverRegistration = () => {
     if (!formData.addressLine1) newErrors.addressLine1 = "Address is required";
     if (!formData.city) newErrors.city = "City is required";
     if (!formData.state) newErrors.state = "State is required";
-    if (!formData.pinCode) newErrors.pinCode = "Pin Code is required";
+    //if (!formData.pinCode) newErrors.pinCode = "Pin Code is required";
     // if (!formData.carNumber) newErrors.carNumber = "Vehicle Number is required";
     if (!formData.carSeats) newErrors.carSeats = "Seat Number is required";
     if (!formData.drivingExp) newErrors.drivingExp = "Experience is required";
@@ -120,12 +122,22 @@ const DriverRegistration = () => {
     }
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async(e) => {
+    
     e.preventDefault(); // Prevent the default form submission behavior
-
     const newErrors = validateForm();
+    console.log(Object.keys(newErrors))
     if (Object.keys(newErrors).length === 0) {
       //Submission logic here
+      console.log('clicked');
+      const response=await axios.post('/registerNewDriver',{
+        formData
+      }).then((res)=>{
+        console.log(res);
+        setTimeout(() => {
+          setRunContext('driver from submited');
+        }, 1500);
+      })
       console.log("Form submitted successfully:", formData);
       setErrors({});
     } else {

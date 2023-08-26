@@ -152,80 +152,104 @@ app.post('/googlecheckUser', async(req,res)=>{
 
 app.post('/registerNewUser',async(req,res)=>{
   await mongoose.connect(MONGO_URL);
-  const name=req.body.name;
-  const address=req.body.address;
-  const phoneNumber=req.body.phoneNumber;
-  const profilePicture=req.body.profilePicture;
-  if(name&&address&&phoneNumber&& profilePicture){
-    try{
-      const updatedResponse=await UserModel.updateOne(
-        {
-            "email": email,
-        },
-        {
-            $set:{
-                phoneNumber:phoneNumber,
-                name:name,
-                address:address,
-                profilePicture:profilePicture
-            }
-        });
-        if(updatedResponse){
-          res.status(200).json("updated");
-        }
-        else{
-          res.status(500).json('error updating');
-        }
-    }
-    catch(err){
-      res.status(500).send("Internal Server Error");
-    }
+  console.log(req.body.formData);
+  const formData=req.body.formData;
+  const name=formData.name;
+  const email=formData.email;
+  const phoneNumber=formData.phoneNumber;
+  const addressName=formData.name;
+  const addressLine1=formData.addressLine1;
+  const addressLine2=formData.addressLine2;
+  const city = formData.city;
+  const state=formData.state;
+  const pin=formData.pin;
+ if(formData){
+  try{
+    const updatedResponse=await UserModel.updateOne(
+      {
+          "email": email,
+      },
+      {
+          $set:{
+              name:name,
+              phoneNumber:phoneNumber,
+              "address.0.addressName":addressName,
+              "address.0.addressLine1":addressLine1,
+              "address.0.addressLine2":addressLine2,
+              "address.0.city":city,
+              "address.0.state":state,
+              "address.0.pincode":pin,
+          }
+      });
+      if(updatedResponse){
+        res.status(200).json("Details Updated");
+      }
+      else{
+        res.status(200).json(null);
+      }
   }
-  else{
-    res.status(500).json('didnt get complete inputs')
+  catch(err){
+    console.log(err);
+    res.status(500).send("Error in try catch");
   }
+ }
+ else{
+  res.status(500).json("Internal Server Error");
+ }
 });
 
 app.post('/registerNewDriver',async(req,res)=>{
   await mongoose.connect(MONGO_URL);
-  const name=req.body.name;
-  const address=req.body.address;
-  const phoneNumber=req.body.phoneNumber;
-  const profilePicture=req.body.profilePicture;
-  const drivingLicenseNumber=req.body.drivingLicenseNumber;
-  const VehicleNumber=req.body.VehicleNumber;
-  const experience=req.body.experience;
-  if(name&&address&&phoneNumber&& profilePicture && drivingLicenseNumber && VehicleNumber && experience){
-    try{
-      const updatedResponse=await UserModel.updateOne(
-        {
-            "email": email,
-        },
-        {
-            $set:{
-                phoneNumber:phoneNumber,
-                name:name,
-                address:address,
-                profilePicture:profilePicture,
-                drivingLicenseNumber:drivingLicenseNumber,
-                VehicleNumber:VehicleNumber,
-                experience:experience,
-            }
-        });
-        if(updatedResponse){
-          res.status(200).json("updated");
-        }
-        else{
-          res.status(500).json('error updating');
-        }
-    }
-    catch(err){
-      res.status(500).send("Internal Server Error");
-    }
+  console.log(req.body.formData);
+  const formData=req.body.formData;
+  const name=formData.name;
+  const email=formData.email;
+  const phoneNumber=formData.phoneNumber;
+  const addressName=formData.name;
+  const addressLine1=formData.addressLine1;
+  const addressLine2=formData.addressLine2;
+  const city = formData.city;
+  const state=formData.state;
+  const pin=formData.pin;
+  const VehicleNumber=formData.carNumber;
+  const drivingLicenseNumber=formData.phoneNumber//replace with License Number
+  const experience=formData.experience;
+ if(formData){
+  try{
+    const updatedResponse=await UserModel.updateOne(
+      {
+          "email": email,
+      },
+      {
+          $set:{
+              name:name,
+              phoneNumber:phoneNumber,
+              VehicleNumber:VehicleNumber,
+              drivingLicenseNumber:drivingLicenseNumber,
+              experience:experience,
+              "address.0.addressName":addressName,
+              "address.0.addressLine1":addressLine1,
+              "address.0.addressLine2":addressLine2,
+              "address.0.city":city,
+              "address.0.state":state,
+              "address.0.pincode":pin,
+          }
+      });
+      if(updatedResponse){
+        res.status(200).json("Details Updated");
+      }
+      else{
+        res.status(200).json(null);
+      }
   }
-  else{
-    res.status(500).json('didnt get complete inputs')
+  catch(err){
+    console.log(err);
+    res.status(500).send("Error in try catch");
   }
+ }
+ else{
+  res.status(500).json("Internal Server Error");
+ }
 });
 
 

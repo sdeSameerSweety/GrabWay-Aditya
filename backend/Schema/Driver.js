@@ -42,7 +42,7 @@ const RideHistorySchema=new mongoose.Schema({
 })
 
 const DriverSchema = new mongoose.Schema({
-    profilePicture:{type:String, unique:true},
+    profilePicture:{type:String, unique:true},//remove unique profile picture from here
     name:{type:String},
     email:{type:String,unique:true},
     phoneNumber:{type:Number},
