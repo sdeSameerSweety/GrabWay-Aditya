@@ -2,6 +2,7 @@ import React, { useEffect, useRef, useState } from "react";
 import { Navigate, useNavigate } from "react-router-dom";
 import "./Homepage.css";
 import Geocode from "react-geocode";
+import { Navigator } from "react-router-dom";
 import {
   Input,
   InputGroup,
@@ -29,6 +30,22 @@ import { useJsApiLoader } from "@react-google-maps/api";
 import { Autocomplete } from "@react-google-maps/api";
 import Cookies from "js-cookie";
 const TopSection = ({ nonceVal, loginState }) => {
+  const [currLocation, setCurrlocation] = useState({});
+  useEffect(() => {
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition(
+        (position) => {
+          setCurrlocation(position.coords);
+          console.log(position.coords);
+        },
+        (error) => {
+          console.log(error);
+        }
+      );
+    } else {
+      console.log("Geolocation is not supported by this browser.");
+    }
+  }, []);
   const navigate = useNavigate();
   const sourceDesk = useRef();
   const destinationDesk = useRef();
