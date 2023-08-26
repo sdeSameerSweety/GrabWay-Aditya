@@ -13,18 +13,23 @@ import { UserContext, UserContextProvider } from "./context/Context";
 import ProfilePage from "./Pages/ProfilePages/index";
 import Cookies from "js-cookie";
 
+
 import DriverRegistration from "./Pages/Registeration/DriverRegistration";
 import UserRegistration from "./Pages/Registeration/UserRegistration";
 
+
 axios.defaults.baseURL="http://localhost:8080";
 axios.defaults.withCredentials=true;
+// import NearbyMap from "./components/Map/NearbyMap";
+axios.defaults.baseURL = "http://localhost:8080";
+axios.defaults.withCredentials = true;
 function App() {
   const [windowSize, setWindowSize] = useState(window.innerWidth);
   const [loginState, setLoginState] = useState(false);
   const [nonce, setNonce] = useState("grabway@123");
-  console.log(loginState);
-  const {userEmail,setUserEmail}=useContext(UserContext);
-  console.log(userEmail);
+  //console.log(loginState);
+  const { userEmail, setUserEmail } = useContext(UserContext);
+  //console.log(userEmail);
   useEffect(() => {
     const handleWindowResize = () => {
       setWindowSize(window.innerWidth);
@@ -64,8 +69,8 @@ function App() {
         <div style={intDivStyle}>
           <Registeration />
           {/* <Support/> */}
-
           <Routes>
+            <Route path="/nearby" element={<NearbyMap nonceVal={nonce} />} />
             <Route
               path="/"
               element={<Homepage nonceVal={nonce} loginState={loginState} />}

@@ -78,14 +78,21 @@ app.post("/createUser", async (req, res) => {
         email:email,
         userType:'user'
       })
-      const User = await UserModel.create({
-        email:email,
-        phoneNumber:phoneNumber,
-        userType:'user'
-      });
-      return res.status(200).json(User);
+      if(EmailRes){
+        const User = await UserModel.create({
+          email:email,
+          phoneNumber:phoneNumber,
+          userType:'user'
+        });
+        return res.status(200).json(User);
+      }
+      else{
+        res.status(500).json('cannot create user model')
+      }
+      
     }
     catch(err){
+      console.log(err);
       res.status(500).send("Internal Server Error");
     }
   }
@@ -116,6 +123,98 @@ app.post("/createDriver", async (req, res) => {
 });
 
 //api for google login left
+
+
+app.post('/registerNewUser',async(req,res)=>{
+  await mongoose.connect(MONGO_URL);
+  const name=req.body.name;
+  const address=req.body.address;
+  const phoneNumber=req.body.phoneNumber;
+  const profilePicture=req.body.profilePicture;
+  if(name&&address&&phoneNumber&& profilePicture){
+    try{
+      const updatedResponse=await UserModel.updateOne(
+        {
+            "email": email,
+        },
+        {
+            $set:{
+                phoneNumber:phoneNumber,
+                name:name,
+                address:address,
+                profilePicture:profilePicture
+            }
+        });
+        if(updatedResponse){
+          res.status(200).json("updated");
+        }
+        else{
+          res.status(500).json('error updating');
+        }
+    }
+    catch(err){
+      res.status(500).send("Internal Server Error");
+    }
+  }
+  else{
+    res.status(500).json('didnt get complete inputs')
+  }
+});
+
+app.post('/registerNewDriver',async(req,res)=>{
+  await mongoose.connect(MONGO_URL);
+  const name=req.body.name;
+  const address=req.body.address;
+  const phoneNumber=req.body.phoneNumber;
+  const profilePicture=req.body.profilePicture;
+  const drivingLicenseNumber=req.body.drivingLicenseNumber;
+  const VehicleNumber=req.body.VehicleNumber;
+  const experience=req.body.experience;
+  if(name&&address&&phoneNumber&& profilePicture && drivingLicenseNumber && VehicleNumber && experience){
+    try{
+      const updatedResponse=await UserModel.updateOne(
+        {
+            "email": email,
+        },
+        {
+            $set:{
+                phoneNumber:phoneNumber,
+                name:name,
+                address:address,
+                profilePicture:profilePicture,
+                drivingLicenseNumber:drivingLicenseNumber,
+                VehicleNumber:VehicleNumber,
+                experience:experience,
+            }
+        });
+        if(updatedResponse){
+          res.status(200).json("updated");
+        }
+        else{
+          res.status(500).json('error updating');
+        }
+    }
+    catch(err){
+      res.status(500).send("Internal Server Error");
+    }
+  }
+  else{
+    res.status(500).json('didnt get complete inputs')
+  }
+});
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

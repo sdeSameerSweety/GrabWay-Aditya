@@ -60,7 +60,13 @@ export default function ContactFaq() {
     });
   };
 
-  const userData=Cookies.get('grabwayUser');
+ 
+  const userData = Cookies.get("grabwayUser");
+  if (userData !== undefined) {
+    if (userData.name===undefined) {
+      return <Navigate to={"/registration"} />;
+    }
+  }
   if(!userData){
       return <Navigate to={"/"}/>
   }
