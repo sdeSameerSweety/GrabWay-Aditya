@@ -338,18 +338,14 @@ const DriverRegistration = () => {
 
             <FormControl mt={4} isRequired isInvalid={!!errors.carSeats}>
               <FormLabel>Vehicle Seats</FormLabel>
-              <Select
-                placeholder="How many seaters do you have?"
+              <Input
+                type="number"
+                placeholder="Number of seats"
                 value={formData.carSeats}
                 onChange={(e) =>
                   setFormData({ ...formData, carSeats: e.target.value })
                 }
-              >
-                <option value="3">3</option>
-                <option value="4">4</option>
-                <option value="5">5</option>
-                <option value="6">6</option>
-              </Select>
+              />
               <FormErrorMessage>{errors.carSeats}</FormErrorMessage>
             </FormControl>
 

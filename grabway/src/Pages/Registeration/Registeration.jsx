@@ -1,8 +1,8 @@
 import React, { useEffect } from "react";
 import { Navigate } from "react-router-dom";
-import "./UserRegistration";
-import "./DriverRegistration";
 import Cookies from "js-cookie";
+import DriverRegistration from "./DriverRegistration";
+import UserRegistration from "./UserRegistration";
 
 const Registration = () => {
   const userData = Cookies.get("grabwayUser");
@@ -12,12 +12,12 @@ const Registration = () => {
     return <Navigate to={"/"} />;
   }
 
-  const user = JSON.parse(userData);
-  const targetPath =
-    user.userType === "driver" ? "./DriverRegistration" : "./UserRegistration";//Not able to get path
-
-  return <Navigate to={targetPath} />;
+  const userType = JSON.parse(userData).userType;
+  return (
+    <>
+      {userType === "driver" ? <UserRegistration /> : <DriverRegistration />}
+    </>
+  );
 };
 
 export default Registration;
-

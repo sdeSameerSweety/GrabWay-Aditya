@@ -52,7 +52,7 @@ const UserRegistration = () => {
         const postOffice = data[0].PostOffice[0];
         setFormData({
           ...formData,
-          city: postOffice.District,
+          city: postOffice.Region,
           state: postOffice.State,
         });
       }

@@ -12,7 +12,7 @@ import axios from "axios";
 import { UserContext, UserContextProvider } from "./context/Context";
 import ProfilePage from "./Pages/ProfilePages/index";
 import Cookies from "js-cookie";
-
+import UserProfile from "./components/Profile/User/userProfile";
 import DriverRegistration from "./Pages/Registeration/DriverRegistration";
 import UserRegistration from "./Pages/Registeration/UserRegistration";
 
@@ -76,7 +76,7 @@ function App() {
             <Route path="/support" element={<Support />} />
             <Route path="/maps" element={<MapLayout nonceVal={nonce} />} />
             <Route path="/dashboard" element={<Dashboard />} />
-            {/* <Route path="/userprofile" element={<UserProfile />} /> */}
+            <Route path="/userprofile" element={<UserProfile />} />
             <Route path="/driverregistration" component={DriverRegistration} />
             <Route path="/userregistration" component={UserRegistration} />
             <Route path="/registration" element={<Registeration />} />
