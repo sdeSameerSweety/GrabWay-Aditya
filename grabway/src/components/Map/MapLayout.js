@@ -104,6 +104,16 @@ function MyComponent({ nonceVal }, { route, state }) {
     setMap(null);
   }, []);
 
+
+  //function to scroll down to cards
+    const handleScroll = () => {
+      const element = document.getElementById('package-cards');
+      if (element) {
+        // 👇 Will scroll smoothly to the top of the next section
+        element.scrollIntoView({ behavior: 'smooth' });
+      }
+    }
+
   //const declaration for display outputs
   const [fromVerifed, setFromVerified] = useState(false);
   const [showFinalButtonDisplay, setShowFinalButtonDisplay] = useState(true);
@@ -145,6 +155,9 @@ function MyComponent({ nonceVal }, { route, state }) {
                 calculateRoute();
                 distanceMatrix();
                 setShowFinalButtonDisplay(false);
+                setTimeout(() => {
+                  handleScroll();
+                }, 3000);
               }}
             >
               Confirm Destination
@@ -153,7 +166,7 @@ function MyComponent({ nonceVal }, { route, state }) {
         </div>
       )}
 
-      <div>
+      <div id='package-cards'>
         <section class="bg-white">
           <div class="py-8 px-4 mx-auto max-w-screen-xl lg:py-16 lg:px-6">
             <div class="mx-auto max-w-screen-md text-center mb-8 lg:mb-12">
