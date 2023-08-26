@@ -82,7 +82,8 @@ app.post("/createUser", async (req, res) => {
         const User = await UserModel.create({
           email:email,
           phoneNumber:phoneNumber,
-          userType:'user'
+          userType:'user',
+          name:"",
         });
         return res.status(200).json(User);
       }
@@ -112,7 +113,8 @@ app.post("/createDriver", async (req, res) => {
       const Driver = await UserModel.create({
         email:email,
         phoneNumber:phoneNumber,
-        userType:'driver'
+        userType:'driver',
+        name:'',
       });
       return res.status(200).json(Driver);
     }
