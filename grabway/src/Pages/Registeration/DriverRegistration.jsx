@@ -93,9 +93,15 @@ const DriverRegistration = () => {
     if (!formData.city) newErrors.city = "City is required";
     if (!formData.state) newErrors.state = "State is required";
     if (!formData.pinCode) newErrors.pinCode = "Pin Code is required";
-    if (!formData.carNumber) newErrors.carNumber = "Vehicle Number is required";
+    // if (!formData.carNumber) newErrors.carNumber = "Vehicle Number is required";
     if (!formData.carSeats) newErrors.carSeats = "Seat Number is required";
     if (!formData.drivingExp) newErrors.drivingExp = "Experience is required";
+    if (
+      !/^[A-Z]{2}[ -]?[0-9]{2}[ -]?[A-Z]{1,2}[ -]?[0-9]{4}$/.test(
+        formData.carNumber
+      )
+    )
+      newErrors.carNumber = "Invalid Vehicle Number Plate";
     // else if (!/^\d{6}$/.test(formData.pinCode))
     //   newErrors.pinCode = "Pin Code should be a 6-digit number";
 
@@ -126,7 +132,6 @@ const DriverRegistration = () => {
       setErrors(newErrors);
     }
   };
-
 
   if (!userData) {
     return <Navigate to={"/"} />;
@@ -331,7 +336,7 @@ const DriverRegistration = () => {
               <FormErrorMessage>{errors.carNumber}</FormErrorMessage>
             </FormControl>
 
-            <FormControl mt={4} isRequired isInvalid={!!errors.carNumber}>
+            <FormControl mt={4} isRequired isInvalid={!!errors.carSeats}>
               <FormLabel>Vehicle Seats</FormLabel>
               <Select
                 placeholder="How many seaters do you have?"
