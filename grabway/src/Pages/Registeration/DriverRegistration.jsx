@@ -137,6 +137,9 @@ const DriverRegistration = () => {
         setTimeout(() => {
           setRunContext('driver from submited');
         }, 1500);
+        if(res.data){
+          window.location.reload(false);
+        }
       })
       console.log("Form submitted successfully:", formData);
       setErrors({});

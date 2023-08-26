@@ -98,7 +98,6 @@ app.post("/createUser", async (req, res) => {
     }
   }
 });
-
 app.post("/createDriver", async (req, res) => {
   await mongoose.connect(MONGO_URL);
   const email=req.body.signupEmail;
@@ -182,7 +181,7 @@ app.post('/registerNewUser',async(req,res)=>{
           }
       });
       if(updatedResponse){
-        res.status(200).json("Details Updated");
+        res.status(200).json(true);
       }
       else{
         res.status(200).json(null);
@@ -200,7 +199,7 @@ app.post('/registerNewUser',async(req,res)=>{
 
 app.post('/registerNewDriver',async(req,res)=>{
   await mongoose.connect(MONGO_URL);
-  console.log(req.body.formData);
+  //console.log(req.body.formData);
   const formData=req.body.formData;
   const name=formData.name;
   const email=formData.email;
@@ -216,7 +215,7 @@ app.post('/registerNewDriver',async(req,res)=>{
   const experience=formData.experience;
  if(formData){
   try{
-    const updatedResponse=await UserModel.updateOne(
+    const updatedResponse=await DriverModel.updateOne(
       {
           "email": email,
       },
@@ -236,7 +235,7 @@ app.post('/registerNewDriver',async(req,res)=>{
           }
       });
       if(updatedResponse){
-        res.status(200).json("Details Updated");
+        res.status(200).json(true);
       }
       else{
         res.status(200).json(null);

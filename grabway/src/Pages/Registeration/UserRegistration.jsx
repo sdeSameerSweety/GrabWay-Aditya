@@ -121,11 +121,13 @@ const UserRegistration = () => {
         setTimeout(() => {
           setRunContext('driver from submited');
         }, 1500);
+        if(res.data){
+          window.location.reload(false);
+        }
       })
       setErrors({});
-      if(response!==null){
-        return <Navigate to={"/"} />;
-      }
+
+      
     } else {
       setErrors(newErrors);
     }
