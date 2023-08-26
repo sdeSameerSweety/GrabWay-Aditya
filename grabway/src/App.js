@@ -70,21 +70,21 @@ function App() {
           {/* <Registeration /> */}
           {/* <Support/> */}
           {/* <DriverRegistration /> */}
-          <UserRegistration/>
+          <DriverRegistration />
           <Routes>
             {/* <Route path="/nearby" element={<NearbyMap nonceVal={nonce} />} /> */}
             <Route
-              path="/"
-              element={<Homepage nonceVal={nonce} loginState={loginState} />}
+            // path="/"
+            // element={<Homepage nonceVal={nonce} loginState={loginState} />}
             />
-            <Route path="/support" element={<Support />} />
-            <Route path="/maps" element={<MapLayout nonceVal={nonce} />} />
-            <Route path="/dashboard" element={<Dashboard />} />
+            {/* <Route path="/support" element={<Support />} /> */}
+            {/* <Route path="/maps" element={<MapLayout nonceVal={nonce} />} /> */}
+            {/* <Route path="/dashboard" element={<Dashboard />} /> */}
             {/* <Route path="/userprofile" element={<UserProfile />} /> */}
             {/* <Route path="/driverregistration" component={DriverRegistration} /> */}
             {/* <Route path="/userregistration" component={UserRegistration} /> */}
             {/* <Route path="/registration" element={<Registeration />} /> */}
-            <Route path="/profile" element={<ProfilePage />} />
+            {/* <Route path="/profile" element={<ProfilePage />} /> */}
           </Routes>
           <Footer />
         </div>

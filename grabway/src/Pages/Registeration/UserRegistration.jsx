@@ -134,6 +134,8 @@ const UserRegistration = () => {
         display="flex"
         alignItems="center"
         justifyContent="center"
+        flexDirection={{ base: "column", md: "row" }} // Adjust flex direction for different screen sizes
+        // alignItems={{ base: "stretch", md: "center" }} // Align items for different screen sizes
       >
         <Box flex={1} p={8}>
           <Heading className="heading">Welcome</Heading>

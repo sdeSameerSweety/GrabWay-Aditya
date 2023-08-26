@@ -128,8 +128,8 @@ const DriverRegistration = () => {
 
   const handleCarNumberChange = (e) => {
     setFormDataCarno({ ...formDataCarno, carNumber: e.target.value });
-    };
-    
+  };
+
   if (!userData) {
     return <Navigate to={"/"} />;
   }
@@ -140,26 +140,13 @@ const DriverRegistration = () => {
         display="flex"
         alignItems="center"
         justifyContent="center"
-        // bgImg="url('https://img.freepik.com/free-vector/car-driving-concept-illustration_114360-8001.jpg?w=2000')"
-        // bgSize="cover"
-        // bgPosition="center"
-        // bgRepeat="no-repeat"
-        // w="100%"
-        // h="100%"
+        flexDirection={{ base: "column", md: "row" }}
       >
-        {/* <Box
-          position="absolute"
-          top="0"
-          left="0"
-          w="100%"
-          h="100%"
-          bg="rgba(0, 0, 0, 0.2)" // Adjust the opacity here
-        /> */}
         <Box flex={1} p={8}>
           <Heading className="heading">Welcome</Heading>
           <Text className="text">
             Step into Grabway, where your commute becomes a canvas of
-            connections, savings, and sustainability – all painted in shared
+            connections, savings, and sustainability - all painted in shared
             journeys.
           </Text>
           <Text className="text-sm" color={"black"}>
