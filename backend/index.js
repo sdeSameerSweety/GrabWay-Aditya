@@ -139,11 +139,11 @@ app.post('/googlecheckUser', async(req,res)=>{
   const UserEmail = await EmailModel.findOne({email});
   if(UserEmail!==null){
     console.log("User email found");
-    console.log(UserEmail);
+    //console.log(UserEmail);
     res.status(200).json(email);
   }
   else{
-      console.log(UserEmail);
+      console.log('not found, Redirect to creation....');
       res.status(200).json(null);
     }
 })

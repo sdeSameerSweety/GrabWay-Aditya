@@ -269,13 +269,22 @@ const TopBar = ({ counter, setCounter, setLoginState,loginState }) => {
         if(userFound!==null){
           Cookies.set('grabwayToken', user.email,7);
           setRunContext('signInWithGoogle');
+          setCounter(true);
+          setLoginState(true);
         }
         else{
           console.log("not found");
+          Cookies.set('grabwayGoogleToken', user.email);
+          //write registration redirect condition as
+          //if(!grabwayToken or !grabwayGoogleToken) then redirect
+          //if grabwayGoogleToken then show seperate registration page
+          //if grabwayGoogle token not present and grabwayUser present then do like you were doing before
+          
+          /*setCounter(true);
+          setLoginState(true);
+          return <Navigate to={'/registartion'}/>
+          */
         }
-        setCounter(true);
-        setLoginState(true);
-        
       })
       .catch((error) => {
         const errorCode = error.code;
