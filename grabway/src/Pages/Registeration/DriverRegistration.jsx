@@ -37,7 +37,7 @@ const DriverRegistration = () => {
     state: "",
     pin: "",
     carNumber: "",
-    carSeats: "",
+    dlNumber: "",
     drivingExp: "",
     bio: "",
   });
@@ -93,9 +93,14 @@ const DriverRegistration = () => {
     if (!formData.city) newErrors.city = "City is required";
     if (!formData.state) newErrors.state = "State is required";
     if (!formData.pinCode) newErrors.pinCode = "Pin Code is required";
-    // if (!formData.carNumber) newErrors.carNumber = "Vehicle Number is required";
-    if (!formData.carSeats) newErrors.carSeats = "Seat Number is required";
     if (!formData.drivingExp) newErrors.drivingExp = "Experience is required";
+    if (
+      !/^(([A-Z]{2}[0-9]{2})|([A-Z]{2}-[0-9]{2}))((19|20)[0-9]{2})[0-9]{7}$/.test(
+        formData.dlNumber
+      )
+    ) {
+      newErrors.dlNumber = "DL is required";
+    }
     if (
       !/^[A-Z]{2}[ -]?[0-9]{2}[ -]?[A-Z]{1,2}[ -]?[0-9]{4}$/.test(
         formData.carNumber
@@ -336,17 +341,17 @@ const DriverRegistration = () => {
               <FormErrorMessage>{errors.carNumber}</FormErrorMessage>
             </FormControl>
 
-            <FormControl mt={4} isRequired isInvalid={!!errors.carSeats}>
-              <FormLabel>Vehicle Seats</FormLabel>
+            <FormControl mt={4} isRequired isInvalid={!!errors.dlNumber}>
+              <FormLabel>DL Number</FormLabel>
               <Input
                 type="number"
-                placeholder="Number of seats"
-                value={formData.carSeats}
+                placeholder="DL Number"
+                value={formData.dlNumber}
                 onChange={(e) =>
-                  setFormData({ ...formData, carSeats: e.target.value })
+                  setFormData({ ...formData, cdlNumber: e.target.value })
                 }
               />
-              <FormErrorMessage>{errors.carSeats}</FormErrorMessage>
+              <FormErrorMessage>{errors.dlNumber}</FormErrorMessage>
             </FormControl>
 
             <FormControl mt={4} isRequired isInvalid={!!errors.drivingExp}>

@@ -66,7 +66,6 @@ function App() {
           loginState={loginState}
         />
         <div style={intDivStyle}>
-          <GRegisteration />
           <Routes>
             {/* <Route path="/nearby" element={<NearbyMap nonceVal={nonce} />} /> */}
             <Route
