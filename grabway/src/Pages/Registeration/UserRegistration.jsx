@@ -5,11 +5,6 @@ import {
   Box,
   Heading,
   Text,
-  Tabs,
-  TabList,
-  Tab,
-  TabPanels,
-  TabPanel,
   Input,
   Button,
   FormControl,
@@ -138,7 +133,7 @@ const UserRegistration = () => {
         // alignItems={{ base: "stretch", md: "center" }} // Align items for different screen sizes
       >
         <Box flex={1} p={8}>
-          <Heading className="heading">Welcome</Heading>
+          <Heading className="heading">Dear User</Heading>
           <Text className="text">
             Step into Grabway, where your commute becomes a canvas of
             connections, savings, and sustainability - all painted in shared
@@ -158,12 +153,16 @@ const UserRegistration = () => {
           variant="enclosed-colored"
           colorScheme="teal"
         >
-          {/* <TabList>
-              <Tab>User Registration</Tab>
-              <Tab>Driver Registration</Tab>
-            </TabList> */}
-          <Heading size="md" mt={4}>
-            Apply as User
+          <Heading
+            size="xl"
+            mt={4}
+            fontFamily="cursive"
+            letterSpacing="wide"
+            color="black.500"
+            textAlign="justify"
+            textShadow="2px 2px 4px rgba(0, 0, 0, 0.4)"
+          >
+            Welcome to Grabway!
           </Heading>
           <Box mt={4}>
             <Avatar size="xl" mb={4} src={profilePhoto} />

@@ -5,11 +5,6 @@ import {
   Box,
   Heading,
   Text,
-  Tabs,
-  TabList,
-  Tab,
-  TabPanels,
-  TabPanel,
   Input,
   Radio,
   RadioGroup,
@@ -18,9 +13,6 @@ import {
   FormControl,
   FormLabel,
   FormErrorMessage,
-  Flex,
-  Stack,
-  HStack,
   Alert,
   AlertIcon,
   Checkbox,
@@ -149,7 +141,7 @@ const DriverRegistration = () => {
         flexDirection={{ base: "column", md: "row" }}
       >
         <Box flex={1} p={8}>
-          <Heading className="heading">Welcome</Heading>
+          <Heading className="heading">Dear Commodator</Heading>
           <Text className="text">
             Step into Grabway, where your commute becomes a canvas of
             connections, savings, and sustainability - all painted in shared
@@ -169,8 +161,16 @@ const DriverRegistration = () => {
           variant="enclosed-colored"
           colorScheme="teal"
         >
-          <Heading size="md" mt={4}>
-            Apply as a Driver
+          <Heading
+            size="xl"
+            mt={4}
+            fontFamily="cursive"
+            letterSpacing="wide"
+            color="black.500"
+            textAlign="justify"
+            textShadow="2px 2px 4px rgba(0, 0, 0, 0.4)"
+          >
+            Welcome to Grabway!
           </Heading>
           <Box mt={4}>
             <Avatar size="xl" mb={4} src={profilePhoto} />

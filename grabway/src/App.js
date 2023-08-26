@@ -69,8 +69,8 @@ function App() {
         <div style={intDivStyle}>
           {/* <Registeration /> */}
           {/* <Support/> */}
-          <UserRegistration />/
-          {/* <DriverRegistration /> */}
+          {/* <UserRegistration /> */}
+          <DriverRegistration />
           <Routes>
             {/* <Route path="/nearby" element={<NearbyMap nonceVal={nonce} />} /> */}
             <Route
