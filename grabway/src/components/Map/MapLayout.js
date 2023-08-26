@@ -18,26 +18,8 @@ const containerStyle = {
 
 function MyComponent({ nonceVal }, { route, state }) {
   const location = useLocation();
-  const [srcCord, setsrcCord] = useState({});
-  const [destCord, setDestCord] = useState({});
 
-  //geocode convert function
-  async function getgeoCode(place, type) {
-    await axios
-      .get("https://maps.googleapis.com/maps/api/geocode/json", {
-        params: {
-          address: place,
-          key: "AIzaSyDJaFr-HFXGBOg8pUSdQfGjGwGdIwtbXhY",
-        },
-      })
-      .then((res) => {
-        if (type === "source")
-          setsrcCord(res.data.results[0].geometry.location);
-        else setDestCord(res.data.results[0].geometry.location);
-      })
-      .catch((err) => console.log(err));
-  }
-  console.log({ srcCord, destCord });
+  console.log(location);
   const { isLoaded } = useJsApiLoader({
     id: "google-map-script",
     googleMapsApiKey: "AIzaSyDJaFr-HFXGBOg8pUSdQfGjGwGdIwtbXhY",
@@ -51,11 +33,7 @@ function MyComponent({ nonceVal }, { route, state }) {
     source: location.state.source,
     destination: location.state.destination,
   };
-
-  useEffect(() => {
-    getgeoCode(location.state.source, "source");
-    getgeoCode(location.state.destination, "destination");
-  }, [location]);
+  console.log(rideDataText);
 
   //Route setup and display function
   const [directionResponse, setDirectionResponse] = useState("");
@@ -105,8 +83,8 @@ function MyComponent({ nonceVal }, { route, state }) {
   }
 
   //Contents for map container
-  let initialPosition = srcCord;
-  let finalPosition = destCord;
+  let initialPosition = location.state.sourceCord;
+  let finalPosition = location.state.destinationCord;
 
   const mapOptions = {
     mapId: "7e437361629e930a",

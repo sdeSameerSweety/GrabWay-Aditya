@@ -1,6 +1,7 @@
 import React, { useEffect, useRef, useState } from "react";
 import { Navigate, useNavigate } from "react-router-dom";
 import "./Homepage.css";
+import Geocode from "react-geocode";
 import {
   Input,
   InputGroup,
@@ -13,7 +14,9 @@ import {
   Text,
   border,
   Button,
+  Toast,
 } from "@chakra-ui/react";
+import { useToast } from "@chakra-ui/react";
 import { FiRefreshCcw } from "react-icons/fi";
 import { FaCircleDot } from "react-icons/fa6";
 import TopSlider from "./TopScroller/TopSlider";
@@ -27,11 +30,26 @@ import { Autocomplete } from "@react-google-maps/api";
 import Cookies from "js-cookie";
 const TopSection = ({ nonceVal, loginState }) => {
   const navigate = useNavigate();
-  const [searchResult, setSearchResult] = useState();
   const sourceDesk = useRef();
   const destinationDesk = useRef();
   const sourceMob = useRef();
   const destinationMob = useRef();
+  const toast = useToast();
+
+  const [windowSize, setWindowSize] = useState([
+    window.innerWidth,
+    window.innerHeight,
+  ]);
+  useEffect(() => {
+    const handleWindowResize = () => {
+      setWindowSize([window.innerWidth, window.innerHeight]);
+    };
+    window.addEventListener("resize", handleWindowResize);
+    return () => {
+      window.removeEventListener("resize", handleWindowResize);
+    };
+  }, []);
+
   const { isLoaded } = useJsApiLoader({
     id: "google-map-script",
     googleMapsApiKey: "AIzaSyDJaFr-HFXGBOg8pUSdQfGjGwGdIwtbXhY",
@@ -42,30 +60,124 @@ const TopSection = ({ nonceVal, loginState }) => {
   const pacItemQuery = {
     padding: "20px",
   };
-  const handleSearchDesk = () => {
-    console.log(destinationDesk.current.value);
-    navigate("/maps", {
-      state: {
-        source: sourceDesk.current.value,
-        destination: destinationDesk.current.value,
+
+  const [srcCord, setsrcCord] = useState({});
+  const [destCord, setDestCord] = useState({});
+
+  //geocode convert function
+  async function getgeoCode(place, type) {
+    await Geocode.fromAddress(
+      place,
+      "AIzaSyDJaFr-HFXGBOg8pUSdQfGjGwGdIwtbXhY",
+      "en"
+    ).then(
+      (response) => {
+        const coordData = response.results[0].geometry.location;
+        console.log(coordData);
+        if (type == "Source") setsrcCord(coordData);
+        else setDestCord(coordData);
+        return true;
       },
-    });
+      (error) => {
+        console.error(error);
+        toast({
+          title: `Please select valid ${type} location from list`,
+          status: "error",
+          isClosable: true,
+          position: "top-right",
+        });
+      }
+    );
+  }
+
+  useEffect(() => {
+    if (
+      Object.keys(srcCord).length !== 0 &&
+      Object.keys(destCord).length !== 0
+    ) {
+      navigate("/maps", {
+        state: {
+          source:
+            windowSize[0] <= 600
+              ? sourceMob.current.value
+              : sourceDesk.current.value,
+          destination:
+            windowSize[0] <= 600
+              ? destinationMob.current.value
+              : destinationDesk.current.value,
+          sourceCord: srcCord,
+          destinationCord: destCord,
+        },
+      });
+    }
+  }, [srcCord, destCord]);
+
+  const handleSearchDesk = async () => {
+    if (
+      sourceDesk.current.value.length === 0 &&
+      destinationDesk.current.value.length === 0
+    ) {
+      toast({
+        title: "Source and Destination cannot be empty",
+        status: "error",
+        isClosable: true,
+        position: "top-right",
+      });
+    } else if (sourceDesk.current.value.length === 0) {
+      toast({
+        title: "Source cannot be empty",
+        status: "error",
+        isClosable: true,
+        position: "top-right",
+      });
+    } else if (destinationDesk.current.value.length === 0) {
+      toast({
+        title: "Destination cannot be empty",
+        status: "error",
+        isClosable: true,
+        position: "top-right",
+      });
+    } else {
+      getgeoCode(sourceDesk.current.value, "Source");
+      getgeoCode(destinationDesk.current.value, "Destination");
+    }
   };
 
   const handleSearchMob = () => {
-    console.log(destinationDesk.current.value);
-    navigate("/maps", {
-      state: {
-        source: sourceMob.current.value,
-        destination: destinationMob.current.value,
-      },
-    });
+    if (
+      sourceMob.current.value.length === 0 &&
+      destinationMob.current.value.length === 0
+    ) {
+      toast({
+        title: "Source and Destination cannot be empty",
+        status: "error",
+        isClosable: true,
+        position: "top-right",
+      });
+    } else if (sourceMob.current.value.length === 0) {
+      toast({
+        title: "Source cannot be empty",
+        status: "error",
+        isClosable: true,
+        position: "top-right",
+      });
+    } else if (destinationMob.current.value.length === 0) {
+      toast({
+        title: "Destination cannot be empty",
+        status: "error",
+        isClosable: true,
+        position: "top-right",
+      });
+    } else {
+      getgeoCode(sourceMob.current.value, "Source");
+      getgeoCode(destinationMob.current.value, "Destination");
+    }
   };
 
-  const userData=(Cookies.get('grabwayUser'));
-  if(userData!==undefined){
-    if(!(JSON.parse(userData)).name){
-      return <Navigate to={"/registration"}/>
+  const userData = Cookies.get("grabwayUser");
+  if (userData !== undefined) {
+    if (!JSON.parse(userData).name) {
+      return <Navigate to={"/registration"} />;
     }
   }
   if (!isLoaded) {
@@ -81,7 +193,7 @@ const TopSection = ({ nonceVal, loginState }) => {
       </div>
     );
   }
-  
+
   return (
     <>
       <div className="relative dekstop-view">
