@@ -43,6 +43,31 @@ const UserRegistration = () => {
     pin: "",
   });
 
+  const handlePincodeChange = async (e) => {
+    const pincode = e.target.value;
+    setAddressData({
+      ...addressData,
+      pin: pincode,
+    });
+    try {
+      const response = await fetch(
+        `https://api.postalpincode.in/pincode/${pincode}`
+      );
+      const data = await response.json();
+
+      if (data && data[0].Status === "Success") {
+        const postOffice = data[0].PostOffice[0];
+        setAddressData({
+          ...addressData,
+          city: postOffice.District,
+          state: postOffice.State,
+        });
+      }
+    } catch (error) {
+      console.error("Error fetching data:", error);
+    }
+  };
+  
   const [errors, setErrors] = useState({});
   const [isChecked, setIsChecked] = useState(false);
   const [error, setError] = useState("");
@@ -281,6 +306,20 @@ const UserRegistration = () => {
                     />
                   </FormControl>
 
+                  {/* PIN */}
+                  <FormControl mt={4} isRequired>
+                    <FormLabel>PIN</FormLabel>
+                    <Input
+                      type="text"
+                      placeholder="PIN"
+                      value={addressData.pin}
+                      onChange={(e) => {
+                        setAddressData({ ...addressData, pin: e.target.value });
+                        handlePincodeChange(e); // Call the function when the input changes
+                      }}
+                    />
+                  </FormControl>
+
                   {/* City */}
                   <FormControl mt={4} isRequired>
                     <FormLabel>City</FormLabel>
@@ -306,19 +345,6 @@ const UserRegistration = () => {
                           ...addressData,
                           state: e.target.value,
                         })
-                      }
-                    />
-                  </FormControl>
-
-                  {/* PIN */}
-                  <FormControl mt={4} isRequired>
-                    <FormLabel>PIN</FormLabel>
-                    <Input
-                      type="text"
-                      placeholder="PIN"
-                      value={addressData.pin}
-                      onChange={(e) =>
-                        setAddressData({ ...addressData, pin: e.target.value })
                       }
                     />
                   </FormControl>
