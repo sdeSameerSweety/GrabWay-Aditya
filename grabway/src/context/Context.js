@@ -17,7 +17,7 @@ export function UserContextProvider({ children }) {
           Cookies.set('grabwayUser',(JSON.stringify(res.data)),7);
         });
       }
-  }, []);
+  },[]);
 
   useEffect(() => {
     if (email) {

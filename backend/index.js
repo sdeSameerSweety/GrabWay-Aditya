@@ -78,14 +78,21 @@ app.post("/createUser", async (req, res) => {
         email:email,
         userType:'user'
       })
-      const User = await UserModel.create({
-        email:email,
-        phoneNumber:phoneNumber,
-        userType:'user'
-      });
-      return res.status(200).json(User);
+      if(EmailRes){
+        const User = await UserModel.create({
+          email:email,
+          phoneNumber:phoneNumber,
+          userType:'user'
+        });
+        return res.status(200).json(User);
+      }
+      else{
+        res.status(500).json('cannot create user model')
+      }
+      
     }
     catch(err){
+      console.log(err);
       res.status(500).send("Internal Server Error");
     }
   }
