@@ -82,7 +82,8 @@ app.post("/createUser", async (req, res) => {
         const User = await UserModel.create({
           email:email,
           phoneNumber:phoneNumber,
-          userType:'user'
+          userType:'user',
+          name:"",
         });
         return res.status(200).json(User);
       }
@@ -98,25 +99,33 @@ app.post("/createUser", async (req, res) => {
   }
 });
 
-app.post("/createDriver", async (req, res) => {
+app.post("/createUser", async (req, res) => {
   await mongoose.connect(MONGO_URL);
-  const email=req.params.email;
-  const phoneNumber=req.params.phoneNumber;
+  const email=req.body.signupEmail;
+  const phoneNumber=req.body.signupPhone;
   if(email && phoneNumber){
     try{
+      console.log('trying to create user model')
       const EmailRes=await EmailModel.create({
         email:email,
-        userType:'driver'
+        userType:'user'
       })
-
-      const Driver = await UserModel.create({
-        email:email,
-        phoneNumber:phoneNumber,
-        userType:'driver'
-      });
-      return res.status(200).json(Driver);
+      if(EmailRes){
+        const User = await DriverModel.create({
+          email:email,
+          phoneNumber:phoneNumber,
+          userType:'driver',
+          name:"",
+        });
+        return res.status(200).json(User);
+      }
+      else{
+        res.status(500).json('cannot create user model')
+      }
+      
     }
     catch(err){
+      console.log(err);
       res.status(500).send("Internal Server Error");
     }
   }
