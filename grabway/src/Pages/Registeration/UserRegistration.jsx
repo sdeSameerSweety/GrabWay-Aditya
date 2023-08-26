@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import "./Registeration.css";
 import {
   Container,
@@ -17,11 +17,14 @@ import {
 } from "@chakra-ui/react";
 import Cookies from "js-cookie";
 import { Navigate } from "react-router-dom";
+import axios from "axios";
+import { UserContext } from "../../context/Context";
 
 const UserRegistration = () => {
+  const {setRunContext}=useContext(UserContext);
   const userData = Cookies.get("grabwayUser");
   const hasUserData = userData !== undefined;
-  console.log(userData);
+  //console.log(userData);
   const [formData, setFormData] = useState({
     name: "",
     lastName: "",
@@ -85,7 +88,7 @@ const UserRegistration = () => {
     if (!formData.addressLine1) newErrors.addressLine1 = "Address is required";
     if (!formData.city) newErrors.city = "City is required";
     if (!formData.state) newErrors.state = "State is required";
-    if (!formData.pinCode) newErrors.pinCode = "Pin Code is required";
+    //if (!formData.pinCode) newErrors.pinCode = "Pin Code is required";
     // else if (!/^\d{6}$/.test(formData.pinCode))
     //   newErrors.pinCode = "Pin Code should be a 6-digit number";
 
@@ -105,14 +108,26 @@ const UserRegistration = () => {
     }
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async(e) => {
     e.preventDefault(); // Prevent the default form submission behavior
-
+    
     const newErrors = validateForm();
+    console.log(Object.keys(newErrors))
     if (Object.keys(newErrors).length === 0) {
       //Submission logic here
-      console.log("Form submitted successfully:", formData);
+      //console.log("Form submitted successfully:", formData);
+      const response=await axios.post('/registerNewUser',{formData}).then((res)=>{
+        console.log(res.data);
+        setTimeout(() => {
+          setRunContext('driver from submited');
+        }, 1500);
+        if(res.data){
+          window.location.reload(false);
+        }
+      })
       setErrors({});
+
+      
     } else {
       setErrors(newErrors);
     }
