@@ -155,7 +155,7 @@ export default function Footer() {
             <Logo />
           </Flex>
           <Text pt={6} fontSize={"sm"} textAlign={"center"}>
-            © Made By CosmicCodeman
+            © Made By Cosmic Codemen
           </Text>
         </Box>
       </Box>

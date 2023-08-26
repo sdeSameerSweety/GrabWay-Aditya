@@ -1,4 +1,4 @@
-//USer Schema is Defined here
+//User Schema is Defined here
 const mongoose = require('mongoose');
 
 const PaymentSchema= new mongoose.Schema({

@@ -12,8 +12,13 @@ import axios from "axios";
 import { UserContext, UserContextProvider } from "./context/Context";
 import ProfilePage from "./Pages/ProfilePages/index";
 import Cookies from "js-cookie";
-import NearbyMap from "./components/Map/NearbyMap";
 
+import DriverRegistration from "./Pages/Registeration/DriverRegistration";
+import UserRegistration from "./Pages/Registeration/UserRegistration";
+
+axios.defaults.baseURL = "http://localhost:8080";
+axios.defaults.withCredentials = true;
+// import NearbyMap from "./components/Map/NearbyMap";
 axios.defaults.baseURL = "http://localhost:8080";
 axios.defaults.withCredentials = true;
 function App() {
@@ -60,11 +65,10 @@ function App() {
           loginState={loginState}
         />
         <div style={intDivStyle}>
-          {/* <Registeration /> */}
+          <Registeration />
           {/* <Support/> */}
-
           <Routes>
-            <Route path="/nearby" element={<NearbyMap nonceVal={nonce} />} />
+            {/* <Route path="/nearby" element={<NearbyMap nonceVal={nonce} />} /> */}
             <Route
               path="/"
               element={<Homepage nonceVal={nonce} loginState={loginState} />}
@@ -73,6 +77,8 @@ function App() {
             <Route path="/maps" element={<MapLayout nonceVal={nonce} />} />
             <Route path="/dashboard" element={<Dashboard />} />
             {/* <Route path="/userprofile" element={<UserProfile />} /> */}
+            <Route path="/driverregistration" component={DriverRegistration} />
+            <Route path="/userregistration" component={UserRegistration} />
             <Route path="/registration" element={<Registeration />} />
             <Route path="/profile" element={<ProfilePage />} />
           </Routes>
