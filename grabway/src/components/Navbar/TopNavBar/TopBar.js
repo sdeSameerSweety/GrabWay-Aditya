@@ -1,7 +1,7 @@
 import React, { useContext, useEffect, useState } from "react";
 import { IoNotificationsSharp } from "react-icons/io5";
 import { Avatar, useConst } from "@chakra-ui/react";
-import { Link } from "react-router-dom";
+import { Link, Navigate } from "react-router-dom";
 import { IconButton } from "@chakra-ui/react";
 import { Button } from "@chakra-ui/react";
 import { HiOutlineMail } from "react-icons/hi";
@@ -181,11 +181,28 @@ const TopBar = ({ counter, setCounter, setLoginState,loginState }) => {
           }
         })
         .catch((error) => {
+          console.log(error.message);
           if (
             error.message === "Firebase: Error (auth/email-already-in-use)."
           ) {
             toast({
               title: `User Already Exists`,
+              status: "error",
+              isClosable: true,
+              position: "top-right",
+            });
+          }
+          if(error.message==="Firebase: Error (auth/invalid-email)."){
+            toast({
+              title: `Invalid Email`,
+              status: "error",
+              isClosable: true,
+              position: "top-right",
+            });
+          }
+          if(error.message==="Firebase: Password should be at least 6 characters (auth/weak-password)."){
+            toast({
+              title: `Password should be at least 6 characters`,
               status: "error",
               isClosable: true,
               position: "top-right",
@@ -228,7 +245,7 @@ const TopBar = ({ counter, setCounter, setLoginState,loginState }) => {
   }
   function handleGoogleSignIn() {
     signInWithPopup(auth, provider)
-      .then((result) => {
+      .then(async(result) => {
         // This gives you a Google Access Token. You can use it to access the Google API.
         const credential = GoogleAuthProvider.credentialFromResult(result);
         const token = credential.accessToken;
@@ -247,8 +264,27 @@ const TopBar = ({ counter, setCounter, setLoginState,loginState }) => {
           duration: 3000,
           isClosable: true,
         });
-        setCounter(true);
-        setLoginState(true);
+        console.log(user.email);
+        const userFound=await axios.post('/googlecheckUser', {email:user.email});
+        if(userFound!==null){
+          Cookies.set('grabwayToken', user.email,7);
+          setRunContext('signInWithGoogle');
+          setCounter(true);
+          setLoginState(true);
+        }
+        else{
+          console.log("not found");
+          Cookies.set('grabwayGoogleToken', user.email);
+          //write registration redirect condition as
+          //if(!grabwayToken or !grabwayGoogleToken) then redirect
+          //if grabwayGoogleToken then show seperate registration page
+          //if grabwayGoogle token not present and grabwayUser present then do like you were doing before
+          
+          /*setCounter(true);
+          setLoginState(true);
+          return <Navigate to={'/registartion'}/>
+          */
+        }
       })
       .catch((error) => {
         const errorCode = error.code;
@@ -571,9 +607,9 @@ const TopBar = ({ counter, setCounter, setLoginState,loginState }) => {
             )}
 
             {loginState && (
-              <>
+              <Link to ='/profile'>
                 <Avatar name="Kent Dodds" src="https://bit.ly/kent-c-dodds" />
-              </>
+              </Link>
             )}
           </div>
         </div>
