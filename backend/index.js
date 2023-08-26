@@ -132,6 +132,22 @@ app.post("/createDriver", async (req, res) => {
 });
 
 //api for google login left
+app.post('/googlecheckUser', async(req,res)=>{
+  await mongoose.connect(MONGO_URL);
+  const email=req.body.email;
+  console.log(email);
+  const UserEmail = await EmailModel.findOne({email});
+  if(UserEmail!==null){
+    console.log("User email found");
+    console.log(UserEmail);
+    res.status(200).json(email);
+  }
+  else{
+      console.log(UserEmail);
+      res.status(200).json(null);
+    }
+})
+
 
 
 app.post('/registerNewUser',async(req,res)=>{
