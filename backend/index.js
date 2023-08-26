@@ -99,7 +99,7 @@ app.post("/createUser", async (req, res) => {
   }
 });
 
-app.post("/createUser", async (req, res) => {
+app.post("/createDriver", async (req, res) => {
   await mongoose.connect(MONGO_URL);
   const email=req.body.signupEmail;
   const phoneNumber=req.body.signupPhone;
@@ -108,7 +108,7 @@ app.post("/createUser", async (req, res) => {
       console.log('trying to create user model')
       const EmailRes=await EmailModel.create({
         email:email,
-        userType:'user'
+        userType:'driver'
       })
       if(EmailRes){
         const User = await DriverModel.create({
