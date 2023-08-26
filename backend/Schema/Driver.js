@@ -42,7 +42,6 @@ const RideHistorySchema=new mongoose.Schema({
 })
 
 const DriverSchema = new mongoose.Schema({
-    userName:{type:String,unique:true},
     profilePicture:{type:String, unique:true},
     name:{type:String},
     email:{type:String,unique:true},

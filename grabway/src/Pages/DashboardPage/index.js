@@ -9,10 +9,10 @@ import { Navigate } from "react-router-dom";
 
 export default function Dashboard() {
 
-  const userData=(Cookies.get('grabwayUser'));
-  if(userData!==undefined){
-    if(!(JSON.parse(userData)).name){
-      return <Navigate to={"/registration"}/>
+  const userData = Cookies.get("grabwayUser");
+  if (userData !== undefined) {
+    if (userData.name===undefined) {
+      return <Navigate to={"/registration"} />;
     }
   }
   if(!userData){

@@ -176,7 +176,7 @@ const TopSection = ({ nonceVal, loginState }) => {
 
   const userData = Cookies.get("grabwayUser");
   if (userData !== undefined) {
-    if (!JSON.parse(userData).name) {
+    if (userData.name===undefined) {
       return <Navigate to={"/registration"} />;
     }
   }
