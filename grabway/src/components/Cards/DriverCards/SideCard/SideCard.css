@@ -1,6 +1,6 @@
 /* this is the style for the container inside the app.js */
 /* you can remove it and just use the card CSS */
-.container {
+/* .container {
   position: relative;
   width: 100%;
   height: 100vh;
@@ -15,7 +15,7 @@
   );
   font-family: "Roboto", sans-serif;
   gap: 50px;
-}
+} */
 
 .sideCard {
   transform-style: preserve-3d;

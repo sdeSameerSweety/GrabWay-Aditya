@@ -136,6 +136,17 @@ const Registration = () => {
   const handleCarNumberChange = (e) => {
     setFormDataCarno({ ...formDataCarno, carNumber: e.target.value });
   };
+
+  // const handleSubmit = (e) => {
+  //   e.preventDefault();
+
+  //   const carNumberRegex = /^[A-Z]{2}\s?\d{1,2}\s?[A-Z]{1,2}\s?\d{4}$/;
+
+  //   if (!carNumberRegex.test(formData.carNumber)) {
+  //     alert("Invalid car number format. Please use XX00 XX0000 format.");
+  //     return;
+  //   }
+  //   };
   if (!userData) {
     return <Navigate to={"/"} />;
   }

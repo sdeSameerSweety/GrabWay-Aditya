@@ -29,18 +29,11 @@ import {
 import Cookies from "js-cookie";
 import { Navigate } from "react-router-dom";
 
-const Registration = () => {
+const UserRegistration = () => {
   // const userData = Cookies.get('grabwayUser');
   const userData = Cookies.get("grabwayUser");
   const hasUserData = userData !== undefined;
   console.log(userData);
-  // const [formData, setFormData] = useState({
-  //   firstName: "",
-  //   lastName: "",
-  //   email: userData.email,
-  //   phoneNumber: userData.phoneNumber,
-  //   location: "",
-  //  });
   const [formData, setFormData] = useState({
     firstName: "",
     lastName: "",
@@ -111,31 +104,6 @@ const Registration = () => {
     setError("");
   };
 
-  const [workSchedule, setWorkSchedule] = useState({
-    from: "",
-    to: "",
-  });
-
-  const handleTimeChange = (field, value) => {
-    setWorkSchedule((prevSchedule) => ({
-      ...prevSchedule,
-      [field]: value,
-    }));
-  };
-
-  const [formDataCarno, setFormDataCarno] = useState({
-    location: "",
-    carType: "",
-    carNumber: "",
-  });
-
-  const handleCarTypeChange = (e) => {
-    setFormDataCarno({ ...formDataCarno, carType: e.target.value });
-  };
-
-  const handleCarNumberChange = (e) => {
-    setFormDataCarno({ ...formDataCarno, carNumber: e.target.value });
-  };
   if (!userData) {
     return <Navigate to={"/"} />;
   }
@@ -179,7 +147,7 @@ const Registration = () => {
           <Tabs isFitted variant="enclosed-colored" colorScheme="teal">
             <TabList>
               <Tab>User Registration</Tab>
-              <Tab>Driver Registration</Tab>
+              {/* <Tab>Driver Registration</Tab> */}
             </TabList>
             <TabPanels>
               <TabPanel>
@@ -281,6 +249,7 @@ const Registration = () => {
 
                     <FormErrorMessage>{errors.phoneNumber}</FormErrorMessage>
                   </FormControl>
+                  {/* To be added in future */}
 
                   {/* Location */}
 
@@ -321,188 +290,6 @@ const Registration = () => {
                   </Button>
                 </Box>
               </TabPanel>
-              <TabPanel>
-                <Heading size="md" mt={4}>
-                  Apply as a Driver
-                </Heading>
-                <Box mt={4}>
-                  <Avatar size="xl" mb={4} src={profilePhoto} />
-                  <FormControl>
-                    <FormLabel>Profile Photo</FormLabel>
-                    <Input
-                      type="file"
-                      accept="image/*"
-                      onChange={handlePhotoChange}
-                      mb={4}
-                    />
-                  </FormControl>
-                  <FormControl
-                    isRequired
-                    isInvalid={!!errors.firstName}
-                    onSubmit={handleSubmit}
-                  >
-                    <FormLabel>First Name</FormLabel>
-                    <Input
-                      type="text"
-                      placeholder="First Name"
-                      value={formData.firstName}
-                      onChange={(e) =>
-                        setFormData({ ...formData, firstName: e.target.value })
-                      }
-                    />
-                    <FormErrorMessage>{errors.firstName}</FormErrorMessage>
-                  </FormControl>
-                  {/* Last Name */}
-                  <FormControl mt={4} isRequired isInvalid={!!errors.lastName}>
-                    <FormLabel>Last Name</FormLabel>
-                    <Input
-                      type="text"
-                      placeholder="Last Name"
-                      value={formData.lastName}
-                      onChange={(e) =>
-                        setFormData({ ...formData, lastName: e.target.value })
-                      }
-                    />
-                    <FormErrorMessage>{errors.lastName}</FormErrorMessage>
-                  </FormControl>
-
-                  {/* Email */}
-                  <FormControl mt={4} isRequired isInvalid={!!errors.email}>
-                    <FormLabel>Email</FormLabel>
-                    <Input
-                      type="email"
-                      placeholder="Email"
-                      value={formData.email}
-                      onChange={(e) =>
-                        setFormData({ ...formData, email: e.target.value })
-                      }
-                      disabled={hasUserData}
-                    />
-                    <FormErrorMessage>{errors.email}</FormErrorMessage>
-                  </FormControl>
-
-                  {/* Password */}
-                  <FormControl mt={4} isRequired isInvalid={!!errors.password}>
-                    <FormLabel>Password</FormLabel>
-                    <Input
-                      type="password"
-                      placeholder="Password"
-                      value={formData.password}
-                      onChange={(e) =>
-                        setFormData({ ...formData, password: e.target.value })
-                      }
-                    />
-                    <FormErrorMessage>{errors.password}</FormErrorMessage>
-                  </FormControl>
-
-                  {/* Phone Number */}
-                  <FormControl
-                    mt={4}
-                    isRequired
-                    isInvalid={!!errors.phoneNumber}
-                  >
-                    <FormLabel>Phone Number</FormLabel>
-                    <Input
-                      type="number"
-                      placeholder="Phone Number"
-                      value={formData.phoneNumber}
-                      onChange={(e) => {
-                        const inputPhoneNumber = e.target.value;
-
-                        // Ensure the input value is not exceeding the maximum length
-                        if (inputPhoneNumber.length <= 10) {
-                          setFormData({
-                            ...formData,
-                            phoneNumber: inputPhoneNumber,
-                          });
-                        }
-                      }}
-                      minLength={10}
-                      maxLength={10}
-                      disabled={hasUserData}
-                    />
-
-                    <FormErrorMessage>{errors.phoneNumber}</FormErrorMessage>
-                  </FormControl>
-
-                  {/* Location */}
-                  <FormControl mt={4} isRequired>
-                    <FormLabel>Residance Location</FormLabel>
-                    <Input
-                      type="text"
-                      placeholder="Location"
-                      value={formData.location}
-                      onChange={(e) =>
-                        setFormData({ ...formData, location: e.target.value })
-                      }
-                    />
-                  </FormControl>
-                  <FormControl mt={4} isRequired>
-                    <FormLabel>Vehicle Number Plate</FormLabel>
-                    <Input
-                      type="text"
-                      placeholder="Enter car number"
-                      value={formDataCarno.carNumber}
-                      onChange={handleCarNumberChange}
-                    />
-                  </FormControl>
-
-                  <FormControl mt={4} isRequired>
-                    <FormLabel>Vehicle Seats</FormLabel>
-                    <Select
-                      placeholder="How many seaters do you have?"
-                      value={formDataCarno.carType}
-                      onChange={handleCarTypeChange}
-                    >
-                      <option value="3">3</option>
-                      <option value="4">4</option>
-                      <option value="5">5</option>
-                      <option value="6">6</option>
-                      {/* Add more options as needed */}
-                    </Select>
-                  </FormControl>
-                  <FormControl mt={4} isRequired>
-                    <FormLabel>Driving Experiance(Years)</FormLabel>
-                    <Select placeholder="Driving experiance in years">
-                      <option value="1L">1 or Less</option>
-                      <option value="12">1-2</option>
-                      <option value="23">2-3</option>
-                      <option value="35">3-5</option>
-                      <option value="2M">5 or More</option>
-                      {/* Add more options as needed */}
-                    </Select>
-                  </FormControl>
-                  <FormControl mt={4} isRequired>
-                    <FormLabel>Bio</FormLabel>
-                    <Input type="text" placeholder="Your Bio" />
-                  </FormControl>
-                  <FormControl isInvalid={!!error} mt={4}>
-                    <Checkbox
-                      isChecked={isChecked}
-                      onChange={handleCheckboxChange}
-                      size="lg"
-                      onSubmit={handleFormSubmit}
-                    >
-                      I accept the terms and conditions
-                    </Checkbox>
-                    <FormErrorMessage>{error}</FormErrorMessage>
-                  </FormControl>
-                  {error && (
-                    <Alert status="error" mt={5}>
-                      <AlertIcon />
-                      {error}
-                    </Alert>
-                  )}
-                </Box>
-                <Button
-                  colorScheme="blue"
-                  mt={4}
-                  onClick={handleSubmit}
-                  isDisabled={!isChecked}
-                >
-                  Register
-                </Button>
-              </TabPanel>
             </TabPanels>
           </Tabs>
         </Box>
@@ -511,4 +298,4 @@ const Registration = () => {
   );
 };
 
-export default Registration;
+export default UserRegistration;
