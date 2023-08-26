@@ -326,7 +326,7 @@ const TopBar = ({ counter, setCounter, setLoginState, loginState }) => {
               GrabWay
             </div>
             <div className="flex justify-center items-center">
-              <img src="/assets/images/logo.png" />
+              <img src="/assets/images/logo.png" alt="logo"/>
             </div>
           </div>
         </Link>

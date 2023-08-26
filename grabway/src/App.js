@@ -15,6 +15,7 @@ import Cookies from "js-cookie";
 import UserProfile from "./components/Profile/User/userProfile";
 import DriverRegistration from "./Pages/Registeration/DriverRegistration";
 import UserRegistration from "./Pages/Registeration/UserRegistration";
+import GRegisteration from "./components/GRegisteration/GRegisteration";
 
 axios.defaults.baseURL = "http://localhost:8080";
 axios.defaults.withCredentials = true;
@@ -65,8 +66,7 @@ function App() {
           loginState={loginState}
         />
         <div style={intDivStyle}>
-          {/* <Registeration /> */}
-          {/* <Support/> */}
+          <GRegisteration />
           <Routes>
             {/* <Route path="/nearby" element={<NearbyMap nonceVal={nonce} />} /> */}
             <Route
