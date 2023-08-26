@@ -5,7 +5,7 @@ import {
   useJsApiLoader,
   DirectionsRenderer,
 } from "@react-google-maps/api";
-import { Button, Mark } from "@chakra-ui/react";
+import { Button, Mark, useToast } from "@chakra-ui/react";
 import { useLocation } from "react-router-dom";
 import { Card, CardBody } from "@chakra-ui/react";
 import axios from "axios";
@@ -18,7 +18,8 @@ const containerStyle = {
 
 function MyComponent({ nonceVal }, { route, state }) {
   const location = useLocation();
-
+  const toast=useToast();
+  const [showCards, setShowCards]=useState(false);
   console.log(location);
   const { isLoaded } = useJsApiLoader({
     id: "google-map-script",
@@ -59,7 +60,8 @@ function MyComponent({ nonceVal }, { route, state }) {
   const [durationNum, setDurationNum] = useState(null);
 
   async function distanceMatrix() {
-    /* eslint-disable */
+    try{
+      /* eslint-disable */
     const service = new google.maps.DistanceMatrixService();
     const request = {
       origins: [rideDataText.source],
@@ -80,6 +82,19 @@ function MyComponent({ nonceVal }, { route, state }) {
         setDurationText(res.rows[0].elements[0].duration.text);
         console.log(res);
       });
+      setShowCards(true);
+    }
+    catch(err){
+      console.log("Error while calculating distnace");
+      toast({
+        title: "Didn't find Any such Route",
+        description: "Presently we dont provide service in requested route",
+        status: "error",
+        duration: 3000,
+        isClosable: true,
+      });
+      setShowCards(false);
+    }
   }
 
   //Contents for map container
@@ -165,8 +180,8 @@ function MyComponent({ nonceVal }, { route, state }) {
           )}
         </div>
       )}
-
-      <div id='package-cards'>
+      {showCards &&<>
+        <div id='package-cards'>
         <section class="bg-white">
           <div class="py-8 px-4 mx-auto max-w-screen-xl lg:py-16 lg:px-6">
             <div class="mx-auto max-w-screen-md text-center mb-8 lg:mb-12">
@@ -488,6 +503,9 @@ function MyComponent({ nonceVal }, { route, state }) {
           </div>
         </section>
       </div>
+        
+      </>}
+      
     </>
   ) : (
     <></>
