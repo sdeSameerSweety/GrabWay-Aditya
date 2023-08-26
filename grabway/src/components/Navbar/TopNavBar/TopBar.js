@@ -181,11 +181,28 @@ const TopBar = ({ counter, setCounter, setLoginState,loginState }) => {
           }
         })
         .catch((error) => {
+          console.log(error.message);
           if (
             error.message === "Firebase: Error (auth/email-already-in-use)."
           ) {
             toast({
               title: `User Already Exists`,
+              status: "error",
+              isClosable: true,
+              position: "top-right",
+            });
+          }
+          if(error.message==="Firebase: Error (auth/invalid-email)."){
+            toast({
+              title: `Invalid Email`,
+              status: "error",
+              isClosable: true,
+              position: "top-right",
+            });
+          }
+          if(error.message==="Firebase: Password should be at least 6 characters (auth/weak-password)."){
+            toast({
+              title: `Password should be at least 6 characters`,
               status: "error",
               isClosable: true,
               position: "top-right",
