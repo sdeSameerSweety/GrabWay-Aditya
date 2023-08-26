@@ -29,18 +29,11 @@ import {
 import Cookies from "js-cookie";
 import { Navigate } from "react-router-dom";
 
-const Registration = () => {
+const DriverRegistration = () => {
   // const userData = Cookies.get('grabwayUser');
   const userData = Cookies.get("grabwayUser");
   const hasUserData = userData !== undefined;
   console.log(userData);
-  // const [formData, setFormData] = useState({
-  //   firstName: "",
-  //   lastName: "",
-  //   email: userData.email,
-  //   phoneNumber: userData.phoneNumber,
-  //   location: "",
-  //  });
   const [formData, setFormData] = useState({
     firstName: "",
     lastName: "",
@@ -135,18 +128,8 @@ const Registration = () => {
 
   const handleCarNumberChange = (e) => {
     setFormDataCarno({ ...formDataCarno, carNumber: e.target.value });
-  };
-
-  // const handleSubmit = (e) => {
-  //   e.preventDefault();
-
-  //   const carNumberRegex = /^[A-Z]{2}\s?\d{1,2}\s?[A-Z]{1,2}\s?\d{4}$/;
-
-  //   if (!carNumberRegex.test(formData.carNumber)) {
-  //     alert("Invalid car number format. Please use XX00 XX0000 format.");
-  //     return;
-  //   }
-  //   };
+    };
+    
   if (!userData) {
     return <Navigate to={"/"} />;
   }
@@ -189,149 +172,10 @@ const Registration = () => {
         <Box flex={3} p={8}>
           <Tabs isFitted variant="enclosed-colored" colorScheme="teal">
             <TabList>
-              <Tab>User Registration</Tab>
+              {/* <Tab>User Registration</Tab> */}
               <Tab>Driver Registration</Tab>
             </TabList>
             <TabPanels>
-              <TabPanel>
-                <Heading size="md" mt={4}>
-                  Apply as User
-                </Heading>
-                <Box mt={4}>
-                  <Avatar size="xl" mb={4} src={profilePhoto} />
-                  <FormControl>
-                    <FormLabel>Profile Photo</FormLabel>
-                    <Input
-                      type="file"
-                      accept="image/*"
-                      onChange={handlePhotoChange}
-                      mb={4}
-                    />
-                  </FormControl>
-                  <FormControl isRequired isInvalid={!!errors.firstName}>
-                    <FormLabel>First Name</FormLabel>
-                    <Input
-                      type="text"
-                      placeholder="First Name"
-                      value={formData.firstName}
-                      onChange={(e) =>
-                        setFormData({ ...formData, firstName: e.target.value })
-                      }
-                    />
-                    <FormErrorMessage>{errors.firstName}</FormErrorMessage>
-                  </FormControl>
-                  {/* Last Name */}
-                  <FormControl mt={4} isRequired isInvalid={!!errors.lastName}>
-                    <FormLabel>Last Name</FormLabel>
-                    <Input
-                      type="text"
-                      placeholder="Last Name"
-                      value={formData.lastName}
-                      onChange={(e) =>
-                        setFormData({ ...formData, lastName: e.target.value })
-                      }
-                    />
-                    <FormErrorMessage>{errors.lastName}</FormErrorMessage>
-                  </FormControl>
-
-                  {/* Email */}
-                  <FormControl mt={4} isRequired isInvalid={!!errors.email}>
-                    <FormLabel>Email</FormLabel>
-                    <Input
-                      type="email"
-                      placeholder="Email"
-                      value={formData.email}
-                      onChange={(e) =>
-                        setFormData({ ...formData, email: e.target.value })
-                      }
-                      disabled={hasUserData}
-                    />
-                    <FormErrorMessage>{errors.email}</FormErrorMessage>
-                  </FormControl>
-
-                  {/* Password */}
-                  <FormControl mt={4} isRequired isInvalid={!!errors.password}>
-                    <FormLabel>Password</FormLabel>
-                    <Input
-                      type="password"
-                      placeholder="Password"
-                      value={formData.password}
-                      onChange={(e) =>
-                        setFormData({ ...formData, password: e.target.value })
-                      }
-                    />
-                    <FormErrorMessage>{errors.password}</FormErrorMessage>
-                  </FormControl>
-
-                  {/* Phone Number */}
-                  <FormControl
-                    mt={4}
-                    isRequired
-                    isInvalid={!!errors.phoneNumber}
-                  >
-                    <FormLabel>Phone Number</FormLabel>
-                    <Input
-                      type="number"
-                      placeholder="Phone Number"
-                      value={formData.phoneNumber}
-                      onChange={(e) => {
-                        const inputPhoneNumber = e.target.value;
-
-                        // Ensure the input value is not exceeding the maximum length
-                        if (inputPhoneNumber.length <= 10) {
-                          setFormData({
-                            ...formData,
-                            phoneNumber: inputPhoneNumber,
-                          });
-                        }
-                      }}
-                      minLength={10}
-                      maxLength={10}
-                      disabled={hasUserData}
-                    />
-
-                    <FormErrorMessage>{errors.phoneNumber}</FormErrorMessage>
-                  </FormControl>
-
-                  {/* Location */}
-
-                  {/* Workplace */}
-
-                  {/* Work Schedule */}
-
-                  {/* Preferred Gender */}
-
-                  {/* Smoking Preferences */}
-
-                  {/* Accessibility Needs */}
-
-                  <FormControl isInvalid={!!error} mt={4}>
-                    <Checkbox
-                      isChecked={isChecked}
-                      onChange={handleCheckboxChange}
-                      size="lg"
-                      onSubmit={handleFormSubmit}
-                    >
-                      I accept the terms and conditions
-                    </Checkbox>
-                    <FormErrorMessage>{error}</FormErrorMessage>
-                  </FormControl>
-                  {error && (
-                    <Alert status="error" mt={5}>
-                      <AlertIcon />
-                      {error}
-                    </Alert>
-                  )}
-                  <Button
-                    colorScheme="blue"
-                    mt={4}
-                    onClick={handleSubmit}
-                    isDisabled={!isChecked}
-                  >
-                    Register
-                  </Button>
-                </Box>
-              </TabPanel>
               <TabPanel>
                 <Heading size="md" mt={4}>
                   Apply as a Driver
@@ -522,4 +366,4 @@ const Registration = () => {
   );
 };
 
-export default Registration;
+export default DriverRegistration;
