@@ -67,10 +67,12 @@ function App() {
           loginState={loginState}
         />
         <div style={intDivStyle}>
-          <Registeration />
+          {/* <Registeration /> */}
           {/* <Support/> */}
+          {/* <DriverRegistration /> */}
+          <UserRegistration/>
           <Routes>
-            <Route path="/nearby" element={<NearbyMap nonceVal={nonce} />} />
+            {/* <Route path="/nearby" element={<NearbyMap nonceVal={nonce} />} /> */}
             <Route
               path="/"
               element={<Homepage nonceVal={nonce} loginState={loginState} />}
@@ -79,9 +81,9 @@ function App() {
             <Route path="/maps" element={<MapLayout nonceVal={nonce} />} />
             <Route path="/dashboard" element={<Dashboard />} />
             {/* <Route path="/userprofile" element={<UserProfile />} /> */}
-            <Route path="/driverregistration" component={DriverRegistration} />
-            <Route path="/userregistration" component={UserRegistration} />
-            <Route path="/registration" element={<Registeration />} />
+            {/* <Route path="/driverregistration" component={DriverRegistration} /> */}
+            {/* <Route path="/userregistration" component={UserRegistration} /> */}
+            {/* <Route path="/registration" element={<Registeration />} /> */}
             <Route path="/profile" element={<ProfilePage />} />
           </Routes>
           <Footer />

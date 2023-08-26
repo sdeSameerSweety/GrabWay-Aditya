@@ -134,7 +134,7 @@ const DriverRegistration = () => {
     return <Navigate to={"/"} />;
   }
   return (
-    <Container className="container" maxW="75%" mt={8}>
+    <Container className="container-reg" maxW="75%" mt={8}>
       <Box
         className="tab-list"
         display="flex"

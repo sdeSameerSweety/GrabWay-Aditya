@@ -1,28 +1,22 @@
 import React, { useEffect } from "react";
-import { useNavigate } from "react-router-dom";
-import Cookies from "js-cookie";
-import "./DriverRegistration";
+import { Navigate } from "react-router-dom";
 import "./UserRegistration";
+import "./DriverRegistration";
+import Cookies from "js-cookie";
 
 const Registration = () => {
   const userData = Cookies.get("grabwayUser");
   const hasUserData = userData !== undefined;
-  const history = useNavigate();
 
-  useEffect(() => {
-    if (hasUserData) {
-      const user = JSON.parse(userData);
-      if (user.isDriver) {
-        history.push("./DriverRegistration");
-      } else {
-        history.push("./DriverRegistration");
-      }
-    } else {
-      history.push("/");
-    }
-  }, [hasUserData, history]);
+  if (!hasUserData) {
+    return <Navigate to={"/"} />;
+  }
 
-  return null; // No need to render anything here
+  const user = JSON.parse(userData);
+  const targetPath =
+    user.userType === "driver" ? "./DriverRegistration" : "./UserRegistration";
+
+  return <Navigate to={targetPath} />;
 };
 
 export default Registration;

@@ -11,16 +11,10 @@ import {
   TabPanels,
   TabPanel,
   Input,
-  Radio,
-  RadioGroup,
-  Select,
   Button,
   FormControl,
   FormLabel,
   FormErrorMessage,
-  Flex,
-  Stack,
-  HStack,
   Alert,
   AlertIcon,
   Checkbox,
@@ -30,16 +24,23 @@ import Cookies from "js-cookie";
 import { Navigate } from "react-router-dom";
 
 const UserRegistration = () => {
-  // const userData = Cookies.get('grabwayUser');
   const userData = Cookies.get("grabwayUser");
   const hasUserData = userData !== undefined;
   console.log(userData);
   const [formData, setFormData] = useState({
-    firstName: "",
+    name: "",
     lastName: "",
     email: hasUserData ? JSON.parse(userData).email : "",
     phoneNumber: hasUserData ? JSON.parse(userData).phoneNumber : "",
     location: "",
+  });
+
+  const [addressData, setAddressData] = useState({
+    addressLine1: "",
+    addressLine2: "",
+    city: "",
+    state: "",
+    pin: "",
   });
 
   const [errors, setErrors] = useState({});
@@ -56,16 +57,15 @@ const UserRegistration = () => {
     if (!isChecked) {
       setError("Please accept the terms and conditions.");
     } else {
-      // Proceed with your desired action here, since terms are accepted.
       console.log("Terms accepted, proceed with further actions.");
     }
   };
   const validateForm = () => {
     const newErrors = {};
-    if (!formData.firstName) newErrors.firstName = "First Name is required";
-    if (!formData.lastName) newErrors.lastName = "Last Name is required";
+    if (!formData.name) newErrors.name = "First Name is required";
+    // if (!formData.lastName) newErrors.lastName = "Last Name is required";
     if (!formData.email) newErrors.email = "Email is required";
-    if (!formData.password) newErrors.password = "Password is required";
+    // if (!formData.password) newErrors.password = "Password is required";
     // Add more validation rules here
 
     return newErrors;
@@ -108,7 +108,7 @@ const UserRegistration = () => {
     return <Navigate to={"/"} />;
   }
   return (
-    <Container className="container" maxW="75%" mt={8}>
+    <Container className="container-reg" maxW="80%" mt={8}>
       <Box
         className="tab-list"
         display="flex"
@@ -165,20 +165,20 @@ const UserRegistration = () => {
                       mb={4}
                     />
                   </FormControl>
-                  <FormControl isRequired isInvalid={!!errors.firstName}>
-                    <FormLabel>First Name</FormLabel>
+                  <FormControl isRequired isInvalid={!!errors.name}>
+                    <FormLabel>Full Name</FormLabel>
                     <Input
                       type="text"
-                      placeholder="First Name"
-                      value={formData.firstName}
+                      placeholder="Full Name"
+                      value={formData.name}
                       onChange={(e) =>
-                        setFormData({ ...formData, firstName: e.target.value })
+                        setFormData({ ...formData, name: e.target.value })
                       }
                     />
-                    <FormErrorMessage>{errors.firstName}</FormErrorMessage>
+                    <FormErrorMessage>{errors.name}</FormErrorMessage>
                   </FormControl>
                   {/* Last Name */}
-                  <FormControl mt={4} isRequired isInvalid={!!errors.lastName}>
+                  {/* <FormControl mt={4} isRequired isInvalid={!!errors.lastName}>
                     <FormLabel>Last Name</FormLabel>
                     <Input
                       type="text"
@@ -189,7 +189,7 @@ const UserRegistration = () => {
                       }
                     />
                     <FormErrorMessage>{errors.lastName}</FormErrorMessage>
-                  </FormControl>
+                  </FormControl> */}
 
                   {/* Email */}
                   <FormControl mt={4} isRequired isInvalid={!!errors.email}>
@@ -207,7 +207,7 @@ const UserRegistration = () => {
                   </FormControl>
 
                   {/* Password */}
-                  <FormControl mt={4} isRequired isInvalid={!!errors.password}>
+                  {/* <FormControl mt={4} isRequired isInvalid={!!errors.password}>
                     <FormLabel>Password</FormLabel>
                     <Input
                       type="password"
@@ -218,7 +218,7 @@ const UserRegistration = () => {
                       }
                     />
                     <FormErrorMessage>{errors.password}</FormErrorMessage>
-                  </FormControl>
+                  </FormControl> */}
 
                   {/* Phone Number */}
                   <FormControl
@@ -249,6 +249,80 @@ const UserRegistration = () => {
 
                     <FormErrorMessage>{errors.phoneNumber}</FormErrorMessage>
                   </FormControl>
+                  {/* Address Line 1 */}
+                  <FormControl mt={4} isRequired>
+                    <FormLabel>Address Line 1</FormLabel>
+                    <Input
+                      type="text"
+                      placeholder="Address Line 1"
+                      value={addressData.addressLine1}
+                      onChange={(e) =>
+                        setAddressData({
+                          ...addressData,
+                          addressLine1: e.target.value,
+                        })
+                      }
+                    />
+                  </FormControl>
+
+                  {/* Address Line 2 */}
+                  <FormControl mt={4}>
+                    <FormLabel>Address Line 2</FormLabel>
+                    <Input
+                      type="text"
+                      placeholder="Address Line 2"
+                      value={addressData.addressLine2}
+                      onChange={(e) =>
+                        setAddressData({
+                          ...addressData,
+                          addressLine2: e.target.value,
+                        })
+                      }
+                    />
+                  </FormControl>
+
+                  {/* City */}
+                  <FormControl mt={4} isRequired>
+                    <FormLabel>City</FormLabel>
+                    <Input
+                      type="text"
+                      placeholder="City"
+                      value={addressData.city}
+                      onChange={(e) =>
+                        setAddressData({ ...addressData, city: e.target.value })
+                      }
+                    />
+                  </FormControl>
+
+                  {/* State */}
+                  <FormControl mt={4} isRequired>
+                    <FormLabel>State</FormLabel>
+                    <Input
+                      type="text"
+                      placeholder="State"
+                      value={addressData.state}
+                      onChange={(e) =>
+                        setAddressData({
+                          ...addressData,
+                          state: e.target.value,
+                        })
+                      }
+                    />
+                  </FormControl>
+
+                  {/* PIN */}
+                  <FormControl mt={4} isRequired>
+                    <FormLabel>PIN</FormLabel>
+                    <Input
+                      type="text"
+                      placeholder="PIN"
+                      value={addressData.pin}
+                      onChange={(e) =>
+                        setAddressData({ ...addressData, pin: e.target.value })
+                      }
+                    />
+                  </FormControl>
+
                   {/* To be added in future */}
 
                   {/* Location */}
