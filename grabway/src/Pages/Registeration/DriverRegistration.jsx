@@ -95,8 +95,6 @@ const DriverRegistration = () => {
     if (!formData.city) newErrors.city = "City is required";
     if (!formData.state) newErrors.state = "State is required";
     //if (!formData.pinCode) newErrors.pinCode = "Pin Code is required";
-    // if (!formData.carNumber) newErrors.carNumber = "Vehicle Number is required";
-    // if (!formData.carSeats) newErrors.carSeats = "Seat Number is required";
     if (!formData.drivingExp) newErrors.drivingExp = "Experience is required";
     if (
       !/^(([A-Z]{2}[0-9]{2})|([A-Z]{2}-[0-9]{2}))((19|20)[0-9]{2})[0-9]{7}$/.test(
