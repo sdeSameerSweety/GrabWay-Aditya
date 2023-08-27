@@ -1,14 +1,28 @@
 import React, { useState } from "react";
 import "./GRegisteration.css";
-
+import { Navigate } from "react-router-dom";
+import GDriverRegistation from "./GDriverRegistration/GDriverRegistration";
+import GUserRegistration from "./GUserRegistration/GUserRegistration";
+import Cookies from "js-cookie";
 const GRegistration = () => {
   const [activeImage, setActiveImage] = useState(3); // Default: Image 3
-
+  const [rider,setRider]=useState(false);
+  const [driver,setDriver]=useState(false);
   const handleHover = (imageIndex) => {
     setActiveImage(imageIndex);
   };
-
-  return (
+  function handleRiderClick(){
+    setRider(true);
+  }
+  function handleDriverClick(){
+    setDriver(true);
+  }
+  const googleToken=Cookies.get('grabwayGoogleToken');
+  if(!googleToken){
+    return <Navigate to={"/"}/>
+  }
+  return (<>
+    {!driver && !rider && <>
     <div className="gRegisteration-container">
       <header>
         <img
@@ -22,10 +36,13 @@ const GRegistration = () => {
           <h1>Join the Future of Transportation</h1>
           <p>Choose your journey:</p>
           <div className="buttons">
-            <button className="user-button" onMouseEnter={() => handleHover(1)}>
+            <button className="user-button" 
+            onClick={handleRiderClick}
+            onMouseEnter={() => handleHover(1)}>
               I'm a Rider
             </button>
             <button
+            onClick={handleDriverClick}
               className="driver-button"
               onMouseEnter={() => handleHover(2)}
             >
@@ -57,7 +74,12 @@ const GRegistration = () => {
           )}
         </div>
       </main>
-    </div>
+    </div></>}
+    {driver && <>
+    <GDriverRegistation/>
+    </>}
+    {rider && <><GUserRegistration/></>}
+    </>
   );
 };
 

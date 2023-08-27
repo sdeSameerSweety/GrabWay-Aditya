@@ -130,7 +130,7 @@ app.post("/createDriver", async (req, res) => {
   }
 });
 
-//api for google login left
+//api for google login below
 app.post('/googlecheckUser', async(req,res)=>{
   await mongoose.connect(MONGO_URL);
   const email=req.body.email;
@@ -143,12 +143,110 @@ app.post('/googlecheckUser', async(req,res)=>{
   }
   else{
       console.log('not found, Redirect to creation....');
-      res.status(200).json(null);
+      res.status(500).json(false);
     }
 })
+app.post("/googleCreateUser", async (req, res) => {
+  await mongoose.connect(MONGO_URL);
+  const formData=req.body.formData;
+  const name=formData.name;
+  const email=formData.email;
+  const phoneNumber=formData.phoneNumber;
+  const addressName=formData.name;
+  const addressLine1=formData.addressLine1;
+  const addressLine2=formData.addressLine2;
+  const city = formData.city;
+  const state=formData.state;
+  const pin=formData.pin;
+  if(email && formData){
+    try{
+      console.log('trying to create email model')
+      const EmailRes=await EmailModel.create({
+        email:email,
+        userType:'user'
+      })
+      if(EmailRes){
+        console.log('trying to create user model')
+        const User = await UserModel.create({
+          email:email,
+          phoneNumber:phoneNumber,
+          userType:'user',
+          name:name,
+          "address.0.addressName":addressName,
+          "address.0.addressLine1":addressLine1,
+          "address.0.addressLine2":addressLine2,
+          "address.0.city":city,
+          "address.0.state":state,
+          "address.0.pincode":pin,
+        });
+        return res.status(200).json(User);
+      }
+      else{
+        res.status(500).json('cannot create user model')
+      }
+      
+    }
+    catch(err){
+      console.log(err);
+      res.status(500).send("Internal Server Error");
+    }
+  }
 
+});
 
+app.post("/googleCreateDriver", async (req, res) => {
+  await mongoose.connect(MONGO_URL);
+  const formData=req.body.formData;
+  const name=formData.name;
+  const email=formData.email;
+  const phoneNumber=formData.phoneNumber;
+  const addressName=formData.name;
+  const addressLine1=formData.addressLine1;
+  const addressLine2=formData.addressLine2;
+  const city = formData.city;
+  const state=formData.state;
+  const pin=formData.pin;
+  const VehicleNumber=formData.carNumber;
+  const drivingLicenseNumber=formData.dlNumber
+  const experience=formData.experience;
+  if(email && formData){
+    try{
+      console.log('trying to create email model')
+      const EmailRes=await EmailModel.create({
+        email:email,
+        userType:'driver'
+      })
+      if(EmailRes){
+        console.log('trying to create user model')
+        const User = await DriverModel.create({
+          name:name,
+          phoneNumber:phoneNumber,
+          VehicleNumber:VehicleNumber,
+          drivingLicenseNumber:drivingLicenseNumber,
+          experience:experience,
+          "address.0.addressName":addressName,
+          "address.0.addressLine1":addressLine1,
+          "address.0.addressLine2":addressLine2,
+          "address.0.city":city,
+          "address.0.state":state,
+          "address.0.pincode":pin,
+        });
+        return res.status(200).json(User);
+      }
+      else{
+        res.status(500).json('cannot create user model')
+      }
+      
+    }
+    catch(err){
+      console.log(err);
+      res.status(500).send("Internal Server Error");
+    }
+  }
 
+});
+
+//api for normal registration with prefilled email,phone number
 app.post('/registerNewUser',async(req,res)=>{
   await mongoose.connect(MONGO_URL);
   console.log(req.body.formData);
@@ -211,7 +309,7 @@ app.post('/registerNewDriver',async(req,res)=>{
   const state=formData.state;
   const pin=formData.pin;
   const VehicleNumber=formData.carNumber;
-  const drivingLicenseNumber=formData.phoneNumber//replace with License Number
+  const drivingLicenseNumber=formData.dlNumber
   const experience=formData.experience;
  if(formData){
   try{

@@ -285,26 +285,24 @@ const TopBar = ({ counter, setCounter, setLoginState, loginState }) => {
           isClosable: true,
         });
         console.log(user.email);
-        const userFound = await axios.post("/googlecheckUser", {
-          email: user.email,
-        });
-        if (userFound !== null) {
-          Cookies.set("grabwayToken", user.email, 7);
-          setRunContext("signInWithGoogle");
-          setCounter(true);
-          setLoginState(true);
-        } else {
+        try{
+          const userFound = await axios.post("/googlecheckUser", {
+            email: user.email,
+          });
+          if (userFound) {
+            Cookies.set("grabwayToken", user.email, 7);
+            setRunContext("signInWithGoogle");
+            setCounter(true);
+            setLoginState(true);
+          }
+           
+        }
+        catch(err){
           console.log("not found");
           Cookies.set("grabwayGoogleToken", user.email);
-          //write registration redirect condition as
-          //if(!grabwayToken or !grabwayGoogleToken) then redirect
-          //if grabwayGoogleToken then show seperate registration page
-          //if grabwayGoogle token not present and grabwayUser present then do like you were doing before
 
-          /*setCounter(true);
+          setCounter(true);
           setLoginState(true);
-          return <Navigate to={'/registartion'}/>
-          */
         }
       })
       .catch((error) => {
@@ -459,7 +457,7 @@ const TopBar = ({ counter, setCounter, setLoginState, loginState }) => {
                                 colorScheme="gray"
                                 onClick={handleGoogleSignIn}
                               >
-                                <Text>Sign In with Google</Text>
+                                <div>Sign In with Google</div>
                               </Button>
                             </div>
                           </div>
