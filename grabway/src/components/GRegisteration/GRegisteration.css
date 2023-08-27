@@ -1,0 +1,96 @@
+/* WelcomePage.css */
+
+.gRegisteration-container {
+  background-color: #292c35;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  margin: 0% 2%;
+  align-items: center;
+  text-align: center;
+}
+
+.logo {
+  width: 150px;
+  height: auto;
+}
+
+.content {
+  text-align: center;
+  margin: 20px 0;
+}
+
+h1 {
+  font-size: 32px;
+  color: #ffffff;
+  margin-bottom: 10px;
+}
+
+p {
+  font-size: 18px;
+  color: #a0a0a0;
+  margin-bottom: 30px;
+}
+
+.buttons {
+  display: flex;
+  gap: 20px;
+  justify-content: center;
+}
+
+.user-button,
+.driver-button {
+  padding: 12px 30px;
+  border: none;
+  border-radius: 50px;
+  background-color: #ff5a5f;
+  color: #ffffff;
+  font-size: 20px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.user-button:hover,
+.driver-button:hover {
+  background-color: #ff3b3f;
+}
+
+.animation-gif {
+  max-width: 60%;
+  /* width: 60%; */
+  height: 300px;
+}
+
+/* Media Queries */
+
+@media (max-width: 768px) {
+  .welcome-container {
+    margin: 0;
+  }
+
+  .content {
+    margin: 10px 0;
+  }
+
+  h1 {
+    font-size: 28px;
+  }
+
+  p {
+    font-size: 16px;
+    margin-bottom: 20px;
+  }
+
+  .user-button,
+  .driver-button {
+    padding: 10px 25px;
+    font-size: 18px;
+  }
+
+  .animation-gif {
+    width: 90%;
+  }
+}
+
+/* Additional styling to enhance the design */

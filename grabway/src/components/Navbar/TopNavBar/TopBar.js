@@ -33,18 +33,25 @@ import {
   Radio,
   Stack,
   Text,
+  InputRightElement,
 } from "@chakra-ui/react";
 import { initializeApp } from "firebase/app";
 import { firebaseConfig } from "../../../firebase";
 import { FcGoogle } from "react-icons/fc";
 import Cookies from "js-cookie";
 import { UserContext } from "../../../context/Context";
+import {
+  RiEyeLine,
+  RiEyeOffLine,
+} from "react-icons/ri";
 
-const TopBar = ({ counter, setCounter, setLoginState,loginState }) => {
+const TopBar = ({ counter, setCounter, setLoginState, loginState }) => {
+  /* For hiding password */
+  const [showPassword, setShowPassword] = useState(false);
   const app = initializeApp(firebaseConfig);
   const auth = getAuth();
   const provider = new GoogleAuthProvider();
-  const {userEmail,setUserEmail,setRunContext}=useContext(UserContext);
+  const { userEmail, setUserEmail, setRunContext } = useContext(UserContext);
   const { isOpen, onOpen, onClose } = useDisclosure();
   const [showSignIn, setShowSignIn] = useState(true);
   const [loginEmail, setLoginEmail] = useState("");
@@ -81,12 +88,12 @@ const TopBar = ({ counter, setCounter, setLoginState,loginState }) => {
       }
     }
   }
-  useEffect(()=>{
-    if(userEmail){
+  useEffect(() => {
+    if (userEmail) {
       setCounter(true);
-      setLoginState(true)
+      setLoginState(true);
     }
-  },[userEmail])
+  }, [userEmail]);
 
   function handleSignIn() {
     if (isEmail(loginEmail) && isTextField(loginPassword)) {
@@ -102,8 +109,8 @@ const TopBar = ({ counter, setCounter, setLoginState,loginState }) => {
             duration: 3000,
             isClosable: true,
           });
-          Cookies.set('grabwayToken', loginEmail,7);
-          setRunContext('login');
+          Cookies.set("grabwayToken", loginEmail, 7);
+          setRunContext("login");
         })
         .catch((error) => {
           if (error.message === "Firebase: Error (auth/wrong-password).") {
@@ -150,7 +157,7 @@ const TopBar = ({ counter, setCounter, setLoginState,loginState }) => {
     ) {
       //proceed with signup
       createUserWithEmailAndPassword(auth, signupEmail, signupPassword)
-        .then(async(userCredential) => {
+        .then(async (userCredential) => {
           // Signed in
           const user = userCredential.user;
           onClose();
@@ -161,22 +168,27 @@ const TopBar = ({ counter, setCounter, setLoginState,loginState }) => {
             duration: 3000,
             isClosable: true,
           });
-          Cookies.set('grabwayToken', signupEmail,7);
+          Cookies.set("grabwayToken", signupEmail, 7);
           setTimeout(() => {
-            setRunContext('signup');
+            setRunContext("signup");
           }, 1500);
-          
-          
+
           //console.log(signupUserType);
-          if(signupUserType==='user'){
+          if (signupUserType === "user") {
             console.log("inside user if");
-            const res= await axios.post(`/createUser`,{signupEmail,signupPhone});
-            const userMongo=res.data.email;
+            const res = await axios.post(`/createUser`, {
+              signupEmail,
+              signupPhone,
+            });
+            const userMongo = res.data.email;
             setUserEmail(userMongo);
           }
-          if(signupUserType==='driver'){
-            const res=await axios.post(`/createDriver`,{signupEmail,signupPhone});
-            const driverMongo=res.data.email;
+          if (signupUserType === "driver") {
+            const res = await axios.post(`/createDriver`, {
+              signupEmail,
+              signupPhone,
+            });
+            const driverMongo = res.data.email;
             setUserEmail(driverMongo);
           }
         })
@@ -192,7 +204,7 @@ const TopBar = ({ counter, setCounter, setLoginState,loginState }) => {
               position: "top-right",
             });
           }
-          if(error.message==="Firebase: Error (auth/invalid-email)."){
+          if (error.message === "Firebase: Error (auth/invalid-email).") {
             toast({
               title: `Invalid Email`,
               status: "error",
@@ -200,7 +212,10 @@ const TopBar = ({ counter, setCounter, setLoginState,loginState }) => {
               position: "top-right",
             });
           }
-          if(error.message==="Firebase: Password should be at least 6 characters (auth/weak-password)."){
+          if (
+            error.message ===
+            "Firebase: Password should be at least 6 characters (auth/weak-password)."
+          ) {
             toast({
               title: `Password should be at least 6 characters`,
               status: "error",
@@ -245,7 +260,7 @@ const TopBar = ({ counter, setCounter, setLoginState,loginState }) => {
   }
   function handleGoogleSignIn() {
     signInWithPopup(auth, provider)
-      .then(async(result) => {
+      .then(async (result) => {
         // This gives you a Google Access Token. You can use it to access the Google API.
         const credential = GoogleAuthProvider.credentialFromResult(result);
         const token = credential.accessToken;
@@ -253,7 +268,7 @@ const TopBar = ({ counter, setCounter, setLoginState,loginState }) => {
         const user = result.user;
         console.log(user);
         console.log(result);
-        Cookies.set('grabwayToken', user.email,7);
+        Cookies.set("grabwayToken", user.email, 7);
         // IdP data available using getAdditionalUserInfo(result)
         // ...
         onClose();
@@ -265,21 +280,22 @@ const TopBar = ({ counter, setCounter, setLoginState,loginState }) => {
           isClosable: true,
         });
         console.log(user.email);
-        const userFound=await axios.post('/googlecheckUser', {email:user.email});
-        if(userFound!==null){
-          Cookies.set('grabwayToken', user.email,7);
-          setRunContext('signInWithGoogle');
+        const userFound = await axios.post("/googlecheckUser", {
+          email: user.email,
+        });
+        if (userFound !== null) {
+          Cookies.set("grabwayToken", user.email, 7);
+          setRunContext("signInWithGoogle");
           setCounter(true);
           setLoginState(true);
-        }
-        else{
+        } else {
           console.log("not found");
-          Cookies.set('grabwayGoogleToken', user.email);
+          Cookies.set("grabwayGoogleToken", user.email);
           //write registration redirect condition as
           //if(!grabwayToken or !grabwayGoogleToken) then redirect
           //if grabwayGoogleToken then show seperate registration page
           //if grabwayGoogle token not present and grabwayUser present then do like you were doing before
-          
+
           /*setCounter(true);
           setLoginState(true);
           return <Navigate to={'/registartion'}/>
@@ -310,7 +326,7 @@ const TopBar = ({ counter, setCounter, setLoginState,loginState }) => {
               GrabWay
             </div>
             <div className="flex justify-center items-center">
-              <img src="/assets/images/logo.png" />
+              <img src="/assets/images/logo.png" alt="logo"/>
             </div>
           </div>
         </Link>
@@ -406,9 +422,30 @@ const TopBar = ({ counter, setCounter, setLoginState,loginState }) => {
                                   size={"lg"}
                                   sx={{ width: "320px" }}
                                   variant={"filled"}
-                                  type="password"
+                                  type={showPassword ? "text" : "password"}
                                   placeholder="Enter Your Password"
                                 />
+                                <InputRightElement>
+                                  <IconButton
+                                    aria-label={
+                                      showPassword
+                                        ? "Hide password"
+                                        : "Show password"
+                                    }
+                                    icon={
+                                      showPassword ? (
+                                        <RiEyeOffLine />
+                                      ) : (
+                                        <RiEyeLine />
+                                      )
+                                    }
+                                    onClick={() =>
+                                      setShowPassword(!showPassword)
+                                    }
+                                    variant="unstyled"
+                                    size="md"
+                                  />
+                                </InputRightElement>
                               </InputGroup>
                             </div>
                             <div className="mb-[5%]">
@@ -511,9 +548,30 @@ const TopBar = ({ counter, setCounter, setLoginState,loginState }) => {
                                   size={"lg"}
                                   sx={{ width: "320px" }}
                                   variant={"filled"}
-                                  type="password"
+                                  type={showPassword ? "text" : "password"}
                                   placeholder="Enter Your Password"
                                 />
+                                <InputRightElement>
+                                  <IconButton
+                                    aria-label={
+                                      showPassword
+                                        ? "Hide password"
+                                        : "Show password"
+                                    }
+                                    icon={
+                                      showPassword ? (
+                                        <RiEyeOffLine />
+                                      ) : (
+                                        <RiEyeLine />
+                                      )
+                                    }
+                                    onClick={() =>
+                                      setShowPassword(!showPassword)
+                                    }
+                                    variant="unstyled"
+                                    size="md"
+                                  />
+                                </InputRightElement>
                               </InputGroup>
                             </div>
                             <div>
@@ -607,7 +665,7 @@ const TopBar = ({ counter, setCounter, setLoginState,loginState }) => {
             )}
 
             {loginState && (
-              <Link to ='/profile'>
+              <Link to="/profile">
                 <Avatar name="Kent Dodds" src="https://bit.ly/kent-c-dodds" />
               </Link>
             )}
