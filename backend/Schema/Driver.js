@@ -42,7 +42,7 @@ const RideHistorySchema=new mongoose.Schema({
 })
 
 const DriverSchema = new mongoose.Schema({
-    profilePicture:{type:String, unique:true},
+    profilePicture:{type:String},
     name:{type:String},
     email:{type:String,unique:true},
     phoneNumber:{type:Number},
@@ -55,7 +55,7 @@ const DriverSchema = new mongoose.Schema({
     rideHistory:[RideHistorySchema],
     credits:{type:Number},
     userType:{type:String},
-    experience:{type:Number},
+    experience:{type:String},
 });
 
 const DriverModel = mongoose.model('Driver', DriverSchema);

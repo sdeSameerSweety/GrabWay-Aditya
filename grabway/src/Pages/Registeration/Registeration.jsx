@@ -11,11 +11,15 @@ const Registration = () => {
   if (!hasUserData) {
     return <Navigate to={"/"} />;
   }
-
+  if(userData){
+    if((JSON.parse(userData).name)!==''){
+      return <Navigate to={"/"} />;
+    }
+  }
   const userType = JSON.parse(userData).userType;
   return (
     <>
-      {userType === "driver" ? <UserRegistration /> : <DriverRegistration />}
+      {userType === "driver" ?  <DriverRegistration />:<UserRegistration /> }
     </>
   );
 };
