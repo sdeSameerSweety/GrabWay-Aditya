@@ -17,7 +17,14 @@ export function UserContextProvider({ children }) {
           setUserEmail(res.data);
           Cookies.set('grabwayUser',(JSON.stringify(res.data)),7);
         });
+        
       }
+      if (email && googleToken) {
+       
+          setUserEmail(email);
+    
+        };
+        
   },[]);
 
   useEffect(() => {
@@ -28,6 +35,11 @@ export function UserContextProvider({ children }) {
         Cookies.set('grabwayUser', (JSON.stringify(res.data)),7);
       });
     }
+    if (email && googleToken) {
+       
+      setUserEmail(email);
+
+    };
 }, [runContext]);
   
   return (

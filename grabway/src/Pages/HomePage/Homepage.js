@@ -190,20 +190,15 @@ const TopSection = ({ nonceVal, loginState }) => {
       getgeoCode(destinationMob.current.value, "Destination");
     }
   };
-  const [userGoogleData, setUserGoogleData]=useState(null);
-  useEffect(()=>{
-    setUserGoogleData(Cookies.get("grabwayGoogleToken"));
-  })
-  
-  if (userGoogleData !== undefined) {
-      return <Navigate to={"/googleRegistration"}/>;
-    }
-
   const userData = Cookies.get("grabwayUser");
-  if (userData !== undefined) {
+  if (userData) {
     if ((JSON.parse(userData)).name==='') {
       return <Navigate to={"/registration"} userType=""/>;
     }
+  }
+  const googleUserData=Cookies.get('grabwayGoogleToken');
+  if(googleUserData){
+    return <Navigate to={'/googleRegistration'}/>
   }
   if (!isLoaded) {
     return (
