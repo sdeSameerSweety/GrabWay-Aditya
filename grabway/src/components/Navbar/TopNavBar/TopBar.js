@@ -164,7 +164,7 @@ const TopBar = ({ counter, setCounter, setLoginState,loginState }) => {
           Cookies.set('grabwayToken', signupEmail,7);
           setTimeout(() => {
             setRunContext('signup');
-          }, 1500);
+          }, 2000);
           
           
           //console.log(signupUserType);
