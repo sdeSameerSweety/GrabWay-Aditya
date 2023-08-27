@@ -169,9 +169,7 @@ const TopBar = ({ counter, setCounter, setLoginState, loginState }) => {
             isClosable: true,
           });
           Cookies.set("grabwayToken", signupEmail, 7);
-          setTimeout(() => {
-            setRunContext('signup');
-          }, 2000);
+          
           
           
           //console.log(signupUserType);
@@ -183,6 +181,9 @@ const TopBar = ({ counter, setCounter, setLoginState, loginState }) => {
             });
             const userMongo = res.data.email;
             setUserEmail(userMongo);
+            if(res){
+              setRunContext('signup');
+            }
           }
           if (signupUserType === "driver") {
             const res = await axios.post(`/createDriver`, {
@@ -191,6 +192,9 @@ const TopBar = ({ counter, setCounter, setLoginState, loginState }) => {
             });
             const driverMongo = res.data.email;
             setUserEmail(driverMongo);
+            if(res){
+              setRunContext('signup');
+            }
           }
         })
         .catch((error) => {
