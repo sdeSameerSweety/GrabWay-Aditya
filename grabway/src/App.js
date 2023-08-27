@@ -15,7 +15,7 @@ import Cookies from "js-cookie";
 import UserProfile from "./components/Profile/User/userProfile";
 import DriverRegistration from "./Pages/Registeration/DriverRegistration";
 import UserRegistration from "./Pages/Registeration/UserRegistration";
-import GRegisteration from "./components/GRegisteration/GRegisteration";
+import GRegistration from "./components/GRegisteration/GRegisteration";
 
 axios.defaults.baseURL = "http://localhost:8080";
 axios.defaults.withCredentials = true;
@@ -66,6 +66,7 @@ function App() {
           loginState={loginState}
         />
         <div style={intDivStyle}>
+          
           <Routes>
             {/* <Route path="/nearby" element={<NearbyMap nonceVal={nonce} />} /> */}
             <Route
@@ -76,8 +77,6 @@ function App() {
             <Route path="/maps" element={<MapLayout nonceVal={nonce} />} />
             <Route path="/dashboard" element={<Dashboard />} />
             <Route path="/userprofile" element={<UserProfile />} />
-            <Route path="/driverregistration" component={DriverRegistration} />
-            <Route path="/userregistration" component={UserRegistration} />
             <Route path="/registration" element={<Registeration />} />
             <Route path="/profile" element={<ProfilePage />} />
           </Routes>
