@@ -28,6 +28,7 @@ export default function Sidebar({
     console.log("Signout Successfull");
     Cookies.remove('grabwayToken');
     Cookies.remove('grabwayUser');
+    Cookies.remove('grabwayGoogleToken');
     setRunContext('logout');
     setCounter(false);
     setLoginState(false);

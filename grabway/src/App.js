@@ -13,9 +13,9 @@ import { UserContext, UserContextProvider } from "./context/Context";
 import ProfilePage from "./Pages/ProfilePages/index";
 import Cookies from "js-cookie";
 import UserProfile from "./components/Profile/User/userProfile";
-import DriverRegistration from "./Pages/Registeration/DriverRegistration";
-import UserRegistration from "./Pages/Registeration/UserRegistration";
-import GRegistration from "./components/GRegisteration/GRegisteration";
+import DriverRegistration from "./Pages/Registeration/DriverRegistration/DriverRegistration";
+import UserRegistration from "./Pages/Registeration/UserRegistration/UserRegistration";
+import GRegistration from "./Pages/Registeration/GRegisteration/GRegisteration";
 
 axios.defaults.baseURL = "http://localhost:8080";
 axios.defaults.withCredentials = true;
@@ -78,6 +78,7 @@ function App() {
             <Route path="/dashboard" element={<Dashboard />} />
             <Route path="/userprofile" element={<UserProfile />} />
             <Route path="/registration" element={<Registeration />} />
+            <Route path="/googleRegistration" element={<GRegistration />} />
             <Route path="/profile" element={<ProfilePage />} />
           </Routes>
           <Footer />

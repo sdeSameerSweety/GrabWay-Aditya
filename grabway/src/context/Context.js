@@ -9,8 +9,9 @@ export function UserContextProvider({ children }) {
   const [runContext ,setRunContext] = useState("");
 
   const email = Cookies.get("grabwayToken");
+  const googleToken=Cookies.get("grabwayGoogleToken");
   useEffect(() => {
-      if (email) {
+      if (email && !googleToken) {
         axios.post("/checkuser", { email }).then((res) => {
           console.log(res.data);
           setUserEmail(res.data);
@@ -20,7 +21,7 @@ export function UserContextProvider({ children }) {
   },[]);
 
   useEffect(() => {
-    if (email) {
+    if (email && !googleToken) {
       axios.post("/checkuser", { email }).then((res) => {
         console.log(res.data);
         setUserEmail(res.data);

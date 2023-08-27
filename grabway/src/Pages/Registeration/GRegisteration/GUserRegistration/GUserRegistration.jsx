@@ -1,5 +1,5 @@
 import React, { useContext, useState } from "react";
-import "./Registeration.css";
+import "../../Registeration.css";
 import {
   Container,
   Box,
@@ -18,18 +18,20 @@ import {
 import Cookies from "js-cookie";
 import { Navigate } from "react-router-dom";
 import axios from "axios";
-import { UserContext } from "../../context/Context";
+import { UserContext } from "../../../../context/Context";
+
 
 const UserRegistration = () => {
   const {setRunContext}=useContext(UserContext);
-  const userData = Cookies.get("grabwayUser");
+  const userData = Cookies.get("grabwayGoogleToken");
+  const googleUserType='user';
   const hasUserData = userData !== undefined;
   //console.log(userData);
   const [formData, setFormData] = useState({
     name: "",
     lastName: "",
-    email: hasUserData ? JSON.parse(userData).email : "",
-    phoneNumber: hasUserData ? JSON.parse(userData).phoneNumber : "",
+    email: hasUserData ? userData: "",
+    phoneNumber: "",
     location: "",
     addressLine1: "",
     addressLine2: "",
@@ -116,14 +118,17 @@ const UserRegistration = () => {
     if (Object.keys(newErrors).length === 0) {
       //Submission logic here
       //console.log("Form submitted successfully:", formData);
-      const response=await axios.post('/registerNewUser',{formData}).then((res)=>{
-        console.log(res.data);
+      const response=await axios.post('/googleCreateUser',{formData}).then((res)=>{
+        //console.log(res.data);
         setTimeout(() => {
-          setRunContext('driver from submited');
+          setRunContext('Google User form submited');
         }, 1500);
         if(res.data){
-          window.location.reload(false);
+            Cookies.remove('grabwayGoogleToken');
+            window.location.reload(false);
         }
+      }).catch(()=>{
+        console.log('Internal server Error');
       })
       setErrors({});
 
@@ -238,7 +243,7 @@ const UserRegistration = () => {
                 }}
                 minLength={10}
                 maxLength={10}
-                disabled={hasUserData}
+                
               />
 
               <FormErrorMessage>{errors.phoneNumber}</FormErrorMessage>

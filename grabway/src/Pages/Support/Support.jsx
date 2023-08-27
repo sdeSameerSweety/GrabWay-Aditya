@@ -60,11 +60,14 @@ export default function ContactFaq() {
     });
   };
 
- 
+  const userGoogleData = Cookies.get("grabwayGoogleToken");
+  if (userGoogleData !== undefined) {
+      return <Navigate to={"/googleRegistration"}/>;
+    }
   const userData = Cookies.get("grabwayUser");
   if (userData !== undefined) {
     if ((JSON.parse(userData)).name==='') {
-      return <Navigate to={"/registration"} />;
+      return <Navigate to={"/registration"} userType=""/>;
     }
   }
   if(!userData){

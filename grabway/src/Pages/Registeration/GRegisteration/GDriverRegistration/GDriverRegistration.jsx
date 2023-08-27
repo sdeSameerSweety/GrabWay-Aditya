@@ -1,5 +1,5 @@
 import React, { useContext, useState } from "react";
-import "./Registeration.css";
+import "../../Registeration.css";
 import {
   Container,
   Box,
@@ -21,18 +21,20 @@ import {
 import Cookies from "js-cookie";
 import { Navigate } from "react-router-dom";
 import axios from "axios";
-import { UserContext } from "../../context/Context";
+import { UserContext } from "../../../../context/Context";
+
 
 const DriverRegistration = () => {
   const {setRunContext}=useContext(UserContext);
-  const userData = Cookies.get("grabwayUser");
+  const userData = Cookies.get("grabwayGoogleToken");
+  const GoogleUserType='driver';
   const hasUserData = userData !== undefined;
   //console.log(userData);
   const [formData, setFormData] = useState({
     name: "",
     lastName: "",
-    email: hasUserData ? JSON.parse(userData).email : "",
-    phoneNumber: hasUserData ? JSON.parse(userData).phoneNumber : "",
+    email: hasUserData ? userData : "",
+    phoneNumber:"",
     location: "",
     addressLine1: "",
     addressLine2: "",
@@ -101,7 +103,7 @@ const DriverRegistration = () => {
         formData.dlNumber
       )
     ) {
-      newErrors.dlNumber = "DL is required";
+      newErrors.dlNumber = "DL is Invalid";
     }
     if (
       !/^[A-Z]{2}[ -]?[0-9]{2}[ -]?[A-Z]{1,2}[ -]?[0-9]{4}$/.test(
@@ -134,17 +136,18 @@ const DriverRegistration = () => {
     console.log(Object.keys(newErrors))
     if (Object.keys(newErrors).length === 0) {
       //Submission logic here
-      console.log('clicked');
-      const response=await axios.post('/registerNewDriver',{
-        formData
-      }).then((res)=>{
-        console.log(res);
+      //console.log('clicked');
+      const response=await axios.post('/googleCreateDriver',{formData}).then((res)=>{
+        //console.log(res.data);
         setTimeout(() => {
-          setRunContext('driver from submited');
+          setRunContext('Google Driver form submited');
         }, 1500);
         if(res.data){
-          window.location.reload(false);
+            Cookies.remove('grabwayGoogleToken');
+            window.location.reload(false);
         }
+      }).catch(()=>{
+        console.log('Internal server Error');
       })
       console.log("Form submitted successfully:", formData);
       setErrors({});
@@ -256,7 +259,7 @@ const DriverRegistration = () => {
                 }}
                 minLength={10}
                 maxLength={10}
-                disabled={hasUserData}
+                
               />
 
               <FormErrorMessage>{errors.phoneNumber}</FormErrorMessage>
@@ -359,11 +362,11 @@ const DriverRegistration = () => {
             <FormControl mt={4} isRequired isInvalid={!!errors.dlNumber}>
               <FormLabel>DL Number</FormLabel>
               <Input
-                type="number"
+                type="text"
                 placeholder="DL Number"
                 value={formData.dlNumber}
                 onChange={(e) =>
-                  setFormData({ ...formData, cdlNumber: e.target.value })
+                  setFormData({ ...formData, dlNumber: e.target.value })
                 }
               />
               <FormErrorMessage>{errors.dlNumber}</FormErrorMessage>
