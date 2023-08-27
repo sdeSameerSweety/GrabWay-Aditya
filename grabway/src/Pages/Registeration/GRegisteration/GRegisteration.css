@@ -57,9 +57,8 @@ p {
 }
 
 .animation-gif {
-  max-width: 60%;
-  /* width: 60%; */
-  height: 300px;
+  height: 50vh;
+  width: auto;
 }
 
 /* Media Queries */
@@ -87,7 +86,11 @@ p {
     padding: 10px 25px;
     font-size: 18px;
   }
-
+  .animation{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
   .animation-gif {
     width: 90%;
   }
