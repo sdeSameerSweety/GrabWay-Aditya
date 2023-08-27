@@ -21,7 +21,7 @@ import axios from "axios";
 import { UserContext } from "../../../context/Context";
 
 const UserRegistration = () => {
-  const {setRunContext}=useContext(UserContext);
+  const { setRunContext } = useContext(UserContext);
   const userData = Cookies.get("grabwayUser");
   const hasUserData = userData !== undefined;
   //console.log(userData);
@@ -36,7 +36,44 @@ const UserRegistration = () => {
     city: "",
     state: "",
     pin: "",
+    imgDp: "",
   });
+
+  // const [profilePhoto, setProfilePhoto] = useState("");
+  const handlePhotoChange = (event) => {
+    const file = event.target.files[0];
+    if (file) {
+      const reader = new FileReader();
+      reader.onload = (e) => {
+        compressImage(e.target.result);
+      };
+      reader.readAsDataURL(file);
+    }
+  };
+
+  const compressImage = (dataUrl) => {
+    const img = new Image();
+    img.src = dataUrl;
+    img.onload = () => {
+      const canvas = document.createElement("canvas");
+      const ctx = canvas.getContext("2d");
+
+      const maxWidth = 200; // You can adjust the max width as needed
+      const scaleFactor = maxWidth / img.width;
+      canvas.width = maxWidth;
+      canvas.height = img.height * scaleFactor;
+
+      ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
+
+      // Convert canvas data back to a compressed data URL
+      const compressedDataUrl = canvas.toDataURL("image/jpeg", 0.5); // Adjust quality as needed
+
+      setFormData({
+        ...formData,
+        imgDp: compressedDataUrl,
+      });
+    };
+  };
 
   const handlePincodeChange = async (e) => {
     const pincode = e.target.value;
@@ -95,39 +132,38 @@ const UserRegistration = () => {
     return newErrors;
   };
 
-  const [profilePhoto, setProfilePhoto] = useState(null);
+  // const [profilePhoto, setProfilePhoto] = useState(null);
+  // const handlePhotoChange = (event) => {
+  //   const file = event.target.files[0];
+  //   if (file) {
+  //     const reader = new FileReader();
+  //     reader.onload = (e) => {
+  //       setProfilePhoto(e.target.result);
+  //     };
+  //     reader.readAsDataURL(file);
+  //   }
+  // };
 
-  const handlePhotoChange = (event) => {
-    const file = event.target.files[0];
-    if (file) {
-      const reader = new FileReader();
-      reader.onload = (e) => {
-        setProfilePhoto(e.target.result);
-      };
-      reader.readAsDataURL(file);
-    }
-  };
-
-  const handleSubmit = async(e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault(); // Prevent the default form submission behavior
-    
+
     const newErrors = validateForm();
-    console.log(Object.keys(newErrors))
+    console.log(Object.keys(newErrors));
     if (Object.keys(newErrors).length === 0) {
       //Submission logic here
       //console.log("Form submitted successfully:", formData);
-      const response=await axios.post('/registerNewUser',{formData}).then((res)=>{
-        console.log(res.data);
-        setTimeout(() => {
-          setRunContext('driver from submited');
-        }, 1500);
-        if(res.data){
-          window.location.reload(false);
-        }
-      })
+      const response = await axios
+        .post("/registerNewUser", { formData })
+        .then((res) => {
+          console.log(res.data);
+          setTimeout(() => {
+            setRunContext("driver from submited");
+          }, 1500);
+          if (res.data) {
+            window.location.reload(false);
+          }
+        });
       setErrors({});
-
-      
     } else {
       setErrors(newErrors);
     }
@@ -180,12 +216,13 @@ const UserRegistration = () => {
             Welcome to Grabway!
           </Heading>
           <Box mt={4}>
-            <Avatar size="xl" mb={4} src={profilePhoto} />
             <FormControl>
               <FormLabel>Profile Photo</FormLabel>
+              <Avatar size="xl" mb={4} src={formData} />
               <Input
                 type="file"
                 accept="image/*"
+                value={formData.imgDp}
                 onChange={handlePhotoChange}
                 mb={4}
               />
