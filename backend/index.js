@@ -260,6 +260,7 @@ app.post('/registerNewUser',async(req,res)=>{
   const city = formData.city;
   const state=formData.state;
   const pin=formData.pin;
+  const profilePicture=formData.imgDp;
  if(formData){
   try{
     const updatedResponse=await UserModel.updateOne(
@@ -268,6 +269,7 @@ app.post('/registerNewUser',async(req,res)=>{
       },
       {
           $set:{
+              profilePicture:profilePicture,
               name:name,
               phoneNumber:phoneNumber,
               "address.0.addressName":addressName,
