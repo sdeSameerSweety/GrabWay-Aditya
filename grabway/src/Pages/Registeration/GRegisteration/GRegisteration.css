@@ -1,18 +1,18 @@
 /* WelcomePage.css */
 
 .gRegisteration-container {
-  background-color: #292c35;
+  background-color: #ffffff;
   height: 100vh;
   display: flex;
   flex-direction: column;
-  justify-content: center;
-  margin: 0% 2%;
+
+  margin: 0%;
   align-items: center;
   text-align: center;
 }
 
 .logo {
-  width: 150px;
+  width: 80px;
   height: auto;
 }
 
@@ -23,8 +23,9 @@
 
 h1 {
   font-size: 32px;
-  color: #ffffff;
+  color: #000000;
   margin-bottom: 10px;
+  font-weight: bold;
 }
 
 p {
@@ -44,7 +45,7 @@ p {
   padding: 12px 30px;
   border: none;
   border-radius: 50px;
-  background-color: #ff5a5f;
+  background-color: rgb(229, 62, 62);
   color: #ffffff;
   font-size: 20px;
   cursor: pointer;
