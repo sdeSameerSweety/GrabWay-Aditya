@@ -8,18 +8,22 @@ import Cookies from "js-cookie";
 import { Navigate } from "react-router-dom";
 
 export default function Settings() {
-  const userGoogleData = Cookies.get("grabwayGoogleToken");
-  if (userGoogleData !== undefined) {
-      return <Navigate to={"/googleRegistration"}/>;
-    }
+  const googleUserData = Cookies.get("grabwayGoogleToken");
+  
   const userData = Cookies.get("grabwayUser");
   if (userData !== undefined) {
     if ((JSON.parse(userData)).name==='') {
       return <Navigate to={"/registration"} userType=""/>;
     }
   }
-  if(!userData){
-      return <Navigate to={"/"}/>
+  if (!userData) {
+    if(!googleUserData){
+      return <Navigate to={"/"} />;
+    }
+    if (googleUserData) {
+      return <Navigate to={"/googleRegistration"}/>;
+    }
+    
   }
 
   return (

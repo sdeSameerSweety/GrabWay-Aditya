@@ -12,7 +12,7 @@ export default function Sidebar({
   setLoginState,
   setCounter
 }) {
-
+ 
   const [sidebarClass, setSidebarClass] = useState("sidebar");
   const toggleClass = () => {
     if (sidebarClass === "sidebar open") {

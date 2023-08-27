@@ -6,10 +6,16 @@ import UserRegistration from "./UserRegistration/UserRegistration";
 
 const Registration = (props) => {
   const userData = Cookies.get("grabwayUser");
-  const hasUserData = userData !== undefined;
+  const googleUserData=Cookies.get('grabwayGoogleToken');
   const googleUserType=props.userType;
-  if (!hasUserData) {
-    return <Navigate to={"/"} />;
+  if (!userData) {
+    if(!googleUserData){
+      return <Navigate to={"/"} />;
+    }
+    if (googleUserData) {
+      return <Navigate to={"/googleRegistration"}/>;
+    }
+    
   }
   if(userData){
     if((JSON.parse(userData).name)!==''){
@@ -21,14 +27,7 @@ const Registration = (props) => {
   //{googleUserType==='driver'? <GoogleDriverRegistration/>:<GoogleUserRegistration/>}
   return (
     <>
-      {<>
-      {googleUserType==='' && <>
-      {userType === "driver" ?  <DriverRegistration />:<UserRegistration /> }
-      </>}
-      {googleUserType!=='' && <>
-        google driver / user conditional rendering page.
-      </>}
-      </>}
+       {userType === "driver" ?  <DriverRegistration />:<UserRegistration /> }
     </>
   );
 };

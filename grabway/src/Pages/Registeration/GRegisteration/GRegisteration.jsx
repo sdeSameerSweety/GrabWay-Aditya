@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState,useEffect } from "react";
 import "./GRegisteration.css";
 import { Navigate } from "react-router-dom";
 import GDriverRegistation from "./GDriverRegistration/GDriverRegistration";
@@ -17,8 +17,8 @@ const GRegistration = () => {
   function handleDriverClick(){
     setDriver(true);
   }
-  const googleToken=Cookies.get('grabwayGoogleToken');
-  if(!googleToken){
+  const googleUserData=Cookies.get('grabwayGoogleToken');
+  if(!googleUserData){
     return <Navigate to={"/"}/>
   }
   return (<>
