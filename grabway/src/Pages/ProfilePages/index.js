@@ -9,31 +9,30 @@ import { Navigate } from "react-router-dom";
 
 export default function Settings() {
   const googleUserData = Cookies.get("grabwayGoogleToken");
-  
+
   const userData = Cookies.get("grabwayUser");
   if (userData !== undefined) {
-    if ((JSON.parse(userData)).name==='') {
-      return <Navigate to={"/registration"} userType=""/>;
+    if (JSON.parse(userData).name === "") {
+      return <Navigate to={"/registration"} userType="" />;
     }
   }
   if (!userData) {
-    if(!googleUserData){
+    if (!googleUserData) {
       return <Navigate to={"/"} />;
     }
     if (googleUserData) {
-      return <Navigate to={"/googleRegistration"}/>;
+      return <Navigate to={"/googleRegistration"} />;
     }
-    
   }
 
   return (
     <>
       <div className="flex flex-wrap">
         <div className="w-full lg:w-8/12 px-4">
-          <UserSettings />
+          <UserSettings userData={userData} />
         </div>
         <div className="w-full lg:w-4/12 px-4">
-          <UserProfile />
+          <UserProfile userData={userData} />
         </div>
       </div>
     </>
