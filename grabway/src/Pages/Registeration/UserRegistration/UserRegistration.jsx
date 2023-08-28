@@ -39,8 +39,10 @@ const UserRegistration = () => {
     imgDp: "",
   });
 
-  // const [profilePhoto, setProfilePhoto] = useState("");
+  const [compressedImage, setCompressedImage] = useState("");
+
   const handlePhotoChange = (event) => {
+    console.log(event);
     const file = event.target.files[0];
     if (file) {
       const reader = new FileReader();
@@ -58,23 +60,50 @@ const UserRegistration = () => {
       const canvas = document.createElement("canvas");
       const ctx = canvas.getContext("2d");
 
-      const maxWidth = 200; // You can adjust the max width as needed
+      const maxWidth = 300;
       const scaleFactor = maxWidth / img.width;
       canvas.width = maxWidth;
       canvas.height = img.height * scaleFactor;
 
       ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
 
-      // Convert canvas data back to a compressed data URL
-      const compressedDataUrl = canvas.toDataURL("image/jpeg", 0.5); // Adjust quality as needed
+      const compressedDataUrl = canvas.toDataURL("image/jpeg", 0.7);
 
-      setFormData({
-        ...formData,
-        imgDp: compressedDataUrl,
-      });
+      setCompressedImage(compressedDataUrl); // Update the compressed image state
     };
   };
 
+  const submitFormData = async (e) => {
+    e.preventDefault();
+    const newErrors = validateForm();
+    if (Object.keys(newErrors).length === 0) {
+      try {
+        const response = await axios.post("/registerNewUser", {
+          formData,
+          imgDp: compressedImage, // Make sure this property name is correct
+        });
+        // Handle the response from the backend
+        if (response.data) {
+          console.log("Form submitted successfully:", response.data);
+
+          // Perform any necessary actions after successful submission
+          setTimeout(() => {
+            setRunContext("driver from submitted");
+          }, 1500);
+
+          // Reload the page
+          window.location.reload(false);
+        }
+      } catch (error) {
+        console.error("Error submitting form:", error);
+        // Handle error and show error messages to the user
+      }
+    } else {
+      setErrors(newErrors);
+    }
+  };
+
+  
   const handlePincodeChange = async (e) => {
     const pincode = e.target.value;
     setFormData({
@@ -128,7 +157,6 @@ const UserRegistration = () => {
     //if (!formData.pinCode) newErrors.pinCode = "Pin Code is required";
     // else if (!/^\d{6}$/.test(formData.pinCode))
     //   newErrors.pinCode = "Pin Code should be a 6-digit number";
-
     return newErrors;
   };
 
@@ -146,7 +174,7 @@ const UserRegistration = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault(); // Prevent the default form submission behavior
-
+    submitFormData();
     const newErrors = validateForm();
     console.log(Object.keys(newErrors));
     if (Object.keys(newErrors).length === 0) {
@@ -218,11 +246,15 @@ const UserRegistration = () => {
           <Box mt={4}>
             <FormControl>
               <FormLabel>Profile Photo</FormLabel>
-              <Avatar size="xl" mb={4} src={formData} />
+              <Avatar
+                size="xl"
+                mb={4}
+                src={compressedImage || formData.imgDp}
+              />
               <Input
                 type="file"
                 accept="image/*"
-                value={formData.imgDp}
+                // value={formData.imgDp}
                 onChange={handlePhotoChange}
                 mb={4}
               />
@@ -317,8 +349,8 @@ const UserRegistration = () => {
             <FormControl mt={4} isRequired isInvalid={!!errors.pin}>
               <FormLabel>PIN</FormLabel>
               <Input
-                type="text"
-                placeholder="PIN"
+                type="number"
+                placeholder="PIN Code"
                 value={formData.pin}
                 onChange={(e) => {
                   setFormData({ ...formData, pin: e.target.value });
