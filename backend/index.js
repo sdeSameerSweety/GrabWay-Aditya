@@ -378,10 +378,10 @@ app.post('/routeDriverRegistration',async(req,res)=>{
           routes:{
             seats:seats,
             plan:'basic',
-            'origin':[{'text':originText},{'lat':originLat},{'long':originLong}],
-            'destination':[{'text':destinationText},{'lat':destinationLat},{'long':destinationLong}],
-            'originTime':[{'start':originStartTime},{'end':originEndTime}],
-            'destinationTime':[{'start':destinationStartTime},{'end':destinationEndTime}],
+            'origin':[{'text':originText,'lat':originLat,'long':originLong}],
+            'destination':[{'text':destinationText,'lat':destinationLat,'long':destinationLong}],
+            'originTime':[{'start':originStartTime,'end':originEndTime}],
+            'destinationTime':[{'start':destinationStartTime,'end':destinationEndTime}],
           }
         }
       }
