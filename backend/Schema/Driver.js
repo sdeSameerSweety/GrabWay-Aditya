@@ -26,19 +26,33 @@ const LocationSchema=new mongoose.Schema({
     long:{type:Number}
 });
 
+const CustomerSchema =new mongoose.Schema({
+    email:{type:String},
+    seatNumber:{type:Number},
+    originLocation:[LocationSchema],
+    originTime:{type:String},
+    destinationLocation:[LocationSchema],
+    destinationTime:{type:String},
+})
+const RouteTime=new mongoose.Schema({
+    start:{type:String},
+    end:{type:String}
+})
 const RouteSchema=new mongoose.Schema({
-    origin:{LocationSchema},
-    destination:{LocationSchema},
+    origin:[LocationSchema],
+    destination:[LocationSchema],
     plan:{type:String},
     seats:{type:Number},
-    //add a list of customers with their email and name in this.
+    originTime:[RouteTime],
+    destinationTime:[RouteTime],
+    customers:[CustomerSchema],
 })
 
 
 const RideHistorySchema=new mongoose.Schema({
     rideId:{type:String},
-    origin:{LocationSchema},
-    destination:{LocationSchema},
+    origin:[LocationSchema],
+    destination:[LocationSchema],
     otp:{type:Number}
 })
 

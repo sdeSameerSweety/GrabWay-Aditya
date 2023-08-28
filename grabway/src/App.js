@@ -19,6 +19,7 @@ import GRegistration from "./Pages/Registeration/GRegisteration/GRegisteration";
 import Map from "./Pages/MapPage/Map";
 import DriverHomePage from "./Pages/HomePage/DriverHomepage/DriverHomePage";
 import UserHomePage from "./Pages/HomePage/UserHomepage/UserHomepage";
+import RouteRegisteration from "./Pages/RouteRegisteration/RouteDriverRegisteration";
 
 axios.defaults.baseURL = "http://localhost:8080";
 axios.defaults.withCredentials = true;
@@ -85,6 +86,7 @@ function App() {
             <Route path="/profile" element={<ProfilePage />} />
             <Route path="/driverHomePage" element={<DriverHomePage nonceVal={nonce} loginState={loginState} />} />
             <Route path="/userHomePage" element={<UserHomePage nonceVal={nonce} loginState={loginState} />} />
+            <Route path="/routeDriverRegistration" element={<RouteRegisteration/>} />
           </Routes>
           <Footer />
         </div>
