@@ -30,7 +30,8 @@ const RouteSchema=new mongoose.Schema({
     origin:{LocationSchema},
     destination:{LocationSchema},
     plan:{type:String},
-    seats:{type:Number}
+    seats:{type:Number},
+    //add a list of customers with their email and name in this.
 })
 
 
