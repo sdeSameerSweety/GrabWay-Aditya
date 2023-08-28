@@ -77,13 +77,16 @@ const TopSection = ({ nonceVal, loginState }) => {
 
   const userData = Cookies.get("grabwayUser");
   if (userData) {
-    if (JSON.parse(userData).name === "") {
-      return <Navigate to={"/registration"} userType="" />;
+    if ((JSON.parse(userData)).name==='') {
+      return <Navigate to={"/registration"} userType=""/>;
     }
   }
-  const googleUserData = Cookies.get("grabwayGoogleToken");
-  if (googleUserData) {
-    return <Navigate to={"/googleRegistration"} />;
+  const googleUserData=Cookies.get('grabwayGoogleToken');
+  if(googleUserData){
+    return <Navigate to={'/googleRegistration'}/>
+  }
+  if(!Cookies.get('grabwayToken')){
+    return <Navigate to={'/'}/>
   }
 
   return (
