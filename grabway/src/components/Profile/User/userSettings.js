@@ -321,7 +321,7 @@ export default function UserSettings({ userData }) {
 
             <hr className="mt-6 border-b-1 border-blueGray-300" />
 
-            <h6 className="text-blueGray-400 text-sm mt-3 mb-6 font-bold uppercase">
+           {/* <h6 className="text-blueGray-400 text-sm mt-3 mb-6 font-bold uppercase">
               About Me
             </h6>
             <div className="flex flex-wrap">
@@ -342,7 +342,7 @@ export default function UserSettings({ userData }) {
                   ></textarea>
                 </div>
               </div>
-            </div>
+                  </div>*/}
           </form>
         </div>
       </div>
