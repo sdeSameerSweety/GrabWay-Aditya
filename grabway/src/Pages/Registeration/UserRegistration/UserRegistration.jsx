@@ -19,6 +19,7 @@ import Cookies from "js-cookie";
 import { Navigate } from "react-router-dom";
 import axios from "axios";
 import { UserContext } from "../../../context/Context";
+import imageCompression from "browser-image-compression";
 
 const UserRegistration = () => {
   const { setRunContext } = useContext(UserContext);
@@ -39,38 +40,25 @@ const UserRegistration = () => {
     imgDp: "",
   });
 
-  const [compressedImage, setCompressedImage] = useState("");
-
-  const handlePhotoChange = (event) => {
-    console.log(event);
+  const handlePhotoChange = async (event) => {
     const file = event.target.files[0];
     if (file) {
-      const reader = new FileReader();
-      reader.onload = (e) => {
-        compressImage(e.target.result);
-      };
-      reader.readAsDataURL(file);
+      try {
+        const options = {
+          maxSizeMB: 0.01,
+          maxWidthOrHeight: 300,
+        };
+
+        const compressedFile = await imageCompression(file, options);
+        const dataUrl = URL.createObjectURL(compressedFile);
+        setFormData({
+          ...formData,
+          imgDp: dataUrl,
+        });
+      } catch (error) {
+        console.error("Error compressing image:", error);
+      }
     }
-  };
-
-  const compressImage = (dataUrl) => {
-    const img = new Image();
-    img.src = dataUrl;
-    img.onload = () => {
-      const canvas = document.createElement("canvas");
-      const ctx = canvas.getContext("2d");
-
-      const maxWidth = 300;
-      const scaleFactor = maxWidth / img.width;
-      canvas.width = maxWidth;
-      canvas.height = img.height * scaleFactor;
-
-      ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
-
-      const compressedDataUrl = canvas.toDataURL("image/jpeg", 0.7);
-
-      setCompressedImage(compressedDataUrl); // Update the compressed image state
-    };
   };
 
   const submitFormData = async (e) => {
@@ -78,22 +66,34 @@ const UserRegistration = () => {
     const newErrors = validateForm();
     if (Object.keys(newErrors).length === 0) {
       try {
-        const response = await axios.post("/registerNewUser", {
-          formData,
-          imgDp: compressedImage, // Make sure this property name is correct
-        });
-        // Handle the response from the backend
-        if (response.data) {
-          console.log("Form submitted successfully:", response.data);
+        const options = {
+          maxSizeMB: 0.01,
+          maxWidthOrHeight: 300,
+        };
 
-          // Perform any necessary actions after successful submission
-          setTimeout(() => {
-            setRunContext("driver from submitted");
-          }, 1500);
+        const compressedFile = await imageCompression(
+          document.querySelector('input[type="file"]').files[0],
+          options
+        );
 
-          // Reload the page
-          window.location.reload(false);
-        }
+        const formDataWithImage = new FormData();
+        formDataWithImage.append("formData", JSON.stringify(formData));
+        formDataWithImage.append(
+          "profilePhoto",
+          compressedFile,
+          "compressed.jpg"
+        );
+
+        const response = await axios.post(
+          "/registerNewUser",
+          formDataWithImage,
+          {
+            headers: {
+              "Content-Type": "multipart/form-data",
+            },
+          }
+        );
+        // Rest of your code...
       } catch (error) {
         console.error("Error submitting form:", error);
         // Handle error and show error messages to the user
@@ -103,7 +103,7 @@ const UserRegistration = () => {
     }
   };
 
-  
+
   const handlePincodeChange = async (e) => {
     const pincode = e.target.value;
     setFormData({
@@ -173,7 +173,7 @@ const UserRegistration = () => {
   // };
 
   const handleSubmit = async (e) => {
-    e.preventDefault(); // Prevent the default form submission behavior
+    // e.preventDefault(); // Prevent the default form submission behavior
     submitFormData();
     const newErrors = validateForm();
     console.log(Object.keys(newErrors));
@@ -246,11 +246,7 @@ const UserRegistration = () => {
           <Box mt={4}>
             <FormControl>
               <FormLabel>Profile Photo</FormLabel>
-              <Avatar
-                size="xl"
-                mb={4}
-                src={compressedImage || formData.imgDp}
-              />
+              <Avatar size="xl" mb={4} src={formData.imgDp} />
               <Input
                 type="file"
                 accept="image/*"
