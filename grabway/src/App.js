@@ -20,7 +20,7 @@ import Map from "./Pages/MapPage/Map";
 import DriverHomePage from "./Pages/HomePage/DriverHomepage/DriverHomePage";
 import UserHomePage from "./Pages/HomePage/UserHomepage/UserHomepage";
 import RouteRegisteration from "./Pages/RouteRegisteration/RouteDriverRegisteration";
-import RouteDriverRegisteration from "./Pages/RouteRegisteration/RouteDriverRegisteration";
+
 axios.defaults.baseURL = "http://localhost:8080";
 axios.defaults.withCredentials = true;
 // import NearbyMap from "./components/Map/NearbyMap";
@@ -70,7 +70,6 @@ function App() {
           loginState={loginState}
         />
         <div style={intDivStyle}>
-          <RouteDriverRegisteration />
           <Routes>
             {/* <Route path="/nearby" element={<NearbyMap nonceVal={nonce} />} /> */}
             <Route
