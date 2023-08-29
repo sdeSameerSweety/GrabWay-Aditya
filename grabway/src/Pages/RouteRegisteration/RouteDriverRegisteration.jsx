@@ -260,10 +260,10 @@ const RouteDriverRegisteration = () => {
             <Checkbox
               isChecked={isChecked}
               onChange={handleCheckboxChange}
-              size="lg"
+              size="sm"
               // onSubmit={handleSubmit}
             >
-              I accept the terms and conditions
+              I accept the terms and conditions**
             </Checkbox>
             <FormErrorMessage>{error}</FormErrorMessage>
           </FormControl>
