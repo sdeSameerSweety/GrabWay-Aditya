@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from "react";
-import { Navigate, useNavigate } from "react-router-dom";
+import { Navigate, Link } from "react-router-dom";
 import "./DriverHomePage.css";
 import {
   Card,
@@ -95,7 +95,7 @@ const TopSection = ({ nonceVal, loginState }) => {
         <div className="flex justify-center items-center flex-row m-5">
           <div className="flex justify-center items-center flex-col mt-5 ">
             <div className="flex justify-center items-center mb-10">
-              <Button
+              <Link to='/routeDriverLocation'><Button
                 colorScheme="red"
                 sx={{
                   bgColor: "#E51B23",
@@ -104,7 +104,7 @@ const TopSection = ({ nonceVal, loginState }) => {
                 }}
               >
                 Add New Route
-              </Button>
+              </Button></Link>
             </div>
             <div className="flex flex-col justify-between items-center gap-10 mt-5">
               {routes.map((element, index) => {
@@ -241,7 +241,8 @@ const TopSection = ({ nonceVal, loginState }) => {
         <div className="flex justify-center items-center flex-row m-5">
           <div className="flex justify-center items-center flex-col mt-5 ">
             <div className="flex justify-center items-center mb-10">
-              <Button
+              <Link to='/routeDriverLocation'><Button
+             
                 colorScheme="red"
                 sx={{
                   bgColor: "#E51B23",
@@ -250,7 +251,7 @@ const TopSection = ({ nonceVal, loginState }) => {
                 }}
               >
                 Add New Route
-              </Button>
+              </Button></Link>
             </div>
             <div className="flex flex-col justify-between items-center gap-10 mt-5">
               {routes.map((element, index) => {

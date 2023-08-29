@@ -364,10 +364,10 @@ app.post('/routeDriverRegistration',async(req,res)=>{
   const destinationText=formData.destinationText;
   const destinationLat=formData.destinationLat;
   const destinationLong=formData.destinationLong;
-  const originStartTime = formData.originStartTime;
-  const originEndTime=formData.originEndTime;
-  const destinationStartTime=formData.destinantionStartTime;
-  const destinationEndTime=formData.destinantionEndTime;
+  const originStartTime = formData.originStartTime.from;
+  const originEndTime=formData.originStartTime.to;
+  const destinationStartTime=formData.destinantionStartTime.from;
+  const destinationEndTime=formData.destinantionStartTime.to;
   const seats=formData.seats;
  if(formData){
   try{
