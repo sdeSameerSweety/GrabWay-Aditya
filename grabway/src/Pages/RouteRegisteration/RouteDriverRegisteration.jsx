@@ -34,12 +34,6 @@ const RouteDriverRegisteration = () => {
   const [seats, setSeats] = useState(null);
   const googleUserData = Cookies.get("grabwayGoogleToken");
   const userData = Cookies.get("grabwayUser");
-  // Modify the initialization of state variables
-  //const [originStartTime, setOriginStartTime] = useState({ from: "", to: "" });
-  //const [destinationStartTime, setDestinationStartTime] = useState({
- //   from: "",
-   // to: "",
-  //});
   const [originTimeError, setOriginTimeError] = useState("");
   const [destinationTimeError, setDestinationTimeError] = useState("");
 
@@ -194,24 +188,14 @@ const RouteDriverRegisteration = () => {
                 type="time"
                 placeholder="From"
                 value={originStartTime}
-                onChange={(e) =>
-                  setOriginStartTime({
-                    ...originStartTime,
-                    from: e.target.value,
-                  })
-                }
+                onChange={(e) => setOriginStartTime(e.target.value)}
               />
 
               <Input
                 type="time"
                 placeholder="To"
                 value={originEndTime}
-                onChange={(e) =>
-                  setOriginEndTime({
-                    ...originEndTime,
-                    to: e.target.value,
-                  })
-                }
+                onChange={(e) => setOriginEndTime(e.target.value)}
                 ml={5}
               />
             </Flex>
@@ -224,23 +208,14 @@ const RouteDriverRegisteration = () => {
                 type="time"
                 placeholder="From"
                 value={destinationStartTime}
-                onChange={(e) =>
-                  setDestinationStartTime({
-                    ...destinationStartTime,
-                    from: e.target.value,
-                  })
-                }
+                onChange={(e) => setDestinationStartTime(e.target.value)}
               />
+
               <Input
                 type="time"
                 placeholder="To"
                 value={destinationEndTime}
-                onChange={(e) =>
-                  setDestinationStartTime({
-                    ...destinationStartTime,
-                    to: e.target.value,
-                  })
-                }
+                onChange={(e) => setDestinationEndTime(e.target.value)}
                 ml={5}
               />
             </Flex>
@@ -252,7 +227,7 @@ const RouteDriverRegisteration = () => {
               type="number"
               placeholder="Number of available seats"
               value={seats}
-              onChange={(e) => setSeats(e.target.value.slice(0, 1))}
+              onChange={(e) => setSeats(e.target.value.slice(0, 2))}
             />
             <FormErrorMessage>{errors.seats}</FormErrorMessage>
           </FormControl>
@@ -260,10 +235,9 @@ const RouteDriverRegisteration = () => {
             <Checkbox
               isChecked={isChecked}
               onChange={handleCheckboxChange}
-              size="lg"
-              // onSubmit={handleSubmit}
+              size="sm"
             >
-              I accept the terms and conditions
+              I accept the terms and conditions**
             </Checkbox>
             <FormErrorMessage>{error}</FormErrorMessage>
           </FormControl>
