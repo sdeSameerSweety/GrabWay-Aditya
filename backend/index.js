@@ -19,13 +19,15 @@ const jwtSecretKey = process.env.JWT_SECRET;
 const app = express();
 app.use(cookieParser());
 app.use(express.json());
-app.use(cors({
-  methods: 'GET,POST,PATCH,DELETE,OPTIONS',
-  optionsSuccessStatus: 200,
-  origin: PUBLIC_URL,
-  credentials:true
-}));
-app.options('*', cors());
+app.use(
+  cors({
+    methods: "GET,POST,PATCH,DELETE,OPTIONS",
+    optionsSuccessStatus: 200,
+    origin: PUBLIC_URL,
+    credentials: true,
+  })
+);
+app.options("*", cors());
 
 app.post("/checkuser", async (req, res) => {
   await mongoose.connect(MONGO_URL);
@@ -336,38 +338,46 @@ app.post("/registerNewDriver", async (req, res) => {
 app.post("/routeDriverRegistration", async (req, res) => {
   await mongoose.connect(MONGO_URL);
   console.log(req.body.formData);
-  
-  const formData=req.body.formData;
-  const email=formData.email;
-  const originText=formData.originText;
-  const originLat=formData.originLat;
-  const originLong=formData.originLong;
-  const destinationText=formData.destinationText;
-  const destinationLat=formData.destinationLat;
-  const destinationLong=formData.destinationLong;
+
+  const formData = req.body.formData;
+  const email = formData.email;
+  const originText = formData.originText;
+  const originLat = formData.originLat;
+  const originLong = formData.originLong;
+  const destinationText = formData.destinationText;
+  const destinationLat = formData.destinationLat;
+  const destinationLong = formData.destinationLong;
   const originStartTime = formData.originStartTime;
-  const originEndTime=formData.originEndTime;
-  const destinationStartTime=formData.destinantionStartTime;
-  const destinationEndTime=formData.destinantionEndTime;
-  const seats=formData.seats;
- if(formData){
-  try{
-    const updatedResponse=await DriverModel.updateOne(
-      {email:email},
-      {
-        $push:{
-          routes:{
-            seats:seats,
-            plan:'basic',
-            'origin':[{'text':originText,'lat':originLat,'long':originLong}],
-            'destination':[{'text':destinationText,'lat':destinationLat,'long':destinationLong}],
-            'originTime':[{'start':originStartTime,'end':originEndTime}],
-            'destinationTime':[{'start':destinationStartTime,'end':destinationEndTime}],
-          }
+  const originEndTime = formData.originEndTime;
+  const destinationStartTime = formData.destinantionStartTime;
+  const destinationEndTime = formData.destinantionEndTime;
+  const seats = formData.seats;
+  if (formData) {
+    try {
+      const updatedResponse = await DriverModel.updateOne(
+        { email: email },
+        {
+          $push: {
+            routes: {
+              seats: seats,
+              plan: "basic",
+              origin: [{ text: originText, lat: originLat, long: originLong }],
+              destination: [
+                {
+                  text: destinationText,
+                  lat: destinationLat,
+                  long: destinationLong,
+                },
+              ],
+              originTime: [{ start: originStartTime, end: originEndTime }],
+              destinationTime: [
+                { start: destinationStartTime, end: destinationEndTime },
+              ],
+            },
+          },
         }
-      }
-    )
-      if(updatedResponse){
+      );
+      if (updatedResponse) {
         res.status(200).json(true);
       } else {
         res.status(200).json(null);
