@@ -48,19 +48,22 @@ const UserRegistration = () => {
           maxSizeMB: 0.01,
           maxWidthOrHeight: 300,
         };
-
         const compressedFile = await imageCompression(file, options);
-        const dataUrl = URL.createObjectURL(compressedFile);
-        setFormData({
-          ...formData,
-          imgDp: dataUrl,
-        });
+        await imageCompression
+          .getDataUrlFromFile(compressedFile)
+          .then((dataUrl) => {
+            setFormData({
+              ...formData,
+              imgDp: dataUrl,
+            });
+          });
       } catch (error) {
         console.error("Error compressing image:", error);
       }
     }
   };
 
+  console.log(formData.imgDp);
   const submitFormData = async (e) => {
     e.preventDefault();
     const newErrors = validateForm();
@@ -102,7 +105,6 @@ const UserRegistration = () => {
       setErrors(newErrors);
     }
   };
-
 
   const handlePincodeChange = async (e) => {
     const pincode = e.target.value;
