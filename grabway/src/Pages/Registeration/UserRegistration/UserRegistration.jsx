@@ -19,9 +19,10 @@ import Cookies from "js-cookie";
 import { Navigate } from "react-router-dom";
 import axios from "axios";
 import { UserContext } from "../../../context/Context";
+import imageCompression from "browser-image-compression";
 
 const UserRegistration = () => {
-  const {setRunContext}=useContext(UserContext);
+  const { setRunContext } = useContext(UserContext);
   const userData = Cookies.get("grabwayUser");
   const hasUserData = userData !== undefined;
   //console.log(userData);
@@ -36,7 +37,72 @@ const UserRegistration = () => {
     city: "",
     state: "",
     pin: "",
+    imgDp: "",
   });
+
+  const handlePhotoChange = async (event) => {
+    const file = event.target.files[0];
+    if (file) {
+      try {
+        const options = {
+          maxSizeMB: 0.01,
+          maxWidthOrHeight: 300,
+        };
+
+        const compressedFile = await imageCompression(file, options);
+        const dataUrl = URL.createObjectURL(compressedFile);
+        setFormData({
+          ...formData,
+          imgDp: dataUrl,
+        });
+      } catch (error) {
+        console.error("Error compressing image:", error);
+      }
+    }
+  };
+
+  const submitFormData = async (e) => {
+    e.preventDefault();
+    const newErrors = validateForm();
+    if (Object.keys(newErrors).length === 0) {
+      try {
+        const options = {
+          maxSizeMB: 0.01,
+          maxWidthOrHeight: 300,
+        };
+
+        const compressedFile = await imageCompression(
+          document.querySelector('input[type="file"]').files[0],
+          options
+        );
+
+        const formDataWithImage = new FormData();
+        formDataWithImage.append("formData", JSON.stringify(formData));
+        formDataWithImage.append(
+          "profilePhoto",
+          compressedFile,
+          "compressed.jpg"
+        );
+
+        const response = await axios.post(
+          "/registerNewUser",
+          formDataWithImage,
+          {
+            headers: {
+              "Content-Type": "multipart/form-data",
+            },
+          }
+        );
+        // Rest of your code...
+      } catch (error) {
+        console.error("Error submitting form:", error);
+        // Handle error and show error messages to the user
+      }
+    } else {
+      setErrors(newErrors);
+    }
+  };
+
 
   const handlePincodeChange = async (e) => {
     const pincode = e.target.value;
@@ -91,43 +157,41 @@ const UserRegistration = () => {
     //if (!formData.pinCode) newErrors.pinCode = "Pin Code is required";
     // else if (!/^\d{6}$/.test(formData.pinCode))
     //   newErrors.pinCode = "Pin Code should be a 6-digit number";
-
     return newErrors;
   };
 
-  const [profilePhoto, setProfilePhoto] = useState(null);
+  // const [profilePhoto, setProfilePhoto] = useState(null);
+  // const handlePhotoChange = (event) => {
+  //   const file = event.target.files[0];
+  //   if (file) {
+  //     const reader = new FileReader();
+  //     reader.onload = (e) => {
+  //       setProfilePhoto(e.target.result);
+  //     };
+  //     reader.readAsDataURL(file);
+  //   }
+  // };
 
-  const handlePhotoChange = (event) => {
-    const file = event.target.files[0];
-    if (file) {
-      const reader = new FileReader();
-      reader.onload = (e) => {
-        setProfilePhoto(e.target.result);
-      };
-      reader.readAsDataURL(file);
-    }
-  };
-
-  const handleSubmit = async(e) => {
-    e.preventDefault(); // Prevent the default form submission behavior
-    
+  const handleSubmit = async (e) => {
+    // e.preventDefault(); // Prevent the default form submission behavior
+    submitFormData();
     const newErrors = validateForm();
-    console.log(Object.keys(newErrors))
+    console.log(Object.keys(newErrors));
     if (Object.keys(newErrors).length === 0) {
       //Submission logic here
       //console.log("Form submitted successfully:", formData);
-      const response=await axios.post('/registerNewUser',{formData}).then((res)=>{
-        console.log(res.data);
-        setTimeout(() => {
-          setRunContext('driver from submited');
-        }, 1500);
-        if(res.data){
-          window.location.reload(false);
-        }
-      })
+      const response = await axios
+        .post("/registerNewUser", { formData })
+        .then((res) => {
+          console.log(res.data);
+          setTimeout(() => {
+            setRunContext("driver from submited");
+          }, 1500);
+          if (res.data) {
+            window.location.reload(false);
+          }
+        });
       setErrors({});
-
-      
     } else {
       setErrors(newErrors);
     }
@@ -180,12 +244,13 @@ const UserRegistration = () => {
             Welcome to Grabway!
           </Heading>
           <Box mt={4}>
-            <Avatar size="xl" mb={4} src={profilePhoto} />
             <FormControl>
               <FormLabel>Profile Photo</FormLabel>
+              <Avatar size="xl" mb={4} src={formData.imgDp} />
               <Input
                 type="file"
                 accept="image/*"
+                // value={formData.imgDp}
                 onChange={handlePhotoChange}
                 mb={4}
               />
@@ -280,8 +345,8 @@ const UserRegistration = () => {
             <FormControl mt={4} isRequired isInvalid={!!errors.pin}>
               <FormLabel>PIN</FormLabel>
               <Input
-                type="text"
-                placeholder="PIN"
+                type="number"
+                placeholder="PIN Code"
                 value={formData.pin}
                 onChange={(e) => {
                   setFormData({ ...formData, pin: e.target.value });
