@@ -352,7 +352,56 @@ app.post('/registerNewDriver',async(req,res)=>{
 });
 
 
-
+app.post('/routeDriverRegistration',async(req,res)=>{
+  await mongoose.connect(MONGO_URL);
+  console.log(req.body.formData);
+  
+  const formData=req.body.formData;
+  const email=formData.email;
+  const originText=formData.originText;
+  const originLat=formData.originLat;
+  const originLong=formData.originLong;
+  const destinationText=formData.destinationText;
+  const destinationLat=formData.destinationLat;
+  const destinationLong=formData.destinationLong;
+  const originStartTime = formData.originStartTime;
+  const originEndTime=formData.originEndTime;
+  const destinationStartTime=formData.destinantionStartTime;
+  const destinationEndTime=formData.destinantionEndTime;
+  const seats=formData.seats;
+ if(formData){
+  try{
+    const updatedResponse=await DriverModel.updateOne(
+      {email:email},
+      {
+        $push:{
+          routes:{
+            seats:seats,
+            plan:'basic',
+            'origin':[{'text':originText,'lat':originLat,'long':originLong}],
+            'destination':[{'text':destinationText,'lat':destinationLat,'long':destinationLong}],
+            'originTime':[{'start':originStartTime,'end':originEndTime}],
+            'destinationTime':[{'start':destinationStartTime,'end':destinationEndTime}],
+          }
+        }
+      }
+    )
+      if(updatedResponse){
+        res.status(200).json(true);
+      }
+      else{
+        res.status(200).json(null);
+      }
+  }
+  catch(err){
+    console.log(err);
+    res.status(500).send("Error in try catch");
+  }
+ }
+ else{
+  res.status(500).json("Internal Server Error");
+ }
+});
 
 
 

@@ -111,6 +111,7 @@ const TopBar = ({ counter, setCounter, setLoginState, loginState }) => {
           });
           Cookies.set("grabwayToken", loginEmail, 7);
           setRunContext("login");
+          window.location.reload(false);
         })
         .catch((error) => {
           if (error.message === "Firebase: Error (auth/wrong-password).") {
@@ -183,6 +184,7 @@ const TopBar = ({ counter, setCounter, setLoginState, loginState }) => {
             setUserEmail(userMongo);
             if(res){
               setRunContext('signup');
+              window.location.reload(false);
             }
           }
           if (signupUserType === "driver") {
@@ -194,6 +196,7 @@ const TopBar = ({ counter, setCounter, setLoginState, loginState }) => {
             setUserEmail(driverMongo);
             if(res){
               setRunContext('signup');
+              window.location.reload(false);
             }
           }
         })
@@ -294,6 +297,7 @@ const TopBar = ({ counter, setCounter, setLoginState, loginState }) => {
             setRunContext("signInWithGoogle");
             setCounter(true);
             setLoginState(true);
+            window.location.reload(false);
           }
            
         }
@@ -303,6 +307,7 @@ const TopBar = ({ counter, setCounter, setLoginState, loginState }) => {
 
           setCounter(true);
           setLoginState(true);
+          window.location.reload(false);
         }
       })
       .catch((error) => {

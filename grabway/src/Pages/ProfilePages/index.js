@@ -27,7 +27,7 @@ export default function Settings() {
 
   return (
     <>
-      <div className="flex flex-wrap">
+      <div className="flex flex-wrap justify-center items-center">
         <div className="w-full lg:w-8/12 px-4">
           <UserSettings userData={userData} />
         </div>
