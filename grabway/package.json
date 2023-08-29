@@ -12,6 +12,7 @@
     "@testing-library/user-event": "^13.5.0",
     "axios": "^1.4.0",
     "boxicons": "^2.0.7",
+    "browser-image-compression": "^2.0.2",
     "chart.js": "^2.9.4",
     "firebase": "^10.1.0",
     "framer-motion": "^10.15.2",
