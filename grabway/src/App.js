@@ -21,7 +21,7 @@ import DriverHomePage from "./Pages/HomePage/DriverHomepage/DriverHomePage";
 import UserHomePage from "./Pages/HomePage/UserHomepage/UserHomepage";
 import RouteRegisteration from "./Pages/RouteRegisteration/RouteDriverRegisteration";
 import RouteDriverRegisteration from "./Pages/RouteRegisteration/RouteDriverRegisteration";
-
+import DriverRouteLocation from "./Pages/DriverRouteLocation/DriverRouteLocation";
 axios.defaults.baseURL = "http://localhost:8080";
 axios.defaults.withCredentials = true;
 // import NearbyMap from "./components/Map/NearbyMap";
@@ -87,8 +87,12 @@ function App() {
             <Route
               path="/driverHomePage"
               element={
-                <DriverHomePage nonceVal={nonce} loginState={loginState} />
+                <DriverHomePage/>
               }
+            />
+            <Route
+              path="/routeDriverLocation"
+              element={<DriverRouteLocation nonceVal={nonce} loginState={loginState} />}
             />
             <Route
               path="/userHomePage"
