@@ -27,19 +27,13 @@ const RouteDriverRegisteration = () => {
   const destinationText = "destiny";
   const destinationLat = 5454516547475;
   const destinationLong = 321654151321;
-  // const [originStartTime, setOriginStartTime] = useState(null);
-  // const [destinationStartTime, setDestinationStartTime] = useState(null);
-  // const [originEndTime, setOriginEndTime] = useState(null);
-  // const [destinationEndTime, setDestinationEndTime] = useState(null);
+  const [originStartTime, setOriginStartTime] = useState(null);
+  const [destinationStartTime, setDestinationStartTime] = useState(null);
+  const [originEndTime, setOriginEndTime] = useState(null);
+  const [destinationEndTime, setDestinationEndTime] = useState(null);
   const [seats, setSeats] = useState(null);
   const googleUserData = Cookies.get("grabwayGoogleToken");
   const userData = Cookies.get("grabwayUser");
-  // Modify the initialization of state variables
-  const [originStartTime, setOriginStartTime] = useState({ from: "", to: "" });
-  const [destinationStartTime, setDestinationStartTime] = useState({
-    from: "",
-    to: "",
-  });
   const [originTimeError, setOriginTimeError] = useState("");
   const [destinationTimeError, setDestinationTimeError] = useState("");
 
@@ -52,9 +46,9 @@ const RouteDriverRegisteration = () => {
     destinationLat,
     destinationLong,
     originStartTime,
-    // originEndTime,
+    originEndTime,
     destinationStartTime,
-    // destinationEndTime,
+    destinationEndTime,
     seats,
   };
 
@@ -120,22 +114,22 @@ const RouteDriverRegisteration = () => {
       newErrors.seats = "Number of seats required";
     }
 
-    if (!originStartTime.from || !originStartTime.to) {
+    if (!originStartTime || !originEndTime) {
       newErrors.originTime =
         "Both origin start and origin end times are required";
     }
 
-    if (!destinationStartTime.from || !destinationStartTime.to) {
+    if (!destinationStartTime || !destinationEndTime) {
       newErrors.destinationTime =
         "Both estination and estination end times are required";
     }
 
-    const originStart = new Date(`2000-01-01T${originStartTime.from}`);
-    const originEnd = new Date(`2000-01-01T${originStartTime.to}`);
+    const originStart = new Date(`2000-01-01T${originStartTime}`);
+    const originEnd = new Date(`2000-01-01T${originEndTime}`);
     const destinationStart = new Date(
-      `2000-01-01T${destinationStartTime.from}`
+      `2000-01-01T${destinationStartTime}`
     );
-    const destinationEnd = new Date(`2000-01-01T${destinationStartTime.to}`);
+    const destinationEnd = new Date(`2000-01-01T${destinationEndTime}`);
 
     if (originEnd <= originStart) {
       newErrors.originTime = "Origin end time must be after origin start time";
@@ -193,25 +187,15 @@ const RouteDriverRegisteration = () => {
               <Input
                 type="time"
                 placeholder="From"
-                value={originStartTime.from}
-                onChange={(e) =>
-                  setOriginStartTime({
-                    ...originStartTime,
-                    from: e.target.value,
-                  })
-                }
+                value={originStartTime}
+                onChange={(e) => setOriginStartTime(e.target.value)}
               />
 
               <Input
                 type="time"
                 placeholder="To"
-                value={originStartTime.to}
-                onChange={(e) =>
-                  setOriginStartTime({
-                    ...originStartTime,
-                    to: e.target.value,
-                  })
-                }
+                value={originEndTime}
+                onChange={(e) => setOriginEndTime(e.target.value)}
                 ml={5}
               />
             </Flex>
@@ -223,24 +207,15 @@ const RouteDriverRegisteration = () => {
               <Input
                 type="time"
                 placeholder="From"
-                value={destinationStartTime.from}
-                onChange={(e) =>
-                  setDestinationStartTime({
-                    ...destinationStartTime,
-                    from: e.target.value,
-                  })
-                }
+                value={destinationStartTime}
+                onChange={(e) => setDestinationStartTime(e.target.value)}
               />
+
               <Input
                 type="time"
                 placeholder="To"
-                value={destinationStartTime.to}
-                onChange={(e) =>
-                  setDestinationStartTime({
-                    ...destinationStartTime,
-                    to: e.target.value,
-                  })
-                }
+                value={destinationEndTime}
+                onChange={(e) => setDestinationEndTime(e.target.value)}
                 ml={5}
               />
             </Flex>
@@ -252,7 +227,7 @@ const RouteDriverRegisteration = () => {
               type="number"
               placeholder="Number of available seats"
               value={seats}
-              onChange={(e) => setSeats(e.target.value.slice(0, 1))}
+              onChange={(e) => setSeats(e.target.value.slice(0, 2))}
             />
             <FormErrorMessage>{errors.seats}</FormErrorMessage>
           </FormControl>
@@ -260,10 +235,9 @@ const RouteDriverRegisteration = () => {
             <Checkbox
               isChecked={isChecked}
               onChange={handleCheckboxChange}
-              size="lg"
-              // onSubmit={handleSubmit}
+              size="sm"
             >
-              I accept the terms and conditions
+              I accept the terms and conditions**
             </Checkbox>
             <FormErrorMessage>{error}</FormErrorMessage>
           </FormControl>
