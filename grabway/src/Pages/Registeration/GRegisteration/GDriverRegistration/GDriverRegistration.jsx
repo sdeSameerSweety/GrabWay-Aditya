@@ -22,19 +22,19 @@ import Cookies from "js-cookie";
 import { Navigate } from "react-router-dom";
 import axios from "axios";
 import { UserContext } from "../../../../context/Context";
-
+import imageCompression from "browser-image-compression";
 
 const DriverRegistration = () => {
-  const {setRunContext}=useContext(UserContext);
+  const { setRunContext } = useContext(UserContext);
   const userData = Cookies.get("grabwayGoogleToken");
-  const GoogleUserType='driver';
+  const GoogleUserType = "driver";
   const hasUserData = userData !== undefined;
   //console.log(userData);
   const [formData, setFormData] = useState({
     name: "",
     lastName: "",
     email: hasUserData ? userData : "",
-    phoneNumber:"",
+    phoneNumber: "",
     location: "",
     addressLine1: "",
     addressLine2: "",
@@ -45,6 +45,7 @@ const DriverRegistration = () => {
     dlNumber: "",
     drivingExp: "",
     bio: "",
+    imgDp: "",
   });
 
   const handlePincodeChange = async (e) => {
@@ -117,38 +118,51 @@ const DriverRegistration = () => {
     return newErrors;
   };
 
-  const [profilePhoto, setProfilePhoto] = useState(null);
-  const handlePhotoChange = (event) => {
+  const handlePhotoChange = async (event) => {
     const file = event.target.files[0];
     if (file) {
-      const reader = new FileReader();
-      reader.onload = (e) => {
-        setProfilePhoto(e.target.result);
-      };
-      reader.readAsDataURL(file);
+      try {
+        const options = {
+          maxSizeMB: 0.01,
+          maxWidthOrHeight: 300,
+        };
+        const compressedFile = await imageCompression(file, options);
+        await imageCompression
+          .getDataUrlFromFile(compressedFile)
+          .then((dataUrl) => {
+            setFormData({
+              ...formData,
+              imgDp: dataUrl,
+            });
+          });
+      } catch (error) {
+        console.error("Error compressing image:", error);
+      }
     }
   };
 
-  const handleSubmit = async(e) => {
-    
+  const handleSubmit = async (e) => {
     e.preventDefault(); // Prevent the default form submission behavior
     const newErrors = validateForm();
-    console.log(Object.keys(newErrors))
+    console.log(Object.keys(newErrors));
     if (Object.keys(newErrors).length === 0) {
       //Submission logic here
       //console.log('clicked');
-      const response=await axios.post('/googleCreateDriver',{formData}).then((res)=>{
-        //console.log(res.data);
-        setTimeout(() => {
-          setRunContext('Google Driver form submited');
-        }, 1500);
-        if(res.data){
-            Cookies.remove('grabwayGoogleToken');
+      const response = await axios
+        .post("/googleCreateDriver", { formData })
+        .then((res) => {
+          //console.log(res.data);
+          setTimeout(() => {
+            setRunContext("Google Driver form submited");
+          }, 1500);
+          if (res.data) {
+            Cookies.remove("grabwayGoogleToken");
             window.location.reload(false);
-        }
-      }).catch(()=>{
-        console.log('Internal server Error');
-      })
+          }
+        })
+        .catch(() => {
+          console.log("Internal server Error");
+        });
       console.log("Form submitted successfully:", formData);
       setErrors({});
     } else {
@@ -201,7 +215,7 @@ const DriverRegistration = () => {
             Welcome to Grabway!
           </Heading>
           <Box mt={4}>
-            <Avatar size="xl" mb={4} src={profilePhoto} />
+            <Avatar size="xl" mb={4} src={formData.imgDp} />
             <FormControl>
               <FormLabel>Profile Photo</FormLabel>
               <Input
@@ -259,7 +273,6 @@ const DriverRegistration = () => {
                 }}
                 minLength={10}
                 maxLength={10}
-                
               />
 
               <FormErrorMessage>{errors.phoneNumber}</FormErrorMessage>
