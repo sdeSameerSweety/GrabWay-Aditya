@@ -12,87 +12,81 @@ const EmailModel = require("./Schema/Email");
 
 //environment variables
 const MONGO_URL = process.env.MONGO_URL;
-const PUBLIC_URL = 'http://localhost:3000';
+const PUBLIC_URL = "http://localhost:3000";
 const PORT = process.env.PORT;
 const jwtSecretKey = process.env.JWT_SECRET;
-
 
 const app = express();
 app.use(cookieParser());
 app.use(express.json());
-app.use(cors({
-  methods: 'GET,POST,PATCH,DELETE,OPTIONS',
-  optionsSuccessStatus: 200,
-  origin: PUBLIC_URL,
-  credentials:true
-}));
-app.options('*', cors());
+app.use(
+  cors({
+    methods: "GET,POST,PATCH,DELETE,OPTIONS",
+    optionsSuccessStatus: 200,
+    origin: PUBLIC_URL,
+    credentials: true,
+  })
+);
+app.options("*", cors());
 
 app.post("/checkuser", async (req, res) => {
   await mongoose.connect(MONGO_URL);
   if (req.body.email) {
-  const email  = req.body.email;
-  console.log(email);
-    try{
-    const UserEmail = await EmailModel.findOne({ email: email });
-    if(UserEmail!==null){
-      console.log("UserEmail found");
-      const userType=UserEmail.userType;
-      const email=UserEmail.email;
-      if(userType==='user'){
-        console.log('user');
-        const UserData=await UserModel.findOne({email});
-        res.status(200).json(UserData);
-      }
-      if(userType==='driver'){
-        console.log('driver');
-        const UserData=await DriverModel.findOne({email});
-        res.status(200).json(UserData);
-      }
-      }
-      else{
+    const email = req.body.email;
+    console.log(email);
+    try {
+      const UserEmail = await EmailModel.findOne({ email: email });
+      if (UserEmail !== null) {
+        console.log("UserEmail found");
+        const userType = UserEmail.userType;
+        const email = UserEmail.email;
+        if (userType === "user") {
+          console.log("user");
+          const UserData = await UserModel.findOne({ email });
+          res.status(200).json(UserData);
+        }
+        if (userType === "driver") {
+          console.log("driver");
+          const UserData = await DriverModel.findOne({ email });
+          res.status(200).json(UserData);
+        }
+      } else {
         console.log(UserEmail);
         res.status(200).json(null);
       }
-      
-    }
-    
-    catch(err){
+    } catch (err) {
       res.status(200).send(err);
       console.log(err);
     }
   } else {
     res.status(200).json(null);
-    console.log('email not found in body');
+    console.log("email not found in body");
   }
 });
 //all the data will be coming to user context function
 app.post("/createUser", async (req, res) => {
   await mongoose.connect(MONGO_URL);
-  const email=req.body.signupEmail;
-  const phoneNumber=req.body.signupPhone;
-  if(email && phoneNumber){
-    try{
-      console.log('trying to create user model')
-      const EmailRes=await EmailModel.create({
-        email:email,
-        userType:'user'
-      })
-      if(EmailRes){
+  const email = req.body.signupEmail;
+  const phoneNumber = req.body.signupPhone;
+  if (email && phoneNumber) {
+    try {
+      console.log("trying to create user model");
+      const EmailRes = await EmailModel.create({
+        email: email,
+        userType: "user",
+      });
+      if (EmailRes) {
         const User = await UserModel.create({
-          email:email,
-          phoneNumber:phoneNumber,
-          userType:'user',
-          name:"",
+          email: email,
+          phoneNumber: phoneNumber,
+          userType: "user",
+          name: "",
         });
         return res.status(200).json(User);
+      } else {
+        res.status(500).json("cannot create user model");
       }
-      else{
-        res.status(500).json('cannot create user model')
-      }
-      
-    }
-    catch(err){
+    } catch (err) {
       console.log(err);
       res.status(500).send("Internal Server Error");
     }
@@ -100,30 +94,27 @@ app.post("/createUser", async (req, res) => {
 });
 app.post("/createDriver", async (req, res) => {
   await mongoose.connect(MONGO_URL);
-  const email=req.body.signupEmail;
-  const phoneNumber=req.body.signupPhone;
-  if(email && phoneNumber){
-    try{
-      console.log('trying to create user model')
-      const EmailRes=await EmailModel.create({
-        email:email,
-        userType:'driver'
-      })
-      if(EmailRes){
+  const email = req.body.signupEmail;
+  const phoneNumber = req.body.signupPhone;
+  if (email && phoneNumber) {
+    try {
+      console.log("trying to create user model");
+      const EmailRes = await EmailModel.create({
+        email: email,
+        userType: "driver",
+      });
+      if (EmailRes) {
         const User = await DriverModel.create({
-          email:email,
-          phoneNumber:phoneNumber,
-          userType:'driver',
-          name:"",
+          email: email,
+          phoneNumber: phoneNumber,
+          userType: "driver",
+          name: "",
         });
         return res.status(200).json(User);
+      } else {
+        res.status(500).json("cannot create user model");
       }
-      else{
-        res.status(500).json('cannot create user model')
-      }
-      
-    }
-    catch(err){
+    } catch (err) {
       console.log(err);
       res.status(500).send("Internal Server Error");
     }
@@ -131,289 +122,274 @@ app.post("/createDriver", async (req, res) => {
 });
 
 //api for google login below
-app.post('/googlecheckUser', async(req,res)=>{
+app.post("/googlecheckUser", async (req, res) => {
   await mongoose.connect(MONGO_URL);
-  const email=req.body.email;
+  const email = req.body.email;
   console.log(email);
-  const UserEmail = await EmailModel.findOne({email});
-  if(UserEmail!==null){
+  const UserEmail = await EmailModel.findOne({ email });
+  if (UserEmail !== null) {
     console.log("User email found");
     //console.log(UserEmail);
     res.status(200).json(email);
+  } else {
+    console.log("not found, Redirect to creation....");
+    res.status(500).json(false);
   }
-  else{
-      console.log('not found, Redirect to creation....');
-      res.status(500).json(false);
-    }
-})
+});
 app.post("/googleCreateUser", async (req, res) => {
   await mongoose.connect(MONGO_URL);
-  const formData=req.body.formData;
-  const name=formData.name;
-  const email=formData.email;
-  const phoneNumber=formData.phoneNumber;
-  const addressName=formData.name;
-  const addressLine1=formData.addressLine1;
-  const addressLine2=formData.addressLine2;
+  const formData = req.body.formData;
+  const name = formData.name;
+  const email = formData.email;
+  const phoneNumber = formData.phoneNumber;
+  const addressName = formData.name;
+  const addressLine1 = formData.addressLine1;
+  const addressLine2 = formData.addressLine2;
   const city = formData.city;
-  const state=formData.state;
-  const pin=formData.pin;
-  if(email && formData){
-    try{
-      console.log('trying to create email model')
-      const EmailRes=await EmailModel.create({
-        email:email,
-        userType:'user'
-      })
-      if(EmailRes){
-        console.log('trying to create user model')
+  const state = formData.state;
+  const pin = formData.pin;
+  const profilePicture = formData.imgDp;
+  if (email && formData) {
+    try {
+      console.log("trying to create email model");
+      const EmailRes = await EmailModel.create({
+        email: email,
+        userType: "user",
+      });
+      if (EmailRes) {
+        console.log("trying to create user model");
         const User = await UserModel.create({
-          email:email,
-          phoneNumber:phoneNumber,
-          userType:'user',
-          name:name,
-          "address.0.addressName":addressName,
-          "address.0.addressLine1":addressLine1,
-          "address.0.addressLine2":addressLine2,
-          "address.0.city":city,
-          "address.0.state":state,
-          "address.0.pincode":pin,
+          email: email,
+          phoneNumber: phoneNumber,
+          userType: "user",
+          profilePicture: profilePicture,
+          name: name,
+          "address.0.addressName": addressName,
+          "address.0.addressLine1": addressLine1,
+          "address.0.addressLine2": addressLine2,
+          "address.0.city": city,
+          "address.0.state": state,
+          "address.0.pincode": pin,
         });
         return res.status(200).json(User);
+      } else {
+        res.status(500).json("cannot create user model");
       }
-      else{
-        res.status(500).json('cannot create user model')
-      }
-      
-    }
-    catch(err){
+    } catch (err) {
       console.log(err);
       res.status(500).send("Internal Server Error");
     }
   }
-
 });
 
 app.post("/googleCreateDriver", async (req, res) => {
   await mongoose.connect(MONGO_URL);
-  const formData=req.body.formData;
-  const name=formData.name;
-  const email=formData.email;
-  const phoneNumber=formData.phoneNumber;
-  const addressName=formData.name;
-  const addressLine1=formData.addressLine1;
-  const addressLine2=formData.addressLine2;
+  const formData = req.body.formData;
+  const name = formData.name;
+  const email = formData.email;
+  const phoneNumber = formData.phoneNumber;
+  const addressName = formData.name;
+  const addressLine1 = formData.addressLine1;
+  const addressLine2 = formData.addressLine2;
   const city = formData.city;
-  const state=formData.state;
-  const pin=formData.pin;
-  const VehicleNumber=formData.carNumber;
-  const drivingLicenseNumber=formData.dlNumber
-  const experience=formData.experience;
-  if(email && formData){
-    try{
-      console.log('trying to create email model')
-      const EmailRes=await EmailModel.create({
-        email:email,
-        userType:'driver'
-      })
-      if(EmailRes){
-        console.log('trying to create user model')
+  const state = formData.state;
+  const pin = formData.pin;
+  const VehicleNumber = formData.carNumber;
+  const drivingLicenseNumber = formData.dlNumber;
+  const experience = formData.experience;
+  const profilePicture = formData.imgDp;
+  if (email && formData) {
+    try {
+      console.log("trying to create email model");
+      const EmailRes = await EmailModel.create({
+        email: email,
+        userType: "driver",
+      });
+      if (EmailRes) {
+        console.log("trying to create user model");
         const User = await DriverModel.create({
-          name:name,
-          phoneNumber:phoneNumber,
-          VehicleNumber:VehicleNumber,
-          drivingLicenseNumber:drivingLicenseNumber,
-          experience:experience,
-          "address.0.addressName":addressName,
-          "address.0.addressLine1":addressLine1,
-          "address.0.addressLine2":addressLine2,
-          "address.0.city":city,
-          "address.0.state":state,
-          "address.0.pincode":pin,
+          name: name,
+          phoneNumber: phoneNumber,
+          VehicleNumber: VehicleNumber,
+          drivingLicenseNumber: drivingLicenseNumber,
+          profilePicture: profilePicture,
+          experience: experience,
+          "address.0.addressName": addressName,
+          "address.0.addressLine1": addressLine1,
+          "address.0.addressLine2": addressLine2,
+          "address.0.city": city,
+          "address.0.state": state,
+          "address.0.pincode": pin,
         });
         return res.status(200).json(User);
+      } else {
+        res.status(500).json("cannot create user model");
       }
-      else{
-        res.status(500).json('cannot create user model')
-      }
-      
-    }
-    catch(err){
+    } catch (err) {
       console.log(err);
       res.status(500).send("Internal Server Error");
     }
   }
-
 });
 
 //api for normal registration with prefilled email,phone number
-app.post('/registerNewUser',async(req,res)=>{
+app.post("/registerNewUser", async (req, res) => {
   await mongoose.connect(MONGO_URL);
   console.log(req.body.formData);
-  const formData=req.body.formData;
-  const name=formData.name;
-  const email=formData.email;
-  const phoneNumber=formData.phoneNumber;
-  const addressName=formData.name;
-  const addressLine1=formData.addressLine1;
-  const addressLine2=formData.addressLine2;
+  const formData = req.body.formData;
+  const name = formData.name;
+  const email = formData.email;
+  const phoneNumber = formData.phoneNumber;
+  const addressName = formData.name;
+  const addressLine1 = formData.addressLine1;
+  const addressLine2 = formData.addressLine2;
   const city = formData.city;
-  const state=formData.state;
-  const pin=formData.pin;
-  const profilePicture=formData.imgDp;
- if(formData){
-  try{
-    const updatedResponse=await UserModel.updateOne(
-      {
-          "email": email,
-      },
-      {
-          $set:{
-              profilePicture:profilePicture,
-              name:name,
-              phoneNumber:phoneNumber,
-              "address.0.addressName":addressName,
-              "address.0.addressLine1":addressLine1,
-              "address.0.addressLine2":addressLine2,
-              "address.0.city":city,
-              "address.0.state":state,
-              "address.0.pincode":pin,
-          }
-      });
-      if(updatedResponse){
+  const state = formData.state;
+  const pin = formData.pin;
+  const profilePicture = formData.imgDp;
+  if (formData) {
+    try {
+      const updatedResponse = await UserModel.updateOne(
+        {
+          email: email,
+        },
+        {
+          $set: {
+            profilePicture: profilePicture,
+            name: name,
+            phoneNumber: phoneNumber,
+            "address.0.addressName": addressName,
+            "address.0.addressLine1": addressLine1,
+            "address.0.addressLine2": addressLine2,
+            "address.0.city": city,
+            "address.0.state": state,
+            "address.0.pincode": pin,
+          },
+        }
+      );
+      if (updatedResponse) {
         res.status(200).json(true);
-      }
-      else{
+      } else {
         res.status(200).json(null);
       }
+    } catch (err) {
+      console.log(err);
+      res.status(500).send("Error in try catch");
+    }
+  } else {
+    res.status(500).json("Internal Server Error");
   }
-  catch(err){
-    console.log(err);
-    res.status(500).send("Error in try catch");
-  }
- }
- else{
-  res.status(500).json("Internal Server Error");
- }
 });
 
-app.post('/registerNewDriver',async(req,res)=>{
+app.post("/registerNewDriver", async (req, res) => {
   await mongoose.connect(MONGO_URL);
   //console.log(req.body.formData);
-  const formData=req.body.formData;
-  const name=formData.name;
-  const email=formData.email;
-  const phoneNumber=formData.phoneNumber;
-  const addressName=formData.name;
-  const addressLine1=formData.addressLine1;
-  const addressLine2=formData.addressLine2;
+  const formData = req.body.formData;
+  const name = formData.name;
+  const email = formData.email;
+  const phoneNumber = formData.phoneNumber;
+  const addressName = formData.name;
+  const addressLine1 = formData.addressLine1;
+  const addressLine2 = formData.addressLine2;
   const city = formData.city;
-  const state=formData.state;
-  const pin=formData.pin;
-  const VehicleNumber=formData.carNumber;
-  const drivingLicenseNumber=formData.dlNumber
-  const experience=formData.experience;
- if(formData){
-  try{
-    const updatedResponse=await DriverModel.updateOne(
-      {
-          "email": email,
-      },
-      {
-          $set:{
-              name:name,
-              phoneNumber:phoneNumber,
-              VehicleNumber:VehicleNumber,
-              drivingLicenseNumber:drivingLicenseNumber,
-              experience:experience,
-              "address.0.addressName":addressName,
-              "address.0.addressLine1":addressLine1,
-              "address.0.addressLine2":addressLine2,
-              "address.0.city":city,
-              "address.0.state":state,
-              "address.0.pincode":pin,
-          }
-      });
-      if(updatedResponse){
+  const state = formData.state;
+  const pin = formData.pin;
+  const VehicleNumber = formData.carNumber;
+  const drivingLicenseNumber = formData.dlNumber;
+  const experience = formData.experience;
+  const profilePicture = formData.imgDp;
+  if (formData) {
+    try {
+      const updatedResponse = await DriverModel.updateOne(
+        {
+          email: email,
+        },
+        {
+          $set: {
+            name: name,
+            phoneNumber: phoneNumber,
+            VehicleNumber: VehicleNumber,
+            profilePicture: profilePicture,
+            drivingLicenseNumber: drivingLicenseNumber,
+            experience: experience,
+            "address.0.addressName": addressName,
+            "address.0.addressLine1": addressLine1,
+            "address.0.addressLine2": addressLine2,
+            "address.0.city": city,
+            "address.0.state": state,
+            "address.0.pincode": pin,
+          },
+        }
+      );
+      if (updatedResponse) {
         res.status(200).json(true);
-      }
-      else{
+      } else {
         res.status(200).json(null);
       }
+    } catch (err) {
+      console.log(err);
+      res.status(500).send("Error in try catch");
+    }
+  } else {
+    res.status(500).json("Internal Server Error");
   }
-  catch(err){
-    console.log(err);
-    res.status(500).send("Error in try catch");
-  }
- }
- else{
-  res.status(500).json("Internal Server Error");
- }
 });
 
-
-app.post('/routeDriverRegistration',async(req,res)=>{
+app.post("/routeDriverRegistration", async (req, res) => {
   await mongoose.connect(MONGO_URL);
   console.log(req.body.formData);
-  
-  const formData=req.body.formData;
-  const email=formData.email;
-  const originText=formData.originText;
-  const originLat=formData.originLat;
-  const originLong=formData.originLong;
-  const destinationText=formData.destinationText;
-  const destinationLat=formData.destinationLat;
-  const destinationLong=formData.destinationLong;
+
+  const formData = req.body.formData;
+  const email = formData.email;
+  const originText = formData.originText;
+  const originLat = formData.originLat;
+  const originLong = formData.originLong;
+  const destinationText = formData.destinationText;
+  const destinationLat = formData.destinationLat;
+  const destinationLong = formData.destinationLong;
   const originStartTime = formData.originStartTime;
-  const originEndTime=formData.originEndTime;
-  const destinationStartTime=formData.destinantionStartTime;
-  const destinationEndTime=formData.destinantionEndTime;
-  const seats=formData.seats;
- if(formData){
-  try{
-    const updatedResponse=await DriverModel.updateOne(
-      {email:email},
-      {
-        $push:{
-          routes:{
-            seats:seats,
-            plan:'basic',
-            'origin':[{'text':originText,'lat':originLat,'long':originLong}],
-            'destination':[{'text':destinationText,'lat':destinationLat,'long':destinationLong}],
-            'originTime':[{'start':originStartTime,'end':originEndTime}],
-            'destinationTime':[{'start':destinationStartTime,'end':destinationEndTime}],
-          }
+  const originEndTime = formData.originEndTime;
+  const destinationStartTime = formData.destinantionStartTime;
+  const destinationEndTime = formData.destinantionEndTime;
+  const seats = formData.seats;
+  if (formData) {
+    try {
+      const updatedResponse = await DriverModel.updateOne(
+        { email: email },
+        {
+          $push: {
+            routes: {
+              seats: seats,
+              plan: "basic",
+              origin: [{ text: originText, lat: originLat, long: originLong }],
+              destination: [
+                {
+                  text: destinationText,
+                  lat: destinationLat,
+                  long: destinationLong,
+                },
+              ],
+              originTime: [{ start: originStartTime, end: originEndTime }],
+              destinationTime: [
+                { start: destinationStartTime, end: destinationEndTime },
+              ],
+            },
+          },
         }
-      }
-    )
-      if(updatedResponse){
+      );
+      if (updatedResponse) {
         res.status(200).json(true);
-      }
-      else{
+      } else {
         res.status(200).json(null);
       }
+    } catch (err) {
+      console.log(err);
+      res.status(500).send("Error in try catch");
+    }
+  } else {
+    res.status(500).json("Internal Server Error");
   }
-  catch(err){
-    console.log(err);
-    res.status(500).send("Error in try catch");
-  }
- }
- else{
-  res.status(500).json("Internal Server Error");
- }
 });
-
-
-
-
-
-
-
-
-
-
-
-
 
 maxAge = 24 * 60 * 60;
 
@@ -676,8 +652,6 @@ app.post("/cartpage", async (req, res) => {
     res.status(400).send("Internal Server Error");
   }
 });
-
-
 
 app.post("/address", async (req, res) => {
   await mongoose.connect(MONGO_URL);
