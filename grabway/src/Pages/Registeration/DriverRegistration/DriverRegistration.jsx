@@ -64,6 +64,7 @@ const DriverRegistration = () => {
         const postOffice = data[0].PostOffice[0];
         setFormData({
           ...formData,
+          pin: postOffice.PinCode,
           city: postOffice.District,
           state: postOffice.State,
         });

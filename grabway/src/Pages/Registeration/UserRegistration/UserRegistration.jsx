@@ -124,6 +124,7 @@ const UserRegistration = () => {
         setFormData({
           ...formData,
           city: postOffice.Region,
+          pin: postOffice.PinCode,
           state: postOffice.State,
         });
       }
