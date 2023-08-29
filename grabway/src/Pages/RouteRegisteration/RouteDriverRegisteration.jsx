@@ -121,12 +121,13 @@ const RouteDriverRegisteration = () => {
     }
 
     if (!originStartTime.from || !originStartTime.to) {
-      newErrors.originTime = "Both start and end times are required for origin";
+      newErrors.originTime =
+        "Both origin start and origin end times are required";
     }
 
     if (!destinationStartTime.from || !destinationStartTime.to) {
       newErrors.destinationTime =
-        "Both start and end times are required for destination";
+        "Both estination and estination end times are required";
     }
 
     const originStart = new Date(`2000-01-01T${originStartTime.from}`);
