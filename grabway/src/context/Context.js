@@ -9,12 +9,14 @@ export function UserContextProvider({ children }) {
   const [runContext, setRunContext] = useState("");
 
   const email = Cookies.get("grabwayToken");
+  const [profilePhoto, setProfilePhoto] = useState("");
   const googleToken = Cookies.get("grabwayGoogleToken");
   useEffect(() => {
     if (email && !googleToken) {
       axios.post("/checkuser", { email }).then((res) => {
         // console.log(res.data);
         let data = res.data;
+        setProfilePhoto(data.profilePicture);
         if (delete data.profilePicture)
           Cookies.set("grabwayUser", JSON.stringify(data), { expires: 7 });
         setUserEmail(res.data);
@@ -30,6 +32,7 @@ export function UserContextProvider({ children }) {
       axios.post("/checkuser", { email }).then((res) => {
         // console.log("I am here", res.data);
         let data = res.data;
+        setProfilePhoto(data.profilePicture);
         if (delete data.profilePicture)
           Cookies.set("grabwayUser", JSON.stringify(data), { expires: 7 });
         setUserEmail(res.data);
@@ -41,7 +44,9 @@ export function UserContextProvider({ children }) {
   }, [runContext]);
 
   return (
-    <UserContext.Provider value={{ userEmail, setUserEmail, setRunContext }}>
+    <UserContext.Provider
+      value={{ profilePhoto, userEmail, setUserEmail, setRunContext }}
+    >
       {children}
     </UserContext.Provider>
   );
