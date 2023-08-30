@@ -177,7 +177,7 @@ const UserRegistration = () => {
 
   const handleSubmit = async (e) => {
     // e.preventDefault(); // Prevent the default form submission behavior
-    submitFormData();
+    submitFormData(e);
     const newErrors = validateForm();
     console.log(Object.keys(newErrors));
     if (Object.keys(newErrors).length === 0) {
