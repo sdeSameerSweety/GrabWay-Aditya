@@ -126,9 +126,7 @@ const RouteDriverRegisteration = () => {
 
     const originStart = new Date(`2000-01-01T${originStartTime}`);
     const originEnd = new Date(`2000-01-01T${originEndTime}`);
-    const destinationStart = new Date(
-      `2000-01-01T${destinationStartTime}`
-    );
+    const destinationStart = new Date(`2000-01-01T${destinationStartTime}`);
     const destinationEnd = new Date(`2000-01-01T${destinationEndTime}`);
 
     if (originEnd <= originStart) {
