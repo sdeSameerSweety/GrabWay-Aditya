@@ -184,7 +184,9 @@ app.post("/googleCreateUser", async (req, res) => {
 
 app.post("/googleCreateDriver", async (req, res) => {
   await mongoose.connect(MONGO_URL);
+  
   const formData = req.body.formData;
+  console.log(formData);
   const name = formData.name;
   const email = formData.email;
   const phoneNumber = formData.phoneNumber;
@@ -208,6 +210,7 @@ app.post("/googleCreateDriver", async (req, res) => {
       if (EmailRes) {
         console.log("trying to create user model");
         const User = await DriverModel.create({
+          email:email,
           name: name,
           phoneNumber: phoneNumber,
           VehicleNumber: VehicleNumber,

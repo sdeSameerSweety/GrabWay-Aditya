@@ -59,6 +59,28 @@ const TopBar = ({ counter, setCounter, setLoginState, loginState }) => {
   const [signupPhone, setSignupPhone] = useState("");
   const [signupUserType, setSignupUserType] = useState("");
   const toast = useToast();
+  const [weatherData,setWeatherData]=useState(null);
+  async function getWeather(city){
+    const res=await fetch(`https://api.weatherapi.com/v1/current.json?q=${city}&key=%20beab78d23f424b26923110343233008`);
+    const myJson=await res.json();
+    //console.log(myJson);
+    setWeatherData(myJson);
+  }
+  
+  const [city, setCity]= useState('');
+
+  useEffect(()=>{
+    const UserData=Cookies.get('grabwayUser');
+    if(UserData){
+      if((JSON.parse(UserData).name!=='')){
+        setCity((JSON.parse(UserData)).address[0].city);
+       
+      }
+    }
+  })
+  if(city){
+    getWeather(city);
+  }
   function showModal() {
     if (showSignIn === true) {
       setShowSignIn(false);
@@ -333,6 +355,17 @@ const TopBar = ({ counter, setCounter, setLoginState, loginState }) => {
           </div>
         </Link>
         <div className="flex flex-row justify-center items-center gap-7">
+          {weatherData && <>
+          <div className="weather-info flex justify-center items-center gap-1">
+            <img className='w-9' src={weatherData.current.condition.icon}/>
+            <div className="flex justify-center flex-col items-center font-ubuntu">
+              <div className="text-[11px]">{weatherData.current.temp_c}°C</div>
+              <div className="text-[11px]">
+                  {weatherData.location.name}
+              </div>
+            </div>
+          </div>
+          </>}
           <div>
             <IconButton
               sx={{ bgColor: "white" }}
@@ -667,6 +700,7 @@ const TopBar = ({ counter, setCounter, setLoginState, loginState }) => {
             )}
 
             {loginState && (
+              <>
               <Link to="/profile">
                 <Avatar
                   name="Kent Dodds"
@@ -675,6 +709,8 @@ const TopBar = ({ counter, setCounter, setLoginState, loginState }) => {
                   }
                 />
               </Link>
+              </>
+              
             )}
           </div>
         </div>
