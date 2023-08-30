@@ -1,6 +1,6 @@
-import { useStatStyles } from "@chakra-ui/react";
 import React, { useEffect, useState } from "react";
 import { useToast } from "@chakra-ui/react";
+import axios from "axios";
 
 // components
 
@@ -24,6 +24,7 @@ export default function UserSettings({ userData }) {
       pin: data.address[0].pincode,
     });
   }, []);
+  console.log(displayData);
   // console.log(displayData);
   const [editData, setEditData] = useState({});
   useEffect(() => {
@@ -94,7 +95,7 @@ export default function UserSettings({ userData }) {
   // console.log(postData);
   const [emptydataStatus, setDataStatus] = useState(true);
 
-  const handleProfileChanges = () => {
+  const handleProfileChanges = async () => {
     console.log(editData);
     if (emptydataStatus === true) {
       var ctr = 0;
@@ -115,8 +116,8 @@ export default function UserSettings({ userData }) {
     } else {
       console.log("data ready to update");
       console.log(editData);
-      setDisabledState(true);
-      setEditVal("Edit Profile");
+      const dataRet = await axios.post("/editprofile/user", { editData });
+      console.log(dataRet.data);
     }
   };
   console.log(postData);
@@ -287,26 +288,36 @@ export default function UserSettings({ userData }) {
                   >
                     City
                   </label>
-                  <select
-                    type="email"
-                    className="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
-                    disabled={disabledState}
-                    onChange={(e) => {
-                      setEditData({
-                        ...editData,
-                        city: e.target.value,
-                      });
-                      setDisplayData({
-                        ...displayData,
-                        city: e.target.value,
-                      });
-                    }}
-                  >
-                    {postData &&
-                      postData[0].PostOffice.map((item) => (
-                        <option value="volvo">{item.Name}</option>
-                      ))}
-                  </select>
+                  {disabledState === true ? (
+                    <input
+                      type="email"
+                      className="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
+                      defaultValue={displayData.city}
+                    />
+                  ) : (
+                    <select
+                      type="email"
+                      className="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
+                      onChange={(e) => {
+                        setEditData({
+                          ...editData,
+                          city: e.target.value,
+                        });
+                        setDisplayData({
+                          ...displayData,
+                          city: e.target.value,
+                        });
+                      }}
+                    >
+                      <option value="" selected disabled hidden>
+                        {displayData.city}
+                      </option>
+                      {postData &&
+                        postData[0].PostOffice.map((item) => (
+                          <option value="volvo">{item.Name}</option>
+                        ))}
+                    </select>
+                  )}
                 </div>
               </div>
               <div className="w-full lg:w-4/12 px-4">

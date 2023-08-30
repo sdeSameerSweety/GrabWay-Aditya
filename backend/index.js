@@ -936,6 +936,13 @@ app.post("/buyNow", async (req, res) => {
   }
 });
 
+app.post("/editprofile:type", async (req, res) => {
+  await mongoose.connect(MONGO_URL);
+  const userType = req.params.type;
+  const data = req.body;
+  console.log(data);
+});
+
 app.listen(PORT, () => {
   console.log(`Server running at http://localhost:${PORT}`);
 });

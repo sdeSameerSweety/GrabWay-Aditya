@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext } from "react";
 
 // components
 
@@ -6,8 +6,11 @@ import UserSettings from "../../components/Profile/User/userSettings";
 import UserProfile from "../../components/Profile/User/userProfile";
 import Cookies from "js-cookie";
 import { Navigate } from "react-router-dom";
+import { UserContext } from "../../context/Context";
+import { useConst } from "@chakra-ui/react";
 
 export default function Settings() {
+  const { profilePhoto } = useContext(UserContext);
   const googleUserData = Cookies.get("grabwayGoogleToken");
 
   const userData = Cookies.get("grabwayUser");
@@ -32,7 +35,7 @@ export default function Settings() {
           <UserSettings userData={userData} />
         </div>
         <div className="w-full lg:w-4/12 px-4">
-          <UserProfile userData={userData} />
+          <UserProfile userData={userData} profilePhoto={profilePhoto} />
         </div>
       </div>
     </>
