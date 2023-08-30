@@ -129,7 +129,7 @@ const TopBar = ({ counter, setCounter, setLoginState, loginState }) => {
             duration: 3000,
             isClosable: true,
           });
-          Cookies.set("grabwayToken", loginEmail, 7);
+          Cookies.set("grabwayToken", loginEmail,{expires:7} );
           setRunContext("login");
           window.location.reload(false);
         })
@@ -189,7 +189,7 @@ const TopBar = ({ counter, setCounter, setLoginState, loginState }) => {
             duration: 3000,
             isClosable: true,
           });
-          Cookies.set("grabwayToken", signupEmail, 7);
+          Cookies.set("grabwayToken", signupEmail, {expires:7});
 
           //console.log(signupUserType);
           if (signupUserType === "user") {
@@ -294,7 +294,7 @@ const TopBar = ({ counter, setCounter, setLoginState, loginState }) => {
         const user = result.user;
         console.log(user);
         console.log(result);
-        Cookies.set("grabwayToken", user.email, 7);
+        Cookies.set("grabwayToken", user.email, {expires:7});
         // IdP data available using getAdditionalUserInfo(result)
         // ...
         onClose();
@@ -311,7 +311,7 @@ const TopBar = ({ counter, setCounter, setLoginState, loginState }) => {
             email: user.email,
           });
           if (userFound) {
-            Cookies.set("grabwayToken", user.email, 7);
+            Cookies.set("grabwayToken", user.email, {expires:7});
             setRunContext("signInWithGoogle");
             setCounter(true);
             setLoginState(true);
