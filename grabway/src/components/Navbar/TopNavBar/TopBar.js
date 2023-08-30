@@ -40,14 +40,12 @@ import { firebaseConfig } from "../../../firebase";
 import { FcGoogle } from "react-icons/fc";
 import Cookies from "js-cookie";
 import { UserContext } from "../../../context/Context";
-import {
-  RiEyeLine,
-  RiEyeOffLine,
-} from "react-icons/ri";
+import { RiEyeLine, RiEyeOffLine } from "react-icons/ri";
 
 const TopBar = ({ counter, setCounter, setLoginState, loginState }) => {
   /* For hiding password */
   const [showPassword, setShowPassword] = useState(false);
+  const { profilePhoto } = useContext(UserContext);
   const app = initializeApp(firebaseConfig);
   const auth = getAuth();
   const provider = new GoogleAuthProvider();
@@ -61,6 +59,28 @@ const TopBar = ({ counter, setCounter, setLoginState, loginState }) => {
   const [signupPhone, setSignupPhone] = useState("");
   const [signupUserType, setSignupUserType] = useState("");
   const toast = useToast();
+  const [weatherData,setWeatherData]=useState(null);
+  async function getWeather(city){
+    const res=await fetch(`https://api.weatherapi.com/v1/current.json?q=${city}&key=%20beab78d23f424b26923110343233008`);
+    const myJson=await res.json();
+    //console.log(myJson);
+    setWeatherData(myJson);
+  }
+  
+  const [city, setCity]= useState('');
+
+  useEffect(()=>{
+    const UserData=Cookies.get('grabwayUser');
+    if(UserData){
+      if((JSON.parse(UserData).name!=='')){
+        setCity((JSON.parse(UserData)).address[0].city);
+       
+      }
+    }
+  })
+  if(city){
+    getWeather(city);
+  }
   function showModal() {
     if (showSignIn === true) {
       setShowSignIn(false);
@@ -109,7 +129,7 @@ const TopBar = ({ counter, setCounter, setLoginState, loginState }) => {
             duration: 3000,
             isClosable: true,
           });
-          Cookies.set("grabwayToken", loginEmail, 7);
+          Cookies.set("grabwayToken", loginEmail,{expires:7} );
           setRunContext("login");
           window.location.reload(false);
         })
@@ -169,10 +189,8 @@ const TopBar = ({ counter, setCounter, setLoginState, loginState }) => {
             duration: 3000,
             isClosable: true,
           });
-          Cookies.set("grabwayToken", signupEmail, 7);
-          
-          
-          
+          Cookies.set("grabwayToken", signupEmail, {expires:7});
+
           //console.log(signupUserType);
           if (signupUserType === "user") {
             console.log("inside user if");
@@ -182,8 +200,8 @@ const TopBar = ({ counter, setCounter, setLoginState, loginState }) => {
             });
             const userMongo = res.data.email;
             setUserEmail(userMongo);
-            if(res){
-              setRunContext('signup');
+            if (res) {
+              setRunContext("signup");
               window.location.reload(false);
             }
           }
@@ -194,8 +212,8 @@ const TopBar = ({ counter, setCounter, setLoginState, loginState }) => {
             });
             const driverMongo = res.data.email;
             setUserEmail(driverMongo);
-            if(res){
-              setRunContext('signup');
+            if (res) {
+              setRunContext("signup");
               window.location.reload(false);
             }
           }
@@ -276,7 +294,7 @@ const TopBar = ({ counter, setCounter, setLoginState, loginState }) => {
         const user = result.user;
         console.log(user);
         console.log(result);
-        Cookies.set("grabwayToken", user.email, 7);
+        Cookies.set("grabwayToken", user.email, {expires:7});
         // IdP data available using getAdditionalUserInfo(result)
         // ...
         onClose();
@@ -288,20 +306,18 @@ const TopBar = ({ counter, setCounter, setLoginState, loginState }) => {
           isClosable: true,
         });
         console.log(user.email);
-        try{
+        try {
           const userFound = await axios.post("/googlecheckUser", {
             email: user.email,
           });
           if (userFound) {
-            Cookies.set("grabwayToken", user.email, 7);
+            Cookies.set("grabwayToken", user.email, {expires:7});
             setRunContext("signInWithGoogle");
             setCounter(true);
             setLoginState(true);
             window.location.reload(false);
           }
-           
-        }
-        catch(err){
+        } catch (err) {
           console.log("not found");
           Cookies.set("grabwayGoogleToken", user.email);
 
@@ -334,11 +350,22 @@ const TopBar = ({ counter, setCounter, setLoginState, loginState }) => {
               GrabWay
             </div>
             <div className="flex justify-center items-center">
-              <img src="/assets/images/logo.png" alt="logo"/>
+              <img src="/assets/images/logo.png" alt="logo" />
             </div>
           </div>
         </Link>
         <div className="flex flex-row justify-center items-center gap-7">
+          {weatherData && <>
+          <div className="weather-info flex justify-center items-center gap-1">
+            <img className='w-9' src={weatherData.current.condition.icon}/>
+            <div className="flex justify-center flex-col items-center font-ubuntu">
+              <div className="text-[11px]">{weatherData.current.temp_c}°C</div>
+              <div className="text-[11px]">
+                  {weatherData.location.name}
+              </div>
+            </div>
+          </div>
+          </>}
           <div>
             <IconButton
               sx={{ bgColor: "white" }}
@@ -673,9 +700,17 @@ const TopBar = ({ counter, setCounter, setLoginState, loginState }) => {
             )}
 
             {loginState && (
+              <>
               <Link to="/profile">
-                <Avatar name="Kent Dodds" src="https://bit.ly/kent-c-dodds" />
+                <Avatar
+                  name="Kent Dodds"
+                  src={
+                    profilePhoto ? profilePhoto : "https://bit.ly/kent-c-dodds"
+                  }
+                />
               </Link>
+              </>
+              
             )}
           </div>
         </div>

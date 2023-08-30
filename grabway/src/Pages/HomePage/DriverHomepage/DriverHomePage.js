@@ -11,71 +11,19 @@ import {
 } from "@chakra-ui/react";
 import Cookies from "js-cookie";
 const TopSection = ({ nonceVal, loginState }) => {
-  const routes = [
-    {
-      origin:
-        "Silicon Institute Silicon Institute Silicon Institute Silicon Institute1",
-      destination: "MasterCanteen",
-      seats: 10,
-      customers: [
-        { name: "Abhinav Singh", Email: "demo@gmail.com" },
-        { name: "Abhinav Singh", Email: "demo@gmail.com" },
-      ],
-    },
-    {
-      origin: "Silicon Institute2",
-      destination: "MasterCanteen",
-      seats: 10,
-      customers: [
-        { name: "Abhinav Singh", Email: "demo@gmail.com" },
-        { name: "Abhinav Singh", Email: "demo@gmail.com" },
-      ],
-    },
-    {
-      origin: "Silicon Institute3",
-      destination: "MasterCanteen",
-      seats: 10,
-      customers: [{ name: "Abhinav Singh", Email: "demo@gmail.com" }],
-    },
-    {
-      origin: "Silicon Institute4",
-      destination: "MasterCanteen",
-      seats: 10,
-      customers: [
-        { name: "Abhinav Singh", Email: "demo@gmail.com" },
-        { name: "Abhinav Singh", Email: "demo@gmail.com" },
-      ],
-    },
-    {
-      origin: "Silicon Institute",
-      destination: "MasterCanteen",
-      seats: 10,
-      customers: [
-        { name: "Abhinav Singh", Email: "demo@gmail.com" },
-        { name: "Abhinav Singh", Email: "demo@gmail.com" },
-      ],
-    },
-    {
-      origin: "Silicon Institute",
-      destination: "MasterCanteen",
-      seats: 10,
-      customers: [
-        { name: "Abhinav Singh", Email: "demo@gmail.com" },
-        { name: "Abhinav Singh", Email: "demo@gmail.com" },
-      ],
-    },
-    {
-      origin: "Silicon Institute",
-      destination: "MasterCanteen",
-      seats: 10,
-      customers: [
-        { name: "Abhinav Singh", Email: "demo@gmail.com" },
-        { name: "Abhinav Singh", Email: "demo@gmail.com" },
-      ],
-    },
-  ];
-
   const userData = Cookies.get("grabwayUser");
+  const [routes, setRoutes]=useState(null);
+  const [routesEmpty,setRoutesEmpty]=useState(false);
+  useEffect(()=>{
+    if(userData){
+      if((JSON.parse(userData)).routes.length!==0){
+        setRoutes((JSON.parse(userData)).routes);
+      }
+      if((JSON.parse(userData)).routes.length===0){
+        setRoutesEmpty(true);
+      }
+    }
+  })
   if (userData) {
     if ((JSON.parse(userData)).name==='') {
       return <Navigate to={"/registration"} userType=""/>;
@@ -88,11 +36,39 @@ const TopSection = ({ nonceVal, loginState }) => {
   if(!Cookies.get('grabwayToken')){
     return <Navigate to={'/'}/>
   }
-
   return (
     <>
       <div className="dekstop-view flex justify-center items-center">
-        <div className="flex justify-center items-center flex-row m-5">
+      {routesEmpty && <>
+        <div className="flex flex-row justify-between items-center gap-20 mt-[8vh]">
+          <div className="flex justify-center items-center">
+            <img className="flex justify-center items-center w-[30vw]" src="/assets/gif/noRoute.gif"/>
+          </div>
+          <div className="flex flex-col justify-center items-center">
+            <div className="animated-text">
+                Welcome,<br/> Lets Begin with adding your Routes
+            </div>
+            <div className="flex justify-center items-center ">
+              <Link to='/routeDriverLocation'><Button
+                colorScheme="red"
+                sx={{
+                  bgColor: "#E51B23",
+                  _hover: `bgColor:"#E51B23"`,
+                  color: "white",
+                }}
+              >
+                Add New Route
+              </Button></Link>
+            </div>
+          </div>
+        </div>
+        
+        
+        
+        
+        
+        </>}
+        {!routesEmpty && <><div className="flex justify-center items-center flex-row m-5">
           <div className="flex justify-center items-center flex-col mt-5 ">
             <div className="flex justify-center items-center mb-10">
               <Link to='/routeDriverLocation'><Button
@@ -107,7 +83,7 @@ const TopSection = ({ nonceVal, loginState }) => {
               </Button></Link>
             </div>
             <div className="flex flex-col justify-between items-center gap-10 mt-5">
-              {routes.map((element, index) => {
+              {routes && routes.map((element, index) => {
                 return (
                   <>
                     {index % 2 === 0 && (
@@ -126,7 +102,7 @@ const TopSection = ({ nonceVal, loginState }) => {
                                         FROM:
                                       </div>
                                       <div className="text-[black]">
-                                        {element.origin}
+                                        {element.origin[0].text}
                                       </div>
                                     </div>
                                     <div>
@@ -134,7 +110,7 @@ const TopSection = ({ nonceVal, loginState }) => {
                                         TO:
                                       </div>
                                       <div className="text-[black]">
-                                        {element.destination}
+                                        {element.destination[0].text}
                                       </div>
                                     </div>
                                   </div>
@@ -186,7 +162,7 @@ const TopSection = ({ nonceVal, loginState }) => {
                                         FROM:
                                       </div>
                                       <div className="text-[black]">
-                                        {element.origin}
+                                        {element.origin[0].text}
                                       </div>
                                     </div>
                                     <div>
@@ -194,7 +170,7 @@ const TopSection = ({ nonceVal, loginState }) => {
                                         TO:
                                       </div>
                                       <div className="text-[black]">
-                                        {element.destination}
+                                        {element.destination[0].text}
                                       </div>
                                     </div>
                                   </div>
@@ -235,10 +211,39 @@ const TopSection = ({ nonceVal, loginState }) => {
               })}
             </div>
           </div>
-        </div>
+        </div></>}
       </div>
       <div className="mobile-view flex justify-center items-center">
-        <div className="flex justify-center items-center flex-row m-5">
+      {routesEmpty && <>
+        <div className="flex flex-col justify-between items-center gap-20 mt-[8vh]">
+          <div className="flex justify-center items-center">
+            <img className="flex justify-center items-center pl-[5%] pr-[5%]" src="/assets/gif/noRoute.gif"/>
+          </div>
+          <div className="flex flex-col justify-center items-center">
+            <div className="animated-text">
+                Welcome,<br/> Lets Begin with adding your Routes
+            </div>
+            <div className="flex justify-center items-center ">
+              <Link to='/routeDriverLocation'><Button
+                colorScheme="red"
+                sx={{
+                  bgColor: "#E51B23",
+                  _hover: `bgColor:"#E51B23"`,
+                  color: "white",
+                }}
+              >
+                Add New Route
+              </Button></Link>
+            </div>
+          </div>
+        </div>
+        
+        
+        
+        
+        
+        </>}
+        {!routesEmpty && <><div className="flex justify-center items-center flex-row m-5">
           <div className="flex justify-center items-center flex-col mt-5 ">
             <div className="flex justify-center items-center mb-10">
               <Link to='/routeDriverLocation'><Button
@@ -254,7 +259,7 @@ const TopSection = ({ nonceVal, loginState }) => {
               </Button></Link>
             </div>
             <div className="flex flex-col justify-between items-center gap-10 mt-5">
-              {routes.map((element, index) => {
+              {routes && routes.map((element, index) => {
                 return (
                   <>
                     {index % 2 === 0 && (
@@ -273,7 +278,7 @@ const TopSection = ({ nonceVal, loginState }) => {
                                         FROM:
                                       </div>
                                       <div className="text-[black]">
-                                        {element.origin}
+                                        {element.origin[0].text}
                                       </div>
                                     </div>
                                     <div>
@@ -281,7 +286,7 @@ const TopSection = ({ nonceVal, loginState }) => {
                                         TO:
                                       </div>
                                       <div className="text-[black]">
-                                        {element.destination}
+                                        {element.destination[0].text}
                                       </div>
                                     </div>
                                   </div>
@@ -333,7 +338,7 @@ const TopSection = ({ nonceVal, loginState }) => {
                                         FROM:
                                       </div>
                                       <div className="text-[black]">
-                                        {element.origin}
+                                        {element.origin[0].text}
                                       </div>
                                     </div>
                                     <div>
@@ -341,7 +346,7 @@ const TopSection = ({ nonceVal, loginState }) => {
                                         TO:
                                       </div>
                                       <div className="text-[black]">
-                                        {element.destination}
+                                        {element.destination[0].text}
                                       </div>
                                     </div>
                                   </div>
@@ -382,7 +387,7 @@ const TopSection = ({ nonceVal, loginState }) => {
               })}
             </div>
           </div>
-        </div>
+        </div></>}
       </div>
     </>
   );
