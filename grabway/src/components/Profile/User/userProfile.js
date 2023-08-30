@@ -1,8 +1,8 @@
-import React from "react";
+import React, { useContext } from "react";
 
 // components
 
-export default function userProfile({ userData }) {
+export default function userProfile({ userData, profilePhoto }) {
   const imgProfile = {
     borderRadius: "50%",
     width: "54%",
@@ -18,7 +18,7 @@ export default function userProfile({ userData }) {
               <div className="relative flex justify-center">
                 <img
                   alt="..."
-                  src="assets/images/user.png"
+                  src={profilePhoto ? profilePhoto : "assets/images/user.png"}
                   style={imgProfile}
                 />
               </div>

@@ -40,14 +40,12 @@ import { firebaseConfig } from "../../../firebase";
 import { FcGoogle } from "react-icons/fc";
 import Cookies from "js-cookie";
 import { UserContext } from "../../../context/Context";
-import {
-  RiEyeLine,
-  RiEyeOffLine,
-} from "react-icons/ri";
+import { RiEyeLine, RiEyeOffLine } from "react-icons/ri";
 
 const TopBar = ({ counter, setCounter, setLoginState, loginState }) => {
   /* For hiding password */
   const [showPassword, setShowPassword] = useState(false);
+  const { profilePhoto } = useContext(UserContext);
   const app = initializeApp(firebaseConfig);
   const auth = getAuth();
   const provider = new GoogleAuthProvider();
@@ -170,9 +168,7 @@ const TopBar = ({ counter, setCounter, setLoginState, loginState }) => {
             isClosable: true,
           });
           Cookies.set("grabwayToken", signupEmail, 7);
-          
-          
-          
+
           //console.log(signupUserType);
           if (signupUserType === "user") {
             console.log("inside user if");
@@ -182,8 +178,8 @@ const TopBar = ({ counter, setCounter, setLoginState, loginState }) => {
             });
             const userMongo = res.data.email;
             setUserEmail(userMongo);
-            if(res){
-              setRunContext('signup');
+            if (res) {
+              setRunContext("signup");
               window.location.reload(false);
             }
           }
@@ -194,8 +190,8 @@ const TopBar = ({ counter, setCounter, setLoginState, loginState }) => {
             });
             const driverMongo = res.data.email;
             setUserEmail(driverMongo);
-            if(res){
-              setRunContext('signup');
+            if (res) {
+              setRunContext("signup");
               window.location.reload(false);
             }
           }
@@ -288,7 +284,7 @@ const TopBar = ({ counter, setCounter, setLoginState, loginState }) => {
           isClosable: true,
         });
         console.log(user.email);
-        try{
+        try {
           const userFound = await axios.post("/googlecheckUser", {
             email: user.email,
           });
@@ -299,9 +295,7 @@ const TopBar = ({ counter, setCounter, setLoginState, loginState }) => {
             setLoginState(true);
             window.location.reload(false);
           }
-           
-        }
-        catch(err){
+        } catch (err) {
           console.log("not found");
           Cookies.set("grabwayGoogleToken", user.email);
 
@@ -334,7 +328,7 @@ const TopBar = ({ counter, setCounter, setLoginState, loginState }) => {
               GrabWay
             </div>
             <div className="flex justify-center items-center">
-              <img src="/assets/images/logo.png" alt="logo"/>
+              <img src="/assets/images/logo.png" alt="logo" />
             </div>
           </div>
         </Link>
@@ -674,7 +668,12 @@ const TopBar = ({ counter, setCounter, setLoginState, loginState }) => {
 
             {loginState && (
               <Link to="/profile">
-                <Avatar name="Kent Dodds" src="https://bit.ly/kent-c-dodds" />
+                <Avatar
+                  name="Kent Dodds"
+                  src={
+                    profilePhoto ? profilePhoto : "https://bit.ly/kent-c-dodds"
+                  }
+                />
               </Link>
             )}
           </div>
