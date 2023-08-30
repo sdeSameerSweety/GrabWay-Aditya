@@ -349,8 +349,8 @@ app.post("/routeDriverRegistration", async (req, res) => {
   const destinationLong = formData.destinationLong;
   const originStartTime = formData.originStartTime;
   const originEndTime = formData.originEndTime;
-  const destinationStartTime = formData.destinantionStartTime;
-  const destinationEndTime = formData.destinantionEndTime;
+  const destinationStartTime = formData.destinationStartTime;
+  const destinationEndTime = formData.destinationEndTime;
   const seats = formData.seats;
   if (formData) {
     try {
@@ -370,9 +370,7 @@ app.post("/routeDriverRegistration", async (req, res) => {
                 },
               ],
               originTime: [{ start: originStartTime, end: originEndTime }],
-              destinationTime: [
-                { start: destinationStartTime, end: destinationEndTime },
-              ],
+              destinationTime: [{ start: destinationStartTime, end: destinationEndTime }],
             },
           },
         }
