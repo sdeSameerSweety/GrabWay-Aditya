@@ -2,4 +2,7 @@
     .logo-text {
       display: none;
     }
+    .weather-info{
+      display:none;
+    }
   }
