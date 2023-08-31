@@ -310,8 +310,20 @@ function MyComponent({ nonceVal }, { route, state }) {
                         </span>
                       </div>
                       {/* <!-- Pricing Card --> */}
-                      <div class="flex flex-col p-6 mx-auto max-w-lg text-center text-gray-900 bg-white rounded-lg border border-gray-100 shadow  dark:border-gray-600 xl:p-8 dark:bg-gray-800 dark:text-white">
-                        <h3 class="mb-4 text-2xl font-semibold">Pro</h3>
+                      <div class="flex flex-col p-6 mx-auto max-w-lg text-center text-gray-900 bg-white rounded-lg border border-gray-100 shadow  dark:border-gray-600 xl:p-8 dark:bg-gray-800 dark:text-white opacity-40">
+                        <div className="flex">
+                          <h3 class="mb-4 text-2xl font-semibold pl-[40%] pr-[40%]">
+                            Pro
+                          </h3>
+                          <i
+                            class="bx bx-lock-alt"
+                            style={{
+                              color: "red",
+                              fontSize: "xx-large",
+                              fontWeight: "700",
+                            }}
+                          ></i>
+                        </div>
                         <p class="font-light text-gray-500 sm:text-lg">
                           Relevant for more than one Services per day.
                         </p>
@@ -411,8 +423,20 @@ function MyComponent({ nonceVal }, { route, state }) {
                         </span>
                       </div>
                       {/* <!-- Pricing Card --> */}
-                      <div class="flex flex-col p-6 mx-auto max-w-lg text-center text-gray-900 bg-white rounded-lg border border-gray-100 shadow dark:border-gray-600 xl:p-8 dark:bg-gray-800 dark:text-white">
-                        <h3 class="mb-4 text-2xl font-semibold">Premium</h3>
+                      <div class="flex flex-col p-6 mx-auto max-w-lg text-center text-gray-900 bg-white rounded-lg border border-gray-100 shadow dark:border-gray-600 xl:p-8 dark:bg-gray-800 dark:text-white opacity-40">
+                        <div className="flex">
+                          <h3 class="mb-4 text-2xl font-semibold pl-[35%] pr-[30%]">
+                            Premium
+                          </h3>
+                          <i
+                            class="bx bx-lock-alt"
+                            style={{
+                              color: "red",
+                              fontSize: "xx-large",
+                              fontWeight: "700",
+                            }}
+                          ></i>
+                        </div>
                         <p class="font-light text-gray-500 sm:text-lg">
                           All Accessible features and Support from GrabWay
                           instantly
@@ -553,8 +577,20 @@ function MyComponent({ nonceVal }, { route, state }) {
                         </span>
                       </div>
                       {/* <!-- Pricing Card --> */}
-                      <div class="flex flex-col p-6 mx-auto max-w-lg text-center text-gray-900 bg-white rounded-lg border border-gray-100 shadow  dark:border-gray-600 xl:p-8 dark:bg-gray-800 dark:text-white">
-                        <h3 class="mb-4 text-2xl font-semibold">Pro</h3>
+                      <div class="flex flex-col p-6 mx-auto max-w-lg text-center text-gray-900 bg-white rounded-lg border border-gray-100 shadow  dark:border-gray-600 xl:p-8 dark:bg-gray-800 dark:text-white opacity-40">
+                        <div className="flex">
+                          <h3 class="mb-4 text-2xl font-semibold pl-[40%] pr-[40%]">
+                            Pro
+                          </h3>
+                          <i
+                            class="bx bx-lock-alt"
+                            style={{
+                              color: "red",
+                              fontSize: "xx-large",
+                              fontWeight: "700",
+                            }}
+                          ></i>
+                        </div>
                         <p class="font-light text-gray-500 sm:text-lg">
                           Relevant for more than one Services per day.
                         </p>
@@ -573,8 +609,20 @@ function MyComponent({ nonceVal }, { route, state }) {
                         </span>
                       </div>
                       {/* <!-- Pricing Card --> */}
-                      <div class="flex flex-col p-6 mx-auto max-w-lg text-center text-gray-900 bg-white rounded-lg border border-gray-100 shadow dark:border-gray-600 xl:p-8 dark:bg-gray-800 dark:text-white">
-                        <h3 class="mb-4 text-2xl font-semibold">Premium</h3>
+                      <div class="flex flex-col p-6 mx-auto max-w-lg text-center text-gray-900 bg-white rounded-lg border border-gray-100 shadow dark:border-gray-600 xl:p-8 dark:bg-gray-800 dark:text-white opacity-40">
+                        <div className="flex">
+                          <h3 class="mb-4 text-2xl font-semibold pl-[35%] pr-[30%]">
+                            Premium
+                          </h3>
+                          <i
+                            class="bx bx-lock-alt"
+                            style={{
+                              color: "red",
+                              fontSize: "xx-large",
+                              fontWeight: "700",
+                            }}
+                          ></i>
+                        </div>
                         <p class="font-light text-gray-500 sm:text-lg">
                           All Accessible features and Support from GrabWay
                           instantly
