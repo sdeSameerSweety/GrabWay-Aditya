@@ -99,7 +99,7 @@ const RouteUserRegisteration = () => {
           });
 
           // Redirect to driver homepage
-          window.location.href = "/driverHomepage";
+          window.location.href = "/userHomepage";
         }
       } catch (err) {
         console.error(err);

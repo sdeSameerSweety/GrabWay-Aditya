@@ -303,7 +303,7 @@ function MyComponent({ nonceVal }, { route, state }) {
                         </ul>
                         <span
                           role="button"
-                          onClick={handlemapDriverRoute("user")}
+                          onClick={() => handlemapDriverRoute("user")}
                           class="text-white bg-primary-600 hover:bg-primary-700 focus:ring-4 focus:ring-primary-200 font-medium rounded-lg text-sm px-5 py-2.5 text-center"
                         >
                           Get GrabWay
@@ -547,7 +547,7 @@ function MyComponent({ nonceVal }, { route, state }) {
                         <span
                           class="text-white bg-primary-600 hover:bg-primary-700 focus:ring-4 focus:ring-primary-200 font-medium rounded-lg text-sm px-5 py-2.5 text-center"
                           role="button"
-                          onClick={handlemapDriverRoute("driver")}
+                          onClick={() => handlemapDriverRoute("driver")}
                         >
                           Get GrabWay
                         </span>
