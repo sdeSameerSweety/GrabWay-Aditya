@@ -89,7 +89,7 @@ const RouteUserRegisteration = () => {
     seats,
   };
 
-  console.log(formData);
+  //console.log(formData);
 
   const handleSubmit = async (e) => {
     e.preventDefault(); // Prevent the default form submission behavior
@@ -98,7 +98,7 @@ const RouteUserRegisteration = () => {
 
     if (Object.keys(newErrors).length === 0) {
       try {
-        const response = await axios.post("/routeDriverRegistration", {
+        const response = await axios.post("/routeUserSearch", {
           formData,
         });
 
@@ -115,7 +115,7 @@ const RouteUserRegisteration = () => {
           });
 
           // Redirect to driver homepage
-          window.location.href = "/userHomepage";
+          //window.location.href = "/userHomepage";
         }
       } catch (err) {
         console.error(err);
