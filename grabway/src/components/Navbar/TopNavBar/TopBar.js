@@ -45,7 +45,7 @@ import { RiEyeLine, RiEyeOffLine } from "react-icons/ri";
 const TopBar = ({ counter, setCounter, setLoginState, loginState }) => {
   /* For hiding password */
   const [showPassword, setShowPassword] = useState(false);
-  const { profilePhoto } = useContext(UserContext);
+  const [profilePhoto, setProfilePhoto] = useState("");
   const app = initializeApp(firebaseConfig);
   const auth = getAuth();
   const provider = new GoogleAuthProvider();
@@ -60,6 +60,12 @@ const TopBar = ({ counter, setCounter, setLoginState, loginState }) => {
   const [signupUserType, setSignupUserType] = useState("");
   const toast = useToast();
   const [weatherData, setWeatherData] = useState(null);
+  let dt = useContext(UserContext);
+
+  useEffect(() => {
+    if (dt.profilePhoto !== undefined || dt.profilePhoto !== null)
+      setProfilePhoto(dt.profilePhoto);
+  }, []);
   async function getWeather(city) {
     const res = await fetch(
       `https://api.weatherapi.com/v1/current.json?q=${city}&key=%20beab78d23f424b26923110343233008`
@@ -70,6 +76,7 @@ const TopBar = ({ counter, setCounter, setLoginState, loginState }) => {
   }
 
   const [city, setCity] = useState("");
+  console.log(profilePhoto);
 
   useEffect(() => {
     const UserData = Cookies.get("grabwayUser");
