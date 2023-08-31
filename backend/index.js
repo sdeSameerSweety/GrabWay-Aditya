@@ -157,7 +157,7 @@ app.post("/googleCreateUser", async (req, res) => {
         userType: "user",
       });
       if (EmailRes) {
-        console.log("trying to create user model");
+        console.log("trying to create user model", pin);
         const User = await UserModel.create({
           email: email,
           phoneNumber: phoneNumber,
@@ -184,7 +184,7 @@ app.post("/googleCreateUser", async (req, res) => {
 
 app.post("/googleCreateDriver", async (req, res) => {
   await mongoose.connect(MONGO_URL);
-  
+
   const formData = req.body.formData;
   console.log(formData);
   const name = formData.name;
@@ -210,7 +210,7 @@ app.post("/googleCreateDriver", async (req, res) => {
       if (EmailRes) {
         console.log("trying to create user model");
         const User = await DriverModel.create({
-          email:email,
+          email: email,
           name: name,
           phoneNumber: phoneNumber,
           VehicleNumber: VehicleNumber,
@@ -373,7 +373,9 @@ app.post("/routeDriverRegistration", async (req, res) => {
                 },
               ],
               originTime: [{ start: originStartTime, end: originEndTime }],
-              destinationTime: [{ start: destinationStartTime, end: destinationEndTime }],
+              destinationTime: [
+                { start: destinationStartTime, end: destinationEndTime },
+              ],
             },
           },
         }
