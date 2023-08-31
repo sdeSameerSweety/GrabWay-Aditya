@@ -41,8 +41,10 @@ function MyComponent({ nonceVal }, { route, state }) {
   };
   console.log(rideDataText, location);
 
-  const handlemapDriverRoute = () => {
-    navigate("/routeDriverRegistration", { state: location });
+  const handlemapDriverRoute = (type) => {
+    if (type === "driver")
+      navigate("/routeDriverRegistration", { state: location });
+    else navigate("/routeUserRegistration", { state: location });
   };
   //Route setup and display function
   const [directionResponse, setDirectionResponse] = useState("");
@@ -299,12 +301,13 @@ function MyComponent({ nonceVal }, { route, state }) {
                             <span>Secured Rides with 2FA</span>
                           </li>
                         </ul>
-                        <a
-                          href="#"
+                        <span
+                          role="button"
+                          onClick={handlemapDriverRoute("user")}
                           class="text-white bg-primary-600 hover:bg-primary-700 focus:ring-4 focus:ring-primary-200 font-medium rounded-lg text-sm px-5 py-2.5 text-center"
                         >
                           Get GrabWay
-                        </a>
+                        </span>
                       </div>
                       {/* <!-- Pricing Card --> */}
                       <div class="flex flex-col p-6 mx-auto max-w-lg text-center text-gray-900 bg-white rounded-lg border border-gray-100 shadow  dark:border-gray-600 xl:p-8 dark:bg-gray-800 dark:text-white">
@@ -403,12 +406,9 @@ function MyComponent({ nonceVal }, { route, state }) {
                             <span>Secured Rides with 2FA</span>
                           </li>
                         </ul>
-                        <a
-                          href="#"
-                          class="text-white bg-primary-600 hover:bg-primary-700 focus:ring-4 focus:ring-primary-200 font-medium rounded-lg text-sm px-5 py-2.5 text-center"
-                        >
+                        <span class="text-white bg-primary-600 hover:bg-primary-700 focus:ring-4 focus:ring-primary-200 font-medium rounded-lg text-sm px-5 py-2.5 text-center">
                           Get GrabWay
-                        </a>
+                        </span>
                       </div>
                       {/* <!-- Pricing Card --> */}
                       <div class="flex flex-col p-6 mx-auto max-w-lg text-center text-gray-900 bg-white rounded-lg border border-gray-100 shadow dark:border-gray-600 xl:p-8 dark:bg-gray-800 dark:text-white">
@@ -508,12 +508,9 @@ function MyComponent({ nonceVal }, { route, state }) {
                             <span>Secured Rides with 2FA</span>
                           </li>
                         </ul>
-                        <a
-                          href="#"
-                          class="text-white bg-primary-600 hover:bg-primary-700 focus:ring-4 focus:ring-primary-200 font-medium rounded-lg text-sm px-5 py-2.5 text-center"
-                        >
+                        <span class="text-white bg-primary-600 hover:bg-primary-700 focus:ring-4 focus:ring-primary-200 font-medium rounded-lg text-sm px-5 py-2.5 text-center">
                           Get GrabWay
-                        </a>
+                        </span>
                       </div>
                     </div>
                   </div>
@@ -550,7 +547,7 @@ function MyComponent({ nonceVal }, { route, state }) {
                         <span
                           class="text-white bg-primary-600 hover:bg-primary-700 focus:ring-4 focus:ring-primary-200 font-medium rounded-lg text-sm px-5 py-2.5 text-center"
                           role="button"
-                          onClick={handlemapDriverRoute}
+                          onClick={handlemapDriverRoute("driver")}
                         >
                           Get GrabWay
                         </span>
