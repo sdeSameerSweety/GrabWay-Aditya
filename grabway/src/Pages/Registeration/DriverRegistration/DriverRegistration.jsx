@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useState, useEffect } from "react";
 import "../Registeration.css";
 import {
   Container,
@@ -29,6 +29,7 @@ const DriverRegistration = () => {
   const userData = Cookies.get("grabwayUser");
   const hasUserData = userData !== undefined;
   //console.log(userData);
+  const [tmpPin, setTmpPin] = useState("");
   const [formData, setFormData] = useState({
     name: "",
     lastName: "",
@@ -51,7 +52,7 @@ const DriverRegistration = () => {
     const pincode = e.target.value;
     setFormData({
       ...formData,
-      pin: pincode,
+      pin: e.target.value,
     });
 
     try {
@@ -64,15 +65,20 @@ const DriverRegistration = () => {
         const postOffice = data[0].PostOffice[0];
         setFormData({
           ...formData,
-          pin: postOffice.PinCode,
           city: postOffice.District,
           state: postOffice.State,
         });
+        if (postOffice.Pincode !== undefined || postOffice.Pincode !== null)
+          setTmpPin(postOffice.Pincode);
       }
     } catch (error) {
       console.error("Error fetching data:", error);
     }
   };
+
+  useEffect(() => {
+    if (tmpPin.length === 6) setFormData({ ...formData, pin: tmpPin });
+  }, [tmpPin]);
 
   const [errors, setErrors] = useState({});
   const [isChecked, setIsChecked] = useState(false);
