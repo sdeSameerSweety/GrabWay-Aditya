@@ -65,7 +65,8 @@ const TopBar = ({ counter, setCounter, setLoginState, loginState }) => {
   useEffect(() => {
     if (dt.profilePhoto !== undefined || dt.profilePhoto !== null)
       setProfilePhoto(dt.profilePhoto);
-  }, []);
+  });
+
   async function getWeather(city) {
     const res = await fetch(
       `https://api.weatherapi.com/v1/current.json?q=${city}&key=%20beab78d23f424b26923110343233008`

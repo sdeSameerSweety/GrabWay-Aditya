@@ -217,6 +217,7 @@ app.post("/googleCreateDriver", async (req, res) => {
           drivingLicenseNumber: drivingLicenseNumber,
           profilePicture: profilePicture,
           experience: experience,
+          userType: "driver",
           "address.0.addressName": addressName,
           "address.0.addressLine1": addressLine1,
           "address.0.addressLine2": addressLine2,
