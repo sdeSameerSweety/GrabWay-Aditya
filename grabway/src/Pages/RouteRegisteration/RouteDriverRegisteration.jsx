@@ -40,6 +40,15 @@ const RouteDriverRegisteration = () => {
   const userData = Cookies.get("grabwayUser");
   const [originTimeError, setOriginTimeError] = useState("");
   const [destinationTimeError, setDestinationTimeError] = useState("");
+   //function to scroll down to cards
+   const handleScroll = () => {
+    const element = document.getElementById("form-div");
+    if (element) {
+      // 👇 Will scroll smoothly to the top of the next section
+      element.scrollIntoView({ behavior: "smooth" });
+    }
+  };
+  handleScroll();
 
   useEffect(() => {
     if (location.state === undefined || location.state === null) {
@@ -192,7 +201,7 @@ const RouteDriverRegisteration = () => {
   }
 
   return (
-    <Container className="container-reg" maxW="75%" mt={8}>
+    <Container id='form-div' className=" container-reg" maxW="75%" mt={8}>
       <Box
         className="tab-list"
         display="flex"
