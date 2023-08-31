@@ -13,11 +13,15 @@ import {
   Heading,
 } from "@chakra-ui/react";
 import "./RouteDriverRegisteration.css";
+import { useNavigate } from "react-router-dom";
 import Cookies from "js-cookie";
 import { Navigate } from "react-router-dom";
 import { UserContext } from "../../context/Context";
+import { useLocation } from "react-router-dom";
 import axios from "axios";
 const RouteDriverRegisteration = () => {
+  const location = useLocation();
+  const navigate = useNavigate();
   const [email, setEmail] = useState(null);
   const { setRunContext } = useContext(UserContext); //dont remove this
   const toast = useToast(); //dont remove this
@@ -37,20 +41,39 @@ const RouteDriverRegisteration = () => {
   const [originTimeError, setOriginTimeError] = useState("");
   const [destinationTimeError, setDestinationTimeError] = useState("");
 
+  useEffect(() => {
+    if (location.state === undefined || location.state === null) {
+      navigate("/");
+
+      toast({
+        title: "Cannot Access now",
+        description: "Please Fill Source and Destination before moving ahead",
+        status: "error",
+        duration: 5000,
+        isClosable: true,
+        position: "top",
+      });
+    }
+  }, []);
+
+  // console.log(location.state.state);
+
   const formData = {
     email,
-    originText,
-    originLat,
-    originLong,
-    destinationText,
-    destinationLat,
-    destinationLong,
+    originText: location.state.state.source,
+    originLat: location.state.state.sourceCord.lat,
+    originLong: location.state.state.sourceCord.lng,
+    destinationText: location.state.state.destination,
+    destinationLat: location.state.state.destinationCord.lat,
+    destinationLong: location.state.state.destinationCord.lng,
     originStartTime,
     originEndTime,
     destinationStartTime,
     destinationEndTime,
     seats,
   };
+
+  console.log(formData);
 
   const handleSubmit = async (e) => {
     e.preventDefault(); // Prevent the default form submission behavior
@@ -126,9 +149,7 @@ const RouteDriverRegisteration = () => {
 
     const originStart = new Date(`2000-01-01T${originStartTime}`);
     const originEnd = new Date(`2000-01-01T${originEndTime}`);
-    const destinationStart = new Date(
-      `2000-01-01T${destinationStartTime}`
-    );
+    const destinationStart = new Date(`2000-01-01T${destinationStartTime}`);
     const destinationEnd = new Date(`2000-01-01T${destinationEndTime}`);
 
     if (originEnd <= originStart) {
