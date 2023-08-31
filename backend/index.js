@@ -10,7 +10,7 @@ const UserModel = require("./Schema/User");
 const DriverModel = require("./Schema/Driver");
 const EmailModel = require("./Schema/Email");
 var haversine = require("haversine-distance");
-const moment = require("moment");
+
 //environment variables
 const MONGO_URL = process.env.MONGO_URL;
 const PUBLIC_URL = "http://localhost:3000";
