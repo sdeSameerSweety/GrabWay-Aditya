@@ -5,9 +5,10 @@ import {
   useJsApiLoader,
   DirectionsRenderer,
 } from "@react-google-maps/api";
-import { Button, Mark, useToast } from "@chakra-ui/react";
+import { Button, Mark, useControllableProp, useToast } from "@chakra-ui/react";
 import { useLocation } from "react-router-dom";
 import Cookies from "js-cookie";
+import { useNavigate } from "react-router-dom";
 import { Card, CardBody } from "@chakra-ui/react";
 import axios from "axios";
 const containerStyle = {
@@ -18,6 +19,7 @@ const containerStyle = {
 };
 
 function MyComponent({ nonceVal }, { route, state }) {
+  const navigate = useNavigate();
   const usData = JSON.parse(Cookies.get("grabwayUser"));
   console.log(usData);
   const location = useLocation();
@@ -37,8 +39,11 @@ function MyComponent({ nonceVal }, { route, state }) {
     source: location.state.source,
     destination: location.state.destination,
   };
-  console.log(rideDataText);
+  console.log(rideDataText, location);
 
+  const handlemapDriverRoute = () => {
+    navigate("/routeDriverRegistration", { state: location });
+  };
   //Route setup and display function
   const [directionResponse, setDirectionResponse] = useState("");
   async function calculateRoute() {
@@ -542,12 +547,13 @@ function MyComponent({ nonceVal }, { route, state }) {
                           <span class="text-gray-500">/month</span>
                         </div>
 
-                        <a
-                          href="#"
+                        <span
                           class="text-white bg-primary-600 hover:bg-primary-700 focus:ring-4 focus:ring-primary-200 font-medium rounded-lg text-sm px-5 py-2.5 text-center"
+                          role="button"
+                          onClick={handlemapDriverRoute}
                         >
                           Get GrabWay
-                        </a>
+                        </span>
                       </div>
                       {/* <!-- Pricing Card --> */}
                       <div class="flex flex-col p-6 mx-auto max-w-lg text-center text-gray-900 bg-white rounded-lg border border-gray-100 shadow  dark:border-gray-600 xl:p-8 dark:bg-gray-800 dark:text-white">
@@ -562,12 +568,12 @@ function MyComponent({ nonceVal }, { route, state }) {
                           <span class="text-gray-500">/month</span>
                         </div>
 
-                        <a
-                          href="#"
+                        <span
                           class="text-white bg-primary-600 hover:bg-primary-700 focus:ring-4 focus:ring-primary-200 font-medium rounded-lg text-sm px-5 py-2.5 text-center"
+                          role="button"
                         >
                           Get GrabWay
-                        </a>
+                        </span>
                       </div>
                       {/* <!-- Pricing Card --> */}
                       <div class="flex flex-col p-6 mx-auto max-w-lg text-center text-gray-900 bg-white rounded-lg border border-gray-100 shadow dark:border-gray-600 xl:p-8 dark:bg-gray-800 dark:text-white">
@@ -583,12 +589,12 @@ function MyComponent({ nonceVal }, { route, state }) {
                           <span class="text-gray-500">/month</span>
                         </div>
 
-                        <a
-                          href="#"
+                        <span
                           class="text-white bg-primary-600 hover:bg-primary-700 focus:ring-4 focus:ring-primary-200 font-medium rounded-lg text-sm px-5 py-2.5 text-center"
+                          role="button"
                         >
                           Get GrabWay
-                        </a>
+                        </span>
                       </div>
                     </div>
                   </div>

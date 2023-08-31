@@ -23,14 +23,7 @@ export function UserContextProvider({ children }) {
       });
     }
     if (email && googleToken) {
-      axios.post("/checkuser", { email }).then((res) => {
-        console.log("I am here up", res.data);
-        let data = res.data;
-        setProfilePhoto(data.profilePicture);
-        if (delete data.profilePicture)
-          Cookies.set("grabwayUser", JSON.stringify(data), { expires: 7 });
-        setUserEmail(res.data);
-      });
+      setUserEmail(email);
     }
   }, []);
 
@@ -46,14 +39,7 @@ export function UserContextProvider({ children }) {
       });
     }
     if (email && googleToken) {
-      axios.post("/checkuser", { email }).then((res) => {
-        console.log("I am here down", res.data);
-        let data = res.data;
-        setProfilePhoto(data.profilePicture);
-        if (delete data.profilePicture)
-          Cookies.set("grabwayUser", JSON.stringify(data), { expires: 7 });
-        setUserEmail(res.data);
-      });
+      setUserEmail(email);
     }
   }, [runContext]);
 
