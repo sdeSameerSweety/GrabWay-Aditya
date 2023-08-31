@@ -22,6 +22,8 @@ import UserHomePage from "./Pages/HomePage/UserHomepage/UserHomepage";
 import RouteRegisteration from "./Pages/RouteRegisteration/RouteDriverRegisteration";
 import RouteDriverRegisteration from "./Pages/RouteRegisteration/RouteDriverRegisteration";
 import DriverRouteLocation from "./Pages/DriverRouteLocation/DriverRouteLocation";
+import StatusBar from "./components/StausBar/StatusBar";
+import RouteUserRegisteration from "./Pages/RouteRegisteration/RouteUserRegistration";
 axios.defaults.baseURL = "http://localhost:8080";
 axios.defaults.withCredentials = true;
 // import NearbyMap from "./components/Map/NearbyMap";
@@ -62,6 +64,7 @@ function App() {
   return (
     <BrowserRouter>
       <UserContextProvider>
+        {/* <StatusBar /> */}
         <Navbar
           classDisplay={classDisplay}
           setClassDislay={setClassDisplay}
@@ -84,15 +87,12 @@ function App() {
             <Route path="/registration" element={<Registeration />} />
             <Route path="/googleRegistration" element={<GRegistration />} />
             <Route path="/profile" element={<ProfilePage />} />
-            <Route
-              path="/driverHomePage"
-              element={
-                <DriverHomePage/>
-              }
-            />
+            <Route path="/driverHomePage" element={<DriverHomePage />} />
             <Route
               path="/routeDriverLocation"
-              element={<DriverRouteLocation nonceVal={nonce} loginState={loginState} />}
+              element={
+                <DriverRouteLocation nonceVal={nonce} loginState={loginState} />
+              }
             />
             <Route
               path="/userHomePage"
@@ -103,6 +103,10 @@ function App() {
             <Route
               path="/routeDriverRegistration"
               element={<RouteRegisteration />}
+            />
+            <Route
+              path="/routeUserRegistration"
+              element={<RouteUserRegisteration />}
             />
           </Routes>
           <Footer />

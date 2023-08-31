@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import "../../Registeration.css";
 import {
   Container,
@@ -22,6 +22,7 @@ import { UserContext } from "../../../../context/Context";
 import imageCompression from "browser-image-compression";
 
 const UserRegistration = () => {
+  const [tmpPin, setTmpPin] = useState("");
   const { setRunContext } = useContext(UserContext);
   const userData = Cookies.get("grabwayGoogleToken");
   const googleUserType = "user";
@@ -40,12 +41,13 @@ const UserRegistration = () => {
     pin: "",
     imgDp: "",
   });
-
+  // console.log(formData);
+  // console.log(tmpPin);
   const handlePincodeChange = async (e) => {
     const pincode = e.target.value;
     setFormData({
       ...formData,
-      pin: pincode,
+      pin: e.target.value,
     });
 
     try {
@@ -53,20 +55,24 @@ const UserRegistration = () => {
         `https://api.postalpincode.in/pincode/${pincode}`
       );
       const data = await response.json();
-
+      console.log(data);
       if (data && data[0].Status === "Success") {
         const postOffice = data[0].PostOffice[0];
         setFormData({
           ...formData,
           city: postOffice.Region,
-          pin: postOffice.PinCode,
           state: postOffice.State,
         });
+        if (postOffice.Pincode !== undefined || postOffice.Pincode !== null)
+          setTmpPin(postOffice.Pincode);
       }
     } catch (error) {
       console.error("Error fetching data:", error);
     }
   };
+  useEffect(() => {
+    if (tmpPin.length === 6) setFormData({ ...formData, pin: tmpPin });
+  }, [tmpPin]);
 
   const [errors, setErrors] = useState({});
   const [isChecked, setIsChecked] = useState(false);

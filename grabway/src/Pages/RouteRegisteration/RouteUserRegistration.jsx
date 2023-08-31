@@ -19,7 +19,7 @@ import { Navigate } from "react-router-dom";
 import { UserContext } from "../../context/Context";
 import { useLocation } from "react-router-dom";
 import axios from "axios";
-const RouteDriverRegisteration = () => {
+const RouteUserRegisteration = () => {
   const location = useLocation();
   const navigate = useNavigate();
   const [email, setEmail] = useState(null);
@@ -99,7 +99,7 @@ const RouteDriverRegisteration = () => {
           });
 
           // Redirect to driver homepage
-          window.location.href = "/driverHomepage";
+          window.location.href = "/userHomepage";
         }
       } catch (err) {
         console.error(err);
@@ -276,4 +276,4 @@ const RouteDriverRegisteration = () => {
   );
 };
 
-export default RouteDriverRegisteration;
+export default RouteUserRegisteration;
