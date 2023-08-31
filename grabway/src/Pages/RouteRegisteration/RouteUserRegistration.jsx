@@ -41,21 +41,28 @@ const RouteUserRegisteration = () => {
   const [originTimeError, setOriginTimeError] = useState("");
   const [destinationTimeError, setDestinationTimeError] = useState("");
 
-  useEffect(() => {
-    if (location.state === undefined || location.state === null) {
-      navigate("/");
+  if (location === null) {
+    navigate("/");
 
-      toast({
-        title: "Cannot Access now",
-        description: "Please Fill Source and Destination before moving ahead",
-        status: "error",
-        duration: 5000,
-        isClosable: true,
-        position: "top",
-      });
-    }
-  }, []);
-
+    toast({
+      title: "Cannot Access now",
+      description: "Please Fill Source and Destination before moving ahead",
+      status: "error",
+      duration: 5000,
+      isClosable: true,
+      position: "top",
+    });
+  } else if (location.state === undefined || location.state === null) {
+    navigate("/");
+    toast({
+      title: "Cannot Access now",
+      description: "Please Fill Source and Destination before moving ahead",
+      status: "error",
+      duration: 5000,
+      isClosable: true,
+      position: "top",
+    });
+  }
   // console.log(location.state.state);
 
   const formData = {
@@ -178,7 +185,7 @@ const RouteUserRegisteration = () => {
     if (JSON.parse(userData).name === "") {
       return <Navigate to={"/registration"} userType="" />;
     }
-    if (JSON.parse(userData).userType === "user") {
+    if (JSON.parse(userData).userType === "driver") {
       return <Navigate to={"/"} />;
     }
   }
