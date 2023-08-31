@@ -16,9 +16,13 @@ export function UserContextProvider({ children }) {
       axios.post("/checkuser", { email }).then((res) => {
         // console.log(res.data);
         let data = res.data;
-        setProfilePhoto(data.profilePicture);
-        if (delete data.profilePicture)
-          Cookies.set("grabwayUser", JSON.stringify(data), { expires: 7 });
+
+        if (data !== null) {
+          if ("profilePicture" in data) setProfilePhoto(data.profilePicture);
+          if (delete data.profilePicture)
+            Cookies.set("grabwayUser", JSON.stringify(data), { expires: 7 });
+          else Cookies.set("grabwayUser", JSON.stringify(data), { expires: 7 });
+        } else Cookies.set("grabwayUser", JSON.stringify(data), { expires: 7 });
         setUserEmail(res.data);
       });
     }
@@ -32,9 +36,12 @@ export function UserContextProvider({ children }) {
       axios.post("/checkuser", { email }).then((res) => {
         // console.log("I am here", res.data);
         let data = res.data;
-        setProfilePhoto(data.profilePicture);
-        if (delete data.profilePicture)
-          Cookies.set("grabwayUser", JSON.stringify(data), { expires: 7 });
+        if (data !== null) {
+          if ("profilePicture" in data) setProfilePhoto(data.profilePicture);
+          if (delete data.profilePicture)
+            Cookies.set("grabwayUser", JSON.stringify(data), { expires: 7 });
+          else Cookies.set("grabwayUser", JSON.stringify(data), { expires: 7 });
+        } else Cookies.set("grabwayUser", JSON.stringify(data), { expires: 7 });
         setUserEmail(res.data);
       });
     }
