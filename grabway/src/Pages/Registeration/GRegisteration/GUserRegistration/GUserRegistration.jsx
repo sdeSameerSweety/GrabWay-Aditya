@@ -41,8 +41,8 @@ const UserRegistration = () => {
     pin: "",
     imgDp: "",
   });
-  console.log(formData);
-  console.log(tmpPin);
+  // console.log(formData);
+  // console.log(tmpPin);
   const handlePincodeChange = async (e) => {
     const pincode = e.target.value;
     setFormData({
