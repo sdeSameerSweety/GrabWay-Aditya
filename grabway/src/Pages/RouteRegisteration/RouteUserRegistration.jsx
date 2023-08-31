@@ -40,6 +40,15 @@ const RouteUserRegisteration = () => {
   const userData = Cookies.get("grabwayUser");
   const [originTimeError, setOriginTimeError] = useState("");
   const [destinationTimeError, setDestinationTimeError] = useState("");
+  const handleScroll = () => {
+    const element = document.getElementById("form-div");
+    if (element) {
+      // 👇 Will scroll smoothly to the top of the next section
+      element.scrollIntoView({ behavior: "smooth" });
+    }
+  };
+ 
+    handleScroll();
 
   if (location === null) {
     navigate("/");
@@ -199,7 +208,7 @@ const RouteUserRegisteration = () => {
   }
 
   return (
-    <Container className="container-reg" maxW="75%" mt={8}>
+    <Container id="form-div" className="container-reg" maxW="75%" mt={8}>
       <Box
         className="tab-list"
         display="flex"
