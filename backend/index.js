@@ -18,7 +18,6 @@ const CLIENT_ID='496366764705-a756l0dqt95hq8a3d9vrbcif2nud3a3u.apps.googleuserco
 const CLIENT_SECRET='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';
 const REDIRECT_URL='https://developers.google.com/oauthplayground';
 const  REFERESH_TOKEN='1//04o76Ui3AbBUoCgYIARAAGAQSNwF-L9Ir39VJ9FIAo8kukHMCFFYwfyO9z4A3rmzXBdW9rLacGVXDB7RvAvMeoUSw7MNNXaDqKW8';
-
 const oAuth2Client=new google.auth.OAuth2(CLIENT_ID,CLIENT_SECRET,REDIRECT_URL);
 oAuth2Client.setCredentials({refresh_token:REFERESH_TOKEN});
 
@@ -42,7 +41,7 @@ app.use(
 );
 app.options("*", cors());
 
-
+//fucntion to send mail
 async function sendMail(emailOfUser,otp){
   try{
     const accessToken=await oAuth2Client.getAccessToken();
@@ -88,6 +87,9 @@ async function sendMail(emailOfUser,otp){
     console.log(err);
   }
 }
+
+
+
 app.post('/verifyEmail',(req,res)=>{
   function randomNumber(min, max) {
     return Math.floor(Math.random() * (max - min) + min);
