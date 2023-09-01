@@ -4,8 +4,10 @@ import { Navigate } from "react-router-dom";
 import { useLocation, useParams } from "react-router-dom";
 import Cookies from "js-cookie";
 import { Box, Center, Image, Text, Fade } from "@chakra-ui/react";
-// import "./MatchedRoutes.css";
+
 import LoadingCarAnimation from "../../components/AllAnimations/LoadingCarAnimation";
+import DriverNotFound from "../../components/AllAnimations/DriverNotFound";
+
 const MatchedRoutes = () => {
   const [matchedRoutes, setMatchedRoutes] = useState(null);
   const [driverFound, setDriverFound] = useState(false);
@@ -58,8 +60,12 @@ const MatchedRoutes = () => {
         </>
       )}
 
-      {matchedRoutes === "empty" && <>driver not found</>}
-      {matchedRoutes !== null && matchedRoutes !== "empty" && <></>}
+      {matchedRoutes === "empty" && (
+        <>
+          <DriverNotFound />
+        </>
+      )}
+      {matchedRoutes !== null && matchedRoutes !== "empty" && <>grgsrd</>}
     </>
   );
 };
