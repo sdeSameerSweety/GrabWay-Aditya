@@ -228,6 +228,7 @@ const TopSection = ({ nonceVal, loginState }) => {
             <img
               className="h-[75vh] w-[80%] opacity-70"
               src="/assets/images/loginImage.jpg"
+              alt="login img"
             />
           </div>
           <div className="flex flex-col justify-center items-center absolute z-20 mt-5 ml-[-6vw]">
