@@ -130,7 +130,8 @@ const TopSection = ({ nonceVal, loginState }) => {
   }, [srcCord, destCord]);
 
   const handleSearchDesk = async () => {
-    if (
+   /*
+     if (
       sourceDesk.current.value.length === 0 &&
       destinationDesk.current.value.length === 0
     ) {
@@ -158,9 +159,27 @@ const TopSection = ({ nonceVal, loginState }) => {
       getgeoCode(sourceDesk.current.value, "Source");
       getgeoCode(destinationDesk.current.value, "Destination");
     }
+   */
+    toast({
+      title: "Kindly Login",
+      description: "Please Login before to proceed",
+      status: "warning",
+      duration: 2000,
+      isClosable: true,
+    });
+
   };
 
   const handleSearchMob = () => {
+    toast({
+      title: "Kindly Login",
+      description: "Please Login before to proceed",
+      status: "warning",
+      duration: 2000,
+      isClosable: true,
+    });
+
+    /*
     if (
       sourceMob.current.value.length === 0 &&
       destinationMob.current.value.length === 0
@@ -189,6 +208,7 @@ const TopSection = ({ nonceVal, loginState }) => {
       getgeoCode(sourceMob.current.value, "Source");
       getgeoCode(destinationMob.current.value, "Destination");
     }
+    */
   };
   const [userData,setUserData] = useState(Cookies.get("grabwayUser"));
   useEffect(()=>{
