@@ -41,6 +41,8 @@ const RouteUserRegisteration = () => {
   const userData = Cookies.get("grabwayUser");
   const [originTimeError, setOriginTimeError] = useState("");
   const [destinationTimeError, setDestinationTimeError] = useState("");
+  const [search, setSearch]=useState(false);
+  var counter=1;
   const handleScroll = () => {
     const element = document.getElementById("form-div");
     if (element) {
@@ -92,52 +94,6 @@ const RouteUserRegisteration = () => {
 
   //console.log(formData);
 
-  const handleSubmit = async (e) => {
-    e.preventDefault(); // Prevent the default form submission behavior
-
-    const newErrors = validateForm();
-
-    if (Object.keys(newErrors).length === 0) {
-      try {
-        const response = await axios.post("/routeUserSearch", {
-          formData,
-        });
-
-        if (response.data) {
-          console.log("driver route added");
-          setRunContext("driver route added");
-
-          toast({
-            title: "Route has been Added",
-            status: "success",
-            duration: 3000,
-            isClosable: true,
-            position: "top-right",
-          });
-
-          // Redirect to driver homepage
-          //window.location.href = "/userHomepage";
-        }
-      } catch (err) {
-        console.error(err);
-        toast({
-          title: "Failed to Add Route",
-          description:
-            "There was some problem adding the details, Please Try again Later",
-          status: "error",
-          duration: 3000,
-          isClosable: true,
-        });
-      }
-    } else {
-      setErrors(newErrors);
-    }
-
-    if (!userData) {
-      // Redirect if userData is not available
-      window.location.href = "/";
-    }
-  };
 
   const [errors, setErrors] = useState({});
   const [isChecked, setIsChecked] = useState(false);
@@ -189,9 +145,28 @@ const RouteUserRegisteration = () => {
       setEmail(JSON.parse(Cookies.get("grabwayUser")).email);
     }
   }, [userData, email]);
+//dont change this part, its for redirecting when not a logged in driver
+const handleSubmit = async (e) => {
+  e.preventDefault(); // Prevent the default form submission behavior
 
-  //dont change this part, its for redirecting when not a logged in driver
-  if (userData !== undefined) {
+  const newErrors = validateForm();
+
+  if (Object.keys(newErrors).length !== 0) {
+    
+    setErrors(newErrors);
+  } 
+  else {
+    setSearch(true);
+
+  }
+
+};
+
+if(search){
+  return navigate("/matchedRoutes", { state: formData });
+}
+
+if (userData !== undefined) {
     if (JSON.parse(userData).name === "") {
       return <Navigate to={"/registration"} userType="" />;
     }

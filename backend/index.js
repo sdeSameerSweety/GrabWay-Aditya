@@ -387,18 +387,36 @@ app.post("/routeDriverRegistration", async (req, res) => {
       } else {
         res.status(200).json(null);
       }
-    } catch (err) {
+    } 
+    catch (err) {
       console.log(err);
       res.status(500).send("Error in try catch");
     }
   } else {
-    res.status(500).json("Internal Server Error");
+    res.status(500).json("Didn't recieve Form Data");
   }
 });
 
+//function to find overlapping time intervals;
+function overlappingIntervals(interval1, interval2) {
+  "use strict";
+
+  // Check if the start time of interval1 is before the end time of interval2
+  if (interval1.start < interval2.end) {
+    // Check if the end time of interval1 is after the start time of interval2
+    if (interval1.end > interval2.start) {
+      // The two intervals overlap
+      return true;
+    }
+  }
+
+  // The two intervals do not overlap
+  return false;
+}
+
 app.post("/routeUserSearch", async (req, res) => {
   await mongoose.connect(MONGO_URL);
-  console.log(req.body.formData);
+  //console.log(req.body.formData);
 
   const formData = req.body.formData;
   const email = formData.email;
@@ -412,7 +430,7 @@ app.post("/routeUserSearch", async (req, res) => {
   const originEndTimeUser = formData.originEndTime;
   const destinationStartTimeUser = formData.destinationStartTime;
   const destinationEndTimeUser = formData.destinationEndTime;
-  const result = [];
+  const MatchedData = [];
   if (formData) {
     try {
       const userStateResponse = await UserModel.findOne({ email: email });
@@ -426,7 +444,7 @@ app.post("/routeUserSearch", async (req, res) => {
             },
           },
         ]);
-        console.log(DriverResponse);
+        //console.log(DriverResponse);
         for (let i = 0; i < DriverResponse.length; i++) {
           const DriverDetails = DriverResponse[i].routes;
           //console.log(DriverDetails);
@@ -458,17 +476,67 @@ app.post("/routeUserSearch", async (req, res) => {
               if (distanceDestination_km <= 2) {
                 var originTimeStart = eachRoute.originTime[0].start;
                 var originTimeEnd = eachRoute.originTime[0].end;
-                var destinationTimeStart = eachRoute.destinationTime[0].start;
-                var destinationTimeEnd = eachRoute.destinationTime[0].end;
+
                 //till here we are getting same route drivers.
-                //Now we need to matchtime
-                result.push(DriverResponse[i]);
+                //Now we will do origin time matching
+                const intervalUser = {
+                  start: originStartTimeUser,
+                  end: originEndTimeUser,
+                };
+
+                const intervalDriver = {
+                  start: originTimeStart,
+                  end: originTimeEnd,
+                };
+                //console.log(eachRoute)
+                //console.log(overlappingIntervals(intervalUser, intervalDriver));
+                const resultOriginTimeMatch = overlappingIntervals(
+                  intervalUser,
+                  intervalDriver
+                );
+                if (resultOriginTimeMatch) {
+                  //now we will do destination time matching
+                  var destinationTimeStart = eachRoute.destinationTime[0].start;
+                  var destinationTimeEnd = eachRoute.destinationTime[0].end;
+                  const intervalUser = {
+                    start: destinationStartTimeUser,
+                    end: destinationEndTimeUser,
+                  };
+
+                  const intervalDriver = {
+                    start: destinationTimeStart,
+                    end: destinationTimeEnd,
+                  };
+                  const resultDestinationTimeMatch = overlappingIntervals(
+                    intervalUser,
+                    intervalDriver
+                  );
+                  //console.log(resultDestinationTimeMatch);
+                  if (resultDestinationTimeMatch) {
+                    const RouteCardData = {
+                      email: email,
+                      VehicleManufacturer: "Maruti Suzuki",
+                      VehcileModel: "Swift Dzire",
+                      RouteAtIndex: j,
+                      route: eachRoute,
+                      driverName: DriverResponse[i].name,
+                    };
+                    MatchedData.push(RouteCardData);
+                  }
+                }
               }
             }
           }
         }
-        console.log(result);
-        res.status(200).json("good");
+        if(MatchedData.length!==0){
+          res.status(200).json(MatchedData);
+        }
+        else{
+          res.status(500).json('No Drivers Found');
+        }
+      }
+      else{
+        res.status(500).json('user is not present in database');
       }
     } catch (err) {
       console.log(err);

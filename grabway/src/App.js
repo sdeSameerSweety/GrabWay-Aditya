@@ -24,6 +24,7 @@ import RouteDriverRegisteration from "./Pages/RouteRegisteration/RouteDriverRegi
 import DriverRouteLocation from "./Pages/DriverRouteLocation/DriverRouteLocation";
 import StatusBar from "./components/StausBar/StatusBar";
 import RouteUserRegisteration from "./Pages/RouteRegisteration/RouteUserRegistration";
+import MatchedRoutes from "./Pages/MatchedRoutes/MatchedRoutes";
 axios.defaults.baseURL = "http://localhost:8080";
 axios.defaults.withCredentials = true;
 // import NearbyMap from "./components/Map/NearbyMap";
@@ -107,6 +108,10 @@ function App() {
             <Route
               path="/routeUserRegistration"
               element={<RouteUserRegisteration />}
+            />
+            <Route
+              path="/matchedRoutes"
+              element={<MatchedRoutes />}
             />
           </Routes>
           <Footer />
