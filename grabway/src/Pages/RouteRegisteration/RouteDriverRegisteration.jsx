@@ -19,6 +19,7 @@ import { Navigate } from "react-router-dom";
 import { UserContext } from "../../context/Context";
 import { useLocation } from "react-router-dom";
 import axios from "axios";
+import FormAnimation from "../../components/FormAnimation/FormAnimation";
 const RouteDriverRegisteration = () => {
   const location = useLocation();
   const navigate = useNavigate();
@@ -40,20 +41,19 @@ const RouteDriverRegisteration = () => {
   const userData = Cookies.get("grabwayUser");
   const [originTimeError, setOriginTimeError] = useState("");
   const [destinationTimeError, setDestinationTimeError] = useState("");
-   //function to scroll down to cards
-   const handleScroll = () => {
+  const handleScroll = () => {
     const element = document.getElementById("form-div");
     if (element) {
       // 👇 Will scroll smoothly to the top of the next section
       element.scrollIntoView({ behavior: "smooth" });
     }
   };
+
   handleScroll();
 
   useEffect(() => {
     if (location.state === undefined || location.state === null) {
       navigate("/");
-
       toast({
         title: "Cannot Access now",
         description: "Please Fill Source and Destination before moving ahead",
@@ -82,7 +82,7 @@ const RouteDriverRegisteration = () => {
     seats,
   };
 
-  console.log(formData);
+  // console.log(formData);
 
   const handleSubmit = async (e) => {
     e.preventDefault(); // Prevent the default form submission behavior
@@ -201,16 +201,26 @@ const RouteDriverRegisteration = () => {
   }
 
   return (
-    <Container id='form-div' className=" container-reg" maxW="75%" mt={8}>
+    <Container id="form-div" className=" container-reg" maxW="75%" mt={8}>
       <Box
         className="tab-list"
         display="flex"
         alignItems="center"
         justifyContent="center"
         flexDirection={{ base: "column", md: "row" }}
+        px={8}
       >
+        <FormAnimation />
         <Box flex={1} p={8}>
           <Heading className="heading">Register Your Schedule</Heading>
+          <FormControl mt={4}>
+            <FormLabel>Origin Text</FormLabel>
+            <Input type="text" value={originText} isReadOnly />
+          </FormControl>
+          <FormControl mt={4}>
+            <FormLabel>Destination Text</FormLabel>
+            <Input type="text" value={destinationText} isReadOnly />
+          </FormControl>
           <FormControl isInvalid={!!originTimeError} mt={4}>
             <FormLabel>Your Start Time</FormLabel>
             <Flex>
