@@ -9,6 +9,7 @@ const bcrypt = require("bcryptjs");
 const UserModel = require("./Schema/User");
 const DriverModel = require("./Schema/Driver");
 const EmailModel = require("./Schema/Email");
+var haversine = require("haversine-distance");
 
 //environment variables
 const MONGO_URL = process.env.MONGO_URL;
@@ -385,6 +386,89 @@ app.post("/routeDriverRegistration", async (req, res) => {
         res.status(200).json(true);
       } else {
         res.status(200).json(null);
+      }
+    } catch (err) {
+      console.log(err);
+      res.status(500).send("Error in try catch");
+    }
+  } else {
+    res.status(500).json("Internal Server Error");
+  }
+});
+
+app.post("/routeUserSearch", async (req, res) => {
+  await mongoose.connect(MONGO_URL);
+  console.log(req.body.formData);
+
+  const formData = req.body.formData;
+  const email = formData.email;
+  const originTextUser = formData.originText;
+  const originLatUser = formData.originLat;
+  const originLongUser = formData.originLong;
+  const destinationTextUser = formData.destinationText;
+  const destinationLatUser = formData.destinationLat;
+  const destinationLongUser = formData.destinationLong;
+  const originStartTimeUser = formData.originStartTime;
+  const originEndTimeUser = formData.originEndTime;
+  const destinationStartTimeUser = formData.destinationStartTime;
+  const destinationEndTimeUser = formData.destinationEndTime;
+  const result = [];
+  if (formData) {
+    try {
+      const userStateResponse = await UserModel.findOne({ email: email });
+      if (userStateResponse) {
+        const userState = userStateResponse.address[0].state;
+        //console.log(userState);
+        const DriverResponse = await DriverModel.aggregate([
+          {
+            $match: {
+              "address.state": userState,
+            },
+          },
+        ]);
+        console.log(DriverResponse);
+        for (let i = 0; i < DriverResponse.length; i++) {
+          const DriverDetails = DriverResponse[i].routes;
+          //console.log(DriverDetails);
+          for (let j = 0; j < DriverDetails.length; j++) {
+            const eachRoute = DriverDetails[j];
+            const originLat = eachRoute.origin[0].lat;
+            const originLong = eachRoute.origin[0].long;
+            const destinationLat = eachRoute.destination[0].lat;
+            const destinationLong = eachRoute.destination[0].long;
+            //First point in your haversine calculation
+            var point1 = { lat: originLat, lng: originLong };
+
+            //Second point in your haversine calculation
+            var point2 = { lat: originLatUser, lng: originLongUser };
+            var distanceOrigin_m = haversine(point1, point2); //Results in meters (default)
+            var distanceOrigin_km = distanceOrigin_m / 1000; //Results in kilometers
+            //console.log("distance (in meters): " + haversine_m + "m");
+            //console.log("distance (in kilometers): " + haversine_km + "km");
+            if (distanceOrigin_km <= 2) {
+              var point3 = { lat: destinationLat, lng: destinationLong };
+
+              //Second point in your haversine calculation
+              var point4 = {
+                lat: destinationLatUser,
+                lng: destinationLongUser,
+              };
+              var distanceDestination_m = haversine(point1, point2); //Results in meters (default)
+              var distanceDestination_km = distanceDestination_m / 1000; //Results in kilometers
+              if (distanceDestination_km <= 2) {
+                var originTimeStart = eachRoute.originTime[0].start;
+                var originTimeEnd = eachRoute.originTime[0].end;
+                var destinationTimeStart = eachRoute.destinationTime[0].start;
+                var destinationTimeEnd = eachRoute.destinationTime[0].end;
+                //till here we are getting same route drivers.
+                //Now we need to matchtime
+                result.push(DriverResponse[i]);
+              }
+            }
+          }
+        }
+        console.log(result);
+        res.status(200).json("good");
       }
     } catch (err) {
       console.log(err);

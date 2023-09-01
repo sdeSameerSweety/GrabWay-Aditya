@@ -40,6 +40,15 @@ const RouteUserRegisteration = () => {
   const userData = Cookies.get("grabwayUser");
   const [originTimeError, setOriginTimeError] = useState("");
   const [destinationTimeError, setDestinationTimeError] = useState("");
+  const handleScroll = () => {
+    const element = document.getElementById("form-div");
+    if (element) {
+      // 👇 Will scroll smoothly to the top of the next section
+      element.scrollIntoView({ behavior: "smooth" });
+    }
+  };
+ 
+    handleScroll();
 
   if (location === null) {
     navigate("/");
@@ -80,7 +89,7 @@ const RouteUserRegisteration = () => {
     seats,
   };
 
-  console.log(formData);
+  //console.log(formData);
 
   const handleSubmit = async (e) => {
     e.preventDefault(); // Prevent the default form submission behavior
@@ -89,7 +98,7 @@ const RouteUserRegisteration = () => {
 
     if (Object.keys(newErrors).length === 0) {
       try {
-        const response = await axios.post("/routeDriverRegistration", {
+        const response = await axios.post("/routeUserSearch", {
           formData,
         });
 
@@ -106,7 +115,7 @@ const RouteUserRegisteration = () => {
           });
 
           // Redirect to driver homepage
-          window.location.href = "/userHomepage";
+          //window.location.href = "/userHomepage";
         }
       } catch (err) {
         console.error(err);
@@ -199,7 +208,7 @@ const RouteUserRegisteration = () => {
   }
 
   return (
-    <Container className="container-reg" maxW="75%" mt={8}>
+    <Container id="form-div" className="container-reg" maxW="75%" mt={8}>
       <Box
         className="tab-list"
         display="flex"

@@ -113,6 +113,14 @@ const TopSection = ({ nonceVal, loginState }) => {
                                         {element.destination[0].text}
                                       </div>
                                     </div>
+                                    <div>
+                                    <div className="text-sm font-ubuntu text-[#0000006c]">
+                                        TIMING:
+                                      </div>
+                                      <div className="text-[black]">
+                                        {element.originTime[0].start} - {element.destinationTime[0].start}
+                                      </div>
+                                    </div>
                                   </div>
                                 </Heading>
                               </CardHeader>
@@ -149,6 +157,13 @@ const TopSection = ({ nonceVal, loginState }) => {
                     {index % 2 !== 0 && (
                       <>
                         <div className="flex flex-row justify-between items-center w-[100%] gap-10">
+                          
+                          <div className="flex justify-between items-center">
+                            <img
+                              className="flex h-[40vh]"
+                              src="/assets/gif/driverHomepage2.gif"
+                            />
+                          </div>
                           <div className="flex-row justify-between items-center">
                             <Card
                               variant={"elevated"}
@@ -171,6 +186,14 @@ const TopSection = ({ nonceVal, loginState }) => {
                                       </div>
                                       <div className="text-[black]">
                                         {element.destination[0].text}
+                                      </div>
+                                    </div>
+                                    <div>
+                                    <div className="text-sm font-ubuntu text-[#0000006c]">
+                                        TIMING:
+                                      </div>
+                                      <div className="text-[black]">
+                                        {element.originTime[0].start} - {element.destinationTime[0].start}
                                       </div>
                                     </div>
                                   </div>
@@ -196,12 +219,6 @@ const TopSection = ({ nonceVal, loginState }) => {
                                 <Button>View More Details</Button>
                               </CardFooter>
                             </Card>
-                          </div>
-                          <div className="flex justify-between items-center">
-                            <img
-                              className="flex h-[40vh]"
-                              src="/assets/gif/driverHomepage2.gif"
-                            />
                           </div>
                         </div>
                       </>
@@ -289,6 +306,14 @@ const TopSection = ({ nonceVal, loginState }) => {
                                         {element.destination[0].text}
                                       </div>
                                     </div>
+                                    <div>
+                                    <div className="text-sm font-ubuntu text-[#0000006c]">
+                                        TIMING:
+                                      </div>
+                                      <div className="text-[black]">
+                                        {element.originTime[0].start} - {element.destinationTime[0].start}
+                                      </div>
+                                    </div>
                                   </div>
                                 </Heading>
                               </CardHeader>
@@ -347,6 +372,14 @@ const TopSection = ({ nonceVal, loginState }) => {
                                       </div>
                                       <div className="text-[black]">
                                         {element.destination[0].text}
+                                      </div>
+                                    </div>
+                                    <div>
+                                    <div className="text-sm font-ubuntu text-[#0000006c]">
+                                        TIMING:
+                                      </div>
+                                      <div className="text-[black]">
+                                        {element.originTime[0].start} - {element.destinationTime[0].start}
                                       </div>
                                     </div>
                                   </div>
