@@ -1,7 +1,7 @@
 import React from "react";
-import "./SideAnimation.css";
+import "./FormAnimation.css";
 
-const SideAnimation = () => {
+const FormAnimation = () => {
   return (
     <div className="wrap">
       <div className="scene-1">
@@ -271,4 +271,4 @@ const SideAnimation = () => {
   );
 };
 
-export default SideAnimation;
+export default FormAnimation;

@@ -2,7 +2,7 @@
 
 /* Style for the whole container */
 .container-reg {
-  background-color: #f7f7f7;
+  /* background-color: #f7f7f7; */
   padding: 40px;
 }
 
@@ -110,3 +110,5 @@
 .submit-button:hover {
   background-color: #008080;
 }
+
+
