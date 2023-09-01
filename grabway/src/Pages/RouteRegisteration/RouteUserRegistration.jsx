@@ -19,6 +19,7 @@ import { Navigate } from "react-router-dom";
 import { UserContext } from "../../context/Context";
 import { useLocation } from "react-router-dom";
 import axios from "axios";
+import FormAnimation from "../../components/FormAnimation/FormAnimation";
 const RouteUserRegisteration = () => {
   const location = useLocation();
   const navigate = useNavigate();
@@ -47,8 +48,8 @@ const RouteUserRegisteration = () => {
       element.scrollIntoView({ behavior: "smooth" });
     }
   };
- 
-    handleScroll();
+
+  handleScroll();
 
   if (location === null) {
     navigate("/");
@@ -208,16 +209,26 @@ const RouteUserRegisteration = () => {
   }
 
   return (
-    <Container id="form-div" className="container-reg" maxW="75%" mt={8}>
+    <Container id="form-div" className=" container-reg" maxW="75%" mt={8}>
       <Box
         className="tab-list"
         display="flex"
         alignItems="center"
         justifyContent="center"
         flexDirection={{ base: "column", md: "row" }}
+        px={8}
       >
+        <FormAnimation />
         <Box flex={1} p={8}>
           <Heading className="heading">Register Your Schedule</Heading>
+          <FormControl mt={4}>
+            <FormLabel>Origin Text</FormLabel>
+            <Input type="text" value={originText} isReadOnly />
+          </FormControl>
+          <FormControl mt={4}>
+            <FormLabel>Destination Text</FormLabel>
+            <Input type="text" value={destinationText} isReadOnly />
+          </FormControl>
           <FormControl isInvalid={!!originTimeError} mt={4}>
             <FormLabel>Your Start Time</FormLabel>
             <Flex>
