@@ -192,11 +192,11 @@ function MyComponent({ nonceVal }, { route, state }) {
         <>
           {usData.userType === "user" ? (
             <>
-              <div id="package-cards">
+              <div>
                 <section class="bg-white">
                   <div class="py-8 px-4 mx-auto max-w-screen-xl lg:py-16 lg:px-6">
                     <div class="mx-auto max-w-screen-md text-center mb-8 lg:mb-12">
-                      <h2 class="mb-4 text-4xl tracking-tight font-extrabold text-gray-900">
+                      <h2 class="mb-4 text-4xl tracking-tight font-extrabold text-gray-900"  id="package-cards">
                         Explore Our Packages
                       </h2>
                       <p class="mb-5 font-light text-gray-500 sm:text-xl">
@@ -543,11 +543,11 @@ function MyComponent({ nonceVal }, { route, state }) {
             </>
           ) : (
             <>
-              <div id="package-cards">
+              <div>
                 <section class="bg-white">
                   <div class="py-8 px-4 mx-auto max-w-screen-xl lg:py-16 lg:px-6">
                     <div class="mx-auto max-w-screen-md text-center mb-8 lg:mb-12">
-                      <h2 class="mb-4 text-4xl tracking-tight font-extrabold text-gray-900">
+                      <h2 class="mb-4 text-4xl tracking-tight font-extrabold text-gray-900"  id="package-cards">
                         Explore Our Packages
                       </h2>
                       <p class="mb-5 font-light text-gray-500 sm:text-xl">

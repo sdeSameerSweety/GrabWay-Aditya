@@ -12,6 +12,7 @@ body {
   background: radial-gradient(rgb(14, 61, 65), rgb(17, 61, 75));
   border-radius: 20%;
   position: relative;
+  margin-top: 25%;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
