@@ -514,7 +514,7 @@ app.post("/routeUserSearch", async (req, res) => {
                   //console.log(resultDestinationTimeMatch);
                   if (resultDestinationTimeMatch) {
                     const RouteCardData = {
-                      email: email,
+                      email:  DriverResponse[i].email,
                       VehicleManufacturer: "Maruti Suzuki",
                       VehcileModel: "Swift Dzire",
                       RouteAtIndex: j,

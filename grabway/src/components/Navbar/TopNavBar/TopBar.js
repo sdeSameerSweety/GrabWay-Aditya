@@ -719,7 +719,7 @@ const TopBar = ({ counter, setCounter, setLoginState, loginState }) => {
                     src={
                       profilePhoto
                         ? profilePhoto
-                        : "https://bit.ly/kent-c-dodds"
+                        : "https://w7.pngwing.com/pngs/340/946/png-transparent-avatar-user-computer-icons-software-developer-avatar-child-face-heroes.png"
                     }
                   />
                 </Link>
