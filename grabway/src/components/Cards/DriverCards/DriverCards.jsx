@@ -15,7 +15,7 @@ import {
   UnorderedList,
   ListItem,
 } from "@chakra-ui/react";
-import SideCard from "./SideCard/SideCard";
+import AdvertisementCard from "./AdvertisementCard/AdvertisementCard";
 import "./DriverCard.css";
 
 const sections = ["Essential Commuter", "Comfort Traveler", "Premier Business"];
@@ -142,7 +142,6 @@ const cardData = {
     },
   ],
 };
-
 function DriverCard() {
   return (
     <Box p={8} borderRadius="md" boxShadow="lg" bg="white">
@@ -163,50 +162,55 @@ function DriverCard() {
         <TabPanels mt={4}>
           {sections.map((section, index) => (
             <TabPanel key={index}>
-              {cardData[section].map((card, cardIndex) => (
-                <Box key={cardIndex} className="responsive-card">
-                  <Image
-                    src={card.imageSrc}
-                    alt={card.title}
-                    objectFit="cover"
-                    borderRadius="md"
-                    w={400}
-                  />
-                  <div className="card-content">
-                    <Heading size="lg">{card.title}</Heading>
-                    <Text color="gray.600">{card.description}</Text>
-                    <UnorderedList listStyleType="none" p={0}>
-                      {card.services.map((service, serviceIndex) => (
-                        <ListItem key={serviceIndex}>{service}</ListItem>
-                      ))}
-                    </UnorderedList>
-                    <VStack spacing={2} align="start">
-                      <Link
-                        href="#"
-                        color="blue.500"
-                        _hover={{ color: "blue.700" }}
-                        fontWeight="bold"
-                      >
-                        Learn More
-                      </Link>
-                      <Button
-                        href="#"
-                        colorScheme="blue"
-                        size="md"
-                        fontWeight="bold"
-                        rounded={10}
-                        _hover={{ color: "blue.700" }}
-                        _focus={{ boxShadow: "none" }}
-                      >
-                        Book Now
-                      </Button>
-                    </VStack>
-                  </div>
-                  <Box mx={6} my={4} className="sideCardCss">
-                    <SideCard />
+              {cardData[section].map((card, cardIndex) => {
+                const showSideCard = cardIndex === 0; // Show SideCard for the first element
+                return (
+                  <Box key={cardIndex} className="responsive-card">
+                    <Image
+                      src={card.imageSrc}
+                      alt={card.title}
+                      objectFit="cover"
+                      borderRadius="md"
+                      w={400}
+                    />
+                    <div className="card-content">
+                      <Heading size="lg">{card.title}</Heading>
+                      <Text color="gray.600">{card.description}</Text>
+                      <UnorderedList listStyleType="none" p={0}>
+                        {card.services.map((service, serviceIndex) => (
+                          <ListItem key={serviceIndex}>{service}</ListItem>
+                        ))}
+                      </UnorderedList>
+                      <VStack spacing={2} align="start">
+                        <Link
+                          href="#"
+                          color="blue.500"
+                          _hover={{ color: "blue.700" }}
+                          fontWeight="bold"
+                        >
+                          Learn More
+                        </Link>
+                        <Button
+                          href="#"
+                          colorScheme="blue"
+                          size="md"
+                          fontWeight="bold"
+                          rounded={10}
+                          _hover={{ color: "blue.700" }}
+                          _focus={{ boxShadow: "none" }}
+                        >
+                          Book Now
+                        </Button>
+                      </VStack>
+                    </div>
+                    {showSideCard && (
+                      <Box mx={6} my={4} className="sideCardCss">
+                        <AdvertisementCard />
+                      </Box>
+                    )}
                   </Box>
-                </Box>
-              ))}
+                );
+              })}
             </TabPanel>
           ))}
         </TabPanels>

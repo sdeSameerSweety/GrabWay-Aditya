@@ -1,7 +1,7 @@
 import React, { useState, useRef, useEffect } from "react";
-import "./SideCard.css";
+import "./AdvertisementCard.css";
 
-export default function SideCard() {
+export default function AdvertisementCard() {
   const [xRotation, setXRotation] = useState(0);
   const [yRotation, setYRotation] = useState(0);
   const [cardData, setCardData] = useState({});
@@ -18,8 +18,7 @@ export default function SideCard() {
       image:
         "https://www.transparentpng.com/thumb/car-png/car-free-transparent-png-8.png",
       title: "Premimum Sedan",
-      description:
-        "Description lops lorem",
+      description: "Description lops lorem",
     };
     setCardData(backendResponse);
   }, []);
