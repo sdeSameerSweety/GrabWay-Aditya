@@ -34,6 +34,12 @@ function App() {
   const [windowSize, setWindowSize] = useState(window.innerWidth);
   const [loginState, setLoginState] = useState(false);
   const [nonce, setNonce] = useState("grabway@123");
+  const [cookieVal, setCookieVal] = useState(Cookies.get("grabwayUser"));
+  const [valshow, setValShow] = useState(false);
+  useEffect(() => {
+    setCookieVal(Cookies.get("grabwayUser"));
+    if (cookieVal !== undefined || cookieVal !== null) setValShow(true);
+  });
   //console.log(loginState);
   const { userEmail, setUserEmail } = useContext(UserContext);
   //console.log(userEmail);
@@ -47,6 +53,7 @@ function App() {
       window.removeEventListener("resize", handleWindowResize);
     };
   }, []);
+  console.log(cookieVal);
 
   const [classDisplay, setClassDisplay] = useState("sidebar");
   const [displayVal, setDisplayVal] = useState("no");
@@ -65,7 +72,6 @@ function App() {
   return (
     <BrowserRouter>
       <UserContextProvider>
-        {/* <StatusBar /> */}
         <Navbar
           classDisplay={classDisplay}
           setClassDislay={setClassDisplay}
@@ -74,6 +80,7 @@ function App() {
           setLoginState={setLoginState}
           loginState={loginState}
         />
+
         <div style={intDivStyle}>
           <Routes>
             {/* <Route path="/nearby" element={<NearbyMap nonceVal={nonce} />} /> */}
@@ -109,12 +116,10 @@ function App() {
               path="/routeUserRegistration"
               element={<RouteUserRegisteration />}
             />
-            <Route
-              path="/matchedRoutes"
-              element={<MatchedRoutes />}
-            />
+            <Route path="/matchedRoutes" element={<MatchedRoutes />} />
           </Routes>
           <Footer />
+          {windowSize <= 600 && valshow && <StatusBar />}
         </div>
       </UserContextProvider>
     </BrowserRouter>
