@@ -1,58 +1,57 @@
 @media only screen and (max-width: 600px) {
-    .dekstop-view{
-        display: none;
-    }
-    .mobile-view .animated-text{
-      font-size: 6vh;
-      font-family: 'Secular One', sans-serif;
-      display: flex;
-      flex-direction: row;
-      align-items: center;
-      text-align: center;
-      animation: welcome-text-animation 0.5s;
-      margin-bottom: 7vh;
-    }
+  .dekstop-view {
+    display: none;
   }
-
-  @media only screen and (min-width: 600px) {
-    .mobile-view{
-        display:none;
-    }
-    
-  }
-  .animated-text{
-    font-size: 2vw;
-    font-family: 'Secular One', sans-serif;
-    margin: 2vw;
+  .mobile-view .animated-text {
+    font-size: 6vh;
+    font-family: "Secular One", sans-serif;
     display: flex;
     flex-direction: row;
     align-items: center;
     text-align: center;
     animation: welcome-text-animation 0.5s;
+    margin-bottom: 7vh;
   }
-  @keyframes welcome-text-animation {
-    0%{
-      opacity: 0;
-      padding-left: 5vw;
-    }
-    20%{
-      opacity: 0.2;
-      padding-left: 4vw;
-    }
-    40%{
-      opacity: 0.4;
-      padding-left: 3vw;
-    }
-    60%{
-      opacity: 0.6;
-      padding-left: 2vw;
-    }
-    80%{
-      opacity: 0.8;
-      padding-left: 1vw;
-    }
-    100%{
-      opacity: 1;
-      padding-left: 0vw;
-    }
+}
+
+@media only screen and (min-width: 601px) {
+  .mobile-view {
+    display: none;
   }
+}
+.animated-text {
+  font-size: 2vw;
+  font-family: "Secular One", sans-serif;
+  margin: 2vw;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  text-align: center;
+  animation: welcome-text-animation 0.5s;
+}
+@keyframes welcome-text-animation {
+  0% {
+    opacity: 0;
+    padding-left: 5vw;
+  }
+  20% {
+    opacity: 0.2;
+    padding-left: 4vw;
+  }
+  40% {
+    opacity: 0.4;
+    padding-left: 3vw;
+  }
+  60% {
+    opacity: 0.6;
+    padding-left: 2vw;
+  }
+  80% {
+    opacity: 0.8;
+    padding-left: 1vw;
+  }
+  100% {
+    opacity: 1;
+    padding-left: 0vw;
+  }
+}

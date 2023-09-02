@@ -4,10 +4,10 @@
     flex-direction: column;
     margin-top: 9%;
   }
-  .info-section{
-    margin-top:10%;
+  .info-section {
+    margin-top: 10%;
   }
-  .scroller{
+  .scroller {
     margin-top: 10%;
   }
 }
@@ -16,18 +16,18 @@
   .dekstop-view {
     display: none;
   }
+  .mobile-view {
+  }
 }
 @media only screen and (min-width: 601px) {
   .mobile-view {
     display: none;
   }
-}
-@media only screen and (max-width: 600px) {
-  .mobile-view {
+  .dekstop-view {
   }
 }
 
-.pac-container{
+.pac-container {
   margin-left: -0.6%;
   box-sizing: content-box;
   display: flex;
@@ -36,35 +36,28 @@
   border: 2px solid white;
   border-radius: 10px;
   height: 200px;
-  
 }
-.pac-icon{
+.pac-icon {
   display: none;
-
 }
-.pac-item{
-  padding:5px;
+.pac-item {
+  padding: 5px;
   border: none;
   border-radius: 5px;
-  font-size:15px;
-  
+  font-size: 15px;
 }
-.pac-item:hover{
- background-color: rgba(68, 61, 61, 0.279);
- font-size:15px;
- 
+.pac-item:hover {
+  background-color: rgba(68, 61, 61, 0.279);
+  font-size: 15px;
 }
-.pac-item-selected{
-  font-size:15px;
-  
+.pac-item-selected {
+  font-size: 15px;
 }
-.pac-item-query{
+.pac-item-query {
   color: rgb(129, 118, 118);
-  font-size:15px;
-  
+  font-size: 15px;
 }
-.pac-matched{
+.pac-matched {
   color: black;
-  font-size:15px;
-  
+  font-size: 15px;
 }
