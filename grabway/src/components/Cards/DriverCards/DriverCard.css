@@ -7,16 +7,18 @@
 }
 
 .responsive-card {
-  width: 300px;
-  margin: 10px;
+  width: 300px; /* Set a fixed width for each card */
+  margin: 16px; /* Add margin for spacing between cards */
+  overflow: hidden; /* Hide any content that exceeds the fixed height */
 }
 
-/* Add any other styling you need here */
-
-/* AdvertisementCard styling (position it in the top-right corner) */
-.AdvertisementCard {
-  position: fixed;
-  top: 20px;
-  right: 205px;
-  z-index: 2;
+.responsive-card > div {
+  height: 350px; /* Set a fixed height for each card */
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 16px;
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  background-color: white;
 }

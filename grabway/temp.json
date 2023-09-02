@@ -43,3 +43,50 @@
     "driverName": "Kittu Singh"
   }
 ]
+
+
+
+
+
+const driverData = [
+  {
+    driverName: "Kittu Singh",
+    email: "driver@gmail.com",
+    VehicleManufacturer: "Maruti Suzuki",
+    VehicleModel: "Swift Dzire",
+    plan: "basic",
+    seats: 10,
+  },
+  {
+    driverName: "John Doe",
+    email: "john.doe@gmail.com",
+    VehicleManufacturer: "Toyota",
+    VehicleModel: "Camry",
+    plan: "premium",
+    seats: 5,
+  },
+  {
+    driverName: "Alice Johnson",
+    email: "alice.johnson@gmail.com",
+    VehicleManufacturer: "Honda",
+    VehicleModel: "Civic",
+    plan: "standard",
+    seats: 4,
+  },
+  {
+    driverName: "Michael Smith",
+    email: "michael.smith@gmail.com",
+    VehicleManufacturer: "Ford",
+    VehicleModel: "F-150",
+    plan: "basic",
+    seats: 6,
+  },
+  {
+    driverName: "Emily Wilson",
+    email: "emily.wilson@gmail.com",
+    VehicleManufacturer: "Chevrolet",
+    VehicleModel: "Malibu",
+    plan: "standard",
+    seats: 4,
+  },
+];
