@@ -116,12 +116,14 @@ export default function UserSettings({ userData }) {
     } else {
       console.log("data ready to update");
       console.log(editData);
-      const dataRet = await axios.post("/editprofile/user", { editData });
+      let dataRet;
+      if (data.userType === "user")
+        dataRet = await axios.post("/editprofile/user", { editData });
+      else dataRet = await axios.post("/editprofile/user", { editData });
       console.log(dataRet.data);
     }
   };
-  console.log(postData);
-  console.log("disables state ->", disabledState);
+
   return (
     <>
       <div className="relative flex flex-col min-w-0 break-words w-full mb-6 shadow-lg rounded-lg bg-blueGray-100 border-0">
