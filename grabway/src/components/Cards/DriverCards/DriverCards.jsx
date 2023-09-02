@@ -18,11 +18,9 @@ import {
 import AdvertisementCard from "./AdvertisementCard/AdvertisementCard";
 import "./DriverCard.css";
 
-// Define your sections and other constants
 const sections = ["Essential Commuter", "Comfort Traveler", "Premier Business"];
 const areTabsDisabled = true;
 
-// Simulated driver data (replace with actual data fetching)
 const driverData = [
   {
     driverName: "Kittu Singh",
@@ -66,48 +64,46 @@ const driverData = [
   },
 ];
 
-// ... your existing imports and code ...
-
 function DriverCard() {
-  // Render the component with the fetched data
   return (
     <Box p={8} borderRadius="md" boxShadow="lg" bg="white">
-      <Tabs defaultIndex={0} colorScheme="blue">
-        <TabList justifyContent="center" borderBottomWidth="1px" pb={2}>
-          {/* ... your existing TabList mapping code ... */}
-        </TabList>
-        <TabPanels mt={4}>
-          {sections.map((section, index) => (
-            <TabPanel key={index}>
-              {driverData.map((driver, driverIndex) => (
-                <Box className="responsive-card" key={driverIndex}>
-                  <Image
-                    src="https://img.freepik.com/free-vector/red-sedan-car-isolated-white-vector_53876-64366.jpg?w=900&t=st=1692895124~exp=1692895724~hmac=9084cfe1f9e13be10c20ff75317e808efbecd741a345ac619f7814540a6abf66"
-                    alt="Driver Image"
-                    objectFit="cover"
-                    borderRadius="md"
-                    w={400}
-                  />
-                  <div className="card-content">
-                    <Heading size="lg">{driver.driverName}</Heading>
-                    <Text>Email: {driver.email}</Text>
-                    <Text>
-                      Vehicle: {driver.VehicleManufacturer}{" "}
-                      {driver.VehicleModel}
-                    </Text>
-                    <Text>Plan: {driver.plan}</Text>
-                    <Text>Seats: {driver.seats}</Text>
-                  </div>
-                  <Box mx={6} my={4} className="sideCardCss">
-                    {/* Conditionally render AdvertisementCard only for the first driver */}
-                    {driverIndex === 0 && <AdvertisementCard />}
-                  </Box>
-                </Box>
-              ))}
-            </TabPanel>
-          ))}
-        </TabPanels>
-      </Tabs>
+      <Box className="driver-card-container">
+        {driverData.map((driver, driverIndex) => (
+          <Box
+            key={driverIndex}
+            borderRadius="md"
+            boxShadow="md"
+            bg="white"
+            p={4}
+            m={2}
+            textAlign="center"
+            width="300px" // Set a fixed width for each card
+            position="relative"
+          >
+            <Image
+              src="https://img.freepik.com/free-vector/red-sedan-car-isolated-white-vector_53876-64366.jpg?w=900&t=st=1692895124~exp=1692895724~hmac=9084cfe1f9e13be10c20ff75317e808efbecd741a345ac619f7814540a6abf66"
+              alt="Driver Image"
+              objectFit="cover"
+              borderRadius="md"
+              w={200}
+              h={120}
+              mx="auto"
+            />
+            <Heading size="md">{driver.driverName}</Heading>
+            <Text>Email: {driver.email}</Text>
+            <Text>
+              Vehicle: {driver.VehicleManufacturer} {driver.VehicleModel}
+            </Text>
+            <Text>Plan: {driver.plan}</Text>
+            <Text>Seats: {driver.seats}</Text>
+            {driverIndex === 0 && (
+              <Box position="absolute" top={2} right={2} zIndex={1}>
+                <AdvertisementCard />
+              </Box>
+            )}
+          </Box>
+        ))}
+      </Box>
     </Box>
   );
 }

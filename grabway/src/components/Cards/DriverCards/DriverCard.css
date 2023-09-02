@@ -1,32 +1,22 @@
-/* Add this CSS to your stylesheets or components */
+/* DriverCard.css */
+
+.driver-card-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
 
 .responsive-card {
-  display: flex;
-  flex-direction: column;
-  align-items: center; /* Center content on small screens */
-  text-align: center; /* Center text on small screens */
-  margin-bottom: 20px; /* Add some space between cards */
+  width: 300px;
+  margin: 10px;
 }
 
-.responsive-card .card-content {
-  margin-top: 20px; /* Add space between image and content */
-}
+/* Add any other styling you need here */
 
-
-@media screen and (min-width: 768px) {
-  /* Apply this style for medium screens and above */
-  .responsive-card {
-    flex-direction: row;
-    align-items: flex-start;
-    text-align: left;
-    margin-top: 30px;
-  }
-
-  .responsive-card .card-content {
-    margin-top: 0;
-    margin-left: 20px;
-  }
-  /* .sideCardCss{
-    padding-top: 100%;
-  } */
+/* AdvertisementCard styling (position it in the top-right corner) */
+.AdvertisementCard {
+  position: fixed;
+  top: 20px;
+  right: 205px;
+  z-index: 2;
 }
