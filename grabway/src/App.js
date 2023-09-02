@@ -25,6 +25,7 @@ import DriverRouteLocation from "./Pages/DriverRouteLocation/DriverRouteLocation
 import StatusBar from "./components/StausBar/StatusBar";
 import RouteUserRegisteration from "./Pages/RouteRegisteration/RouteUserRegistration";
 import MatchedRoutes from "./Pages/MatchedRoutes/MatchedRoutes";
+import AdvertisementCard from "./components/Cards/DriverCards/AdvertisementCard/AdvertisementCard";
 axios.defaults.baseURL = "http://localhost:8080";
 axios.defaults.withCredentials = true;
 // import NearbyMap from "./components/Map/NearbyMap";
@@ -86,6 +87,7 @@ function App() {
         />
 
         <div style={intDivStyle}>
+          <AdvertisementCard/>
           <Routes>
             {/* <Route path="/nearby" element={<NearbyMap nonceVal={nonce} />} /> */}
             <Route

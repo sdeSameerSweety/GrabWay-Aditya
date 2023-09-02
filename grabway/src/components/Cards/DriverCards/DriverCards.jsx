@@ -76,7 +76,7 @@ function DriverCard() {
           {sections.map((section, index) => (
             <TabPanel key={index}>
               <Box className="driver-card-container">
-                <AdvertisementCard /> {/* Show AdvertisementCard once here */}
+                <AdvertisementCard />
                 {driverData.map((driver, driverIndex) => (
                   <Box
                     key={driverIndex}
