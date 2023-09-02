@@ -202,6 +202,75 @@ app.post("/createDriver", async (req, res) => {
   }
 });
 
+app.post("/editprofile/:type", async (req, res) => {
+  await mongoose.connect(MONGO_URL);
+  const userType = req.params.type;
+  const data = req.body.editData;
+  const email=req.body.emailForApi;
+  console.log(email);
+  console.log(data);
+  try{
+    if(userType==='user'){
+      const updatedResponse = await UserModel.updateOne(
+        {
+          email: email,
+        },
+        {
+          $set: {
+            profilePicture: data.profilePicture,
+            name: data.firstName+" "+data.lastName,
+            phoneNumber: data.phone,
+            "address.0.addressName":  data.firstName+" "+data.lastName,
+            "address.0.addressLine1": data.address,
+            "address.0.addressLine2": data.address,
+            "address.0.city": data.city,
+            "address.0.state": data.state,
+            "address.0.pincode": data.pin,
+          },
+        }
+      );
+      if(updatedResponse){
+        res.status(200).json(updatedResponse);
+      }
+      else{
+        res.status(500).json(null);
+      }
+    }
+    if(userType==='driver'){
+      const updatedResponse = await DriverModel.updateOne(
+        {
+          email: email,
+        },
+        {
+          $set: {
+            name: data.firstName+" "+data.lastName,
+            phoneNumber: data.phone,
+            VehicleNumber: data.VehicleNumber,
+            profilePicture: data.profilePicture,
+            drivingLicenseNumber: data.drivingLicenseNumber,
+            experience: data.experience,
+            "address.0.addressName":  data.firstName+" "+data.lastName,
+            "address.0.addressLine1": data.address,
+            "address.0.addressLine2": data.address,
+            "address.0.city": data.city,
+            "address.0.state": data.state,
+            "address.0.pincode": data.pin,
+          },
+        }
+      );
+      if(updatedResponse){
+        res.status(200).json(updatedResponse);
+      }
+      else{
+        res.status(500).json(null);
+      }
+    }
+  }
+catch(err){
+  res.status(500).json('Internal Server Error')
+}
+});
+
 //api for google login below
 app.post("/googlecheckUser", async (req, res) => {
   await mongoose.connect(MONGO_URL);
@@ -1168,12 +1237,7 @@ app.post("/buyNow", async (req, res) => {
   }
 });
 
-app.post("/editprofile:type", async (req, res) => {
-  await mongoose.connect(MONGO_URL);
-  const userType = req.params.type;
-  const data = req.body;
-  console.log(data);
-});
+
 
 app.listen(PORT, () => {
   console.log(`Server running at http://localhost:${PORT}`);
