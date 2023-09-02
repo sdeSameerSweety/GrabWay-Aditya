@@ -10,10 +10,6 @@ import {
   Tabs,
   Text,
   Image,
-  VStack,
-  Link,
-  UnorderedList,
-  ListItem,
 } from "@chakra-ui/react";
 import AdvertisementCard from "./AdvertisementCard/AdvertisementCard";
 import "./DriverCard.css";
@@ -63,6 +59,7 @@ const driverData = [
     seats: 4,
   },
 ];
+// ... (previous code)
 
 function DriverCard() {
   return (
@@ -79,6 +76,7 @@ function DriverCard() {
           {sections.map((section, index) => (
             <TabPanel key={index}>
               <Box className="driver-card-container">
+                <AdvertisementCard /> {/* Show AdvertisementCard once here */}
                 {driverData.map((driver, driverIndex) => (
                   <Box
                     key={driverIndex}
@@ -108,11 +106,12 @@ function DriverCard() {
                     </Text>
                     <Text>Plan: {driver.plan}</Text>
                     <Text>Seats: {driver.seats}</Text>
-                    {driverIndex === 0 && (
-                      <Box position="absolute" top={2} right={2} zIndex={1}>
-                        <AdvertisementCard />
-                      </Box>
-                    )}
+                    <Button colorScheme="blue" mt={2} mr={2}>
+                      Book Now
+                    </Button>
+                    <Button colorScheme="gray" mt={2}>
+                      Show More
+                    </Button>
                   </Box>
                 ))}
               </Box>
