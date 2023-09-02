@@ -3,6 +3,11 @@ import axios from "axios";
 import { Navigate } from "react-router-dom";
 import { useLocation, useParams } from "react-router-dom";
 import Cookies from "js-cookie";
+import { Box, Center, Image, Text, Fade } from "@chakra-ui/react";
+
+import LoadingCarAnimation from "../../components/AllAnimations/LoadingCarAnimation";
+import DriverNotFound from "../../components/AllAnimations/DriverNotFound";
+
 const MatchedRoutes = () => {
   const [matchedRoutes, setMatchedRoutes] = useState(null);
   const [driverFound, setDriverFound] = useState(false);
@@ -47,13 +52,20 @@ const MatchedRoutes = () => {
   }
   return (
     <>
-      {matchedRoutes === null && <>Loading Screen Here</>}
-
-      {matchedRoutes === "empty" && <>driver not found</>}
-
-      {matchedRoutes !== null && matchedRoutes !== "empty" && (
-        <>user cards here</>
+      {matchedRoutes === null && (
+        <>
+          <div>
+            <LoadingCarAnimation />
+          </div>
+        </>
       )}
+
+      {matchedRoutes === "empty" && (
+        <>
+          <DriverNotFound />
+        </>
+      )}
+      {matchedRoutes !== null && matchedRoutes !== "empty" && <>grgsrd</>}
     </>
   );
 };

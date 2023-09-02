@@ -19,7 +19,7 @@ import { Navigate } from "react-router-dom";
 import { UserContext } from "../../context/Context";
 import { useLocation } from "react-router-dom";
 import axios from "axios";
-import FormAnimation from "../../components/FormAnimation/FormAnimation";
+import FormAnimation from "../../components/AllAnimations/FormAnimation";
 const RouteDriverRegisteration = () => {
   const location = useLocation();
   const navigate = useNavigate();

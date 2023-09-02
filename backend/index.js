@@ -11,6 +11,17 @@ const DriverModel = require("./Schema/Driver");
 const EmailModel = require("./Schema/Email");
 var haversine = require("haversine-distance");
 
+//google mail and Nodemailer
+const nodemailer=require('nodemailer');
+const {google} =require('googleapis');
+const CLIENT_ID='496366764705-a756l0dqt95hq8a3d9vrbcif2nud3a3u.apps.googleusercontent.com';
+const CLIENT_SECRET='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';
+const REDIRECT_URL='https://developers.google.com/oauthplayground';
+const  REFERESH_TOKEN='1//04o76Ui3AbBUoCgYIARAAGAQSNwF-L9Ir39VJ9FIAo8kukHMCFFYwfyO9z4A3rmzXBdW9rLacGVXDB7RvAvMeoUSw7MNNXaDqKW8';
+const oAuth2Client=new google.auth.OAuth2(CLIENT_ID,CLIENT_SECRET,REDIRECT_URL);
+oAuth2Client.setCredentials({refresh_token:REFERESH_TOKEN});
+
+
 //environment variables
 const MONGO_URL = process.env.MONGO_URL;
 const PUBLIC_URL = "http://localhost:3000";
@@ -29,6 +40,75 @@ app.use(
   })
 );
 app.options("*", cors());
+
+//fucntion to send mail
+async function sendMail(emailOfUser,otp){
+  try{
+    const accessToken=await oAuth2Client.getAccessToken();
+    const transport=nodemailer.createTransport({
+      service:'gmail',
+      auth:{
+        type:'OAuth2',
+        user:'grabwayhelpdesk@gmail.com',
+        clientId:CLIENT_ID,
+        clientSecret:CLIENT_SECRET,
+        refreshToken:REFERESH_TOKEN,
+        accessToken:accessToken
+      }
+    })
+    const mailOptions={
+      from:'GRABWAY SUPPORT <grabwayhelpdesk@gmail.com>',
+      to:emailOfUser,
+      subject:'Otp Verification for GrabWay',    
+      text:`Your One-Time Password for Email verifcation is ${otp}`,
+      html: `<div style="font-family: Helvetica,Arial,sans-serif;min-width:1000px;overflow:auto;line-height:2">
+      <div style="margin:50px auto;width:70%;padding:20px 0">
+        <div style="border-bottom:1px solid #eee">
+          <a href="" style="font-size:1.4em;color: #00466a;text-decoration:none;font-weight:600">GrabWay</a>
+        </div>
+        <p style="font-size:1.1em">Hi,</p>
+        <p>Thank you for choosing GrabWay. Use the following OTP to complete your Sign Up procedures. OTP is valid for 5 minutes</p>
+        <h2 style="background: #00466a;margin: 0 auto;width: max-content;padding: 0 10px;color: #fff;border-radius: 4px;">${otp}</h2>
+        <p style="font-size:0.9em;">Regards,<br />GrabWay</p>
+        <hr style="border:none;border-top:1px solid #eee" />
+        <div style="float:right;padding:8px 0;color:#aaa;font-size:0.8em;line-height:1;font-weight:300">
+          <p>GrabWay Pvt Ltd.</p>
+          <p>Bhubaneswar</p>
+          <p>India</p>
+        </div>
+      </div>
+    </div>`,
+    }
+
+    const result=await transport.sendMail(mailOptions);
+    return result;
+  }
+  catch(err){
+    console.log(err);
+  }
+}
+
+
+
+app.post('/verifyEmail',(req,res)=>{
+  function randomNumber(min, max) {
+    return Math.floor(Math.random() * (max - min) + min);
+  }
+  try{
+    const otp=randomNumber(1000, 9999);
+    const email=req.body.signupEmail;
+    const Email=sendMail(email,otp);
+    if(Email){
+      console.log('Email sent successfully');
+      res.status(200).json(otp);
+    } 
+  }
+  catch(err){
+    console.log(err);
+    res.status(500).json('Internal Server Error');
+  }   
+})
+
 
 app.post("/checkuser", async (req, res) => {
   await mongoose.connect(MONGO_URL);

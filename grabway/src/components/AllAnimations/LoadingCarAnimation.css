@@ -1,0 +1,461 @@
+/* html,
+body {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  background-color: black;
+} */
+
+.container-loading {
+  width: 350px;
+  height: 350px;
+  background: radial-gradient(rgb(14, 61, 65), rgb(17, 61, 75));
+  border-radius: 20%;
+  position: relative;
+  margin-top: 25%;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  overflow: hidden;
+}
+
+.moon {
+  width: 35px;
+  height: 35px;
+  background-color: rgb(146, 146, 31);
+  box-shadow: 0 0 20px rgb(255, 208, 0);
+  border-radius: 50%;
+  position: absolute;
+  top: 20px;
+  left: 120px;
+}
+
+.tree {
+  width: 20px;
+  height: 150px;
+  background-color: rgb(95, 67, 31);
+  position: absolute;
+  top: 50%;
+  left: 70%;
+  transform: translate(-50%, -50%);
+}
+
+.tree span:first-child {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  background-color: rgb(23, 105, 23);
+  position: absolute;
+  top: 10%;
+  left: 70%;
+  transform: translate(-50%, -50%);
+}
+
+.tree span:nth-child(2) {
+  width: 70px;
+  height: 60px;
+  border-radius: 50%;
+  background-color: rgb(23, 105, 23);
+  position: absolute;
+  top: -10%;
+  left: 10%;
+  transform: translate(-50%, -50%);
+}
+
+.tree span:nth-child(3) {
+  width: 70px;
+  height: 50px;
+  border-radius: 50%;
+  background-color: rgb(23, 105, 23);
+  position: absolute;
+  top: -10%;
+  left: 150%;
+  transform: translate(-50%, -50%);
+}
+
+.tree span:nth-child(4) {
+  width: 80px;
+  height: 40px;
+  border-radius: 50%;
+  background-color: rgb(23, 105, 23);
+  position: absolute;
+  top: 10%;
+  left: -20%;
+  transform: translate(-50%, -50%);
+}
+
+.tree span:nth-child(5) {
+  width: 80px;
+  height: 40px;
+  border-radius: 50%;
+  background-color: rgb(23, 105, 23);
+  position: absolute;
+  top: 10%;
+  left: 220%;
+  transform: translate(-50%, -50%);
+}
+
+.tree span:last-child {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  background-color: rgb(23, 105, 23);
+  position: absolute;
+  top: -30%;
+  left: 100%;
+  transform: translate(-50%, -50%);
+}
+
+.car {
+  width: 150px;
+  height: 30px;
+  background-color: rgb(228, 167, 0);
+  border-top-left-radius: 10px;
+  border-bottom-left-radius: 5px;
+  border-top-right-radius: 50px;
+  border-bottom-right-radius: 5px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  animation: animate2 5s linear infinite;
+}
+
+@keyframes animate2 {
+  0% {
+    transform: translate(-550px);
+  }
+
+  30%,
+  50% {
+    transform: translate(-150px);
+  }
+
+  100% {
+    transform: translate(200px);
+  }
+}
+
+.spion {
+  width: 7px;
+  height: 7px;
+  background-color: rgba(24, 24, 24, 0.9);
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+  position: absolute;
+  z-index: 3;
+  top: -15%;
+  left: 70%;
+  transform: translate(-50%, -50%);
+}
+
+.handle-front {
+  width: 7px;
+  height: 2px;
+  background-color: rgba(24, 24, 24, 0.5);
+  position: absolute;
+  z-index: 3;
+  top: 15%;
+  left: 48%;
+  transform: translate(-50%, -50%);
+}
+
+.handle-back {
+  width: 7px;
+  height: 2px;
+  background-color: rgba(24, 24, 24, 0.5);
+  position: absolute;
+  z-index: 3;
+  top: 15%;
+  left: 24%;
+  transform: translate(-50%, -50%);
+}
+
+.head-lamp {
+  width: 10px;
+  height: 13px;
+  background-color: yellow;
+  box-shadow: 0 0 5px yellow;
+  border-top-right-radius: 150px;
+  border-bottom-right-radius: 3px;
+  border-bottom-left-radius: 150px;
+  position: absolute;
+  right: 2px;
+  top: 18%;
+}
+
+.head-lamp span {
+  width: 0;
+  height: 0;
+  border-top: 25px solid transparent;
+  border-right: 200px solid rgba(202, 202, 176, 0.2);
+  border-bottom: 30px solid transparent;
+  filter: drop-shadow(0 0 10px rgba(202, 202, 176, 0.418));
+  position: absolute;
+  top: -150%;
+  left: -250%;
+}
+
+.cap-body {
+  width: 90px;
+  height: 30px;
+  background-color: rgb(228, 167, 0);
+  border-top-right-radius: 1000px;
+  border-top-left-radius: 1000px;
+  position: absolute;
+  top: -25%;
+  left: 44%;
+  transform: translate(-50%, -50%);
+}
+
+.cap-body span:first-child {
+  width: 35px;
+  height: 18px;
+  background-color: rgb(145, 145, 145);
+  border-top-right-radius: 1000px;
+  position: absolute;
+  right: 8px;
+  bottom: 8px;
+}
+
+.cap-body span:last-child {
+  width: 35px;
+  height: 18px;
+  background-color: rgb(145, 145, 145);
+  border-top-left-radius: 1000px;
+  position: absolute;
+  left: 8px;
+  bottom: 8px;
+}
+
+.tire-front {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  background-color: rgb(24, 24, 24);
+  position: inherit;
+  bottom: -25%;
+  right: 15%;
+}
+
+.tire-front span {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background-color: rgb(145, 145, 145);
+  position: inherit;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.tire-back {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  background-color: rgb(24, 24, 24);
+  position: inherit;
+  bottom: -25%;
+  left: 15%;
+}
+
+.tire-back span {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background-color: rgb(145, 145, 145);
+  position: inherit;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.back-lamp {
+  width: 10px;
+  height: 10px;
+  background-color: red;
+  box-shadow: 0 0 5px red;
+  border-top-right-radius: 5px;
+  border-bottom-right-radius: 5px;
+  position: absolute;
+  top: 18%;
+}
+
+.street {
+  width: 100%;
+  height: 138px;
+  background-color: rgb(27, 27, 27);
+  position: absolute;
+  z-index: 2;
+  bottom: 0;
+}
+
+.street h4 {
+  margin: auto;
+  margin-top: 35px;
+  width: max-content;
+  color: rgb(145, 145, 145);
+  font-family: "Courier New", Courier, monospace;
+  animation: animate10 2s linear infinite;
+}
+
+@keyframes animate10 {
+  50% {
+    opacity: 0.5;
+    color: rgb(228, 167, 0);
+  }
+}
+
+h2 span:first-child {
+  width: max-content;
+  color: rgb(145, 145, 145);
+  font-family: "Courier New", Courier, monospace;
+  position: absolute;
+  top: 0;
+  left: 10%;
+  transform: translate(-50%, -50%);
+  animation: animate3 2s linear infinite;
+}
+
+@keyframes animate3 {
+  20%,
+  100% {
+    top: 37%;
+  }
+
+  50% {
+    color: rgb(228, 167, 0);
+  }
+}
+
+h2 span:nth-child(2) {
+  width: max-content;
+  color: rgb(145, 145, 145);
+  font-family: "Courier New", Courier, monospace;
+  position: absolute;
+  top: 0;
+  left: 14%;
+  transform: translate(-50%, -50%);
+  animation: animate4 2s linear infinite;
+}
+
+@keyframes animate4 {
+  30%,
+  100% {
+    top: 37%;
+  }
+
+  50% {
+    color: rgb(228, 167, 0);
+  }
+}
+
+h2 span:nth-child(3) {
+  width: max-content;
+  color: rgb(145, 145, 145);
+  font-family: "Courier New", Courier, monospace;
+  position: absolute;
+  top: 0;
+  left: 18%;
+  transform: translate(-50%, -50%);
+  animation: animate5 2s linear infinite;
+}
+
+@keyframes animate5 {
+  40%,
+  100% {
+    top: 36%;
+  }
+
+  50% {
+    color: rgb(228, 167, 0);
+  }
+}
+
+h2 span:nth-child(4) {
+  width: max-content;
+  color: rgb(145, 145, 145);
+  font-family: "Courier New", Courier, monospace;
+  position: absolute;
+  top: 0;
+  left: 22%;
+  transform: translate(-50%, -50%);
+  animation: animate6 2s linear infinite;
+}
+
+@keyframes animate6 {
+  50%,
+  100% {
+    top: 37%;
+  }
+
+  50% {
+    color: rgb(228, 167, 0);
+  }
+}
+
+h2 span:nth-child(5) {
+  width: max-content;
+  color: rgb(145, 145, 145);
+  font-family: "Courier New", Courier, monospace;
+  position: absolute;
+  top: 0;
+  left: 26%;
+  transform: translate(-50%, -50%);
+  animation: animate7 2s linear infinite;
+}
+
+@keyframes animate7 {
+  60%,
+  100% {
+    top: 36%;
+  }
+
+  50% {
+    color: rgb(228, 167, 0);
+  }
+}
+
+h2 span:nth-child(6) {
+  width: max-content;
+  color: rgb(145, 145, 145);
+  font-family: "Courier New", Courier, monospace;
+  position: absolute;
+  top: 0;
+  left: 30%;
+  transform: translate(-50%, -50%);
+  animation: animate8 2s linear infinite;
+}
+
+@keyframes animate8 {
+  70%,
+  100% {
+    top: 37%;
+  }
+
+  50% {
+    color: rgb(228, 167, 0);
+  }
+}
+
+h2 span:last-child {
+  width: max-content;
+  color: rgb(145, 145, 145);
+  font-family: "Courier New", Courier, monospace;
+  position: absolute;
+  top: 0;
+  left: 34%;
+  transform: translate(-50%, -50%);
+  animation: animate9 2s linear infinite;
+}
+
+@keyframes animate9 {
+  80%,
+  100% {
+    top: 37%;
+  }
+
+  50% {
+    color: rgb(228, 167, 0);
+  }
+}

@@ -8,6 +8,7 @@ import { HiOutlineMail } from "react-icons/hi";
 import { RiLockPasswordLine } from "react-icons/ri";
 import { BsTelephone } from "react-icons/bs";
 import { AiFillCar, AiOutlineUser } from "react-icons/ai";
+import {BsShieldLock} from 'react-icons/bs';
 import { useToast } from "@chakra-ui/react";
 import {
   getAuth,
@@ -58,19 +59,21 @@ const TopBar = ({ counter, setCounter, setLoginState, loginState }) => {
   const [signupPassword, setSignupPassword] = useState("");
   const [signupPhone, setSignupPhone] = useState("");
   const [signupUserType, setSignupUserType] = useState("");
+  const [otp,setOtp]=useState(null);
+  const [signupOtp,setSignupOtp]=useState('');
+  const [showOtpInput, setShowOtpInput]=useState(false);
   const toast = useToast();
   const [weatherData, setWeatherData] = useState(null);
   let dt = useContext(UserContext);
-
   useEffect(() => {
     if (dt.profilePhoto !== undefined || dt.profilePhoto !== null)
       setProfilePhoto(dt.profilePhoto);
   });
-
   async function getWeather(city) {
     const res = await fetch(
       `https://api.weatherapi.com/v1/current.json?q=${city}&key=%20beab78d23f424b26923110343233008`
     );
+
     const myJson = await res.json();
     console.log(myJson);
     setWeatherData(myJson);
@@ -179,7 +182,32 @@ const TopBar = ({ counter, setCounter, setLoginState, loginState }) => {
       });
     }
   }
-  function handleSignup() {
+
+  async function handleSignUpInitial(){
+    var otpResponse=await axios.post('/verifyEmail',{signupEmail}).then((res)=>{
+      setOtp(res.data);
+    })
+  }
+
+  async function VerifyOtp(){
+    console.log(JSON.stringify(otp));
+    console.log((signupOtp))
+    if(signupOtp===JSON.stringify(otp)){
+      setShowOtpInput(true);
+      //display the other fields
+    }
+    else{
+      toast({
+        title: `Invalid Otp`,
+        message:'Note: OTP must be 4-digit',
+        status: "error",
+        isClosable: true,
+        position: "top-right",
+      });
+    }
+  }
+
+  async function handleSignup() {
     if (
       isEmail(signupEmail) &&
       isTextField(signupPassword) &&
@@ -581,7 +609,30 @@ const TopBar = ({ counter, setCounter, setLoginState, loginState }) => {
                                 />
                               </InputGroup>
                             </div>
-                            <div>
+
+                            {otp!==null && <div>
+                              <InputGroup>
+                                <InputLeftElement pointerEvents="none">
+                                  <div className="flex justify-center items-center mt-2">
+                                    <BsShieldLock fill="grey" />
+                                  </div>
+                                </InputLeftElement>
+                                <Input
+                                  onChange={(e) =>
+                                    setSignupOtp(e.target.value)
+                                  }
+                                  size={"lg"}
+                                  sx={{ width: "320px" }}
+                                  variant={"filled"}
+                                  type="text"
+                                  placeholder="4-digit OTP sent to your E-Mail"
+                                />
+                              </InputGroup>
+
+                            </div>
+                            }
+                            {showOtpInput && <>
+                              <div>
                               <InputGroup>
                                 <InputLeftElement pointerEvents="none">
                                   <div className="flex justify-center items-center mt-2">
@@ -679,8 +730,9 @@ const TopBar = ({ counter, setCounter, setLoginState, loginState }) => {
                                 </div>
                               </InputGroup>
                             </div>
+                            </>}
                           </div>
-                          <div className="flex justify-center items-center">
+                          <div className="flex justify-center items-center mt-[2%]">
                             Already our User?&nbsp;&nbsp;{" "}
                             <button
                               onClick={showModal}
@@ -695,7 +747,28 @@ const TopBar = ({ counter, setCounter, setLoginState, loginState }) => {
                           <Button color={"red"} mr={3} onClick={onClose}>
                             Close
                           </Button>
-                          <Button
+                          {!otp && !showOtpInput && <>
+                            <Button
+                            onClick={handleSignUpInitial}
+                            bgColor={"red"}
+                            textColor={"white"}
+                            sx={{ _hover: `bgColor:"red"` }}
+                          >
+                            Send Otp
+                          </Button>
+                          </>}
+                          {otp && !showOtpInput && <>
+                            <Button
+                            onClick={VerifyOtp}
+                            bgColor={"red"}
+                            textColor={"white"}
+                            sx={{ _hover: `bgColor:"red"` }}
+                          >
+                            Verify Otp
+                          </Button>
+                          </>}
+                          {otp && showOtpInput && <>
+                            <Button
                             onClick={handleSignup}
                             bgColor={"red"}
                             textColor={"white"}
@@ -703,6 +776,9 @@ const TopBar = ({ counter, setCounter, setLoginState, loginState }) => {
                           >
                             Sign Up
                           </Button>
+                          </>
+
+                          }
                         </ModalFooter>
                       </ModalContent>
                     </Modal>
