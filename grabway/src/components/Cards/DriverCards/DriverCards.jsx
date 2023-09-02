@@ -27,7 +27,7 @@ const driverData = [
     email: "driver@gmail.com",
     VehicleManufacturer: "Maruti Suzuki",
     VehicleModel: "Swift Dzire",
-    plan: "basic",
+    plan: "Basic",
     seats: 10,
   },
   {
@@ -35,7 +35,7 @@ const driverData = [
     email: "john.doe@gmail.com",
     VehicleManufacturer: "Toyota",
     VehicleModel: "Camry",
-    plan: "premium",
+    plan: "Premium",
     seats: 5,
   },
   {
@@ -43,7 +43,7 @@ const driverData = [
     email: "alice.johnson@gmail.com",
     VehicleManufacturer: "Honda",
     VehicleModel: "Civic",
-    plan: "standard",
+    plan: "Standard",
     seats: 4,
   },
   {
@@ -51,7 +51,7 @@ const driverData = [
     email: "michael.smith@gmail.com",
     VehicleManufacturer: "Ford",
     VehicleModel: "F-150",
-    plan: "basic",
+    plan: "Basic",
     seats: 6,
   },
   {
@@ -59,7 +59,7 @@ const driverData = [
     email: "emily.wilson@gmail.com",
     VehicleManufacturer: "Chevrolet",
     VehicleModel: "Malibu",
-    plan: "standard",
+    plan: "Standard",
     seats: 4,
   },
 ];
