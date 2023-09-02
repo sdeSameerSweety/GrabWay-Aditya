@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import Cookies from "js-cookie";
 import "./status.css";
 import "./extramore.css";
 
@@ -9,6 +10,15 @@ export default function StatusBar() {
   const [services, setServices] = useState("services active");
   const [about, setAbout] = useState("about");
   const [help, setHelp] = useState("help");
+  const navigate = useNavigate();
+
+  const handleSignout = () => {
+    console.log("Signout Successfull");
+    Cookies.remove("grabwayToken");
+    Cookies.remove("grabwayUser");
+    Cookies.remove("grabwayGoogleToken");
+    window.location.reload(false);
+  };
 
   const [openSide, setOpenSide] = useState(false);
   return (
@@ -108,41 +118,44 @@ export default function StatusBar() {
         <ul class="nav-list-more">
           <li style={{ width: "0px" }}>
             <a href="#">
-              <i class="bx bx-grid-alt"></i>
+              <i class="bx bx-grid-alt" style={{ color: "transparent" }}></i>
               <span class="links_name-more">Dashboard</span>
             </a>
             <span class="tooltip-more">Dashboard</span>
           </li>
           <li style={{ width: "0px" }}>
             <a href="#">
-              <i class="bx bx-user"></i>
+              <i class="bx bx-user" style={{ color: "transparent" }}></i>
               <span class="links_name-more">User</span>
             </a>
             <span class="tooltip-more">User</span>
           </li>
           <li style={{ width: "0px" }}>
             <a href="#">
-              <i class="bx bx-chat"></i>
+              <i class="bx bx-chat" style={{ color: "transparent" }}></i>
               <span class="links_name-more">Messages</span>
             </a>
             <span class="tooltip-more">Messages</span>
           </li>
           <li style={{ width: "0px" }}>
             <a href="#">
-              <i class="bx bx-pie-chart-alt-2"></i>
+              <i
+                class="bx bx-pie-chart-alt-2"
+                style={{ color: "transparent" }}
+              ></i>
               <span class="links_name-more">Analytics</span>
             </a>
             <span class="tooltip-more">Analytics</span>
           </li>
           <li style={{ width: "0px" }}>
             <a href="#">
-              <i class="bx bx-folder"></i>
+              <i class="bx bx-folder" style={{ color: "transparent" }}></i>
               <span class="links_name-more">File Manager</span>
             </a>
             <span class="tooltip-more">Files</span>
           </li>
           <li>
-            <a href="/support">
+            <a href="#" onClick={() => navigate("/support")}>
               <i class="bx bx-support"></i>
               <span class="links_name-more">Support</span>
             </a>
@@ -156,7 +169,7 @@ export default function StatusBar() {
             <span class="tooltip-more">Packages</span>
           </li>
           <li>
-            <a href="#">
+            <a href="#" onClick={() => handleSignout()}>
               <i class="bx bx-log-out"></i>
               <span class="links_name-more">Log Out</span>
             </a>
