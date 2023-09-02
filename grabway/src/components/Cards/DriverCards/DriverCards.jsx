@@ -1,4 +1,4 @@
-import React from "react";
+import { React, useState } from "react";
 import {
   Box,
   Button,
@@ -19,7 +19,7 @@ import AdvertisementCard from "./AdvertisementCard/AdvertisementCard";
 import "./DriverCard.css";
 
 const sections = ["Essential Commuter", "Comfort Traveler", "Premier Business"];
-
+const areTabsDisabled = true;
 const cardData = {
   /* Essential Commuter Data */
   "Essential Commuter": [
@@ -150,6 +150,11 @@ function DriverCard() {
           {sections.map((section, index) => (
             <Tab
               key={index}
+              isDisabled={
+                areTabsDisabled &&
+                (section === "Comfort Traveler" ||
+                  section === "Premier Business")
+              }
               _selected={{
                 color: "blue.500",
                 borderBottomWidth: "2px",

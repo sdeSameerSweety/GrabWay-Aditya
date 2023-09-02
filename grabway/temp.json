@@ -1,0 +1,45 @@
+[
+  {
+    "email": "driver@gmail.com",
+    "VehicleManufacturer": "Maruti Suzuki",
+    "VehcileModel": "Swift Dzire",
+    "RouteAtIndex": 1,
+    "route": {
+      "origin": [
+        {
+          "text": "Vasudha greens, kamalgazi, Kamalgazi, Kamalgachhi More, Kolkata, West Bengal, India",
+          "lat": 22.4478415,
+          "long": 88.3911004,
+          "_id": "64f0e8a24033c80ebcc694ed"
+        }
+      ],
+      "destination": [
+        {
+          "text": "DPS Ruby Park School, Ruby Park Road, Rath Tala, Kasba, Kolkata, West Bengal, India",
+          "lat": 22.5128928,
+          "long": 88.3817529,
+          "_id": "64f0e8a24033c80ebcc694ee"
+        }
+      ],
+      "plan": "basic",
+      "seats": 10,
+      "originTime": [
+        {
+          "start": "08:00",
+          "end": "08:15",
+          "_id": "64f0e8a24033c80ebcc694ef"
+        }
+      ],
+      "destinationTime": [
+        {
+          "start": "16:00",
+          "end": "16:30",
+          "_id": "64f0e8a24033c80ebcc694f0"
+        }
+      ],
+      "_id": "64f0e8a24033c80ebcc694ec",
+      "customers": []
+    },
+    "driverName": "Kittu Singh"
+  }
+]
