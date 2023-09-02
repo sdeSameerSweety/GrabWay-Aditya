@@ -12,15 +12,20 @@ const EmailModel = require("./Schema/Email");
 var haversine = require("haversine-distance");
 
 //google mail and Nodemailer
-const nodemailer=require('nodemailer');
-const {google} =require('googleapis');
-const CLIENT_ID='496366764705-a756l0dqt95hq8a3d9vrbcif2nud3a3u.apps.googleusercontent.com';
-const CLIENT_SECRET='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';
-const REDIRECT_URL='https://developers.google.com/oauthplayground';
-const  REFERESH_TOKEN='1//04o76Ui3AbBUoCgYIARAAGAQSNwF-L9Ir39VJ9FIAo8kukHMCFFYwfyO9z4A3rmzXBdW9rLacGVXDB7RvAvMeoUSw7MNNXaDqKW8';
-const oAuth2Client=new google.auth.OAuth2(CLIENT_ID,CLIENT_SECRET,REDIRECT_URL);
-oAuth2Client.setCredentials({refresh_token:REFERESH_TOKEN});
-
+const nodemailer = require("nodemailer");
+const { google } = require("googleapis");
+const CLIENT_ID =
+  "496366764705-a756l0dqt95hq8a3d9vrbcif2nud3a3u.apps.googleusercontent.com";
+const CLIENT_SECRET = "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";
+const REDIRECT_URL = "https://developers.google.com/oauthplayground";
+const REFERESH_TOKEN =
+  "1//04o76Ui3AbBUoCgYIARAAGAQSNwF-L9Ir39VJ9FIAo8kukHMCFFYwfyO9z4A3rmzXBdW9rLacGVXDB7RvAvMeoUSw7MNNXaDqKW8";
+const oAuth2Client = new google.auth.OAuth2(
+  CLIENT_ID,
+  CLIENT_SECRET,
+  REDIRECT_URL
+);
+oAuth2Client.setCredentials({ refresh_token: REFERESH_TOKEN });
 
 //environment variables
 const MONGO_URL = process.env.MONGO_URL;
@@ -42,25 +47,25 @@ app.use(
 app.options("*", cors());
 
 //fucntion to send mail
-async function sendMail(emailOfUser,otp){
-  try{
-    const accessToken=await oAuth2Client.getAccessToken();
-    const transport=nodemailer.createTransport({
-      service:'gmail',
-      auth:{
-        type:'OAuth2',
-        user:'grabwayhelpdesk@gmail.com',
-        clientId:CLIENT_ID,
-        clientSecret:CLIENT_SECRET,
-        refreshToken:REFERESH_TOKEN,
-        accessToken:accessToken
-      }
-    })
-    const mailOptions={
-      from:'GRABWAY SUPPORT <grabwayhelpdesk@gmail.com>',
-      to:emailOfUser,
-      subject:'Otp Verification for GrabWay',    
-      text:`Your One-Time Password for Email verifcation is ${otp}`,
+async function sendMail(emailOfUser, otp) {
+  try {
+    const accessToken = await oAuth2Client.getAccessToken();
+    const transport = nodemailer.createTransport({
+      service: "gmail",
+      auth: {
+        type: "OAuth2",
+        user: "grabwayhelpdesk@gmail.com",
+        clientId: CLIENT_ID,
+        clientSecret: CLIENT_SECRET,
+        refreshToken: REFERESH_TOKEN,
+        accessToken: accessToken,
+      },
+    });
+    const mailOptions = {
+      from: "GRABWAY SUPPORT <grabwayhelpdesk@gmail.com>",
+      to: emailOfUser,
+      subject: "Otp Verification for GrabWay",
+      text: `Your One-Time Password for Email verifcation is ${otp}`,
       html: `<div style="font-family: Helvetica,Arial,sans-serif;min-width:1000px;overflow:auto;line-height:2">
       <div style="margin:50px auto;width:70%;padding:20px 0">
         <div style="border-bottom:1px solid #eee">
@@ -78,37 +83,32 @@ async function sendMail(emailOfUser,otp){
         </div>
       </div>
     </div>`,
-    }
+    };
 
-    const result=await transport.sendMail(mailOptions);
+    const result = await transport.sendMail(mailOptions);
     return result;
-  }
-  catch(err){
+  } catch (err) {
     console.log(err);
   }
 }
 
-
-
-app.post('/verifyEmail',(req,res)=>{
+app.post("/verifyEmail", (req, res) => {
   function randomNumber(min, max) {
     return Math.floor(Math.random() * (max - min) + min);
   }
-  try{
-    const otp=randomNumber(1000, 9999);
-    const email=req.body.signupEmail;
-    const Email=sendMail(email,otp);
-    if(Email){
-      console.log('Email sent successfully');
+  try {
+    const otp = randomNumber(1000, 9999);
+    const email = req.body.signupEmail;
+    const Email = sendMail(email, otp);
+    if (Email) {
+      console.log("Email sent successfully");
       res.status(200).json(otp);
-    } 
-  }
-  catch(err){
+    }
+  } catch (err) {
     console.log(err);
-    res.status(500).json('Internal Server Error');
-  }   
-})
-
+    res.status(500).json("Internal Server Error");
+  }
+});
 
 app.post("/checkuser", async (req, res) => {
   await mongoose.connect(MONGO_URL);
@@ -467,8 +467,7 @@ app.post("/routeDriverRegistration", async (req, res) => {
       } else {
         res.status(200).json(null);
       }
-    } 
-    catch (err) {
+    } catch (err) {
       console.log(err);
       res.status(500).send("Error in try catch");
     }
@@ -594,7 +593,7 @@ app.post("/routeUserSearch", async (req, res) => {
                   //console.log(resultDestinationTimeMatch);
                   if (resultDestinationTimeMatch) {
                     const RouteCardData = {
-                      email:  DriverResponse[i].email,
+                      email: DriverResponse[i].email,
                       VehicleManufacturer: "Maruti Suzuki",
                       VehcileModel: "Swift Dzire",
                       RouteAtIndex: j,
@@ -608,15 +607,13 @@ app.post("/routeUserSearch", async (req, res) => {
             }
           }
         }
-        if(MatchedData.length!==0){
+        if (MatchedData.length !== 0) {
           res.status(200).json(MatchedData);
+        } else {
+          res.status(500).json("No Drivers Found");
         }
-        else{
-          res.status(500).json('No Drivers Found');
-        }
-      }
-      else{
-        res.status(500).json('user is not present in database');
+      } else {
+        res.status(500).json("user is not present in database");
       }
     } catch (err) {
       console.log(err);
