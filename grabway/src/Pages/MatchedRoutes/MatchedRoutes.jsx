@@ -62,11 +62,14 @@ const MatchedRoutes = () => {
 
       {matchedRoutes === "empty" && (
         <>
-          {/* <DriverNotFound /> */}
+          <DriverNotFound />
+        </>
+      )}
+      {matchedRoutes !== null && matchedRoutes !== "empty" && (
+        <>
           <DriverCard />
         </>
       )}
-      {matchedRoutes !== null && matchedRoutes !== "empty" && <>grgsrd</>}
     </>
   );
 };
