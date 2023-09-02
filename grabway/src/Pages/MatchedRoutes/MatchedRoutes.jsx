@@ -7,7 +7,7 @@ import { Box, Center, Image, Text, Fade } from "@chakra-ui/react";
 
 import LoadingCarAnimation from "../../components/AllAnimations/LoadingCarAnimation";
 import DriverNotFound from "../../components/AllAnimations/DriverNotFound";
-
+import DriverCard from "../../components/Cards/DriverCards/DriverCards";
 const MatchedRoutes = () => {
   const [matchedRoutes, setMatchedRoutes] = useState(null);
   const [driverFound, setDriverFound] = useState(false);
@@ -65,7 +65,11 @@ const MatchedRoutes = () => {
           <DriverNotFound />
         </>
       )}
-      {matchedRoutes !== null && matchedRoutes !== "empty" && <>grgsrd</>}
+      {matchedRoutes !== null && matchedRoutes !== "empty" && (
+        <>
+          <DriverCard />
+        </>
+      )}
     </>
   );
 };
