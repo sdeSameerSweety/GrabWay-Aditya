@@ -732,7 +732,7 @@ const TopBar = ({ counter, setCounter, setLoginState, loginState }) => {
                             </div>
                             </>}
                           </div>
-                          <div className="flex justify-center items-center mt-[2%]">
+                          <div className="flex justify-center items-center mt-[5%]">
                             Already our User?&nbsp;&nbsp;{" "}
                             <button
                               onClick={showModal}
