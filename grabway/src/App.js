@@ -38,8 +38,11 @@ function App() {
   const [valshow, setValShow] = useState(false);
   useEffect(() => {
     setCookieVal(Cookies.get("grabwayUser"));
-    if (cookieVal !== undefined || cookieVal !== null) setValShow(true);
   });
+
+  useEffect(()=>{
+    if (cookieVal) setValShow(true);
+  })
   //console.log(loginState);
   const { userEmail, setUserEmail } = useContext(UserContext);
   //console.log(userEmail);
@@ -69,6 +72,7 @@ function App() {
         : "0px",
     transition: "all 0.5s ease",
   };
+  console.log(valshow);
   return (
     <BrowserRouter>
       <UserContextProvider>
@@ -119,7 +123,7 @@ function App() {
             <Route path="/matchedRoutes" element={<MatchedRoutes />} />
           </Routes>
           <Footer />
-          {windowSize <= 600 && valshow && <StatusBar />}
+          {windowSize <= 600 && <>{valshow && <StatusBar />}</>}
         </div>
       </UserContextProvider>
     </BrowserRouter>
