@@ -7,6 +7,7 @@ import axios from "axios";
 export default function UserSettings({ userData }) {
   const [fetchStatus, setFetchStatus] = useState(false);
   const data = JSON.parse(userData);
+  const emailForApi=data.email;
   const toast = useToast();
   var name = data.name.split(" ");
   const [displayData, setDisplayData] = useState({});
@@ -118,8 +119,8 @@ export default function UserSettings({ userData }) {
       console.log(editData);
       let dataRet;
       if (data.userType === "user")
-        dataRet = await axios.post("/editprofile/user", { editData });
-      else dataRet = await axios.post("/editprofile/user", { editData });
+        dataRet = await axios.post("/editprofile/user", { editData,emailForApi });
+      else dataRet = await axios.post("/editprofile/user", { editData, emailForApi });
       console.log(dataRet.data);
     }
   };
