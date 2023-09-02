@@ -51,7 +51,7 @@ const DriverNotFound = () => {
           <VStack spacing={4} mt={6}>
             <Button
               as={Link}
-              to="/userHomepage"
+              to="/"
               colorScheme="teal"
               size="md"
               width="100%"
@@ -61,7 +61,7 @@ const DriverNotFound = () => {
             </Button>
             <Button
               as={Link}
-              to="/routeUserRegistration" //not working giving state error
+              to="/userHomepage"
               colorScheme="gray"
               size="md"
               width="100%"

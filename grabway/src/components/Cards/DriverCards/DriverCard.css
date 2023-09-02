@@ -1,32 +1,24 @@
-/* Add this CSS to your stylesheets or components */
+/* DriverCard.css */
+
+.driver-card-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
 
 .responsive-card {
+  width: 300px; /* Set a fixed width for each card */
+  margin: 16px; /* Add margin for spacing between cards */
+  overflow: hidden; /* Hide any content that exceeds the fixed height */
+}
+
+.responsive-card > div {
+  height: 350px; /* Set a fixed height for each card */
   display: flex;
   flex-direction: column;
-  align-items: center; /* Center content on small screens */
-  text-align: center; /* Center text on small screens */
-  margin-bottom: 20px; /* Add some space between cards */
-}
-
-.responsive-card .card-content {
-  margin-top: 20px; /* Add space between image and content */
-}
-
-
-@media screen and (min-width: 768px) {
-  /* Apply this style for medium screens and above */
-  .responsive-card {
-    flex-direction: row;
-    align-items: flex-start;
-    text-align: left;
-    margin-top: 30px;
-  }
-
-  .responsive-card .card-content {
-    margin-top: 0;
-    margin-left: 20px;
-  }
-  /* .sideCardCss{
-    padding-top: 100%;
-  } */
+  justify-content: space-between;
+  padding: 16px;
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  background-color: white;
 }

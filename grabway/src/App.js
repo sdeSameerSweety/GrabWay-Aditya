@@ -40,9 +40,9 @@ function App() {
     setCookieVal(Cookies.get("grabwayUser"));
   });
 
-  useEffect(()=>{
+  useEffect(() => {
     if (cookieVal) setValShow(true);
-  })
+  });
   //console.log(loginState);
   const { userEmail, setUserEmail } = useContext(UserContext);
   //console.log(userEmail);

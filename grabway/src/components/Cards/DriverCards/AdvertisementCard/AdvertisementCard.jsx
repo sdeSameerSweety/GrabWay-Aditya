@@ -1,7 +1,7 @@
 import React, { useState, useRef, useEffect } from "react";
 import "./AdvertisementCard.css";
 
-export default function AdvertisementCard() {
+export default function SideCard() {
   const [xRotation, setXRotation] = useState(0);
   const [yRotation, setYRotation] = useState(0);
   const [cardData, setCardData] = useState({});
@@ -18,7 +18,7 @@ export default function AdvertisementCard() {
       image:
         "https://www.transparentpng.com/thumb/car-png/car-free-transparent-png-8.png",
       title: "Premimum Sedan",
-      description: "Description lops lorem",
+      description: "Description lops lorem de snato",
     };
     setCardData(backendResponse);
   }, []);
@@ -78,7 +78,7 @@ export default function AdvertisementCard() {
           className="badge"
           // style="font-family: cursive; background-color: gold; color: navy; padding: 5px 10px; border-radius: 3px;"
         >
-          Sponsored
+          Sponsored*
         </span>
         {/* <div className="main"> */}
 
@@ -94,13 +94,14 @@ export default function AdvertisementCard() {
         </h2>
         <p ref={descRef}>{cardData.description}</p>
         <ul className="sizes-box" ref={sizesboxRef}>
-          <li>38</li>
-          <li>40</li>
-          <li>42</li>
-          <li>44</li>
+          <p>Seats</p>
+          <li>1</li>
+          <li>2</li>
+          <li>3</li>
+          <li>4</li>
         </ul>
         <div className="button-box" ref={purchaseRef}>
-          <button className="purchase">Purchase</button>
+          <button className="purchase">Book Now</button>
         </div>
       </div>
     </>
