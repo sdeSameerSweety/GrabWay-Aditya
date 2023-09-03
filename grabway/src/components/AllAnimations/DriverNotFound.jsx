@@ -10,8 +10,10 @@ import {
   Flex,
   VStack,
 } from "@chakra-ui/react";
+import { useNavigate } from "react-router-dom";
 
 const DriverNotFound = () => {
+  const navigate = useNavigate();
   return (
     <Fade in={true}>
       <Flex
@@ -60,14 +62,14 @@ const DriverNotFound = () => {
               Return to Home
             </Button>
             <Button
-              as={Link}
-              to="/userHomepage"
+              // as={Link}
+              onClick={() => navigate(-1)}
               colorScheme="gray"
               size="md"
               width="100%"
               _hover={{ bg: "gray.300" }}
             >
-              Book Another Ride
+              Book Another Time
             </Button>
           </VStack>
         </Box>

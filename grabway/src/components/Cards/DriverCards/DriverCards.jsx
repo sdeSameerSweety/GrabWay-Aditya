@@ -19,8 +19,8 @@ const areTabsDisabled = true;
 
 const driverData = [
   {
-    driverName: "Kittu Singh",
-    email: "driver@gmail.com",
+    driverName: "Aditya",
+    email: "addymistrel@gmail.com",
     VehicleManufacturer: "Maruti Suzuki",
     VehicleModel: "Swift Dzire",
     plan: "Basic",
@@ -59,7 +59,6 @@ const driverData = [
     seats: 4,
   },
 ];
-// ... (previous code)
 
 function DriverCard() {
   return (
