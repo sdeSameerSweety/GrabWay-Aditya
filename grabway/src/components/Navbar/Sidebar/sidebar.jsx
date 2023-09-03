@@ -165,7 +165,7 @@ export default function Sidebar({
               </Link>
             </li>
             <li>
-              <Link to="/">
+              <Link to="/userPackages">
                 <div className="items-list-side">
                   <i
                     className={showState === true ? "bx bx-cart" : "hidden"}

@@ -28,6 +28,9 @@ const TopSection = ({ nonceVal, loginState }) => {
     if ((JSON.parse(userData)).name==='') {
       return <Navigate to={"/registration"} userType=""/>;
     }
+    if ((JSON.parse(userData)).userType==='user') {
+      return <Navigate to={"/"} userType=""/>;
+    }
   }
   const googleUserData=Cookies.get('grabwayGoogleToken');
   if(googleUserData){

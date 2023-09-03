@@ -25,6 +25,7 @@ import DriverRouteLocation from "./Pages/DriverRouteLocation/DriverRouteLocation
 import StatusBar from "./components/StausBar/StatusBar";
 import RouteUserRegisteration from "./Pages/RouteRegisteration/RouteUserRegistration";
 import MatchedRoutes from "./Pages/MatchedRoutes/MatchedRoutes";
+import UserPackages from "./Pages/UserPackages/UserPackages";
 axios.defaults.baseURL = "http://localhost:8080";
 axios.defaults.withCredentials = true;
 // import NearbyMap from "./components/Map/NearbyMap";
@@ -121,6 +122,7 @@ function App() {
               element={<RouteUserRegisteration />}
             />
             <Route path="/matchedRoutes" element={<MatchedRoutes />} />
+            <Route path="/userPackages" element={<UserPackages />} />
           </Routes>
           <Footer />
           {windowSize <= 600 && <>{valshow && <StatusBar />}</>}
