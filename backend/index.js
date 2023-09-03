@@ -779,12 +779,12 @@ app.post("/bookRoute", async (req, res) => {
         {
           $push: {
             routes: {
-              "origin.0.text": userOriginText,
-              "origin.0.lat": userOriginLat,
-              "origin.0.long": userOriginLong,
-              "destination.0.text": userDestinationText,
-              "destination.0.lat": userDestinationLat,
-              "destination.0.long": userDestinationLong,
+              "origin.text": userOriginText,
+              "origin.lat": userOriginLat,
+              "origin.long": userOriginLong,
+              "destination.text": userDestinationText,
+              "destination.lat": userDestinationLat,
+              "destination.long": userDestinationLong,
               "plan": plan,
               //driverEmail:driverEmail,
               //driverName:driverName,
