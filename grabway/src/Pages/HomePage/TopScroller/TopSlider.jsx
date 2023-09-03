@@ -16,17 +16,17 @@ export default function TopSlider() {
   const slides = [
     {
       image:
-        "https://static.vecteezy.com/system/resources/previews/007/523/317/non_2x/travaling-of-sport-roster-car-driving-on-tha-asphalt-road-path-sized-a-ocean-beach-with-sandy-beaches-and-a-background-of-island-under-a-blue-sky-illustrator-and-for-summer-posters-vector.jpg",
+        "https://img.freepik.com/free-vector/car-driving-road-along-night-beach-automobile_107791-15615.jpg?w=2000",
       text: "1. Drive, Earn, and Share the Ride with Grabway Carpooling!",
     },
     {
       image:
-        "https://img.freepik.com/premium-vector/big-semi-truck-trailer-driving-coutryside-road-nature-landscape-horizontal-banner_48369-13353.jpg?w=2000",
+        "https://img.freepik.com/free-vector/cartoon-city-street-with-cars-rainy-weather_107791-19455.jpg?w=2000",
       text: "2. Cut Costs, Connect, and Contribute: Grabway Carpooling!",
     },
     {
       image:
-        "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTAp-a2nDcV-73s-VEmgO85PvjZQGkwE6PSPA&usqp=CAU",
+        "https://img.freepik.com/free-vector/car-drive-city-street-rain-night_107791-19306.jpg?w=2000",
       text: "3. Carpooling Redefined: Grabway - Your Daily Solution!",
     },
   ];
@@ -97,7 +97,7 @@ export default function TopSlider() {
         <div className="buttons">
           <Button
             onClick={prevSlide}
-            bg={"whiteAlpha.300"}
+            bg={"whiteAlpha.400"}
             rounded={"full"}
             color={"white"}
             _hover={{ bg: "whiteAlpha.500" }}
@@ -111,7 +111,7 @@ export default function TopSlider() {
             bg={"red.500"}
             rounded={"full"}
             color={"white"}
-            _hover={{ bg: "green.500" }}
+            _hover={{ bg: "green.600" }}
             opacity={fadeIn ? 1 : 0}
             transition="opacity 0.3s ease-in-out"
           >
@@ -119,10 +119,10 @@ export default function TopSlider() {
           </Button>
           <Button
             onClick={nextSlide}
-            bg={"blue.400"}
+            bg={"whiteAlpha.400"}
             rounded={"full"}
             color={"white"}
-            _hover={{ bg: "blue.500" }}
+            _hover={{ bg: "whiteAlpha.600" }}
             opacity={fadeIn ? 1 : 0}
             transition="opacity 0.3s ease-in-out"
           >
