@@ -11,6 +11,7 @@ import "./TopSlider.css";
 
 export default function TopSlider() {
   const [slideIndex, setSlideIndex] = useState(0);
+  const [fadeIn, setFadeIn] = useState(true);
 
   const slides = [
     {
@@ -31,19 +32,27 @@ export default function TopSlider() {
   ];
 
   const nextSlide = () => {
-    setSlideIndex((prevIndex) => (prevIndex + 1) % slides.length);
+    setFadeIn(false);
+    setTimeout(() => {
+      setSlideIndex((prevIndex) => (prevIndex + 1) % slides.length);
+      setFadeIn(true);
+    }, 300); // Delay to change slide after fade-out animation
   };
 
   const prevSlide = () => {
-    setSlideIndex(
-      (prevIndex) => (prevIndex - 1 + slides.length) % slides.length
-    );
+    setFadeIn(false);
+    setTimeout(() => {
+      setSlideIndex(
+        (prevIndex) => (prevIndex - 1 + slides.length) % slides.length
+      );
+      setFadeIn(true);
+    }, 300); // Delay to change slide after fade-out animation
   };
 
   useEffect(() => {
     const interval = setInterval(() => {
       nextSlide();
-    }, 1000); //timer
+    }, 5000); // Auto-advance every 5 seconds
 
     return () => {
       clearInterval(interval);
@@ -55,8 +64,6 @@ export default function TopSlider() {
       <VStack
         w={"full"}
         justify={"center"}
-        // px={useBreakpointValue({ base: 2, md: 1 })}
-        // py={useBreakpointValue({ base: 2, md: 1 })}
         rounded="1.5rem"
         bg={"transparent"}
         position="relative"
@@ -71,6 +78,8 @@ export default function TopSlider() {
           w="100%"
           h="auto"
           objectFit={"fill"}
+          style={{ opacity: fadeIn ? 1 : 0 }}
+          transition="opacity 0.3s ease-in-out"
         />
         <div className="dark-overlay"></div>
         <Text
@@ -85,7 +94,7 @@ export default function TopSlider() {
         >
           {slides[slideIndex].text}
         </Text>
-        {/* <Button
+        <Button
           onClick={prevSlide}
           bg={"whiteAlpha.300"}
           rounded={"full"}
@@ -93,7 +102,10 @@ export default function TopSlider() {
           _hover={{ bg: "whiteAlpha.500" }}
           position="absolute"
           bottom="1rem"
-          right="1rem"
+          left="1rem"
+          transform="translateX(-50%)"
+          opacity={fadeIn ? 1 : 0}
+          transition="opacity 0.3s ease-in-out"
         >
           Previous
         </Button>
@@ -105,10 +117,13 @@ export default function TopSlider() {
           _hover={{ bg: "blue.500" }}
           position="absolute"
           bottom="1rem"
-          right="6rem"
+          left="8rem"
+          transform="translateX(-50%)"
+          opacity={fadeIn ? 1 : 0}
+          transition="opacity 0.3s ease-in-out"
         >
           Next
-        </Button> */}
+        </Button>
         <Button
           onClick={null} // Driver click to signup
           bg={"red.500"}
@@ -117,9 +132,10 @@ export default function TopSlider() {
           _hover={{ bg: "green.500" }}
           position="absolute"
           bottom="1rem"
-          left="13%"
+          left="15rem"
           transform="translateX(-50%)"
-          shadow={2}
+          opacity={fadeIn ? 1 : 0}
+          transition="opacity 0.3s ease-in-out"
         >
           Join Now
         </Button>

@@ -34,7 +34,7 @@ function DriverCard(props) {
 
   return (
     <Box p={8} borderRadius="md" boxShadow="lg" bg="white">
-      <Tabs defaultIndex={1} colorScheme="blue" isLazy={areTabsDisabled}>
+      <Tabs defaultIndex={0} colorScheme="blue" isLazy={areTabsDisabled}>
         <TabList justifyContent="center" borderBottomWidth="1px" pb={2}>
           {sections.map((section, index) => (
             <Tab key={index} isDisabled={index > 0 && areTabsDisabled}>
