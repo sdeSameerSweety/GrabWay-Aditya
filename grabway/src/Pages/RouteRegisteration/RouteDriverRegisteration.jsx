@@ -38,7 +38,7 @@ const RouteDriverRegisteration = () => {
   const [destinationEndTime, setDestinationEndTime] = useState(null);
   const [seats, setSeats] = useState(null);
   const googleUserData = Cookies.get("grabwayGoogleToken");
-  const userData = Cookies.get("grabwayUser");
+  const userData = localStorage.getItem("grabwayUser");
   const [originTimeError, setOriginTimeError] = useState("");
   const [destinationTimeError, setDestinationTimeError] = useState("");
 
@@ -169,7 +169,7 @@ const RouteDriverRegisteration = () => {
 
   useEffect(() => {
     if (userData !== undefined && !email) {
-      setEmail(JSON.parse(Cookies.get("grabwayUser")).email);
+      setEmail(JSON.parse(localStorage.getItem("grabwayUser")).email);
     }
   }, [userData, email]);
 

@@ -34,10 +34,10 @@ function App() {
   const [windowSize, setWindowSize] = useState(window.innerWidth);
   const [loginState, setLoginState] = useState(false);
   const [nonce, setNonce] = useState("grabway@123");
-  const [cookieVal, setCookieVal] = useState(Cookies.get("grabwayUser"));
+  const [cookieVal, setCookieVal] = useState(localStorage.getItem('grabwayUser'));
   const [valshow, setValShow] = useState(false);
   useEffect(() => {
-    setCookieVal(Cookies.get("grabwayUser"));
+    setCookieVal(localStorage.getItem('grabwayUser'));
   });
 
   useEffect(() => {

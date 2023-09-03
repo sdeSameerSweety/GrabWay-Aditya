@@ -32,7 +32,7 @@ const MatchedRoutes = () => {
   if (location.state === null) {
     return <Navigate to="/" />;
   }
-  const userData = Cookies.get("grabwayUser");
+  const userData = localStorage.getItem("grabwayUser");
   const googleUserData = Cookies.get("grabwayGoogleToken");
   if (userData !== undefined) {
     if (JSON.parse(userData).name === "") {

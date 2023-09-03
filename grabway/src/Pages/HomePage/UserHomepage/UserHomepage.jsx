@@ -190,7 +190,7 @@ const TopSection = ({ nonceVal, loginState }) => {
       getgeoCode(destinationMob.current.value, "Destination");
     }
   };
-  const userData = Cookies.get("grabwayUser");
+  const userData = localStorage.getItem("grabwayUser");
   if (userData) {
     if ((JSON.parse(userData)).name==='') {
       return <Navigate to={"/registration"} userType=""/>;

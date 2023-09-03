@@ -19,7 +19,7 @@ const sections = ["Essential Commuter", "Comfort Traveler", "Premier Business"];
 const areTabsDisabled = true;
 
 function DriverCard(props) {
-  const userData=Cookies.get('grabwayUser');
+  const userData=localStorage.getItem("grabwayUser");
   const matchDriverRoute=props.matchDriverRoute;
   const UserQuery=props.UserQuery;
   //console.log(matchDriverRoute);

@@ -83,7 +83,7 @@ const TopBar = ({ counter, setCounter, setLoginState, loginState }) => {
   console.log(profilePhoto);
 
   useEffect(() => {
-    const UserData = Cookies.get("grabwayUser");
+    const UserData = localStorage.getItem("grabwayUser");
     if (UserData) {
       if (JSON.parse(UserData).name !== "") {
         setCity(JSON.parse(UserData).address[0].city);

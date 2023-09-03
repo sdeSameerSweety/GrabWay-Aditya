@@ -5,7 +5,7 @@ import DriverRegistration from "./DriverRegistration/DriverRegistration";
 import UserRegistration from "./UserRegistration/UserRegistration";
 
 const Registration = (props) => {
-  const userData = Cookies.get("grabwayUser");
+  const userData = localStorage.getItem("grabwayUser");
   const googleUserData=Cookies.get('grabwayGoogleToken');
   const googleUserType=props.userType;
   if (!userData) {

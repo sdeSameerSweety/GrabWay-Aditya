@@ -11,7 +11,7 @@ import {
 } from "@chakra-ui/react";
 import Cookies from "js-cookie";
 const TopSection = ({ nonceVal, loginState }) => {
-  const userData = Cookies.get("grabwayUser");
+  const userData = localStorage.getItem("grabwayUser");
   const [routes, setRoutes]=useState(null);
   const [routesEmpty,setRoutesEmpty]=useState(false);
   useEffect(()=>{
