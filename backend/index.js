@@ -732,6 +732,17 @@ app.post('/moreDetailsForMatchRoutes',async(req,res)=>{
  
 })
 
+
+app.post('/bookRoute', async(req,res)=>{
+  const matchDriverRoute=req.body.matchDriverRoute;
+  const userData=req.body.userDetails;
+  console.log(matchDriverRoute);
+  console.log(userData);
+
+})
+
+
+
 maxAge = 24 * 60 * 60;
 
 app.post("/profiledata", async (req, res) => {
