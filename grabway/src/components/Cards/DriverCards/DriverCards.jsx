@@ -18,21 +18,23 @@ import axios from "axios";
 const sections = ["Essential Commuter", "Comfort Traveler", "Premier Business"];
 const areTabsDisabled = true;
 
-
-
 function DriverCard(props) {
-  const matchDriverRoute=props.matchDriverRoute;
+  const matchDriverRoute = props.matchDriverRoute;
   //console.log(matchDriverRoute);
-  
-  async function handleMoreDetails(index){
-    const response=await axios.post('/moreDetailsForMatchRoutes',{matchDriverRoute:matchDriverRoute[index]}).then(()=>{
-      console.log('data sent');
-    })
+
+  async function handleMoreDetails(index) {
+    const response = await axios
+      .post("/moreDetailsForMatchRoutes", {
+        matchDriverRoute: matchDriverRoute[index],
+      })
+      .then(() => {
+        console.log("data sent");
+      });
   }
 
   return (
     <Box p={8} borderRadius="md" boxShadow="lg" bg="white">
-      <Tabs defaultIndex={0} colorScheme="blue" isLazy={areTabsDisabled}>
+      <Tabs defaultIndex={1} colorScheme="blue" isLazy={areTabsDisabled}>
         <TabList justifyContent="center" borderBottomWidth="1px" pb={2}>
           {sections.map((section, index) => (
             <Tab key={index} isDisabled={index > 0 && areTabsDisabled}>
@@ -54,7 +56,7 @@ function DriverCard(props) {
                     p={4}
                     m={2}
                     textAlign="center"
-                    width="300px" // Set a fixed width for each card
+                    width="300px"
                     position="relative"
                   >
                     <Image
@@ -77,9 +79,13 @@ function DriverCard(props) {
                     <Button colorScheme="blue" mt={2} mr={2}>
                       Book Now
                     </Button>
-                    <Button colorScheme="gray" mt={2} onClick={()=>{
-                      handleMoreDetails(driverIndex);
-                    }}>
+                    <Button
+                      colorScheme="gray"
+                      mt={2}
+                      onClick={() => {
+                        handleMoreDetails(driverIndex);
+                      }}
+                    >
                       More Details
                     </Button>
                   </Box>
