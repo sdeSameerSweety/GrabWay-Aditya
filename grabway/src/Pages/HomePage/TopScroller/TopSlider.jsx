@@ -36,7 +36,7 @@ export default function TopSlider() {
     setTimeout(() => {
       setSlideIndex((prevIndex) => (prevIndex + 1) % slides.length);
       setFadeIn(true);
-    }, 300); // Delay to change slide after fade-out animation
+    }, 200); // Delay to change slide after fade-out animation
   };
 
   const prevSlide = () => {
@@ -46,7 +46,7 @@ export default function TopSlider() {
         (prevIndex) => (prevIndex - 1 + slides.length) % slides.length
       );
       setFadeIn(true);
-    }, 300); // Delay to change slide after fade-out animation
+    }, 200); // Delay to change slide after fade-out animation
   };
 
   useEffect(() => {
@@ -94,51 +94,41 @@ export default function TopSlider() {
         >
           {slides[slideIndex].text}
         </Text>
-        <Button
-          onClick={prevSlide}
-          bg={"whiteAlpha.300"}
-          rounded={"full"}
-          color={"white"}
-          _hover={{ bg: "whiteAlpha.500" }}
-          position="absolute"
-          bottom="1rem"
-          left="1rem"
-          transform="translateX(-50%)"
-          opacity={fadeIn ? 1 : 0}
-          transition="opacity 0.3s ease-in-out"
-        >
-          Previous
-        </Button>
-        <Button
-          onClick={nextSlide}
-          bg={"blue.400"}
-          rounded={"full"}
-          color={"white"}
-          _hover={{ bg: "blue.500" }}
-          position="absolute"
-          bottom="1rem"
-          left="8rem"
-          transform="translateX(-50%)"
-          opacity={fadeIn ? 1 : 0}
-          transition="opacity 0.3s ease-in-out"
-        >
-          Next
-        </Button>
-        <Button
-          onClick={null} // Driver click to signup
-          bg={"red.500"}
-          rounded={"full"}
-          color={"white"}
-          _hover={{ bg: "green.500" }}
-          position="absolute"
-          bottom="1rem"
-          left="15rem"
-          transform="translateX(-50%)"
-          opacity={fadeIn ? 1 : 0}
-          transition="opacity 0.3s ease-in-out"
-        >
-          Join Now
-        </Button>
+        <div className="buttons">
+          <Button
+            onClick={prevSlide}
+            bg={"whiteAlpha.300"}
+            rounded={"full"}
+            color={"white"}
+            _hover={{ bg: "whiteAlpha.500" }}
+            opacity={fadeIn ? 1 : 0}
+            transition="opacity 0.3s ease-in-out"
+          >
+            Previous
+          </Button>
+          <Button
+            onClick={null} // Driver click to signup
+            bg={"red.500"}
+            rounded={"full"}
+            color={"white"}
+            _hover={{ bg: "green.500" }}
+            opacity={fadeIn ? 1 : 0}
+            transition="opacity 0.3s ease-in-out"
+          >
+            Join Now
+          </Button>
+          <Button
+            onClick={nextSlide}
+            bg={"blue.400"}
+            rounded={"full"}
+            color={"white"}
+            _hover={{ bg: "blue.500" }}
+            opacity={fadeIn ? 1 : 0}
+            transition="opacity 0.3s ease-in-out"
+          >
+            Next
+          </Button>
+        </div>
       </VStack>
     </Flex>
   );
