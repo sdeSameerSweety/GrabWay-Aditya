@@ -67,7 +67,7 @@ const MatchedRoutes = () => {
       )}
       {matchedRoutes !== null && matchedRoutes !== "empty" && (
         <>
-          <DriverCard />
+          <DriverCard matchDriverRoute={matchedRoutes} />
         </>
       )}
     </>
