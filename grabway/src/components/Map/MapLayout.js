@@ -20,7 +20,7 @@ const containerStyle = {
 
 function MyComponent({ nonceVal }, { route, state }) {
   const navigate = useNavigate();
-  const usData = JSON.parse(Cookies.get("grabwayUser"));
+  const usData = JSON.parse(localStorage.getItem('grabwayUser'));
   console.log(usData);
   const location = useLocation();
   const toast = useToast();

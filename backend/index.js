@@ -718,6 +718,9 @@ app.post("/moreDetailsForMatchRoutes", async (req, res) => {
         res.status(500).json("Didnt find Driver in Database");
       }
     }
+    else{
+      res.status(500).json("Didn't get data")
+    }
   } catch (err) {
     console.log(err);
     res.status(200).json("Error caught in catch block");
@@ -740,9 +743,10 @@ app.post("/bookRoute", async (req, res) => {
   const userDestinationLong = userQuery.destinationLong;
   const userOriginTime = userQuery.originStartTime;
   const userDestinationTime = userQuery.destinationStartTime;
-  const plan =matchDriverRoute.plan;
-  const amount=2000;//make it dynamic
-  const paymentMethod='cash';//make it dyanmic
+  const plan = matchDriverRoute.plan;
+  const driverName=matchDriverRoute.name;
+  const amount = 2000; //make it dynamic
+  const paymentMethod = "cash"; //make it dyanmic
   try {
     if (driverEmail && userEmail && userQuery) {
       const DriverModificationResponse = await DriverModel.updateOne(
@@ -768,6 +772,27 @@ app.post("/bookRoute", async (req, res) => {
           },
         }
       );
+      const UserModificationResponse = await UserModel.updateOne(
+        {
+          email: userEmail,
+        },
+        {
+          $push: {
+            routes: {
+              "origin.0.text": userOriginText,
+              "origin.0.lat": userOriginLat,
+              "origin.0.long": userOriginLong,
+              "destination.0.text": userDestinationText,
+              "destination.0.lat": userDestinationLat,
+              "destination.0.long": userDestinationLong,
+              "plan": plan,
+              //driverEmail:driverEmail,
+              //driverName:driverName,
+              //routeId:RouteId
+            },
+          },
+        }
+      );
       const OrderCreationResponse = await OrderModel.create({
         driverEmail: driverEmail,
         userEmail: userEmail,
@@ -775,14 +800,18 @@ app.post("/bookRoute", async (req, res) => {
         amount: amount,
         paymentMethod: paymentMethod,
       });
-      if ( OrderCreationResponse &&  DriverModificationResponse) {
+      if (OrderCreationResponse && DriverModificationResponse && UserModificationResponse) {
         res.status(200).json({
-          DriverAddtitionResponse:DriverModificationResponse,
-          OrderCreationResponse:OrderCreationResponse
+          DriverAddtitionResponse: DriverModificationResponse,
+          OrderCreationResponse: OrderCreationResponse,
+          UserModificationResponse:UserModificationResponse
         });
       } else {
         res.status(500).json("Problem in if else");
       }
+    }
+    else{
+      res.status(500).json("Didn't get data")
     }
   } catch (err) {
     console.log(err);

@@ -20,9 +20,9 @@ export function UserContextProvider({ children }) {
         if (data !== null) {
           if ("profilePicture" in data) setProfilePhoto(data.profilePicture);
           if (delete data.profilePicture)
-            Cookies.set("grabwayUser", JSON.stringify(data), { expires: 7 });
-          else Cookies.set("grabwayUser", JSON.stringify(data), { expires: 7 });
-        } else Cookies.set("grabwayUser", JSON.stringify(data), { expires: 7 });
+            localStorage.setItem("grabwayUser", JSON.stringify(data), { expires: 7 });
+          else localStorage.setItem("grabwayUser", JSON.stringify(data), { expires: 7 });
+        } else localStorage.setItem("grabwayUser", JSON.stringify(data), { expires: 7 });
         setUserEmail(res.data);
       });
     }
@@ -40,9 +40,9 @@ export function UserContextProvider({ children }) {
         if (data !== null) {
           if ("profilePicture" in data) setProfilePhoto(data.profilePicture);
           if (delete data.profilePicture)
-            Cookies.set("grabwayUser", JSON.stringify(data), { expires: 7 });
-          else Cookies.set("grabwayUser", JSON.stringify(data), { expires: 7 });
-        } else Cookies.set("grabwayUser", JSON.stringify(data), { expires: 7 });
+            localStorage.setItem("grabwayUser", JSON.stringify(data), { expires: 7 });
+          else localStorage.setItem("grabwayUser", JSON.stringify(data), { expires: 7 });
+        } else localStorage.setItem("grabwayUser", JSON.stringify(data), { expires: 7 });
         setUserEmail(res.data);
       });
     }

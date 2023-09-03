@@ -209,10 +209,10 @@ const TopSection = ({ nonceVal, loginState }) => {
     }
     */
   };
-  const [userData, setUserData] = useState(Cookies.get("grabwayUser"));
+  const [userData, setUserData] = useState(localStorage.getItem("grabwayUser"));
   useEffect(() => {
-    setUserData(Cookies.get("grabwayUser"));
-  }, [Cookies.get("grabwayUser")]);
+    setUserData(localStorage.getItem("grabwayUser"));
+  }, [localStorage.getItem("grabwayUser")]);
   if (userData) {
     if (JSON.parse(userData).name === "") {
       return <Navigate to={"/registration"} userType="" />;

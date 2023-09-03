@@ -26,6 +26,9 @@ export default function Sidebar({
   const {userEmail,setUserEmail,setRunContext}= useContext(UserContext);
   const handleSignout = () => {
     console.log("Signout Successfull");
+    localStorage.removeItem('grabwayToken');
+    localStorage.removeItem('grabwayUser');
+    localStorage.removeItem('grabwayGoogleToken');
     Cookies.remove('grabwayToken');
     Cookies.remove('grabwayUser');
     Cookies.remove('grabwayGoogleToken');
@@ -77,9 +80,9 @@ export default function Sidebar({
   }
   const [name,setName]=useState("Hello !");
   const [userType,setUserType]=useState('Customer');
-  const userData = Cookies.get("grabwayUser");
+  const userData = localStorage.getItem('grabwayUser');
   useEffect(()=>{
-    if (userData !== undefined) {
+    if (userData) {
       if ((JSON.parse(userData)).name!=='') {
         setName(`${(JSON.parse(userData)).name}`)
         setUserType(`${(JSON.parse(userData)).userType}`);
@@ -162,7 +165,7 @@ export default function Sidebar({
               </Link>
             </li>
             <li>
-              <Link to="/">
+              <Link to="/userPackages">
                 <div className="items-list-side">
                   <i
                     className={showState === true ? "bx bx-cart" : "hidden"}

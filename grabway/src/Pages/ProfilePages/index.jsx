@@ -13,7 +13,7 @@ export default function Settings() {
   const { profilePhoto } = useContext(UserContext);
   const googleUserData = Cookies.get("grabwayGoogleToken");
 
-  const userData = Cookies.get("grabwayUser");
+  const userData = localStorage.getItem("grabwayUser");
   if (userData !== undefined) {
     if (JSON.parse(userData).name === "") {
       return <Navigate to={"/registration"} userType="" />;

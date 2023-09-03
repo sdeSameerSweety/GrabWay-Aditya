@@ -23,7 +23,7 @@ import imageCompression from "browser-image-compression";
 
 const UserRegistration = () => {
   const { setRunContext } = useContext(UserContext);
-  const userData = Cookies.get("grabwayUser");
+  const userData = localStorage.getItem("grabwayUser");
   const hasUserData = userData !== undefined;
   //console.log(userData);
   const [tmpPin, setTmpPin] = useState("");

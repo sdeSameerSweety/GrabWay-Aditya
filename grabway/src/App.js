@@ -25,6 +25,7 @@ import DriverRouteLocation from "./Pages/DriverRouteLocation/DriverRouteLocation
 import StatusBar from "./components/StausBar/StatusBar";
 import RouteUserRegisteration from "./Pages/RouteRegisteration/RouteUserRegistration";
 import MatchedRoutes from "./Pages/MatchedRoutes/MatchedRoutes";
+import UserPackages from "./Pages/UserPackages/UserPackages";
 axios.defaults.baseURL = "http://localhost:8080";
 axios.defaults.withCredentials = true;
 // import NearbyMap from "./components/Map/NearbyMap";
@@ -34,10 +35,10 @@ function App() {
   const [windowSize, setWindowSize] = useState(window.innerWidth);
   const [loginState, setLoginState] = useState(false);
   const [nonce, setNonce] = useState("grabway@123");
-  const [cookieVal, setCookieVal] = useState(Cookies.get("grabwayUser"));
+  const [cookieVal, setCookieVal] = useState(localStorage.getItem('grabwayUser'));
   const [valshow, setValShow] = useState(false);
   useEffect(() => {
-    setCookieVal(Cookies.get("grabwayUser"));
+    setCookieVal(localStorage.getItem('grabwayUser'));
   });
 
   useEffect(() => {
@@ -121,6 +122,7 @@ function App() {
               element={<RouteUserRegisteration />}
             />
             <Route path="/matchedRoutes" element={<MatchedRoutes />} />
+            <Route path="/userPackages" element={<UserPackages />} />
           </Routes>
           <Footer />
           {windowSize <= 600 && <>{valshow && <StatusBar />}</>}

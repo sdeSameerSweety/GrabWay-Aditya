@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from "react";
 import { Navigate, Link } from "react-router-dom";
-import "./DriverHomePage.css";
+import "../HomePage/DriverHomepage/DriverHomePage";
 import {
   Card,
   CardHeader,
@@ -10,7 +10,7 @@ import {
   Button,
 } from "@chakra-ui/react";
 import Cookies from "js-cookie";
-const TopSection = ({ nonceVal, loginState }) => {
+const UserPackages = ({ nonceVal, loginState }) => {
   const userData = localStorage.getItem("grabwayUser");
   const [routes, setRoutes]=useState(null);
   const [routesEmpty,setRoutesEmpty]=useState(false);
@@ -28,7 +28,7 @@ const TopSection = ({ nonceVal, loginState }) => {
     if ((JSON.parse(userData)).name==='') {
       return <Navigate to={"/registration"} userType=""/>;
     }
-    if ((JSON.parse(userData)).userType==='user') {
+    if ((JSON.parse(userData)).userType==='driver') {
       return <Navigate to={"/"} userType=""/>;
     }
   }
@@ -49,10 +49,10 @@ const TopSection = ({ nonceVal, loginState }) => {
           </div>
           <div className="flex flex-col justify-center items-center">
             <div className="animated-text">
-                Welcome,<br/> Lets Begin with adding your Routes
+                Greetings,<br/> The Routes You Enroll in will be shown here<br/>Happy Ridding xD
             </div>
             <div className="flex justify-center items-center ">
-              <Link to='/routeDriverLocation'><Button
+              <Link to='/userHomepage'><Button
                 colorScheme="red"
                 sx={{
                   bgColor: "#E51B23",
@@ -74,7 +74,7 @@ const TopSection = ({ nonceVal, loginState }) => {
         {!routesEmpty && <><div className="flex justify-center items-center flex-row m-5">
           <div className="flex justify-center items-center flex-col mt-5 ">
             <div className="flex justify-center items-center mb-10">
-              <Link to='/routeDriverLocation'><Button
+              <Link to='/userHomepage'><Button
                 colorScheme="red"
                 sx={{
                   bgColor: "#E51B23",
@@ -99,13 +99,13 @@ const TopSection = ({ nonceVal, loginState }) => {
                             >
                               <CardHeader>
                                 <Heading size="md">
-                                  <div className="flex flex-col gap-3">
+                                  <div className="flex flex-col gap-10">
                                     <div>
                                       <div className="text-sm font-ubuntu text-[#0000006c]">
                                         FROM:
                                       </div>
                                       <div className="text-[black]">
-                                        {element.origin[0].text}
+                                        {element.origin.text}
                                       </div>
                                     </div>
                                     <div>
@@ -113,35 +113,15 @@ const TopSection = ({ nonceVal, loginState }) => {
                                         TO:
                                       </div>
                                       <div className="text-[black]">
-                                        {element.destination[0].text}
+                                        {element.destination.text}
                                       </div>
                                     </div>
-                                    <div>
-                                    <div className="text-sm font-ubuntu text-[#0000006c]">
-                                        TIMING:
-                                      </div>
-                                      <div className="text-[black]">
-                                        {element.originTime[0].start} - {element.destinationTime[0].start}
-                                      </div>
-                                    </div>
+                                    
                                   </div>
                                 </Heading>
                               </CardHeader>
                               <CardBody>
-                                <div className="flex justify-between items-center">
-                                  <div className="text-sm">
-                                    Total Seats -{" "}
-                                    <span className="text-lg text-[#E51B23]">
-                                      {element.seats}
-                                    </span>
-                                  </div>
-                                  <div className="text-sm">
-                                    Available -{" "}
-                                    <span className="text-lg text-[#3bb34d]">
-                                      {element.seats - element.customers.length}
-                                    </span>
-                                  </div>
-                                </div>
+                                
                               </CardBody>
                               <CardFooter>
                                 <Button>View More Details</Button>
@@ -174,13 +154,13 @@ const TopSection = ({ nonceVal, loginState }) => {
                             >
                               <CardHeader>
                                 <Heading size="md">
-                                  <div className="flex flex-col gap-3">
+                                  <div className="flex flex-col gap-10">
                                     <div>
                                       <div className="text-sm font-ubuntu text-[#0000006c]">
                                         FROM:
                                       </div>
                                       <div className="text-[black]">
-                                        {element.origin[0].text}
+                                        {element.origin.text}
                                       </div>
                                     </div>
                                     <div>
@@ -188,35 +168,15 @@ const TopSection = ({ nonceVal, loginState }) => {
                                         TO:
                                       </div>
                                       <div className="text-[black]">
-                                        {element.destination[0].text}
+                                        {element.destination.text}
                                       </div>
                                     </div>
-                                    <div>
-                                    <div className="text-sm font-ubuntu text-[#0000006c]">
-                                        TIMING:
-                                      </div>
-                                      <div className="text-[black]">
-                                        {element.originTime[0].start} - {element.destinationTime[0].start}
-                                      </div>
-                                    </div>
+                                    
                                   </div>
                                 </Heading>
                               </CardHeader>
                               <CardBody>
-                                <div className="flex justify-between items-center">
-                                  <div className="text-sm">
-                                    Total Seats -{" "}
-                                    <span className="text-lg text-[#E51B23]">
-                                      {element.seats}
-                                    </span>
-                                  </div>
-                                  <div className="text-sm">
-                                    Available -{" "}
-                                    <span className="text-lg text-[#3bb34d]">
-                                      {element.seats - element.customers.length}
-                                    </span>
-                                  </div>
-                                </div>
+                                
                               </CardBody>
                               <CardFooter>
                                 <Button>View More Details</Button>
@@ -244,7 +204,7 @@ const TopSection = ({ nonceVal, loginState }) => {
                 Welcome,<br/> Lets Begin with adding your Routes
             </div>
             <div className="flex justify-center items-center ">
-              <Link to='/routeDriverLocation'><Button
+              <Link to='/userHomepage'><Button
                 colorScheme="red"
                 sx={{
                   bgColor: "#E51B23",
@@ -266,7 +226,7 @@ const TopSection = ({ nonceVal, loginState }) => {
         {!routesEmpty && <><div className="flex justify-center items-center flex-row m-5">
           <div className="flex justify-center items-center flex-col mt-5 ">
             <div className="flex justify-center items-center mb-10">
-              <Link to='/routeDriverLocation'><Button
+              <Link to='/userHomepage'><Button
              
                 colorScheme="red"
                 sx={{
@@ -292,13 +252,13 @@ const TopSection = ({ nonceVal, loginState }) => {
                             >
                               <CardHeader>
                                 <Heading size="md">
-                                  <div className="flex flex-col gap-3">
+                                  <div className="flex flex-col gap-10">
                                     <div>
                                       <div className="text-sm font-ubuntu text-[#0000006c]">
                                         FROM:
                                       </div>
                                       <div className="text-[black]">
-                                        {element.origin[0].text}
+                                        {element.origin.text}
                                       </div>
                                     </div>
                                     <div>
@@ -306,35 +266,15 @@ const TopSection = ({ nonceVal, loginState }) => {
                                         TO:
                                       </div>
                                       <div className="text-[black]">
-                                        {element.destination[0].text}
+                                        {element.destination.text}
                                       </div>
                                     </div>
-                                    <div>
-                                    <div className="text-sm font-ubuntu text-[#0000006c]">
-                                        TIMING:
-                                      </div>
-                                      <div className="text-[black]">
-                                        {element.originTime[0].start} - {element.destinationTime[0].start}
-                                      </div>
-                                    </div>
+                                    
                                   </div>
                                 </Heading>
                               </CardHeader>
                               <CardBody>
-                                <div className="flex justify-between items-center">
-                                  <div className="text-sm">
-                                    Total Seats -{" "}
-                                    <span className="text-lg text-[#E51B23]">
-                                      {element.seats}
-                                    </span>
-                                  </div>
-                                  <div className="text-sm">
-                                    Available -{" "}
-                                    <span className="text-lg text-[#3bb34d]">
-                                      {element.seats - element.customers.length}
-                                    </span>
-                                  </div>
-                                </div>
+                      
                               </CardBody>
                               <CardFooter>
                                 <Button>View More Details</Button>
@@ -360,13 +300,13 @@ const TopSection = ({ nonceVal, loginState }) => {
                             >
                               <CardHeader>
                                 <Heading size="md">
-                                  <div className="flex flex-col gap-3">
+                                  <div className="flex flex-col gap-10">
                                     <div>
                                       <div className="text-sm font-ubuntu text-[#0000006c]">
                                         FROM:
                                       </div>
                                       <div className="text-[black]">
-                                        {element.origin[0].text}
+                                        {element.origin.text}
                                       </div>
                                     </div>
                                     <div>
@@ -374,35 +314,15 @@ const TopSection = ({ nonceVal, loginState }) => {
                                         TO:
                                       </div>
                                       <div className="text-[black]">
-                                        {element.destination[0].text}
+                                        {element.destination.text}
                                       </div>
                                     </div>
-                                    <div>
-                                    <div className="text-sm font-ubuntu text-[#0000006c]">
-                                        TIMING:
-                                      </div>
-                                      <div className="text-[black]">
-                                        {element.originTime[0].start} - {element.destinationTime[0].start}
-                                      </div>
-                                    </div>
+                                    
                                   </div>
                                 </Heading>
                               </CardHeader>
                               <CardBody>
-                                <div className="flex justify-between items-center">
-                                  <div className="text-sm">
-                                    Total Seats -{" "}
-                                    <span className="text-lg text-[#E51B23]">
-                                      {element.seats}
-                                    </span>
-                                  </div>
-                                  <div className="text-sm">
-                                    Available -{" "}
-                                    <span className="text-lg text-[#3bb34d]">
-                                      {element.seats - element.customers.length}
-                                    </span>
-                                  </div>
-                                </div>
+                                
                               </CardBody>
                               <CardFooter>
                                 <Button>View More Details</Button>
@@ -428,4 +348,4 @@ const TopSection = ({ nonceVal, loginState }) => {
     </>
   );
 };
-export default TopSection;
+export default UserPackages;
