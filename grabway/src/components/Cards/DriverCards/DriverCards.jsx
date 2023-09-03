@@ -23,11 +23,12 @@ const areTabsDisabled = true;
 function DriverCard(props) {
   const userData=Cookies.get('grabwayUser');
   const matchDriverRoute=props.matchDriverRoute;
+  const UserQuery=props.UserQuery;
   //console.log(matchDriverRoute);
   
   async function handleBookNow(index){
     console.log('book now');
-    const response=await axios.post("/bookRoute",{matchDriverRoute:matchDriverRoute[index], userDetails:JSON.parse(userData)}).then(()=>{
+    const response=await axios.post("/bookRoute",{matchDriverRoute:matchDriverRoute[index], userDetails:JSON.parse(userData),UserQuery:{UserQuery}}).then(()=>{
       console.log('data sent');
     })
   }

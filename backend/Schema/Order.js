@@ -2,6 +2,11 @@
 const mongoose = require('mongoose');
 
 const OrderSchema = new mongoose.Schema({
+    driverEmail:{type:String},
+    userEmail:{type:String},
+    plan:{type:String},
+    amount:{type:Number},
+    paymentMethod:{type:String},
     
 });
 
