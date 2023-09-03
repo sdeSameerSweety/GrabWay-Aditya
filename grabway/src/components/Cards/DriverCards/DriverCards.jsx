@@ -18,16 +18,18 @@ import axios from "axios";
 const sections = ["Essential Commuter", "Comfort Traveler", "Premier Business"];
 const areTabsDisabled = true;
 
-
-
 function DriverCard(props) {
-  const matchDriverRoute=props.matchDriverRoute;
+  const matchDriverRoute = props.matchDriverRoute;
   //console.log(matchDriverRoute);
-  
-  async function handleMoreDetails(index){
-    const response=await axios.post('/moreDetailsForMatchRoutes',{matchDriverRoute:matchDriverRoute[index]}).then(()=>{
-      console.log('data sent');
-    })
+
+  async function handleMoreDetails(index) {
+    const response = await axios
+      .post("/moreDetailsForMatchRoutes", {
+        matchDriverRoute: matchDriverRoute[index],
+      })
+      .then(() => {
+        console.log("data sent");
+      });
   }
 
   return (
@@ -77,9 +79,13 @@ function DriverCard(props) {
                     <Button colorScheme="blue" mt={2} mr={2}>
                       Book Now
                     </Button>
-                    <Button colorScheme="gray" mt={2} onClick={()=>{
-                      handleMoreDetails(driverIndex);
-                    }}>
+                    <Button
+                      colorScheme="gray"
+                      mt={2}
+                      onClick={() => {
+                        handleMoreDetails(driverIndex);
+                      }}
+                    >
                       More Details
                     </Button>
                   </Box>
