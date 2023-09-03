@@ -34,7 +34,7 @@ function DriverCard(props) {
 
   return (
     <Box p={8} borderRadius="md" boxShadow="lg" bg="white">
-      <Tabs defaultIndex={0} colorScheme="blue" isLazy={areTabsDisabled}>
+      <Tabs defaultIndex={1} colorScheme="blue" isLazy={areTabsDisabled}>
         <TabList justifyContent="center" borderBottomWidth="1px" pb={2}>
           {sections.map((section, index) => (
             <Tab key={index} isDisabled={index > 0 && areTabsDisabled}>
@@ -56,7 +56,7 @@ function DriverCard(props) {
                     p={4}
                     m={2}
                     textAlign="center"
-                    width="300px" // Set a fixed width for each card
+                    width="300px"
                     position="relative"
                   >
                     <Image
