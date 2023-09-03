@@ -42,16 +42,6 @@ const RouteUserRegisteration = () => {
   const [originTimeError, setOriginTimeError] = useState("");
   const [destinationTimeError, setDestinationTimeError] = useState("");
   const [search, setSearch] = useState(false);
-  var counter = 1;
-  const handleScroll = () => {
-    const element = document.getElementById("form-div");
-    if (element) {
-      // 👇 Will scroll smoothly to the top of the next section
-      element.scrollIntoView({ behavior: "smooth" });
-    }
-  };
-
-  handleScroll();
 
   if (location === null) {
     navigate("/");

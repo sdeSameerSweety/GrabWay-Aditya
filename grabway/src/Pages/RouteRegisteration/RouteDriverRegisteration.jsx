@@ -41,15 +41,6 @@ const RouteDriverRegisteration = () => {
   const userData = Cookies.get("grabwayUser");
   const [originTimeError, setOriginTimeError] = useState("");
   const [destinationTimeError, setDestinationTimeError] = useState("");
-  const handleScroll = () => {
-    const element = document.getElementById("form-div");
-    if (element) {
-      // 👇 Will scroll smoothly to the top of the next section
-      element.scrollIntoView({ behavior: "smooth" });
-    }
-  };
-
-  handleScroll();
 
   useEffect(() => {
     if (location.state === undefined || location.state === null) {

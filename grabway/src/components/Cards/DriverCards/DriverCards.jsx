@@ -13,54 +13,23 @@ import {
 } from "@chakra-ui/react";
 import AdvertisementCard from "./AdvertisementCard/AdvertisementCard";
 import "./DriverCard.css";
+import axios from "axios";
 
 const sections = ["Essential Commuter", "Comfort Traveler", "Premier Business"];
 const areTabsDisabled = true;
 
-const driverData = [
-  {
-    driverName: "Aditya",
-    email: "addymistrel@gmail.com",
-    VehicleManufacturer: "Maruti Suzuki",
-    VehicleModel: "Swift Dzire",
-    plan: "Basic",
-    seats: 10,
-  },
-  {
-    driverName: "John Doe",
-    email: "john.doe@gmail.com",
-    VehicleManufacturer: "Toyota",
-    VehicleModel: "Camry",
-    plan: "Premium",
-    seats: 5,
-  },
-  {
-    driverName: "Alice Johnson",
-    email: "alice.johnson@gmail.com",
-    VehicleManufacturer: "Honda",
-    VehicleModel: "Civic",
-    plan: "Standard",
-    seats: 4,
-  },
-  {
-    driverName: "Michael Smith",
-    email: "michael.smith@gmail.com",
-    VehicleManufacturer: "Ford",
-    VehicleModel: "F-150",
-    plan: "Basic",
-    seats: 6,
-  },
-  {
-    driverName: "Emily Wilson",
-    email: "emily.wilson@gmail.com",
-    VehicleManufacturer: "Chevrolet",
-    VehicleModel: "Malibu",
-    plan: "Standard",
-    seats: 4,
-  },
-];
 
-function DriverCard() {
+
+function DriverCard(props) {
+  const matchDriverRoute=props.matchDriverRoute;
+  //console.log(matchDriverRoute);
+  
+  async function handleMoreDetails(index){
+    const response=await axios.post('/moreDetailsForMatchRoutes',{matchDriverRoute:matchDriverRoute[index]}).then(()=>{
+      console.log('data sent');
+    })
+  }
+
   return (
     <Box p={8} borderRadius="md" boxShadow="lg" bg="white">
       <Tabs defaultIndex={0} colorScheme="blue" isLazy={areTabsDisabled}>
@@ -76,7 +45,7 @@ function DriverCard() {
             <TabPanel key={index}>
               <Box className="driver-card-container">
                 <AdvertisementCard />
-                {driverData.map((driver, driverIndex) => (
+                {matchDriverRoute.map((driver, driverIndex) => (
                   <Box
                     key={driverIndex}
                     borderRadius="md"
@@ -103,13 +72,15 @@ function DriverCard() {
                       Vehicle: {driver.VehicleManufacturer}{" "}
                       {driver.VehicleModel}
                     </Text>
-                    <Text>Plan: {driver.plan}</Text>
-                    <Text>Seats: {driver.seats}</Text>
+                    <Text>Plan: {driver.route.plan}</Text>
+                    <Text>Seats: {driver.route.seats}</Text>
                     <Button colorScheme="blue" mt={2} mr={2}>
                       Book Now
                     </Button>
-                    <Button colorScheme="gray" mt={2}>
-                      Show More
+                    <Button colorScheme="gray" mt={2} onClick={()=>{
+                      handleMoreDetails(driverIndex);
+                    }}>
+                      More Details
                     </Button>
                   </Box>
                 ))}

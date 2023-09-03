@@ -693,6 +693,45 @@ app.post("/routeUserSearch", async (req, res) => {
   }
 });
 
+
+app.post('/moreDetailsForMatchRoutes',async(req,res)=>{
+  //console.log(req.body.matchDriverRoute);
+  const matchDriverRoute=req.body.matchDriverRoute;
+  const email=matchDriverRoute.email;
+  const RouteAtIndex=matchDriverRoute.RouteAtIndex;
+  try{
+    if(email){
+      //console.log(email);
+      const DriverData = await DriverModel.findOne({ email:email });
+      console.log(DriverData);
+      if(DriverData){
+        const ResponseData={
+          email:DriverData.email,
+          name:DriverData.name,
+          phoneNumber:DriverData.phoneNumber,
+          userType:DriverData.userType,
+          address:DriverData.address[0],
+          route:DriverData.routes[RouteAtIndex],
+          VehicleNumber:DriverData.VehicleNumber,
+          drivingLicenseNumber:DriverData.drivingLicenseNumber,
+          profilePicture:DriverData.profilePicture
+        } 
+        res.status(200).json(ResponseData);
+      }
+      else{
+        res.status(500).json("Didnt find Driver in Database");
+      }
+      
+      
+    }
+  }
+  catch(err){
+    console.log(err);
+    res.status(200).json('Error caught in catch block')
+  }
+ 
+})
+
 maxAge = 24 * 60 * 60;
 
 app.post("/profiledata", async (req, res) => {
