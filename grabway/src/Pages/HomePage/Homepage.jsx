@@ -130,7 +130,7 @@ const TopSection = ({ nonceVal, loginState }) => {
   }, [srcCord, destCord]);
 
   const handleSearchDesk = async () => {
-   /*
+    /*
      if (
       sourceDesk.current.value.length === 0 &&
       destinationDesk.current.value.length === 0
@@ -167,7 +167,6 @@ const TopSection = ({ nonceVal, loginState }) => {
       duration: 2000,
       isClosable: true,
     });
-
   };
 
   const handleSearchMob = () => {
@@ -210,27 +209,26 @@ const TopSection = ({ nonceVal, loginState }) => {
     }
     */
   };
-  const [userData,setUserData] = useState(Cookies.get("grabwayUser"));
-  useEffect(()=>{
-    setUserData(Cookies.get('grabwayUser'));
-  },[Cookies.get('grabwayUser')])
+  const [userData, setUserData] = useState(Cookies.get("grabwayUser"));
+  useEffect(() => {
+    setUserData(Cookies.get("grabwayUser"));
+  }, [Cookies.get("grabwayUser")]);
   if (userData) {
-    if ((JSON.parse(userData)).name==='') {
-      return <Navigate to={"/registration"} userType=""/>;
+    if (JSON.parse(userData).name === "") {
+      return <Navigate to={"/registration"} userType="" />;
     }
-    if((JSON.parse(userData)).name!==''){
-      if((JSON.parse(userData)).userType==='user'){
-        return <Navigate to={'/userHomepage'}/>
+    if (JSON.parse(userData).name !== "") {
+      if (JSON.parse(userData).userType === "user") {
+        return <Navigate to={"/userHomepage"} />;
       }
-      if((JSON.parse(userData)).userType==='driver'){
-        return <Navigate to={'/driverHomepage'}/>
+      if (JSON.parse(userData).userType === "driver") {
+        return <Navigate to={"/driverHomepage"} />;
       }
     }
-    
   }
-  const googleUserData=Cookies.get('grabwayGoogleToken');
-  if(googleUserData){
-    return <Navigate to={'/googleRegistration'}/>
+  const googleUserData = Cookies.get("grabwayGoogleToken");
+  if (googleUserData) {
+    return <Navigate to={"/googleRegistration"} />;
   }
   if (!isLoaded) {
     return (
@@ -254,6 +252,7 @@ const TopSection = ({ nonceVal, loginState }) => {
             <img
               className="h-[75vh] w-[80%] opacity-70"
               src="/assets/images/loginImage.jpg"
+              alt=""
             />
           </div>
           <div className="flex flex-col justify-center items-center absolute z-20 mt-5 ml-[-6vw]">
@@ -392,6 +391,7 @@ const TopSection = ({ nonceVal, loginState }) => {
                   <img
                     className="w-[30vw] h-[60vh]"
                     src="/assets/images/mission.jpg"
+                    alt=""
                   />
                 </div>
                 <div>
@@ -465,6 +465,7 @@ const TopSection = ({ nonceVal, loginState }) => {
                 <img
                   className="w-[30vw] h-[60vh]"
                   src="/assets/images/vission.jpg"
+                  alt=""
                 />
               </div>
             </div>
@@ -474,6 +475,7 @@ const TopSection = ({ nonceVal, loginState }) => {
                 <img
                   className="w-[37vw] h-[60vh]"
                   src="/assets/images/goal.jpg"
+                  alt=""
                 />
               </div>
               <div>
@@ -514,7 +516,11 @@ const TopSection = ({ nonceVal, loginState }) => {
 
       <div className="mobile-view mt-[2vh] flex flex-col justify-center items-center">
         <div>
-          <img className="h-[20vh]" src="/assets/images/loginImage.jpg" />
+          <img
+            className="h-[20vh]"
+            src="/assets/images/loginImage.jpg"
+            alt=""
+          />
         </div>
         <div className="flex justify-center items-center">
           <Card variant="filled" sx={{ boxShadow: "0px 0px 0px 10px white" }}>
@@ -627,6 +633,7 @@ const TopSection = ({ nonceVal, loginState }) => {
                 <img
                   className="w-[60vw] h-[40vh]"
                   src="/assets/images/vission.jpg"
+                  alt=""
                 />
               </div>
               <div>
@@ -721,6 +728,7 @@ const TopSection = ({ nonceVal, loginState }) => {
                   <img
                     className="w-70vw] h-[30vh]"
                     src="/assets/images/goal.jpg"
+                    alt=""
                   />
                 </div>
               </div>

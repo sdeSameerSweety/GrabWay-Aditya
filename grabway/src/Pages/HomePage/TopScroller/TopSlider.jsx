@@ -11,39 +11,48 @@ import "./TopSlider.css";
 
 export default function TopSlider() {
   const [slideIndex, setSlideIndex] = useState(0);
+  const [fadeIn, setFadeIn] = useState(true);
 
   const slides = [
     {
       image:
-        "https://static.vecteezy.com/system/resources/previews/007/523/317/non_2x/travaling-of-sport-roster-car-driving-on-tha-asphalt-road-path-sized-a-ocean-beach-with-sandy-beaches-and-a-background-of-island-under-a-blue-sky-illustrator-and-for-summer-posters-vector.jpg",
+        "https://img.freepik.com/free-vector/car-driving-road-along-night-beach-automobile_107791-15615.jpg?w=2000",
       text: "1. Drive, Earn, and Share the Ride with Grabway Carpooling!",
     },
     {
       image:
-        "https://img.freepik.com/premium-vector/big-semi-truck-trailer-driving-coutryside-road-nature-landscape-horizontal-banner_48369-13353.jpg?w=2000",
+        "https://img.freepik.com/free-vector/cartoon-city-street-with-cars-rainy-weather_107791-19455.jpg?w=2000",
       text: "2. Cut Costs, Connect, and Contribute: Grabway Carpooling!",
     },
     {
       image:
-        "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTAp-a2nDcV-73s-VEmgO85PvjZQGkwE6PSPA&usqp=CAU",
+        "https://img.freepik.com/free-vector/car-drive-city-street-rain-night_107791-19306.jpg?w=2000",
       text: "3. Carpooling Redefined: Grabway - Your Daily Solution!",
     },
   ];
 
   const nextSlide = () => {
-    setSlideIndex((prevIndex) => (prevIndex + 1) % slides.length);
+    setFadeIn(false);
+    setTimeout(() => {
+      setSlideIndex((prevIndex) => (prevIndex + 1) % slides.length);
+      setFadeIn(true);
+    }, 200); // Delay to change slide after fade-out animation
   };
 
   const prevSlide = () => {
-    setSlideIndex(
-      (prevIndex) => (prevIndex - 1 + slides.length) % slides.length
-    );
+    setFadeIn(false);
+    setTimeout(() => {
+      setSlideIndex(
+        (prevIndex) => (prevIndex - 1 + slides.length) % slides.length
+      );
+      setFadeIn(true);
+    }, 200); // Delay to change slide after fade-out animation
   };
 
   useEffect(() => {
     const interval = setInterval(() => {
       nextSlide();
-    }, 1000); //timer
+    }, 5000); // Auto-advance every 5 seconds
 
     return () => {
       clearInterval(interval);
@@ -55,8 +64,6 @@ export default function TopSlider() {
       <VStack
         w={"full"}
         justify={"center"}
-        // px={useBreakpointValue({ base: 2, md: 1 })}
-        // py={useBreakpointValue({ base: 2, md: 1 })}
         rounded="1.5rem"
         bg={"transparent"}
         position="relative"
@@ -71,6 +78,8 @@ export default function TopSlider() {
           w="100%"
           h="auto"
           objectFit={"fill"}
+          style={{ opacity: fadeIn ? 1 : 0 }}
+          transition="opacity 0.3s ease-in-out"
         />
         <div className="dark-overlay"></div>
         <Text
@@ -85,44 +94,41 @@ export default function TopSlider() {
         >
           {slides[slideIndex].text}
         </Text>
-        {/* <Button
-          onClick={prevSlide}
-          bg={"whiteAlpha.300"}
-          rounded={"full"}
-          color={"white"}
-          _hover={{ bg: "whiteAlpha.500" }}
-          position="absolute"
-          bottom="1rem"
-          right="1rem"
-        >
-          Previous
-        </Button>
-        <Button
-          onClick={nextSlide}
-          bg={"blue.400"}
-          rounded={"full"}
-          color={"white"}
-          _hover={{ bg: "blue.500" }}
-          position="absolute"
-          bottom="1rem"
-          right="6rem"
-        >
-          Next
-        </Button> */}
-        <Button
-          onClick={null} // Driver click to signup
-          bg={"red.500"}
-          rounded={"full"}
-          color={"white"}
-          _hover={{ bg: "green.500" }}
-          position="absolute"
-          bottom="1rem"
-          left="13%"
-          transform="translateX(-50%)"
-          shadow={2}
-        >
-          Join Now
-        </Button>
+        <div className="buttons">
+          <Button
+            onClick={prevSlide}
+            bg={"whiteAlpha.400"}
+            rounded={"full"}
+            color={"white"}
+            _hover={{ bg: "whiteAlpha.500" }}
+            opacity={fadeIn ? 1 : 0}
+            transition="opacity 0.3s ease-in-out"
+          >
+            Previous
+          </Button>
+          <Button
+            onClick={null} // Driver click to signup
+            bg={"red.500"}
+            rounded={"full"}
+            color={"white"}
+            _hover={{ bg: "green.600" }}
+            opacity={fadeIn ? 1 : 0}
+            transition="opacity 0.3s ease-in-out"
+          >
+            Join Now
+          </Button>
+          <Button
+            onClick={nextSlide}
+            bg={"whiteAlpha.400"}
+            rounded={"full"}
+            color={"white"}
+            _hover={{ bg: "whiteAlpha.600" }}
+            opacity={fadeIn ? 1 : 0}
+            transition="opacity 0.3s ease-in-out"
+          >
+            Next
+          </Button>
+        </div>
       </VStack>
     </Flex>
   );

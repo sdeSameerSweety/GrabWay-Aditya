@@ -18,8 +18,6 @@ import Cookies from 'js-cookie';
 const sections = ["Essential Commuter", "Comfort Traveler", "Premier Business"];
 const areTabsDisabled = true;
 
-
-
 function DriverCard(props) {
   const userData=Cookies.get('grabwayUser');
   const matchDriverRoute=props.matchDriverRoute;
@@ -63,7 +61,7 @@ function DriverCard(props) {
                     p={4}
                     m={2}
                     textAlign="center"
-                    width="300px" // Set a fixed width for each card
+                    width="300px"
                     position="relative"
                   >
                     <Image
@@ -88,9 +86,13 @@ function DriverCard(props) {
                     }}>
                       Book Now
                     </Button>
-                    <Button colorScheme="gray" mt={2} onClick={()=>{
-                      handleMoreDetails(driverIndex);
-                    }}>
+                    <Button
+                      colorScheme="gray"
+                      mt={2}
+                      onClick={() => {
+                        handleMoreDetails(driverIndex);
+                      }}
+                    >
                       More Details
                     </Button>
                   </Box>
