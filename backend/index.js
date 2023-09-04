@@ -719,6 +719,98 @@ app.post("/moreDetailsForMatchRoutes", async (req, res) => {
   }
 });
 
+app.post("/bookRoute", async (req, res) => {
+  const matchDriverRoute = req.body.matchDriverRoute;
+  const userData = req.body.userDetails;
+  const RouteId = matchDriverRoute.route._id;
+  const userQuery = req.body.UserQuery.UserQuery;
+  const driverEmail = matchDriverRoute.email;
+  const userEmail = userData.email;
+  const seatNumber = matchDriverRoute.seats;
+  const userOriginText = userQuery.originText;
+  const userOriginLat = userQuery.originLat;
+  const userOriginLong = userQuery.originLong;
+  const userDestinationText = userQuery.destinationText;
+  const userDestinationLat = userQuery.destinationLat;
+  const userDestinationLong = userQuery.destinationLong;
+  const userOriginTime = userQuery.originStartTime;
+  const userDestinationTime = userQuery.destinationStartTime;
+  const plan = matchDriverRoute.plan;
+  const driverName=matchDriverRoute.name;
+  const amount = 2000; //make it dynamic
+  const paymentMethod = "cash"; //make it dyanmic
+  try {
+    if (driverEmail && userEmail && userQuery) {
+      const DriverModificationResponse = await DriverModel.updateOne(
+        {
+          email: driverEmail,
+          "routes._id": new mongoose.Types.ObjectId(RouteId),
+        },
+        {
+          $push: {
+            "routes.$.customers": {
+              email: userEmail,
+              seatNumber: seatNumber,
+              "originLocation.0.text": userOriginText,
+              "originLocation.0.lat": userOriginLat,
+              "originLocation.0.long": userOriginLong,
+              "destinationLocation.0.text": userDestinationText,
+              "destinationLocation.0.lat": userDestinationLat,
+              "destinationLocation.0.long": userDestinationLong,
+              originTime: userOriginTime,
+              destinationTime: userDestinationTime,
+              //price:price for that user
+            },
+          },
+        }
+      );
+      const UserModificationResponse = await UserModel.updateOne(
+        {
+          email: userEmail,
+        },
+        {
+          $push: {
+            routes: {
+              "origin.text": userOriginText,
+              "origin.lat": userOriginLat,
+              "origin.long": userOriginLong,
+              "destination.text": userDestinationText,
+              "destination.lat": userDestinationLat,
+              "destination.long": userDestinationLong,
+              "plan": plan,
+              //driverEmail:driverEmail,
+              //driverName:driverName,
+              //routeId:RouteId
+            },
+          },
+        }
+      );
+      const OrderCreationResponse = await OrderModel.create({
+        driverEmail: driverEmail,
+        userEmail: userEmail,
+        plan: plan,
+        amount: amount,
+        paymentMethod: paymentMethod,
+      });
+      if (OrderCreationResponse && DriverModificationResponse && UserModificationResponse) {
+        res.status(200).json({
+          DriverAddtitionResponse: DriverModificationResponse,
+          OrderCreationResponse: OrderCreationResponse,
+          UserModificationResponse:UserModificationResponse
+        });
+      } else {
+        res.status(500).json("Problem in if else");
+      }
+    }
+    else{
+      res.status(500).json("Didn't get data")
+    }
+  } catch (err) {
+    console.log(err);
+    res.status(500).json("Error caught in try catch block");
+  }
+});
+
 maxAge = 24 * 60 * 60;
 
 app.post("/profiledata", async (req, res) => {
