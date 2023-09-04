@@ -14,12 +14,10 @@ export default function Settings() {
   const googleUserData = Cookies.get("grabwayGoogleToken");
 
   const userData = localStorage.getItem("grabwayUser");
-  console.log(userData);
-  if (userData !== undefined) {
-    if (JSON.parse(userData) !== null)
-      if (JSON.parse(userData).name === "") {
-        return <Navigate to={"/registration"} userType="" />;
-      }
+  if (userData) {
+    if (JSON.parse(userData).name === "") {
+      return <Navigate to={"/registration"} userType="" />;
+    }
   }
   if (!userData) {
     if (!googleUserData) {
