@@ -18,10 +18,13 @@ export function UserContextProvider({ children }) {
         let data = res.data;
         // console.log(data);
         if (data !== null) {
-          if ("profilePicture" in data) setProfilePhoto(data.profilePicture);
-          if (delete data.profilePicture)
+          if ("profilePicture" in data) {
+            setProfilePhoto(data.profilePicture);
+            if (delete data.profilePicture)
+              Cookies.set("grabwayUser", JSON.stringify(data), { expires: 7 });
+          } else {
             Cookies.set("grabwayUser", JSON.stringify(data), { expires: 7 });
-          else Cookies.set("grabwayUser", JSON.stringify(data), { expires: 7 });
+          }
         } else Cookies.set("grabwayUser", JSON.stringify(data), { expires: 7 });
         setUserEmail(res.data);
       });
@@ -38,10 +41,14 @@ export function UserContextProvider({ children }) {
         let data = res.data;
         // console.log(data);
         if (data !== null) {
-          if ("profilePicture" in data) setProfilePhoto(data.profilePicture);
-          if (delete data.profilePicture)
+          console.log("setting");
+          if ("profilePicture" in data) {
+            setProfilePhoto(data.profilePicture);
+            if (delete data.profilePicture)
+              Cookies.set("grabwayUser", JSON.stringify(data), { expires: 7 });
+          } else {
             Cookies.set("grabwayUser", JSON.stringify(data), { expires: 7 });
-          else Cookies.set("grabwayUser", JSON.stringify(data), { expires: 7 });
+          }
         } else Cookies.set("grabwayUser", JSON.stringify(data), { expires: 7 });
         setUserEmail(res.data);
       });

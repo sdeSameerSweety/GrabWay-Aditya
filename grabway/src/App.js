@@ -25,6 +25,7 @@ import DriverRouteLocation from "./Pages/DriverRouteLocation/DriverRouteLocation
 import StatusBar from "./components/StausBar/StatusBar";
 import RouteUserRegisteration from "./Pages/RouteRegisteration/RouteUserRegistration";
 import MatchedRoutes from "./Pages/MatchedRoutes/MatchedRoutes";
+import MoreDetails from "./Pages/MoreDetails/MoreDetails";
 axios.defaults.baseURL = "http://localhost:8080";
 axios.defaults.withCredentials = true;
 // import NearbyMap from "./components/Map/NearbyMap";
@@ -100,6 +101,7 @@ function App() {
             <Route path="/googleRegistration" element={<GRegistration />} />
             <Route path="/profile" element={<ProfilePage />} />
             <Route path="/driverHomePage" element={<DriverHomePage />} />
+            <Route path="/moredetails" element={<MoreDetails />} />
             <Route
               path="/routeDriverLocation"
               element={

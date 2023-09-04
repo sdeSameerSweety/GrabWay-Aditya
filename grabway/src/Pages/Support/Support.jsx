@@ -27,7 +27,7 @@ import {
   Center,
   seClipboard,
   useToast,
-  useClipboard
+  useClipboard,
 } from "@chakra-ui/react";
 import {
   MdPhone,
@@ -41,7 +41,6 @@ import { BiCaretDownCircle } from "react-icons/bi";
 import Cookies from "js-cookie";
 import { Navigate } from "react-router-dom";
 export default function ContactFaq() {
-
   const phone = "+91-9696969696";
   const email = "grabwayhelpdesk@gmail.com";
   const address = "Bhubneswar, India";
@@ -64,18 +63,17 @@ export default function ContactFaq() {
 
   const userData = Cookies.get("grabwayUser");
   if (userData !== undefined) {
-    if ((JSON.parse(userData)).name==='') {
-      return <Navigate to={"/registration"} userType=""/>;
+    if (JSON.parse(userData).name === "") {
+      return <Navigate to={"/registration"} userType="" />;
     }
   }
   if (!userData) {
-    if(!googleUserData){
+    if (!googleUserData) {
       return <Navigate to={"/"} />;
     }
     if (googleUserData) {
-      return <Navigate to={"/googleRegistration"}/>;
+      return <Navigate to={"/googleRegistration"} />;
     }
-    
   }
   return (
     <>

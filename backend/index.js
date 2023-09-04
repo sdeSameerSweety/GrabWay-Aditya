@@ -202,73 +202,65 @@ app.post("/createDriver", async (req, res) => {
   }
 });
 
-app.post("/editprofile/:type", async (req, res) => {
+app.post("/editprofile", async (req, res) => {
   await mongoose.connect(MONGO_URL);
-  const userType = req.params.type;
-  const data = req.body.editData;
-  const email=req.body.emailForApi;
-  console.log(email);
+  const data = req.body.sendData;
   console.log(data);
-  try{
-    if(userType==='user'){
+  try {
+    if (data.userType === "user") {
       const updatedResponse = await UserModel.updateOne(
         {
-          email: email,
+          email: data.email,
         },
         {
           $set: {
-            profilePicture: data.profilePicture,
-            name: data.firstName+" "+data.lastName,
+            name: data.fname + " " + data.lname,
             phoneNumber: data.phone,
-            "address.0.addressName":  data.firstName+" "+data.lastName,
-            "address.0.addressLine1": data.address,
-            "address.0.addressLine2": data.address,
+            "address.0.addressName": data.fname + " " + data.lname,
+            "address.0.addressLine1": data.address1,
+            "address.0.addressLine2": data.address2,
             "address.0.city": data.city,
             "address.0.state": data.state,
             "address.0.pincode": data.pin,
           },
         }
       );
-      if(updatedResponse){
-        res.status(200).json(updatedResponse);
-      }
-      else{
-        res.status(500).json(null);
+      if (updatedResponse) {
+        return res.status(200).json(updatedResponse);
+      } else {
+        return res.status(500).json(null);
       }
     }
-    if(userType==='driver'){
+    if (userType === "driver") {
       const updatedResponse = await DriverModel.updateOne(
         {
           email: email,
         },
         {
           $set: {
-            name: data.firstName+" "+data.lastName,
+            name: data.fname + " " + data.lname,
             phoneNumber: data.phone,
-            VehicleNumber: data.VehicleNumber,
-            profilePicture: data.profilePicture,
-            drivingLicenseNumber: data.drivingLicenseNumber,
+            VehicleNumber: data.Vnumber,
+            drivingLicenseNumber: data.dlnumber,
             experience: data.experience,
-            "address.0.addressName":  data.firstName+" "+data.lastName,
-            "address.0.addressLine1": data.address,
-            "address.0.addressLine2": data.address,
+            "address.0.addressName": data.fname + " " + data.lname,
+            "address.0.addressLine1": data.address1,
+            "address.0.addressLine2": data.address2,
             "address.0.city": data.city,
             "address.0.state": data.state,
             "address.0.pincode": data.pin,
           },
         }
       );
-      if(updatedResponse){
-        res.status(200).json(updatedResponse);
-      }
-      else{
-        res.status(500).json(null);
+      if (updatedResponse) {
+        return res.status(200).json(updatedResponse);
+      } else {
+        return res.status(500).json(null);
       }
     }
+  } catch (err) {
+    res.status(500).json("Internal Server Error");
   }
-catch(err){
-  res.status(500).json('Internal Server Error')
-}
 });
 
 //api for google login below
@@ -693,44 +685,38 @@ app.post("/routeUserSearch", async (req, res) => {
   }
 });
 
-
-app.post('/moreDetailsForMatchRoutes',async(req,res)=>{
+app.post("/moreDetailsForMatchRoutes", async (req, res) => {
   //console.log(req.body.matchDriverRoute);
-  const matchDriverRoute=req.body.matchDriverRoute;
-  const email=matchDriverRoute.email;
-  const RouteAtIndex=matchDriverRoute.RouteAtIndex;
-  try{
-    if(email){
+  const matchDriverRoute = req.body.matchDriverRoute;
+  const email = matchDriverRoute.email;
+  const RouteAtIndex = matchDriverRoute.RouteAtIndex;
+  try {
+    if (email) {
       //console.log(email);
-      const DriverData = await DriverModel.findOne({ email:email });
+      const DriverData = await DriverModel.findOne({ email: email });
       console.log(DriverData);
-      if(DriverData){
-        const ResponseData={
-          email:DriverData.email,
-          name:DriverData.name,
-          phoneNumber:DriverData.phoneNumber,
-          userType:DriverData.userType,
-          address:DriverData.address[0],
-          route:DriverData.routes[RouteAtIndex],
-          VehicleNumber:DriverData.VehicleNumber,
-          drivingLicenseNumber:DriverData.drivingLicenseNumber,
-          profilePicture:DriverData.profilePicture
-        } 
+      if (DriverData) {
+        const ResponseData = {
+          email: DriverData.email,
+          name: DriverData.name,
+          phoneNumber: DriverData.phoneNumber,
+          userType: DriverData.userType,
+          address: DriverData.address[0],
+          route: DriverData.routes[RouteAtIndex],
+          VehicleNumber: DriverData.VehicleNumber,
+          drivingLicenseNumber: DriverData.drivingLicenseNumber,
+          profilePicture: DriverData.profilePicture,
+        };
         res.status(200).json(ResponseData);
-      }
-      else{
+      } else {
         res.status(500).json("Didnt find Driver in Database");
       }
-      
-      
     }
-  }
-  catch(err){
+  } catch (err) {
     console.log(err);
-    res.status(200).json('Error caught in catch block')
+    res.status(200).json("Error caught in catch block");
   }
- 
-})
+});
 
 maxAge = 24 * 60 * 60;
 
@@ -1275,8 +1261,6 @@ app.post("/buyNow", async (req, res) => {
     return res.status(400).send("Unable to Process Request");
   }
 });
-
-
 
 app.listen(PORT, () => {
   console.log(`Server running at http://localhost:${PORT}`);
