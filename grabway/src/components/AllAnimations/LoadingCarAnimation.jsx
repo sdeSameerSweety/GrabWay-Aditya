@@ -19,16 +19,7 @@ function LoadingCarAnimation() {
   return (
     <Box>
       {isMobile ? (
-        <div
-          className="mobile-gif"
-          // style={{
-          //   backgroundImage: `url("https://cdn.dribbble.com/users/1716464/screenshots/6247572/happy_man_instagram_2.gif")`,
-          //   backgroundSize: "cover",
-          //   backgroundRepeat: "no-repeat",
-          //   width: "100%",
-          //   height: "300px", // Adjust this as needed
-          // }}
-        ></div>
+        <div className="mobile-gif"></div>
       ) : (
         <div className="container-loading">
           <div className="moon"></div>
