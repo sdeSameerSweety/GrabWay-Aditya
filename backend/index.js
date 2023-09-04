@@ -215,8 +215,7 @@ app.post("/editprofile", async (req, res) => {
         },
         {
           $set: {
-            profilePicture: data.profilePicture,
-            name: data.firstName + " " + data.lastName,
+            name: data.fname + " " + data.lname,
             phoneNumber: data.phone,
             "address.0.addressName": data.fname + " " + data.lname,
             "address.0.addressLine1": data.address1,
