@@ -192,16 +192,16 @@ const TopSection = ({ nonceVal, loginState }) => {
   };
   const userData = localStorage.getItem("grabwayUser");
   if (userData) {
-    if ((JSON.parse(userData)).name==='') {
-      return <Navigate to={"/registration"} userType=""/>;
+    if (JSON.parse(userData).name === "") {
+      return <Navigate to={"/registration"} userType="" />;
     }
   }
-  const googleUserData=Cookies.get('grabwayGoogleToken');
-  if(googleUserData){
-    return <Navigate to={'/googleRegistration'}/>
+  const googleUserData = Cookies.get("grabwayGoogleToken");
+  if (googleUserData) {
+    return <Navigate to={"/googleRegistration"} />;
   }
-  if(!Cookies.get('grabwayToken')){
-    return <Navigate to={'/'}/>
+  if (!Cookies.get("grabwayToken")) {
+    return <Navigate to={"/"} />;
   }
   if (!isLoaded) {
     return (
@@ -354,7 +354,7 @@ const TopSection = ({ nonceVal, loginState }) => {
         </div>
       </div>
 
-      <div className="mobile-view mt-[2vh] flex flex-col justify-center items-center">
+      <div className="mobile-view">
         <div>
           <img className="h-[20vh]" src="/assets/images/loginImage.jpg" />
         </div>
