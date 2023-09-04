@@ -11,7 +11,7 @@ import {
 } from "@chakra-ui/react";
 import Cookies from "js-cookie";
 const TopSection = ({ nonceVal, loginState }) => {
-  const userData = Cookies.get("grabwayUser");
+  const userData = localStorage.getItem("grabwayUser");
   const [routes, setRoutes]=useState(null);
   const [routesEmpty,setRoutesEmpty]=useState(false);
   useEffect(()=>{
@@ -27,6 +27,9 @@ const TopSection = ({ nonceVal, loginState }) => {
   if (userData) {
     if ((JSON.parse(userData)).name==='') {
       return <Navigate to={"/registration"} userType=""/>;
+    }
+    if ((JSON.parse(userData)).userType==='user') {
+      return <Navigate to={"/"} userType=""/>;
     }
   }
   const googleUserData=Cookies.get('grabwayGoogleToken');

@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from "react";
 import { Navigate, useNavigate } from "react-router-dom";
-import "./Homepage.css";
+import "../Homepage.css";
 import Geocode from "react-geocode";
 import { Navigator } from "react-router-dom";
 import {
@@ -20,7 +20,7 @@ import {
 import { useToast } from "@chakra-ui/react";
 import { FiRefreshCcw } from "react-icons/fi";
 import { FaCircleDot } from "react-icons/fa6";
-import TopSlider from "./TopScroller/TopSlider";
+import TopSlider from "../TopScroller/TopSlider";
 import { PiMountainsDuotone } from "react-icons/pi";
 import { BiLeaf } from "react-icons/bi";
 import { GiGlassBall } from "react-icons/gi";
@@ -130,8 +130,7 @@ const TopSection = ({ nonceVal, loginState }) => {
   }, [srcCord, destCord]);
 
   const handleSearchDesk = async () => {
-   /*
-     if (
+    if (
       sourceDesk.current.value.length === 0 &&
       destinationDesk.current.value.length === 0
     ) {
@@ -159,27 +158,9 @@ const TopSection = ({ nonceVal, loginState }) => {
       getgeoCode(sourceDesk.current.value, "Source");
       getgeoCode(destinationDesk.current.value, "Destination");
     }
-   */
-    toast({
-      title: "Kindly Login",
-      description: "Please Login before to proceed",
-      status: "warning",
-      duration: 2000,
-      isClosable: true,
-    });
-
   };
 
   const handleSearchMob = () => {
-    toast({
-      title: "Kindly Login",
-      description: "Please Login before to proceed",
-      status: "warning",
-      duration: 2000,
-      isClosable: true,
-    });
-
-    /*
     if (
       sourceMob.current.value.length === 0 &&
       destinationMob.current.value.length === 0
@@ -208,29 +189,19 @@ const TopSection = ({ nonceVal, loginState }) => {
       getgeoCode(sourceMob.current.value, "Source");
       getgeoCode(destinationMob.current.value, "Destination");
     }
-    */
   };
-  const [userData,setUserData] = useState(Cookies.get("grabwayUser"));
-  useEffect(()=>{
-    setUserData(Cookies.get('grabwayUser'));
-  },[Cookies.get('grabwayUser')])
+  const userData = localStorage.getItem("grabwayUser");
   if (userData) {
     if ((JSON.parse(userData)).name==='') {
       return <Navigate to={"/registration"} userType=""/>;
     }
-    if((JSON.parse(userData)).name!==''){
-      if((JSON.parse(userData)).userType==='user'){
-        return <Navigate to={'/userHomepage'}/>
-      }
-      if((JSON.parse(userData)).userType==='driver'){
-        return <Navigate to={'/driverHomepage'}/>
-      }
-    }
-    
   }
   const googleUserData=Cookies.get('grabwayGoogleToken');
   if(googleUserData){
     return <Navigate to={'/googleRegistration'}/>
+  }
+  if(!Cookies.get('grabwayToken')){
+    return <Navigate to={'/'}/>
   }
   if (!isLoaded) {
     return (
@@ -381,135 +352,6 @@ const TopSection = ({ nonceVal, loginState }) => {
             </div>
           </div>
         </div>
-        {loginState === false && (
-          <>
-            <div className="scroller">
-              <TopSlider />
-            </div>
-            <div className="info-section mt-[5%] flex flex-col justify-center items-center gap-10">
-              <div className="flex flex-row justify-center items-center">
-                <div>
-                  <img
-                    className="w-[30vw] h-[60vh]"
-                    src="/assets/images/mission.jpg"
-                  />
-                </div>
-                <div>
-                  <Card
-                    className="w-[50vw]"
-                    sx={{ border: "none", boxShadow: "none" }}
-                  >
-                    <CardHeader>
-                      <Heading>
-                        <div className="flex justify-center items-center font-ubuntu">
-                          <div className="mr-[1%]">
-                            <PiMountainsDuotone fill="#E51B23" />
-                          </div>
-                          Our Mission
-                        </div>
-                      </Heading>
-                    </CardHeader>
-                    <CardBody>
-                      <Text>
-                        <div className="flex text-center justify-center items-center text-xl opacity-80">
-                          We aim at reducing your travel time, socializing your
-                          world of travel
-                          <br />
-                          and providing comfort at your doorstep.
-                        </div>
-                        <div className="font-ubuntu mt-[3%] flex justify-center items-center text-2xl opacity-95 text-[#1b4ee5] text-center">
-                          <AiOutlineThunderbolt className="mr-[1%]" />
-                          JUST GRABWAY AND CHILL
-                          <AiOutlineThunderbolt className="ml-[1%]" />
-                        </div>
-                      </Text>
-                    </CardBody>
-                  </Card>
-                </div>
-              </div>
-            </div>
-
-            <div className="flex flex-row justify-center items-center">
-              <div>
-                <Card
-                  className="w-[50vw]"
-                  sx={{ border: "none", boxShadow: "none" }}
-                >
-                  <CardHeader>
-                    <Heading>
-                      <div className="flex justify-center items-center font-ubuntu">
-                        <div className="mr-[1%]">
-                          <BiLeaf fill="#E51B23" />
-                        </div>
-                        Our Vission
-                      </div>
-                    </Heading>
-                  </CardHeader>
-                  <CardBody>
-                    <Text>
-                      <div className="flex text-center justify-center items-center text-xl opacity-80">
-                        Grabway is commited to reducing Carbon prints from our
-                        planet by providing a public yet personal mode of
-                        transport.
-                      </div>
-                      <div className="font-ubuntu mt-[3%] flex justify-center items-center text-2xl opacity-95 text-[#4ee51b] text-center">
-                        <AiFillHeart className="mr-[1%]" />
-                        LET US CONTRIBUTE TO A GREENER EARTH
-                        <AiFillHeart className="ml-[1%]" />
-                      </div>
-                    </Text>
-                  </CardBody>
-                </Card>
-              </div>
-              <div>
-                <img
-                  className="w-[30vw] h-[60vh]"
-                  src="/assets/images/vission.jpg"
-                />
-              </div>
-            </div>
-
-            <div className="flex flex-row justify-center items-center">
-              <div>
-                <img
-                  className="w-[37vw] h-[60vh]"
-                  src="/assets/images/goal.jpg"
-                />
-              </div>
-              <div>
-                <Card
-                  className="w-[50vw] mt-[4%]"
-                  sx={{ border: "none", boxShadow: "none" }}
-                >
-                  <CardHeader>
-                    <Heading>
-                      <div className="flex justify-center items-center font-ubuntu">
-                        <div className="mr-[1%]">
-                          <GiGlassBall fill="#E51B23" />
-                        </div>
-                        Our Goal
-                      </div>
-                    </Heading>
-                  </CardHeader>
-                  <CardBody>
-                    <Text>
-                      <div className="flex text-center justify-center items-center text-xl opacity-80">
-                        We plan to become India's most trusted platform for
-                        shuttle service,providing completely a new dimension to
-                        your daily Life
-                      </div>
-                      <div className="font-ubuntu mt-[3%] flex justify-center items-center text-2xl opacity-95 text-[#1b4ee5] text-center">
-                        <FaRoad className="mr-[1%]" />
-                        REDEFINING INDIA'S TRANSPORT ASPIRATIONS
-                        <FaRoad className="ml-[1%]" />
-                      </div>
-                    </Text>
-                  </CardBody>
-                </Card>
-              </div>
-            </div>
-          </>
-        )}
       </div>
 
       <div className="mobile-view mt-[2vh] flex flex-col justify-center items-center">
@@ -620,113 +462,6 @@ const TopSection = ({ nonceVal, loginState }) => {
             <div className="font-ubuntu text-2xl">Search GrabWay</div>
           </Button>
         </div>
-        {loginState === false && (
-          <div className="info-section mt-[5%] flex flex-col justify-center items-center gap-10">
-            <div className="flex flex-col justify-center items-center">
-              <div>
-                <img
-                  className="w-[60vw] h-[40vh]"
-                  src="/assets/images/vission.jpg"
-                />
-              </div>
-              <div>
-                <Card className="w-[90vw]" variant={"filled"}>
-                  <CardHeader>
-                    <Heading>
-                      <div className="flex justify-center items-center font-ubuntu">
-                        <div className="mr-[1%]">
-                          <PiMountainsDuotone fill="#E51B23" />
-                        </div>
-                        Our Mission
-                      </div>
-                    </Heading>
-                  </CardHeader>
-                  <CardBody>
-                    <Text>
-                      <div className="flex text-center justify-center items-center text-xl opacity-80">
-                        We aim at reducing your travel time, socializing your
-                        world of travel
-                        <br />
-                        and providing comfort at your doorstep.
-                      </div>
-                      <div className="font-ubuntu mt-[3%] flex justify-center items-center text-2xl opacity-95 text-[#1b4ee5] text-center">
-                        <AiOutlineThunderbolt className="mr-[1%]" />
-                        JUST GRABWAY AND CHILL
-                        <AiOutlineThunderbolt className="ml-[1%]" />
-                      </div>
-                    </Text>
-                  </CardBody>
-                </Card>
-              </div>
-            </div>
-            <div className="flex flex-col justify-center items-center">
-              <div>
-                <Card className="w-[90vw]" variant={"filled"}>
-                  <CardHeader>
-                    <Heading>
-                      <div className="flex justify-center items-center font-ubuntu">
-                        <div className="mr-[1%]">
-                          <BiLeaf fill="#E51B23" />
-                        </div>
-                        Our Vission
-                      </div>
-                    </Heading>
-                  </CardHeader>
-                  <CardBody>
-                    <Text>
-                      <div className="flex text-center justify-center items-center text-xl opacity-80">
-                        Grabway is commited to reducing Carbon prints from our
-                        planet by providing a public yet personal mode of
-                        transport.
-                      </div>
-                      <div className="font-ubuntu mt-[3%] flex justify-center items-center text-2xl opacity-95 text-[#4ee51b] text-center">
-                        <AiFillHeart className="mr-[1%]" />
-                        LET US CONTRIBUTE TO A GREENER EARTH
-                        <AiFillHeart className="ml-[1%]" />
-                      </div>
-                    </Text>
-                  </CardBody>
-                </Card>
-              </div>
-              <div className="flex flex-col justify-center items-center">
-                <div>
-                  <Card className="w-[90vw] mt-[4%]" variant={"filled"}>
-                    <CardHeader>
-                      <Heading>
-                        <div className="flex justify-center items-center font-ubuntu">
-                          <div className="mr-[1%]">
-                            <GiGlassBall fill="#E51B23" />
-                          </div>
-                          Our Goal
-                        </div>
-                      </Heading>
-                    </CardHeader>
-                    <CardBody>
-                      <Text>
-                        <div className="flex text-center justify-center items-center text-xl opacity-80">
-                          We plan to become India's most trusted platform for
-                          shuttle service,providing completely a new dimension
-                          to your daily Life
-                        </div>
-                        <div className="font-ubuntu mt-[3%] flex justify-center items-center text-2xl opacity-95 text-[#1b4ee5] text-center">
-                          <FaRoad className="mr-[1%]" />
-                          REDEFINING INDIA'S TRANSPORT ASPIRATIONS
-                          <FaRoad className="ml-[1%]" />
-                        </div>
-                      </Text>
-                    </CardBody>
-                  </Card>
-                </div>
-                <div>
-                  <img
-                    className="w-70vw] h-[30vh]"
-                    src="/assets/images/goal.jpg"
-                  />
-                </div>
-              </div>
-            </div>
-          </div>
-        )}
       </div>
     </>
   );

@@ -14,6 +14,7 @@ var haversine = require("haversine-distance");
 //google mail and Nodemailer
 const nodemailer = require("nodemailer");
 const { google } = require("googleapis");
+const OrderModel = require("./Schema/Order");
 const CLIENT_ID =
   "496366764705-a756l0dqt95hq8a3d9vrbcif2nud3a3u.apps.googleusercontent.com";
 const CLIENT_SECRET = "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";
@@ -214,7 +215,8 @@ app.post("/editprofile", async (req, res) => {
         },
         {
           $set: {
-            name: data.fname + " " + data.lname,
+            profilePicture: data.profilePicture,
+            name: data.firstName + " " + data.lastName,
             phoneNumber: data.phone,
             "address.0.addressName": data.fname + " " + data.lname,
             "address.0.addressLine1": data.address1,
@@ -226,9 +228,9 @@ app.post("/editprofile", async (req, res) => {
         }
       );
       if (updatedResponse) {
-        return res.status(200).json(updatedResponse);
+        res.status(200).json(updatedResponse);
       } else {
-        return res.status(500).json(null);
+        res.status(500).json(null);
       }
     }
     if (userType === "driver") {
@@ -238,14 +240,14 @@ app.post("/editprofile", async (req, res) => {
         },
         {
           $set: {
-            name: data.fname + " " + data.lname,
+            name: data.firstName + " " + data.lastName,
             phoneNumber: data.phone,
             VehicleNumber: data.Vnumber,
             drivingLicenseNumber: data.dlnumber,
             experience: data.experience,
-            "address.0.addressName": data.fname + " " + data.lname,
-            "address.0.addressLine1": data.address1,
-            "address.0.addressLine2": data.address2,
+            "address.0.addressName": data.firstName + " " + data.lastName,
+            "address.0.addressLine1": data.address,
+            "address.0.addressLine2": data.address,
             "address.0.city": data.city,
             "address.0.state": data.state,
             "address.0.pincode": data.pin,
@@ -253,9 +255,9 @@ app.post("/editprofile", async (req, res) => {
         }
       );
       if (updatedResponse) {
-        return res.status(200).json(updatedResponse);
+        res.status(200).json(updatedResponse);
       } else {
-        return res.status(500).json(null);
+        res.status(500).json(null);
       }
     }
   } catch (err) {

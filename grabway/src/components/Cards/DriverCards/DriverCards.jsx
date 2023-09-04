@@ -14,16 +14,23 @@ import {
 import AdvertisementCard from "./AdvertisementCard/AdvertisementCard";
 import "./DriverCard.css";
 import axios from "axios";
-
+import Cookies from 'js-cookie';
 const sections = ["Essential Commuter", "Comfort Traveler", "Premier Business"];
 const areTabsDisabled = true;
 
-
-
 function DriverCard(props) {
+  const userData=localStorage.getItem("grabwayUser");
   const matchDriverRoute=props.matchDriverRoute;
+  const UserQuery=props.UserQuery;
   //console.log(matchDriverRoute);
   
+  async function handleBookNow(index){
+    console.log('book now');
+    const response=await axios.post("/bookRoute",{matchDriverRoute:matchDriverRoute[index], userDetails:JSON.parse(userData),UserQuery:{UserQuery}}).then(()=>{
+      console.log('data sent');
+    })
+  }
+
   async function handleMoreDetails(index){
     const response=await axios.post('/moreDetailsForMatchRoutes',{matchDriverRoute:matchDriverRoute[index]}).then(()=>{
       console.log('data sent');
@@ -54,7 +61,7 @@ function DriverCard(props) {
                     p={4}
                     m={2}
                     textAlign="center"
-                    width="300px" // Set a fixed width for each card
+                    width="300px"
                     position="relative"
                   >
                     <Image
@@ -73,13 +80,19 @@ function DriverCard(props) {
                       {driver.VehicleModel}
                     </Text>
                     <Text>Plan: {driver.route.plan}</Text>
-                    <Text>Seats: {driver.route.seats}</Text>
-                    <Button colorScheme="blue" mt={2} mr={2}>
+                    <Text>Seats: {(driver.route.seats-driver.route.customers.length)}</Text>
+                    <Button colorScheme="blue" mt={2} mr={2} onClick={()=>{
+                      handleBookNow(index);
+                    }}>
                       Book Now
                     </Button>
-                    <Button colorScheme="gray" mt={2} onClick={()=>{
-                      handleMoreDetails(driverIndex);
-                    }}>
+                    <Button
+                      colorScheme="gray"
+                      mt={2}
+                      onClick={() => {
+                        handleMoreDetails(driverIndex);
+                      }}
+                    >
                       More Details
                     </Button>
                   </Box>

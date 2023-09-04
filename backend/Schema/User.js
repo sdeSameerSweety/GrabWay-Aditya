@@ -27,9 +27,11 @@ const LocationSchema=new mongoose.Schema({
 });
 
 const RouteSchema=new mongoose.Schema({
-    origin:{LocationSchema},
-    destination:{LocationSchema},
+    origin:LocationSchema,
+    destination:LocationSchema,
     plan:{type:String},
+    driverEmail:{type:String},
+    routeId:{type:String}
 })
 
 
