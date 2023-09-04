@@ -25,16 +25,26 @@ function DriverCard(props) {
   //console.log(matchDriverRoute);
   
   async function handleBookNow(index){
+    try{
     console.log('book now');
     const response=await axios.post("/bookRoute",{matchDriverRoute:matchDriverRoute[index], userDetails:JSON.parse(userData),UserQuery:{UserQuery}}).then(()=>{
       console.log('data sent');
     })
+    }
+    catch(err){
+      console.log(err);
+    }
   }
 
   async function handleMoreDetails(index){
-    const response=await axios.post('/moreDetailsForMatchRoutes',{matchDriverRoute:matchDriverRoute[index]}).then(()=>{
-      console.log('data sent');
-    })
+    try{
+      const response=await axios.post('/moreDetailsForMatchRoutes',{matchDriverRoute:matchDriverRoute[index]}).then(()=>{
+        console.log('data sent');
+      })
+    }
+    catch(err){
+      console.log(err);
+    }
   }
 
   return (
