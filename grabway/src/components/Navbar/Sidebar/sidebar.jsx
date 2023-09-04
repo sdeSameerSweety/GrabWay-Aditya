@@ -10,9 +10,8 @@ export default function Sidebar({
   counter,
   setDisplayVal,
   setLoginState,
-  setCounter
+  setCounter,
 }) {
- 
   const [sidebarClass, setSidebarClass] = useState("sidebar");
   const toggleClass = () => {
     if (sidebarClass === "sidebar open") {
@@ -23,16 +22,16 @@ export default function Sidebar({
       setClassDisplay("sidebar open");
     }
   };
-  const {userEmail,setUserEmail,setRunContext}= useContext(UserContext);
+  const { userEmail, setUserEmail, setRunContext } = useContext(UserContext);
   const handleSignout = () => {
     console.log("Signout Successfull");
-    localStorage.removeItem('grabwayToken');
-    localStorage.removeItem('grabwayUser');
-    localStorage.removeItem('grabwayGoogleToken');
-    Cookies.remove('grabwayToken');
-    Cookies.remove('grabwayUser');
-    Cookies.remove('grabwayGoogleToken');
-    setRunContext('logout');
+    localStorage.removeItem("grabwayToken");
+    localStorage.removeItem("grabwayUser");
+    localStorage.removeItem("grabwayGoogleToken");
+    Cookies.remove("grabwayToken");
+    Cookies.remove("grabwayUser");
+    Cookies.remove("grabwayGoogleToken");
+    setRunContext("logout");
     setCounter(false);
     setLoginState(false);
     window.location.reload(false);
@@ -78,18 +77,17 @@ export default function Sidebar({
       else return "w-[0px] ";
     }
   }
-  const [name,setName]=useState("Hello !");
-  const [userType,setUserType]=useState('Customer');
-  const userData = localStorage.getItem('grabwayUser');
-  useEffect(()=>{
+  const [name, setName] = useState("Hello !");
+  const [userType, setUserType] = useState("Customer");
+  const userData = localStorage.getItem("grabwayUser");
+  useEffect(() => {
     if (userData) {
-      if ((JSON.parse(userData)).name!=='') {
-        setName(`${(JSON.parse(userData)).name}`)
-        setUserType(`${(JSON.parse(userData)).userType}`);
+      if (JSON.parse(userData).name !== "") {
+        setName(`${JSON.parse(userData).name}`);
+        setUserType(`${JSON.parse(userData).userType}`);
       }
     }
-  })
-  
+  });
 
   return (
     <>
@@ -121,7 +119,6 @@ export default function Sidebar({
                 <div className="items-list-side-book-ride">
                   <i
                     className={showState === true ? "bx bx-car" : "hidden"}
-                    style={{ color: "#ffffff" }}
                   ></i>
                   <span className="links_name">Book Ride</span>
                 </div>
@@ -144,7 +141,6 @@ export default function Sidebar({
                 <div className="items-list-side">
                   <i
                     className={showState === true ? "bx bx-history" : "hidden"}
-                    style={{ color: "#ffffff" }}
                   ></i>
                   <span className="links_name">Ride History</span>
                 </div>
