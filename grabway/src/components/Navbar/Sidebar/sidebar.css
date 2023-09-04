@@ -167,10 +167,12 @@
   align-items: center;
   text-decoration: none;
   transition: all 0.4s ease;
-  background: #f7ff05;
+  background: #03fe53;
   cursor: pointer;
 }
-
+.items-list-side-book-ride .bx-car {
+  color: #000000;
+}
 .sidebar .items-list-side:hover {
   background: #fff;
 }
@@ -283,7 +285,7 @@
 }
 
 .sidebar .items-list-side-book-ride:hover {
-  background: #fff;
+  background: #ffffff;
 }
 .sidebar .items-list-side-book-ride .links_name {
   color: #000000;
