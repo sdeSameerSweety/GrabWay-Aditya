@@ -228,26 +228,26 @@ app.post("/editprofile", async (req, res) => {
         }
       );
       if (updatedResponse) {
-        res.status(200).json(updatedResponse);
+        return res.status(200).json(updatedResponse);
       } else {
-        res.status(500).json(null);
+        return res.status(500).json(null);
       }
     }
-    if (userType === "driver") {
+    if (data.userType === "driver") {
+      console.log(data);
       const updatedResponse = await DriverModel.updateOne(
         {
-          email: email,
+          email: data.email,
         },
         {
           $set: {
-            name: data.firstName + " " + data.lastName,
+            name: data.fname + " " + data.lname,
             phoneNumber: data.phone,
-            VehicleNumber: data.Vnumber,
+            VehicleNumber: data.vnumber,
             drivingLicenseNumber: data.dlnumber,
-            experience: data.experience,
-            "address.0.addressName": data.firstName + " " + data.lastName,
-            "address.0.addressLine1": data.address,
-            "address.0.addressLine2": data.address,
+            "address.0.addressName": data.fname + " " + data.lname,
+            "address.0.addressLine1": data.address1,
+            "address.0.addressLine2": data.address2,
             "address.0.city": data.city,
             "address.0.state": data.state,
             "address.0.pincode": data.pin,
@@ -255,9 +255,9 @@ app.post("/editprofile", async (req, res) => {
         }
       );
       if (updatedResponse) {
-        res.status(200).json(updatedResponse);
+        return res.status(200).json(updatedResponse);
       } else {
-        res.status(500).json(null);
+        return res.status(500).json(null);
       }
     }
   } catch (err) {
