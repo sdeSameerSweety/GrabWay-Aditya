@@ -26,6 +26,7 @@ import StatusBar from "./components/StausBar/StatusBar";
 import RouteUserRegisteration from "./Pages/RouteRegisteration/RouteUserRegistration";
 import MatchedRoutes from "./Pages/MatchedRoutes/MatchedRoutes";
 import UserPackages from "./Pages/UserPackages/UserPackages";
+import MoreDetails from "./Pages/MoreDetails/MoreDetails";
 axios.defaults.baseURL = "http://localhost:8080";
 axios.defaults.withCredentials = true;
 // import NearbyMap from "./components/Map/NearbyMap";
@@ -35,10 +36,12 @@ function App() {
   const [windowSize, setWindowSize] = useState(window.innerWidth);
   const [loginState, setLoginState] = useState(false);
   const [nonce, setNonce] = useState("grabway@123");
-  const [cookieVal, setCookieVal] = useState(localStorage.getItem('grabwayUser'));
+  const [cookieVal, setCookieVal] = useState(
+    localStorage.getItem("grabwayUser")
+  );
   const [valshow, setValShow] = useState(false);
   useEffect(() => {
-    setCookieVal(localStorage.getItem('grabwayUser'));
+    setCookieVal(localStorage.getItem("grabwayUser"));
   });
 
   useEffect(() => {
@@ -101,6 +104,7 @@ function App() {
             <Route path="/googleRegistration" element={<GRegistration />} />
             <Route path="/profile" element={<ProfilePage />} />
             <Route path="/driverHomePage" element={<DriverHomePage />} />
+            <Route path="/moredetails" element={<MoreDetails />} />
             <Route
               path="/routeDriverLocation"
               element={

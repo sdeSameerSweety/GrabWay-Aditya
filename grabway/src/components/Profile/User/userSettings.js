@@ -1,4 +1,5 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useRef, useState } from "react";
+import { UserContext } from "../../../context/Context";
 import { useToast } from "@chakra-ui/react";
 import axios from "axios";
 
@@ -6,52 +7,60 @@ import axios from "axios";
 
 export default function UserSettings({ userData }) {
   const [fetchStatus, setFetchStatus] = useState(false);
-  const data = JSON.parse(userData);
-  const emailForApi=data.email;
+  const { setRunContext } = useContext(UserContext);
   const toast = useToast();
+  const data = JSON.parse(userData);
   var name = data.name.split(" ");
+  const [uname, setuname] = useState(
+    data.email.slice(0, 5) + data._id.slice(0, 5)
+  );
+  const email = data.email;
+  const [fname, setfname] = useState(name[0]);
+  const [lname, setlname] = useState(name.slice(1).join(" "));
+  const [phone, setphone] = useState(data.phoneNumber);
+  const [address1, setaddress1] = useState(data.address[0].addressLine1);
+  const [address2, setaddress2] = useState(data.address[0].addressLine2);
+  const [city, setcity] = useState(data.address[0].city.split(" ")[0]);
+  const [state, setstate] = useState(data.address[0].state);
+  const [pin, setpin] = useState(data.address[0].pincode);
   const [displayData, setDisplayData] = useState({});
-  useEffect(() => {
-    setDisplayData({
-      username: data.email.slice(0, 5) + data._id.slice(0, 5),
-      email: data.email,
-      firstName: name[0],
-      lastName: name.slice(1).join(" "),
-      phone: data.phoneNumber,
-      address:
-        data.address[0].addressLine1 + " " + data.address[0].addressLine2,
-      city: data.address[0].city.split(" ")[0],
-      state: data.address[0].state,
-      pin: data.address[0].pincode,
-    });
-  }, []);
-  console.log(displayData);
   // console.log(displayData);
   const [editData, setEditData] = useState({});
-  useEffect(() => {
-    setEditData({
-      username: data.email.slice(0, 5) + data._id.slice(0, 5),
-      firstName: name[0],
-      lastName: name.slice(1).join(" "),
-      phone: data.phoneNumber,
-      address:
-        data.address[0].addressLine1 + " " + data.address[0].addressLine2,
-      city: data.address[0].city,
-      state: data.address[0].state,
-      pin: data.address[0].pincode,
-    });
-  }, []);
   const [disabledState, setDisabledState] = useState(true);
   const [editVal, setEditVal] = useState("Edit Profile");
   const [postData, setPostData] = useState();
+
+  //field data
+  let propDetails = {
+    userType: "UserType",
+    email: "Email",
+    fname: "First Name",
+    lname: "Last Name",
+    address1: "Address Line 1",
+    address2: "Address Line 2",
+    phone: "Phone Number",
+    city: "City",
+    state: "State",
+    pin: "PinCode",
+  };
+
+  //genrating random string
+  function randomString() {
+    let length = 20;
+    let result = "";
+    const characters =
+      "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+    const charactersLength = characters.length;
+    let counter = 0;
+    while (counter < length) {
+      result += characters.charAt(Math.floor(Math.random() * charactersLength));
+      counter += 1;
+    }
+    return result;
+  }
+
   const handlePincodeChange = async (e) => {
     const pincode = e.target.value;
-    setEditData({
-      ...editData,
-      pin: pincode,
-    });
-    setDisplayData({ ...displayData, pin: pincode });
-
     try {
       setFetchStatus(true);
       const response = await fetch(
@@ -60,68 +69,90 @@ export default function UserSettings({ userData }) {
       const data = await response.json();
       if (data && data[0].Status === "Error") {
         setFetchStatus(false);
-        setEditData({
-          ...editData,
-          city: "",
-          state: "",
-        });
-        setDisplayData({
-          ...displayData,
-          city: "",
-          state: "",
-        });
-      }
-      if (data && data[0].Status === "Success") {
+        setcity("");
+        setstate("");
+      } else if (data && data[0].Status === "Success") {
         setFetchStatus(false);
         setPostData(data);
+        setstate(data[0].PostOffice[0].State);
+        setcity(data[0].PostOffice[0].Name);
+        console.log(data[0].PostOffice[0].Name);
       }
     } catch (error) {
       console.error("Error fetching data:", error);
     }
   };
-  useEffect(() => {
-    if (postData !== undefined)
-      if (postData[0].Status === "Success") {
-        setEditData({
-          ...editData,
-          state: postData[0].PostOffice[0].State,
-        });
-        setDisplayData({
-          ...displayData,
-          state: postData[0].PostOffice[0].State,
-        });
-      }
-  }, [postData]);
-  console.log(editData);
+  // console.log(editData);
   // console.log(postData);
-  const [emptydataStatus, setDataStatus] = useState(true);
 
   const handleProfileChanges = async () => {
-    console.log(editData);
-    if (emptydataStatus === true) {
-      var ctr = 0;
-      for (var property in editData) {
-        if (editData[property].length === 0) {
-          console.log(ctr);
-          ctr++;
-        }
+    let sendData = {
+      userType: data.userType,
+      email: email,
+      fname: fname,
+      lname: lname,
+      address1: address1,
+      address2: address2,
+      phone: phone.toString(),
+      city: city,
+      state: state,
+      pin: pin,
+    };
+    let tmpStr = "";
+    let emptyStatus = false;
+    for (let prop in sendData) {
+      // console.log(sendData[prop], prop, typeof sendData[prop]);
+      if (sendData[prop].length === 0) {
+        if (tmpStr.length === 0) tmpStr = tmpStr + propDetails[prop];
+        else tmpStr = tmpStr + ", " + propDetails[prop];
+        emptyStatus = true;
       }
-      if (ctr === 0) setDataStatus(false);
-      else
+    }
+    if (emptyStatus) {
+      toast({
+        title: `${tmpStr} cannot be left Blank`,
+        status: "error",
+        isClosable: true,
+        position: "top-right",
+      });
+    } else {
+      // console.log(sendData["phone"]);
+      if (sendData.phone.length !== 10) {
         toast({
-          title: "Fields cannot be left blank",
+          title: `Phone Number must not be less than 10 digits`,
           status: "error",
           isClosable: true,
           position: "top-right",
         });
-    } else {
-      console.log("data ready to update");
-      console.log(editData);
-      let dataRet;
-      if (data.userType === "user")
-        dataRet = await axios.post("/editprofile/user", { editData,emailForApi });
-      else dataRet = await axios.post("/editprofile/user", { editData, emailForApi });
-      console.log(dataRet.data);
+      } else {
+        if (sendData.pin.length !== 6) {
+          toast({
+            title: `Wrong Pin Code`,
+            status: "error",
+            isClosable: true,
+            position: "top-right",
+          });
+        } else {
+          console.log(sendData);
+          const retData = await axios
+            .post("/editprofile", { sendData })
+            .then((res) => {
+              console.log(res.data);
+              toast({
+                title: "Profile Updated Successfully",
+                status: "success",
+                isClosable: true,
+                position: "top-right",
+              });
+              setDisabledState(true);
+              setEditVal("Edit Profile");
+              setRunContext(randomString());
+            })
+            .catch((err) => {
+              console.log(err);
+            });
+        }
+      }
     }
   };
 
@@ -166,7 +197,7 @@ export default function UserSettings({ userData }) {
                   <input
                     type="text"
                     className="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
-                    defaultValue={displayData.username}
+                    defaultValue={uname}
                     disabled="true"
                   />
                 </div>
@@ -182,7 +213,7 @@ export default function UserSettings({ userData }) {
                   <input
                     type="email"
                     className="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
-                    defaultValue={displayData.email}
+                    defaultValue={email}
                     disabled="true"
                   />
                 </div>
@@ -198,14 +229,9 @@ export default function UserSettings({ userData }) {
                   <input
                     type="text"
                     className="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
-                    defaultValue={displayData.firstName}
+                    defaultValue={fname}
                     disabled={disabledState}
-                    onChange={(e) =>
-                      setEditData((prev) => ({
-                        ...prev,
-                        firstName: e.target.value,
-                      }))
-                    }
+                    onChange={(e) => setfname(e.target.value)}
                   />
                 </div>
               </div>
@@ -220,14 +246,9 @@ export default function UserSettings({ userData }) {
                   <input
                     type="text"
                     className="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
-                    defaultValue={displayData.lastName}
+                    defaultValue={lname}
                     disabled={disabledState}
-                    onChange={(e) =>
-                      setEditData((prev) => ({
-                        ...prev,
-                        lastName: e.target.value,
-                      }))
-                    }
+                    onChange={(e) => setlname(e.target.value)}
                   />
                 </div>
               </div>
@@ -250,14 +271,10 @@ export default function UserSettings({ userData }) {
                   <input
                     type="text"
                     className="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
-                    defaultValue={displayData.phone}
+                    defaultValue={phone}
                     disabled={disabledState}
-                    onChange={(e) =>
-                      setEditData((prev) => ({
-                        ...prev,
-                        address: e.target.value,
-                      }))
-                    }
+                    maxLength="10"
+                    onChange={(e) => setphone(e.target.value)}
                   />
                 </div>
               </div>
@@ -267,19 +284,31 @@ export default function UserSettings({ userData }) {
                     className="block uppercase text-blueGray-600 text-xs font-bold mb-2"
                     htmlFor="grid-password"
                   >
-                    Address
+                    Address Line 1
                   </label>
                   <input
                     type="text"
                     className="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
-                    defaultValue={displayData.address}
+                    defaultValue={address1}
                     disabled={disabledState}
-                    onChange={(e) =>
-                      setEditData((prev) => ({
-                        ...prev,
-                        address: e.target.value,
-                      }))
-                    }
+                    onChange={(e) => setaddress1(e.target.value)}
+                  />
+                </div>
+              </div>
+              <div className="w-full lg:w-12/12 px-4">
+                <div className="relative w-full mb-3">
+                  <label
+                    className="block uppercase text-blueGray-600 text-xs font-bold mb-2"
+                    htmlFor="grid-password"
+                  >
+                    Address Line 2
+                  </label>
+                  <input
+                    type="text"
+                    className="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
+                    defaultValue={address2}
+                    disabled={disabledState}
+                    onChange={(e) => setaddress2(e.target.value)}
                   />
                 </div>
               </div>
@@ -293,31 +322,22 @@ export default function UserSettings({ userData }) {
                   </label>
                   {disabledState === true ? (
                     <input
-                      type="email"
+                      type="text"
                       className="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
-                      defaultValue={displayData.city}
+                      defaultValue={city}
                     />
                   ) : (
                     <select
-                      type="email"
-                      className="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
-                      onChange={(e) => {
-                        setEditData({
-                          ...editData,
-                          city: e.target.value,
-                        });
-                        setDisplayData({
-                          ...displayData,
-                          city: e.target.value,
-                        });
-                      }}
+                      type="text"
+                      className="border-0 px3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
+                      onChange={(e) => setcity(e.target.value)}
                     >
                       <option value="" selected disabled hidden>
-                        {displayData.city}
+                        {city}
                       </option>
                       {postData &&
                         postData[0].PostOffice.map((item) => (
-                          <option value="volvo">{item.Name}</option>
+                          <option>{item.Name}</option>
                         ))}
                     </select>
                   )}
@@ -334,7 +354,7 @@ export default function UserSettings({ userData }) {
                   <input
                     type="text"
                     className="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
-                    defaultValue={displayData.state}
+                    value={state}
                     disabled="true"
                   />
                 </div>
@@ -350,13 +370,11 @@ export default function UserSettings({ userData }) {
                   <input
                     type="text"
                     className="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
-                    defaultValue={displayData.pin}
+                    defaultValue={pin}
                     disabled={disabledState}
+                    maxLength="6"
                     onChange={(e) => {
-                      setEditData({
-                        ...editData,
-                        pin: e.target.value,
-                      });
+                      setpin(e.target.value);
                       handlePincodeChange(e);
                     }}
                   />
