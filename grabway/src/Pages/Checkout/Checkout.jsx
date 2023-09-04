@@ -16,7 +16,7 @@ import {
 import { BsThreeDotsVertical } from "react-icons/bs";
 import { AiOutlineHeart } from "react-icons/ai";
 import { BiShareAlt, BiChat } from "react-icons/bi";
-
+import "./Checkout.css";
 const Checkout = () => {
   const driverName = "Kittu Singh";
   const driverState = "West Bengal";
@@ -25,13 +25,14 @@ const Checkout = () => {
   const destinationText = "Bhubaneshwar Railway Station, MasterCanteen Area";
   return (
     <div className="p-5">
-      <div className="flex justify-center items-center w-[100%] font-bold font-ubuntu text-5xl mt-[3%]">
-        CHECKOUT
+      <div className="flex flex-col justify-center items-center w-[100%] mt-[2%] mb-[2%] gap-5" >
+        <div className="font-semibold font-ubuntu text-1xl">Just a few more minutes,</div>
+        <div className="font-bold font-ubuntu text-5xl text-[#E51B23]">LET'S CHECKOUT</div>
       </div>
 
       <div className="flex justify-between items-center ">
-        <div className="flex justify-center items-center">
-          <Card maxW="md">
+        <div className="flex justify-center items-center ">
+          <Card maxW="md" variant={'filled'} className="card">
             <CardHeader>
               <Flex spacing="4">
                 <Flex flex="1" gap="4" alignItems="center" flexWrap="wrap">
@@ -115,7 +116,7 @@ const Checkout = () => {
         </div>
 
         <div>
-            Confirm Address
+            Confirm Pickup
         </div>
       </div>
     </div>
