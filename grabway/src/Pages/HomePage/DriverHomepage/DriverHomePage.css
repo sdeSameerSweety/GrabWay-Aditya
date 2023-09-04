@@ -1,3 +1,14 @@
+.dekstop-viw-driver {
+  /* flex justify-center items-center */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.mobile-view-driver {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
 @media only screen and (max-width: 600px) {
   .dekstop-view-driver {
     display: none;

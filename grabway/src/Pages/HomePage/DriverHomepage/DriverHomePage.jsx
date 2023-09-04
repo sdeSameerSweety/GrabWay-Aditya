@@ -41,7 +41,7 @@ const TopSection = ({ nonceVal, loginState }) => {
   }
   return (
     <>
-      <div className="dekstop-view-driver flex justify-center items-center">
+      <div className="dekstop-view-driver">
         {routesEmpty && (
           <>
             <div className="flex flex-row justify-between items-center gap-20 mt-[8vh]">
@@ -252,7 +252,7 @@ const TopSection = ({ nonceVal, loginState }) => {
           </>
         )}
       </div>
-      <div className="mobile-view-driver flex justify-center items-center">
+      <div className="mobile-view-driver">
         {routesEmpty && (
           <>
             <div className="flex flex-col justify-between items-center gap-20 mt-[8vh]">
