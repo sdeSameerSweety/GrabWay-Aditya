@@ -11,19 +11,22 @@
     margin-top: 10%;
   }
 }
-
+.mobile-view {
+  /* mt-[2vh] flex flex-col justify-center items-center */
+  margin-top: 2vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
 @media only screen and (max-width: 600px) {
   .dekstop-view {
     display: none;
-  }
-  .mobile-view {
   }
 }
 @media only screen and (min-width: 601px) {
   .mobile-view {
     display: none;
-  }
-  .dekstop-view {
   }
 }
 

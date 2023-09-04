@@ -1,8 +1,9 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import Cookies from "js-cookie";
 import "./status.css";
 import "./extramore.css";
+import { UserContext } from "../../context/Context";
 
 export default function StatusBar() {
   const [home, setHome] = useState("home");
@@ -10,13 +11,18 @@ export default function StatusBar() {
   const [services, setServices] = useState("services active");
   const [about, setAbout] = useState("about");
   const [help, setHelp] = useState("help");
+  const { setRunContext } = useContext(UserContext);
   const navigate = useNavigate();
 
   const handleSignout = () => {
     console.log("Signout Successfull");
+    localStorage.removeItem("grabwayToken");
+    localStorage.removeItem("grabwayUser");
+    localStorage.removeItem("grabwayGoogleToken");
     Cookies.remove("grabwayToken");
     Cookies.remove("grabwayUser");
     Cookies.remove("grabwayGoogleToken");
+    setRunContext("logout");
     window.location.reload(false);
   };
 

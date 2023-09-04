@@ -514,7 +514,7 @@ const TopSection = ({ nonceVal, loginState }) => {
         )}
       </div>
 
-      <div className="mobile-view mt-[2vh] flex flex-col justify-center items-center">
+      <div className="mobile-view">
         <div>
           <img
             className="h-[20vh]"
