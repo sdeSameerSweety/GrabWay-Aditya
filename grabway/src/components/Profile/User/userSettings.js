@@ -23,7 +23,10 @@ export default function UserSettings({ userData }) {
   const [city, setcity] = useState(data.address[0].city.split(" ")[0]);
   const [state, setstate] = useState(data.address[0].state);
   const [pin, setpin] = useState(data.address[0].pincode);
-  const [displayData, setDisplayData] = useState({});
+
+  //For Driver
+  const [vnumber, setvnumber] = useState(data.VehicleNumber);
+  const [dlnumber, setdlnumber] = useState(data.drivingLicenseNumber);
   // console.log(displayData);
   const [editData, setEditData] = useState({});
   const [disabledState, setDisabledState] = useState(true);
@@ -42,6 +45,8 @@ export default function UserSettings({ userData }) {
     city: "City",
     state: "State",
     pin: "PinCode",
+    vnumber: "Vehicle Number",
+    dlnumber: "Driving License No",
   };
 
   //genrating random string
@@ -86,71 +91,170 @@ export default function UserSettings({ userData }) {
   // console.log(postData);
 
   const handleProfileChanges = async () => {
-    let sendData = {
-      userType: data.userType,
-      email: email,
-      fname: fname,
-      lname: lname,
-      address1: address1,
-      address2: address2,
-      phone: phone.toString(),
-      city: city,
-      state: state,
-      pin: pin,
-    };
-    let tmpStr = "";
-    let emptyStatus = false;
-    for (let prop in sendData) {
-      // console.log(sendData[prop], prop, typeof sendData[prop]);
-      if (sendData[prop].length === 0) {
-        if (tmpStr.length === 0) tmpStr = tmpStr + propDetails[prop];
-        else tmpStr = tmpStr + ", " + propDetails[prop];
-        emptyStatus = true;
+    if (data.userType === "user") {
+      let sendData = {
+        userType: data.userType,
+        email: email,
+        fname: fname,
+        lname: lname,
+        address1: address1,
+        address2: address2,
+        phone: phone.toString(),
+        city: city,
+        state: state,
+        pin: pin.toString(),
+      };
+      let tmpStr = "";
+      let emptyStatus = false;
+      for (let prop in sendData) {
+        // console.log(sendData[prop], prop, typeof sendData[prop]);
+        if (sendData[prop].length === 0) {
+          if (tmpStr.length === 0) tmpStr = tmpStr + propDetails[prop];
+          else tmpStr = tmpStr + ", " + propDetails[prop];
+          emptyStatus = true;
+        }
       }
-    }
-    if (emptyStatus) {
-      toast({
-        title: `${tmpStr} cannot be left Blank`,
-        status: "error",
-        isClosable: true,
-        position: "top-right",
-      });
-    } else {
-      // console.log(sendData["phone"]);
-      if (sendData.phone.length !== 10) {
+      if (emptyStatus) {
         toast({
-          title: `Phone Number must not be less than 10 digits`,
+          title: `${tmpStr} cannot be left Blank`,
           status: "error",
           isClosable: true,
           position: "top-right",
         });
       } else {
-        if (sendData.pin.length !== 6) {
+        // console.log(sendData["phone"]);
+        if (sendData.phone.length !== 10) {
           toast({
-            title: `Wrong Pin Code`,
+            title: `Phone Number must not be less than 10 digits`,
             status: "error",
             isClosable: true,
             position: "top-right",
           });
         } else {
-          console.log(sendData);
-          const retData = await axios
-            .post("/editprofile", { sendData })
-            .then((res) => {
-              console.log(res.data);
+          if (sendData.pin.length !== 6) {
+            toast({
+              title: `Wrong Pin Code`,
+              status: "error",
+              isClosable: true,
+              position: "top-right",
+            });
+          } else {
+            console.log(sendData);
+            const retData = await axios
+              .post("/editprofile", { sendData })
+              .then((res) => {
+                console.log(res.data);
+                toast({
+                  title: "Profile Updated Successfully",
+                  status: "success",
+                  isClosable: true,
+                  position: "top-right",
+                });
+                setDisabledState(true);
+                setEditVal("Edit Profile");
+                setRunContext(randomString());
+              })
+              .catch((err) => {
+                console.log(err);
+              });
+          }
+        }
+      }
+    } else {
+      let sendData = {
+        userType: data.userType,
+        email: email,
+        fname: fname,
+        lname: lname,
+        address1: address1,
+        address2: address2,
+        phone: phone.toString(),
+        city: city,
+        state: state,
+        pin: pin.toString(),
+        vnumber: vnumber,
+        dlnumber: dlnumber,
+      };
+      let tmpStr = "";
+      let emptyStatus = false;
+      for (let prop in sendData) {
+        // console.log(sendData[prop], prop, typeof sendData[prop]);
+        if (sendData[prop].length === 0) {
+          if (tmpStr.length === 0) tmpStr = tmpStr + propDetails[prop];
+          else tmpStr = tmpStr + ", " + propDetails[prop];
+          emptyStatus = true;
+        }
+      }
+      if (emptyStatus) {
+        toast({
+          title: `${tmpStr} cannot be left Blank`,
+          status: "error",
+          isClosable: true,
+          position: "top-right",
+        });
+      } else {
+        // console.log(sendData["phone"]);
+        if (sendData.phone.length !== 10) {
+          toast({
+            title: `Phone Number must not be less than 10 digits`,
+            status: "error",
+            isClosable: true,
+            position: "top-right",
+          });
+        } else {
+          if (sendData.pin.length !== 6) {
+            toast({
+              title: `Wrong Pin Code`,
+              status: "error",
+              isClosable: true,
+              position: "top-right",
+            });
+          } else {
+            if (
+              !/^[A-Z]{2}[ -]?[0-9]{2}[ -]?[A-Z]{1,2}[ -]?[0-9]{4}$/.test(
+                sendData.vnumber
+              )
+            ) {
               toast({
-                title: "Profile Updated Successfully",
-                status: "success",
+                title: "Invalid Vehicle Number",
+                status: "error",
                 isClosable: true,
                 position: "top-right",
               });
-              setDisabledState(true);
-              setEditVal("Edit Profile");
-              setRunContext(randomString());
-            })
-            .catch((err) => {
-              console.log(err);
-            });
+            } else {
+              if (
+                !/^(([A-Z]{2}[0-9]{2})|([A-Z]{2}-[0-9]{2}))((19|20)[0-9]{2})[0-9]{7}$/.test(
+                  sendData.dlnumber
+                )
+              ) {
+                toast({
+                  title: "Invalid Driving License Number",
+                  status: "error",
+                  isClosable: true,
+                  position: "top-right",
+                });
+              } else {
+                console.log(sendData);
+                const retData = await axios
+                  .post("/editprofile", { sendData })
+                  .then((res) => {
+                    console.log(res.data);
+                    toast({
+                      title: "Profile Updated Successfully",
+                      status: "success",
+                      isClosable: true,
+                      position: "top-right",
+                    });
+                    setDisabledState(true);
+                    setEditVal("Edit Profile");
+                    setRunContext(randomString());
+                  })
+                  .catch((err) => {
+                    console.log(err);
+                  });
+              }
+            }
+          }
         }
       }
     }
@@ -382,30 +486,52 @@ export default function UserSettings({ userData }) {
               </div>
             </div>
 
-            <hr className="mt-6 border-b-1 border-blueGray-300" />
+            {data.userType === "driver" && (
+              <>
+                <hr className="mt-6 border-b-1 border-blueGray-300" />
 
-            {/* <h6 className="text-blueGray-400 text-sm mt-3 mb-6 font-bold uppercase">
-              About Me
-            </h6>
-            <div className="flex flex-wrap">
-              <div className="w-full lg:w-12/12 px-4">
-                <div className="relative w-full mb-3">
-                  <label
-                    className="block uppercase text-blueGray-600 text-xs font-bold mb-2"
-                    htmlFor="grid-password"
-                  >
-                    About me
-                  </label>
-                  <textarea
-                    type="text"
-                    className="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
-                    defaultValue="A beautiful UI Kit and Admin for React & Tailwind CSS. It is Free and Open Source."
-                    disabled={disabledState}
-                    rows="4"
-                  ></textarea>
+                <h6 className="text-blueGray-400 text-sm mt-3 mb-6 font-bold uppercase">
+                  Driving Information
+                </h6>
+                <div className="flex flex-wrap">
+                  <div className="w-full lg:w-12/12 px-4">
+                    <div className="relative w-full mb-3">
+                      <label
+                        className="block uppercase text-blueGray-600 text-xs font-bold mb-2"
+                        htmlFor="grid-password"
+                      >
+                        Vehicle Number
+                      </label>
+                      <input
+                        type="text"
+                        className="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
+                        defaultValue={vnumber}
+                        maxLength="10"
+                        disabled={disabledState}
+                        onChange={(e) => setvnumber(e.target.value)}
+                      />
+                    </div>
+                  </div>
+                  <div className="w-full lg:w-12/12 px-4">
+                    <div className="relative w-full mb-3">
+                      <label
+                        className="block uppercase text-blueGray-600 text-xs font-bold mb-2"
+                        htmlFor="grid-password"
+                      >
+                        Driving License Number
+                      </label>
+                      <input
+                        type="text"
+                        className="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
+                        defaultValue={dlnumber}
+                        disabled={disabledState}
+                        onChange={(e) => setdlnumber(e.target.value)}
+                      />
+                    </div>
+                  </div>
                 </div>
-              </div>
-                  </div>*/}
+              </>
+            )}
           </form>
         </div>
       </div>
