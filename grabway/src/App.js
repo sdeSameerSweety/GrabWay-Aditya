@@ -27,6 +27,7 @@ import RouteUserRegisteration from "./Pages/RouteRegisteration/RouteUserRegistra
 import MatchedRoutes from "./Pages/MatchedRoutes/MatchedRoutes";
 import UserPackages from "./Pages/UserPackages/UserPackages";
 import MoreDetails from "./Pages/MoreDetails/MoreDetails";
+import LoadingCarAnimation from "./components/AllAnimations/LoadingCarAnimation";
 axios.defaults.baseURL = "http://localhost:8080";
 axios.defaults.withCredentials = true;
 // import NearbyMap from "./components/Map/NearbyMap";
@@ -90,6 +91,7 @@ function App() {
         />
 
         <div style={intDivStyle}>
+          <LoadingCarAnimation />
           <Routes>
             {/* <Route path="/nearby" element={<NearbyMap nonceVal={nonce} />} /> */}
             <Route
