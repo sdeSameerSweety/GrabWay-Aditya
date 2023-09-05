@@ -14,11 +14,13 @@ import {
 import AdvertisementCard from "./AdvertisementCard/AdvertisementCard";
 import "./DriverCard.css";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 import Cookies from "js-cookie";
 const sections = ["Essential Commuter", "Comfort Traveler", "Premier Business"];
 const areTabsDisabled = true;
 
 function DriverCard(props) {
+  const navigate = useNavigate();
   const userData = localStorage.getItem("grabwayUser");
   const matchDriverRoute = props.matchDriverRoute;
   const UserQuery = props.UserQuery;
@@ -38,14 +40,18 @@ function DriverCard(props) {
   }
 
   async function handleMoreDetails(index) {
-    // const response = await axios
-    //   .post("/moreDetailsForMatchRoutes", {
-    //     matchDriverRoute: matchDriverRoute[index],
-    //   })
-    //   .then(() => {
-    //     console.log("data sent");
-    //   });
-    console.log(matchDriverRoute[index]);
+    const response = await axios
+      .post("/moreDetailsForMatchRoutes", {
+        matchDriverRoute: matchDriverRoute[index],
+      })
+      .then((res) => {
+        // console.log(res.data);
+        navigate("/moredetails", { state: res.data });
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+    // console.log(matchDriverRoute[index]);
   }
 
   return (
@@ -112,7 +118,10 @@ function DriverCard(props) {
                           Seats:{" "}
                           {driver.route.seats - driver.route.customers.length}
                         </span>
-                        <button class="bg-theme text-white py-2 px-4 rounded-full font-bold hover:bg-gray-800">
+                        <button
+                          class="bg-theme text-white py-2 px-4 rounded-full font-bold hover:bg-gray-800"
+                          onClick={() => handleMoreDetails(driverIndex)}
+                        >
                           Grab it
                         </button>
                       </div>
