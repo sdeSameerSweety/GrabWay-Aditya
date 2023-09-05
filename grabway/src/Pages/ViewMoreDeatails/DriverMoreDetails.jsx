@@ -1,4 +1,3 @@
-// DriverDetails.js
 import React from "react";
 import {
   Box,
@@ -73,7 +72,29 @@ const DriverDetails = () => {
       bg="white"
       color="gray.800"
       className="container-driver-view-details"
+      position="relative"
     >
+      {/* Route Information in the top-right corner */}
+      <Box
+        position="absolute"
+        top="1rem"
+        right="1rem"
+        bg="gray.100"
+        p={2}
+        borderRadius="md"
+      >
+        <Text fontSize="sm" fontWeight="bold">
+          Route Information
+        </Text>
+        <Text fontSize="sm">From: {route.from}</Text>
+        <Text fontSize="sm">To: {route.to}</Text>
+        <Text fontSize="sm">Pickup Time: {route.pickupTime}</Text>
+        <Text fontSize="sm">Drop Time: {route.dropTime}</Text>
+        <Text fontSize="sm">Total Seats: {driver.totalSeats}</Text>
+        <Text fontSize="sm">Total Fare: {driver.totalFare}</Text>
+      </Box>
+
+      {/* Driver Profile */}
       <div className="profile-header">
         <Image
           src={driver.profileImage}
@@ -93,16 +114,8 @@ const DriverDetails = () => {
         </div>
       </div>
       <Divider borderColor="gray.300" />
-      <div className="route-info">
-        <h3>Route Information</h3>
-        <p>From: {route.from}</p>
-        <p>To: {route.to}</p>
-        <p>Pickup Time: {route.pickupTime}</p>
-        <p>Drop Time: {route.dropTime}</p>
-        <p>Total Seats: {driver.totalSeats}</p>
-        <p>Total Fare: {driver.totalFare}</p>
-      </div>
-      <Divider borderColor="gray.300" />
+
+      {/* Customer Information */}
       <div className="customer-card">
         <h4>Customers Information</h4>
         <Grid templateColumns={{ sm: "1fr", md: "repeat(3, 1fr)" }} gap={4}>

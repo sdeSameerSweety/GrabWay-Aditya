@@ -1,28 +1,43 @@
 /* DriverDetails.css */
-/* body {
-  font-family: "Arial", sans-serif;
-} */
 
-.container-driver-view-details {
-  max-width: 85%;
-  margin: 0 auto;
-  padding: 20px;
-  font-family: "Arial", sans-serif;
+/* Reset some default styles */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
+/* Apply a clean and professional font stack */
+body {
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  background-color: #f7f7f7;
+}
+
+/* Styling for the main container */
+.container-driver-view-details {
+  max-width: 80%;
+  margin: 0 auto;
+  padding: 20px;
+  background-color: #fff;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  border-radius: 12px;
+}
+
+/* Styling for the profile header */
 .profile-header {
   display: flex;
-  justify-content: space-between;
   align-items: center;
   margin-bottom: 20px;
 }
 
-.profile-header img {
+.profile-header .profile-image {
   border-radius: 50%;
   width: 150px;
   height: 150px;
   object-fit: cover;
   margin-right: 20px;
+  border: 6px solid #fff; /* Add a white border around the image */
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
 }
 
 .profile-header .driver-info {
@@ -33,18 +48,23 @@
   font-size: 28px;
   font-weight: bold;
   margin-bottom: 10px;
+  color: #333; /* Darken the text color */
 }
 
+/* Styling for route information */
 .route-info h3 {
   font-size: 24px;
   font-weight: bold;
   margin-bottom: 10px;
+  color: #333;
 }
 
+/* Styling for the customer card */
 .customer-card {
-  border: 1px solid #ccc;
-  border-radius: 8px;
-  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
+  background-color: #fff;
+  border: 1px solid #e0e0e0; /* Light gray border */
+  border-radius: 12px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
   padding: 20px;
   margin-bottom: 20px;
 }
@@ -53,9 +73,11 @@
   font-size: 20px;
   font-weight: bold;
   margin-bottom: 10px;
+  color: #333;
 }
 
 .customer-card p {
-  font-size: 16px;
-  margin-bottom: 5px;
+  font-size: 18px;
+  margin-bottom: 8px;
+  color: #666; /* Dark gray text color */
 }
