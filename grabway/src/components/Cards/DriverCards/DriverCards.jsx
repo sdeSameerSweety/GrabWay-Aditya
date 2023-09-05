@@ -15,6 +15,7 @@ import AdvertisementCard from "./AdvertisementCard/AdvertisementCard";
 import "./DriverCard.css";
 import axios from "axios";
 import Cookies from "js-cookie";
+import { Navigate } from "react-router-dom";
 const sections = ["Essential Commuter", "Comfort Traveler", "Premier Business"];
 const areTabsDisabled = true;
 
@@ -25,7 +26,7 @@ function DriverCard(props) {
   //console.log(matchDriverRoute);
 
   async function handleBookNow(index) {
-    console.log("book now");
+    /*console.log("book now");
     const response = await axios
       .post("/bookRoute", {
         matchDriverRoute: matchDriverRoute[index],
@@ -34,7 +35,7 @@ function DriverCard(props) {
       })
       .then(() => {
         console.log("data sent");
-      });
+      });*/
   }
 
   async function handleMoreDetails(index) {
@@ -112,7 +113,7 @@ function DriverCard(props) {
                           Seats:{" "}
                           {driver.route.seats - driver.route.customers.length}
                         </span>
-                        <button class="bg-theme text-white py-2 px-4 rounded-full font-bold hover:bg-gray-800">
+                        <button onClick={handleBookNow} class="bg-theme text-white py-2 px-4 rounded-full font-bold hover:bg-gray-800">
                           Grab it
                         </button>
                       </div>
