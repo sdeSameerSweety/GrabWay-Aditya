@@ -61,29 +61,36 @@ const DriverDetails = () => {
       bg="white"
       color="red.800"
     >
-      <HStack spacing={6} align="center">
-        <VStack align="start" flex="1">
-          <Text fontSize="2xl">{driver.name}</Text>
-          <Text fontSize="md">Email: {driver.email}</Text>
-          <Text fontSize="md">DL Number: {driver.licenseNumber}</Text>
-          <Text fontSize="md">Vehicle Number: {driver.vehicleNumber}</Text>
-          <Text fontSize="md">Car Type: {driver.carType}</Text>
-          <Text fontSize="md">Total Seats: {driver.totalSeats}</Text>
-          <Text fontSize="md">Total Fare: {driver.totalFare}</Text>
-        </VStack>
-        <VStack align="center">
-          <Image
-            src={driver.profileImage}
-            alt={`Profile of ${driver.name}`}
-            borderRadius="full"
-            boxSize="150px"
-            objectFit="cover"
-          />
-          <HStack>
-            <Badge colorScheme="green">Top Rated</Badge>
-            <Text fontSize="md">Rating: {driver.rating}</Text>
+      <HStack spacing={8}>
+        <Box flex="1">
+          <HStack spacing={4} align="center">
+            <Image
+              src={driver.profileImage}
+              alt={`Profile of ${driver.name}`}
+              borderRadius="full"
+              boxSize="150px"
+              objectFit="cover"
+            />
+            <VStack align="start">
+              <Text fontSize="2xl">{driver.name}</Text>
+              <Text fontSize="md">Email: {driver.email}</Text>
+              <Text fontSize="md">DL Number: {driver.licenseNumber}</Text>
+              <Text fontSize="md">Vehicle Number: {driver.vehicleNumber}</Text>
+              <Text fontSize="md">Car Type: {driver.carType}</Text>
+              <HStack>
+                <Badge colorScheme="green">Top Rated</Badge>
+                <Text fontSize="md">Rating: {driver.rating}</Text>
+              </HStack>
+            </VStack>
           </HStack>
-        </VStack>
+        </Box>
+        <Box flex="1">
+          <VStack spacing={4} align="start">
+            <Text fontSize="2xl">Trip Information</Text>
+            <Text fontSize="md">Total Seats: {driver.totalSeats}</Text>
+            <Text fontSize="md">Total Fare: {driver.totalFare}</Text>
+          </VStack>
+        </Box>
       </HStack>
       <Divider my={4} borderColor="red.300" />
       <Grid templateColumns="repeat(2, 1fr)" gap={4}>
