@@ -16,17 +16,17 @@ export default function TopSlider() {
   const slides = [
     {
       image:
-        "https://img.freepik.com/free-vector/car-driving-road-along-night-beach-automobile_107791-15615.jpg?w=2000",
+        "https://img.freepik.com/free-vector/cartoon-city-street-with-cars-rainy-weather_107791-19455.jpg?w=2000",
       text: "1. Drive, Earn, and Share the Ride with Grabway Carpooling!",
     },
     {
       image:
-        "https://img.freepik.com/free-vector/cartoon-city-street-with-cars-rainy-weather_107791-19455.jpg?w=2000",
+        "https://img.freepik.com/free-vector/car-drive-city-street-rain-night_107791-19306.jpg?w=2000",
       text: "2. Cut Costs, Connect, and Contribute: Grabway Carpooling!",
     },
     {
       image:
-        "https://img.freepik.com/free-vector/car-drive-city-street-rain-night_107791-19306.jpg?w=2000",
+        "https://img.freepik.com/free-vector/car-driving-road-along-night-beach-automobile_107791-15615.jpg?w=2000",
       text: "3. Carpooling Redefined: Grabway - Your Daily Solution!",
     },
   ];
@@ -36,7 +36,7 @@ export default function TopSlider() {
     setTimeout(() => {
       setSlideIndex((prevIndex) => (prevIndex + 1) % slides.length);
       setFadeIn(true);
-    }, 200); // Delay to change slide after fade-out animation
+    },100); // Delay to change slide after fade-out animation
   };
 
   const prevSlide = () => {
@@ -46,13 +46,13 @@ export default function TopSlider() {
         (prevIndex) => (prevIndex - 1 + slides.length) % slides.length
       );
       setFadeIn(true);
-    }, 200); // Delay to change slide after fade-out animation
+    }, 100); // Delay to change slide after fade-out animation
   };
 
   useEffect(() => {
     const interval = setInterval(() => {
       nextSlide();
-    }, 5000); // Auto-advance every 5 seconds
+    }, 3500); // Auto-advance every 5 seconds
 
     return () => {
       clearInterval(interval);
