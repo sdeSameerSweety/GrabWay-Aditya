@@ -1,0 +1,146 @@
+.card:hover{
+    transform: scale(1.02);
+    transition: 1s all;
+}
+.card{
+    transition: 1s all;
+}
+.razorpaylogo{
+    width: 100px;
+    height:30px;
+}
+.visalogo{
+    width:100px;
+    height:30px
+}
+.upilogo{
+    width:100px;
+    height:40px
+}
+.cashlogo{
+    width:100px;
+    height: 40px;
+}
+.driver-card{
+    animation-name: slow-visibility;
+    animation-duration: 1s;
+    transition: 1s all;
+}
+.first-box{
+    animation-name: slow-visibility;
+    animation-duration: 1s;
+    transition: 1s all;
+}
+.second-box{
+    animation-name: slow-visibility;
+    animation-duration: 0.5s;
+    transition: 0.5s all;
+}
+.mobile-amt{
+    padding-left: 2vw;
+    padding-right: 2vw;
+}
+@keyframes slow-visibility {
+    0%{
+        opacity: 0;
+      
+    }
+    10%{
+        opacity: 0.10;
+       
+    }
+    20%{
+        opacity: 0.20;
+    
+    }
+    30%{
+        opacity: 0.30;
+        
+    }
+    40%{
+        opacity: 0.40;
+      
+    }
+    50%{
+        opacity: 0.50;
+        
+    }
+    60%{
+        opacity: 0.60;
+       
+    }
+    70%{
+        opacity: 0.70;
+        
+    }
+    80%{
+        opacity: 0.80;
+       
+    }
+    90%{
+        opacity: 0.90;
+        
+    }
+    100%{
+        opacity: 1;
+       
+    }
+}
+@media only screen and (max-width: 1410px) {
+    .preffered{
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
+  }
+
+  @media only screen and (max-width: 1180px) {
+    .each-payment-option{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap:10px
+    }
+  }
+
+  @media only screen and (max-width: 1180px) {
+    .each-payment-option{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap:10px
+    }
+  }
+  @media only screen and (max-width: 848px) {
+    .each-payment-option Button{
+        width: auto;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+  }
+  @media only screen and (max-width: 735px) {
+    .main-div-two-cards{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+    }
+    .card-second-box{
+        width: auto;;
+    }
+  }
+
+  @media only screen and (max-width: 601px) {
+    .desktop-view{
+        display: none;
+    }
+  }
+  @media only screen and (min-width: 601px) {
+    .mobile-view{
+        display: none;
+    }
+  }

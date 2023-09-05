@@ -80,7 +80,7 @@ const TopBar = ({ counter, setCounter, setLoginState, loginState }) => {
   }
 
   const [city, setCity] = useState("");
-  console.log(profilePhoto);
+
 
   useEffect(() => {
     const UserData = localStorage.getItem("grabwayUser");
@@ -191,8 +191,12 @@ const TopBar = ({ counter, setCounter, setLoginState, loginState }) => {
 
   async function VerifyOtp(){
     console.log(JSON.stringify(otp));
-    console.log((signupOtp))
-    if(signupOtp===JSON.stringify(otp)){
+    console.log(parseInt(signupOtp));
+    let generatedOtp=JSON.stringify(otp);
+    generatedOtp=parseInt(generatedOtp);
+    generatedOtp=generatedOtp-2025;
+    console.log(generatedOtp)
+    if(parseInt(signupOtp)===generatedOtp){
       setShowOtpInput(true);
       //display the other fields
     }
@@ -381,7 +385,7 @@ const TopBar = ({ counter, setCounter, setLoginState, loginState }) => {
   }
   return (
     <>
-      <div className="flex flex-row justify-between items-center m-1 mt-2 border-b-2 border-[#77717150] p-2 pl-10 pr-10 rounded-full">
+      <div className="flex flex-row justify-between items-center m-1 mt-2 border-b-2 border-[#77717150] topbar rounded-full">
         <Link to="/">
           <div className="flex flex-row justify-center items-center">
             <div className="logo-text flex flex-row justify-center items-center text-2xl font-ubuntu">
@@ -624,7 +628,7 @@ const TopBar = ({ counter, setCounter, setLoginState, loginState }) => {
                                   size={"lg"}
                                   sx={{ width: "320px" }}
                                   variant={"filled"}
-                                  type="text"
+                                  type="number"
                                   placeholder="4-digit OTP sent to your E-Mail"
                                 />
                               </InputGroup>

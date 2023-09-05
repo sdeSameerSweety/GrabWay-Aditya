@@ -27,6 +27,8 @@ import RouteUserRegisteration from "./Pages/RouteRegisteration/RouteUserRegistra
 import MatchedRoutes from "./Pages/MatchedRoutes/MatchedRoutes";
 import UserPackages from "./Pages/UserPackages/UserPackages";
 import MoreDetails from "./Pages/MoreDetails/MoreDetails";
+import Checkout from "./Pages/Checkout/Checkout";
+import ErrorNotFound from "./Pages/404NotFound/ErrorNotFound";
 axios.defaults.baseURL = "http://localhost:8080";
 axios.defaults.withCredentials = true;
 // import NearbyMap from "./components/Map/NearbyMap";
@@ -127,6 +129,10 @@ function App() {
             />
             <Route path="/matchedRoutes" element={<MatchedRoutes />} />
             <Route path="/userPackages" element={<UserPackages />} />
+            <Route path="/userCheckout" element={<Checkout />} />
+
+
+            <Route path="*" element={<ErrorNotFound />} />
           </Routes>
           <Footer />
           {windowSize <= 600 && <>{valshow && <StatusBar />}</>}
