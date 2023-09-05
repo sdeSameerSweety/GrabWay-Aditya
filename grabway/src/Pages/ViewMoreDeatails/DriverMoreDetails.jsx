@@ -16,42 +16,51 @@ import {
 } from "@chakra-ui/react";
 
 const DriverDetails = () => {
-  // Replace with actual driver and route data from your backend or state management
+  // Realistic driver and route data for a driver in Bhubaneswar, Odisha
   const driver = {
-    name: "John Doe",
-    email: "john@example.com",
-    licenseNumber: "DL123456",
-    vehicleNumber: "ABC 123",
-    carType: "Toyota Camry",
-    totalSeats: 4,
-    totalFare: "$40",
-    profileImage: "driver-image.jpg",
-    rating: 4.8,
+    name: "Rajesh Kumar",
+    email: "rajesh@example.com",
+    licenseNumber: "OD123456",
+    vehicleNumber: "OD-02-AB-1234",
+    carType: "Sedan",
+    totalSeats: 3,
+    totalFare: "₹500",
+    profileImage: "driver-avatar.jpg",
+    rating: 4.9,
   };
 
   const route = {
-    from: "New York",
-    to: "San Francisco",
-    pickupTime: "8:00 AM",
-    dropTime: "5:00 PM",
+    from: "Bhubaneswar, Odisha",
+    to: "Puri, Odisha",
+    pickupTime: "Morning: 7:30 AM",
+    dropTime: "Evening: 5:00 PM",
     passengers: [
       {
         id: 1,
-        name: "User 1",
-        email: "user1@example.com",
-        phone: "123-456-7890",
-        from: "New York",
-        to: "San Francisco",
-        details: "Passenger Details 1",
+        name: "Amit Patel",
+        email: "amit@example.com",
+        phone: "987-654-3210",
+        from: "Bhubaneswar, Odisha",
+        to: "Puri, Odisha",
+        details: "Frequent traveler to Puri",
       },
       {
         id: 2,
-        name: "User 2",
-        email: "user2@example.com",
-        phone: "987-654-3210",
-        from: "Los Angeles",
-        to: "Las Vegas",
-        details: "Passenger Details 2",
+        name: "Neha Singh",
+        email: "neha@example.com",
+        phone: "789-123-4567",
+        from: "Bhubaneswar, Odisha",
+        to: "Puri, Odisha",
+        details: "Visiting Jagannath Temple",
+      },
+      {
+        id: 3,
+        name: "Rahul Sharma",
+        email: "rahul@example.com",
+        phone: "888-555-3333",
+        from: "Bhubaneswar, Odisha",
+        to: "Puri, Odisha",
+        details: "Solo traveler for leisure",
       },
     ],
   };
@@ -95,6 +104,8 @@ const DriverDetails = () => {
             <Text fontSize="md">To: {route.to}</Text>
             <Text fontSize="md">Pickup Time: {route.pickupTime}</Text>
             <Text fontSize="md">Drop Time: {route.dropTime}</Text>
+            <Text fontSize="md">Total Seats: {driver.totalSeats}</Text>
+            <Text fontSize="md">Total Fare: {driver.totalFare}</Text>
           </VStack>
         </Box>
       </HStack>
