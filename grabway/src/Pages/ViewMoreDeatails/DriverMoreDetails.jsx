@@ -61,8 +61,17 @@ const DriverDetails = () => {
       bg="white"
       color="red.800"
     >
-      <VStack spacing={4} align="start">
-        <HStack spacing={4} align="center">
+      <HStack spacing={6} align="center">
+        <VStack align="start" flex="1">
+          <Text fontSize="2xl">{driver.name}</Text>
+          <Text fontSize="md">Email: {driver.email}</Text>
+          <Text fontSize="md">DL Number: {driver.licenseNumber}</Text>
+          <Text fontSize="md">Vehicle Number: {driver.vehicleNumber}</Text>
+          <Text fontSize="md">Car Type: {driver.carType}</Text>
+          <Text fontSize="md">Total Seats: {driver.totalSeats}</Text>
+          <Text fontSize="md">Total Fare: {driver.totalFare}</Text>
+        </VStack>
+        <VStack align="center">
           <Image
             src={driver.profileImage}
             alt={`Profile of ${driver.name}`}
@@ -70,37 +79,30 @@ const DriverDetails = () => {
             boxSize="150px"
             objectFit="cover"
           />
-          <VStack align="start">
-            <Text fontSize="2xl">{driver.name}</Text>
-            <Text fontSize="md" color="gray.500">
-              {driver.email}
-            </Text>
-            <Text fontSize="md">DL Number: {driver.licenseNumber}</Text>
-            <Text fontSize="md">Vehicle Number: {driver.vehicleNumber}</Text>
-            <Text fontSize="md">Car Type: {driver.carType}</Text>
-            <HStack>
-              <Badge colorScheme="green">Top Rated</Badge>
-              <Text fontSize="md">Rating: {driver.rating}</Text>
-            </HStack>
-          </VStack>
-        </HStack>
-        <Divider borderColor="red.300" />
-        <Grid templateColumns="repeat(2, 1fr)" gap={4}>
-          <GridItem colSpan={2}>
+          <HStack>
+            <Badge colorScheme="green">Top Rated</Badge>
+            <Text fontSize="md">Rating: {driver.rating}</Text>
+          </HStack>
+        </VStack>
+      </HStack>
+      <Divider my={4} borderColor="red.300" />
+      <Grid templateColumns="repeat(2, 1fr)" gap={4}>
+        {driver.routes.map((route) => (
+          <GridItem key={route.id}>
             <Card p={4} borderWidth="1px" borderRadius="md" boxShadow="md">
               <VStack align="start">
                 <Text fontSize="xl">Route Details</Text>
-                <Text fontSize="md">From: {driver.routes[0].from}</Text>
-                <Text fontSize="md">To: {driver.routes[0].to}</Text>
-                <Text fontSize="md">{driver.routes[0].timing}</Text>
+                <Text fontSize="md">From: {route.from}</Text>
+                <Text fontSize="md">To: {route.to}</Text>
+                <Text fontSize="md">{route.timing}</Text>
                 <Text fontSize="md">
-                  Available Seats: {driver.routes[0].availableSeats}
+                  Available Seats: {route.availableSeats}
                 </Text>
                 <Text fontSize="xl" mt={2}>
                   Passengers
                 </Text>
                 <List spacing={2}>
-                  {driver.routes[0].passengers.map((passenger) => (
+                  {route.passengers.map((passenger) => (
                     <ListItem key={passenger.id}>
                       <Text fontSize="md">{passenger.name}</Text>
                       <Text fontSize="sm" color="gray.500">
@@ -112,34 +114,8 @@ const DriverDetails = () => {
               </VStack>
             </Card>
           </GridItem>
-          <GridItem colSpan={2}>
-            <Card p={4} borderWidth="1px" borderRadius="md" boxShadow="md">
-              <VStack align="start">
-                <Text fontSize="xl">Route Details</Text>
-                <Text fontSize="md">From: {driver.routes[1].from}</Text>
-                <Text fontSize="md">To: {driver.routes[1].to}</Text>
-                <Text fontSize="md">{driver.routes[1].timing}</Text>
-                <Text fontSize="md">
-                  Available Seats: {driver.routes[1].availableSeats}
-                </Text>
-                <Text fontSize="xl" mt={2}>
-                  Passengers
-                </Text>
-                <List spacing={2}>
-                  {driver.routes[1].passengers.map((passenger) => (
-                    <ListItem key={passenger.id}>
-                      <Text fontSize="md">{passenger.name}</Text>
-                      <Text fontSize="sm" color="gray.500">
-                        {passenger.details}
-                      </Text>
-                    </ListItem>
-                  ))}
-                </List>
-              </VStack>
-            </Card>
-          </GridItem>
-        </Grid>
-      </VStack>
+        ))}
+      </Grid>
     </Box>
   );
 };
