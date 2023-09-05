@@ -130,7 +130,7 @@ const RouteUserRegisteration = () => {
   };
 
   useEffect(() => {
-    if (userData !== undefined && !email) {
+    if (userData && !email) {
       setEmail(JSON.parse(localStorage.getItem("grabwayUser")).email);
     }
   }, [userData, email]);
@@ -151,7 +151,7 @@ const RouteUserRegisteration = () => {
     return navigate("/matchedRoutes", { state: formData });
   }
 
-  if (userData !== undefined) {
+  if (userData) {
     if (JSON.parse(userData).name === "") {
       return <Navigate to={"/registration"} userType="" />;
     }

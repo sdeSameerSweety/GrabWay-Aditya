@@ -28,7 +28,7 @@ const DriverRegistration = () => {
   const { setRunContext } = useContext(UserContext);
   const userData = Cookies.get("grabwayGoogleToken");
   const GoogleUserType = "driver";
-  const hasUserData = userData !== undefined;
+  const hasUserData = userData;
   //console.log(userData);
   const [tmpPin, setTmpPin] = useState("");
   const [formData, setFormData] = useState({

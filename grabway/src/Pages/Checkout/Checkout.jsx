@@ -353,7 +353,7 @@ const Checkout = () => {
                                     width: "300px",
                                   }}
                                 >
-                                  Pay with GiftCard
+                                  Pay with Credit/Debit Card
                                 </Button>
                               </>
                             )}
@@ -736,7 +736,7 @@ const Checkout = () => {
                                     _hover: `bgColor:"#E51B23"`,
                                   }}
                                 >
-                                  Pay with Credit?Debit Card
+                                  Pay with Credit/Debit Card
                                 </Button>
                               </>
                             ) : (
@@ -752,7 +752,7 @@ const Checkout = () => {
                                     width: "300px",
                                   }}
                                 >
-                                  Pay with GiftCard
+                                  Pay with Credit/Debit card
                                 </Button>
                               </>
                             )}
