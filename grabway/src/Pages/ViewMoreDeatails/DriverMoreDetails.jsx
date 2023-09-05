@@ -1,19 +1,6 @@
 // DriverDetails.js
 import React from "react";
-import {
-  Box,
-  Image,
-  Text,
-  VStack,
-  HStack,
-  Badge,
-  Divider,
-  Grid,
-  GridItem,
-  Card,
-  List,
-  ListItem,
-} from "@chakra-ui/react";
+import "./DriverMoreDetails.css"; // Import the CSS file
 
 const DriverDetails = () => {
   // Realistic driver and route data for a driver in Bhubaneswar, Odisha
@@ -66,69 +53,49 @@ const DriverDetails = () => {
   };
 
   return (
-    <Box
-      p={6}
-      borderWidth="1px"
-      borderRadius="lg"
-      boxShadow="lg"
-      bg="white"
-      color="red.800"
-    >
-      <HStack spacing={8}>
-        <Box flex="1">
-          <HStack spacing={4} align="center">
-            <Image
-              src={driver.profileImage}
-              alt={`Profile of ${driver.name}`}
-              borderRadius="full"
-              boxSize="150px"
-              objectFit="cover"
-            />
-            <VStack align="start">
-              <Text fontSize="2xl">{driver.name}</Text>
-              <Text fontSize="md">Email: {driver.email}</Text>
-              <Text fontSize="md">DL Number: {driver.licenseNumber}</Text>
-              <Text fontSize="md">Vehicle Number: {driver.vehicleNumber}</Text>
-              <Text fontSize="md">Car Type: {driver.carType}</Text>
-              <HStack>
-                <Badge colorScheme="green">Top Rated</Badge>
-                <Text fontSize="md">Rating: {driver.rating}</Text>
-              </HStack>
-            </VStack>
-          </HStack>
-        </Box>
-        <Box flex="1">
-          <VStack spacing={4} align="start">
-            <Text fontSize="2xl">Route Information</Text>
-            <Text fontSize="md">From: {route.from}</Text>
-            <Text fontSize="md">To: {route.to}</Text>
-            <Text fontSize="md">Pickup Time: {route.pickupTime}</Text>
-            <Text fontSize="md">Drop Time: {route.dropTime}</Text>
-            <Text fontSize="md">Total Seats: {driver.totalSeats}</Text>
-            <Text fontSize="md">Total Fare: {driver.totalFare}</Text>
-          </VStack>
-        </Box>
-      </HStack>
-      <Divider borderColor="red.300" />
-      <Grid templateColumns="repeat(2, 1fr)" gap={4}>
+    <div className="driver-details-container">
+      <div className="profile-header">
+        <img
+          src={driver.profileImage}
+          alt={`Profile of ${driver.name}`}
+          className="profile-image"
+        />
+        <div className="driver-info">
+          <h2>{driver.name}</h2>
+          <p>Email: {driver.email}</p>
+          <p>DL Number: {driver.licenseNumber}</p>
+          <p>Vehicle Number: {driver.vehicleNumber}</p>
+          <p>Car Type: {driver.carType}</p>
+          <div className="driver-rating">
+            <span className="badge">Top Rated</span>
+            <p>Rating: {driver.rating}</p>
+          </div>
+        </div>
+      </div>
+      <div className="route-info">
+        <h3>Route Information</h3>
+        <p>From: {route.from}</p>
+        <p>To: {route.to}</p>
+        <p>Pickup Time: {route.pickupTime}</p>
+        <p>Drop Time: {route.dropTime}</p>
+        <p>Total Seats: {driver.totalSeats}</p>
+        <p>Total Fare: {driver.totalFare}</p>
+      </div>
+      <div className="passenger-list">
         {route.passengers.map((passenger) => (
-          <GridItem key={passenger.id}>
-            <Card p={4} borderWidth="1px" borderRadius="md" boxShadow="md">
-              <VStack align="start">
-                <Text fontSize="xl">Customer Information</Text>
-                <Text fontSize="md">Name: {passenger.name}</Text>
-                <Text fontSize="md">Email: {passenger.email}</Text>
-                <Text fontSize="md">Phone: {passenger.phone}</Text>
-                <Text fontSize="md">From: {passenger.from}</Text>
-                <Text fontSize="md">To: {passenger.to}</Text>
-                <Divider my={1} borderColor="red.300" />
-                <Text fontSize="sm">{passenger.details}</Text>
-              </VStack>
-            </Card>
-          </GridItem>
+          <div key={passenger.id} className="customer-card">
+            <h4>Customer Information</h4>
+            <p>Name: {passenger.name}</p>
+            <p>Email: {passenger.email}</p>
+            <p>Phone: {passenger.phone}</p>
+            <p>From: {passenger.from}</p>
+            <p>To: {passenger.to}</p>
+            <div className="details-divider"></div>
+            <p>{passenger.details}</p>
+          </div>
         ))}
-      </Grid>
-    </Box>
+      </div>
+    </div>
   );
 };
 
