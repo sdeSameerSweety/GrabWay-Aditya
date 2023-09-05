@@ -36,7 +36,10 @@
     animation-duration: 0.5s;
     transition: 0.5s all;
 }
-
+.mobile-amt{
+    padding-left: 2vw;
+    padding-right: 2vw;
+}
 @keyframes slow-visibility {
     0%{
         opacity: 0;
@@ -125,6 +128,9 @@
         justify-content: center;
         align-items: center;
         flex-direction: column;
+    }
+    .card-second-box{
+        width: auto;;
     }
   }
 
