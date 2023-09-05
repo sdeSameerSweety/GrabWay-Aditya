@@ -22,3 +22,31 @@
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
   background-color: white;
 }
+
+.ad-details {
+  display: flex;
+}
+
+.card-grid {
+  display: grid;
+  /* grid grid-cols-1 md:grid-cols-3  */
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+@media only screen and (max-width: 768px) {
+  .card-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media only screen and (max-width: 1024px) {
+  .card-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+
+@media only screen and (max-width: 640px) {
+  .card-grid {
+    grid-template-columns: repeat(1, minmax(0, 1fr));
+  }
+}
