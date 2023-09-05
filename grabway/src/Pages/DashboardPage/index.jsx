@@ -12,7 +12,7 @@ export default function Dashboard() {
   
   const userData = localStorage.getItem("grabwayUser");
 
-  if (userData !== undefined) {
+  if (userData) {
     if ((JSON.parse(userData)).name==='') {
       return <Navigate to={"/registration"} userType="" />;
     }

@@ -62,7 +62,7 @@ export default function ContactFaq() {
   const googleUserData = Cookies.get("grabwayGoogleToken");
 
   const userData = localStorage.getItem("grabwayUser");
-  if (userData !== undefined) {
+  if (userData) {
     if (JSON.parse(userData).name === "") {
       return <Navigate to={"/registration"} userType="" />;
     }

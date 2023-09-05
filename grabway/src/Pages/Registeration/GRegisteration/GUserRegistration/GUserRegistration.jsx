@@ -26,7 +26,7 @@ const UserRegistration = () => {
   const { setRunContext } = useContext(UserContext);
   const userData = Cookies.get("grabwayGoogleToken");
   const googleUserType = "user";
-  const hasUserData = userData !== undefined;
+  const hasUserData = userData;
   //console.log(userData);
   const [formData, setFormData] = useState({
     name: "",

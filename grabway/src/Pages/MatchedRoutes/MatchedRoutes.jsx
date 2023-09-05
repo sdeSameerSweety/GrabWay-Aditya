@@ -34,7 +34,7 @@ const MatchedRoutes = () => {
   }
   const userData = localStorage.getItem("grabwayUser");
   const googleUserData = Cookies.get("grabwayGoogleToken");
-  if (userData !== undefined) {
+  if (userData) {
     if (JSON.parse(userData).name === "") {
       return <Navigate to={"/registration"} userType="" />;
     }

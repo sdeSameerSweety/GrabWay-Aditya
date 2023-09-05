@@ -27,7 +27,7 @@ import imageCompression from "browser-image-compression";
 const DriverRegistration = () => {
   const { setRunContext } = useContext(UserContext);
   const userData = localStorage.getItem("grabwayUser");
-  const hasUserData = userData !== undefined;
+  const hasUserData = userData;
   //console.log(userData);
   const [tmpPin, setTmpPin] = useState("");
   const [formData, setFormData] = useState({

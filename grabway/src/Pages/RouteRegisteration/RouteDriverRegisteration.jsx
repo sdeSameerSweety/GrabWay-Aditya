@@ -168,13 +168,13 @@ const RouteDriverRegisteration = () => {
   };
 
   useEffect(() => {
-    if (userData !== undefined && !email) {
+    if (userData && !email) {
       setEmail(JSON.parse(localStorage.getItem("grabwayUser")).email);
     }
   }, [userData, email]);
 
   //dont change this part, its for redirecting when not a logged in driver
-  if (userData !== undefined) {
+  if (userData) {
     if (JSON.parse(userData).name === "") {
       return <Navigate to={"/registration"} userType="" />;
     }
