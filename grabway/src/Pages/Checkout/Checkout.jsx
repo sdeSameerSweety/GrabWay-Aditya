@@ -28,7 +28,8 @@ const Checkout = () => {
   const driverCity = "Kolkata";
   const originText = "Silicon Insititute of Technology";
   const destinationText = "Bhubaneshwar Railway Station, MasterCanteen Area";
-
+  const pickupTime='10:00';
+  const dropTime="12:00";
 function handlePay(){
   if(!paymentSelected){
     toast({
@@ -392,37 +393,20 @@ function selectPayment(option){
                     <div className="flex flex-col gap-10">
                       <div>
                         <div className="text-sm font-ubuntu text-[#0000006c]">
-                          FROM:
+                          PICKUP AT
                         </div>
-                        <div className="text-[black]">{originText}</div>
+                        <div className="text-[black]">{pickupTime}</div>
                       </div>
                       <div>
                         <div className="text-sm font-ubuntu text-[#0000006c]">
                           TO:
                         </div>
-                        <div className="text-[black]">{destinationText}</div>
-                      </div>
-                      <div>
-                        <div className="text-sm font-ubuntu text-[#00000027]">
-                          TIMING:
-                        </div>
-                        <div className="text-[black]">11;00-12;00</div>
+                        <div className="text-[black]">{dropTime}</div>
                       </div>
                     </div>
                   </Heading>
                 </CardHeader>
-                <CardBody>
-                  <div className="flex justify-between items-center">
-                    <div className="text-sm">
-                      Total Seats -{" "}
-                      <span className="text-lg text-[#E51B23]">10</span>
-                    </div>
-                    <div className="text-sm">
-                      Available -{" "}
-                      <span className="text-lg text-[#3bb34d]">3</span>
-                    </div>
-                  </div>
-                </CardBody>
+                
                 <CardFooter sx={{display:'flex', justifyContent:'center', alignItems:'center'}}>
                   <Button onClick={setConfirmOrigin} 
                   sx={{bgColor:'#E51B23', color:'white', _hover:`bgColor:'#E51B23'`}}>Matches Perfectely</Button>
