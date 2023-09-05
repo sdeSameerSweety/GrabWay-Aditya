@@ -1,7 +1,10 @@
 import React from "react";
+import { useLocation } from "react-router-dom";
 import "./details.css";
 
 export default function MoreDetails() {
+  const location = useLocation();
+  if (location) console.log(location.state);
   return (
     <main class="profile-page">
       <section class="relative block h-500-px">
@@ -9,7 +12,7 @@ export default function MoreDetails() {
           class="absolute top-0 w-full h-full bg-center bg-cover"
           style={{
             backgroundImage:
-              "url('https://images.unsplash.com/photo-1499336315816-097655dcfbda?ixlib=rb-1.2.1&amp;ixid=eyJhcHBfaWQiOjEyMDd9&amp;auto=format&amp;fit=crop&amp;w=2710&amp;q=80')",
+              "url('https://img.freepik.com/free-vector/red-sedan-car-isolated-white-vector_53876-64366.jpg?w=900&t=st=1692895124~exp=1692895724~hmac=9084cfe1f9e13be10c20ff75317e808efbecd741a345ac619f7814540a6abf66')",
           }}
         >
           <span
