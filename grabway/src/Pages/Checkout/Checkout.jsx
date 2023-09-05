@@ -19,6 +19,8 @@ import { AiOutlineHeart } from "react-icons/ai";
 import { BiShareAlt, BiChat } from "react-icons/bi";
 import "./Checkout.css";
 import { SiRazorpay } from "react-icons/si";
+import { Navigate } from "react-router-dom";
+import Cookies from "js-cookie";
 const Checkout = () => {
   const toast = useToast();
   const [confirmOrigin, setConfirmOrigin] = useState(false);
@@ -52,7 +54,22 @@ const Checkout = () => {
       isClosable: true,
     });
   }
+  const googleUserData = Cookies.get("grabwayGoogleToken");
 
+  const userData = localStorage.getItem("grabwayUser");
+  if (userData) {
+    if (JSON.parse(userData).name === "") {
+      return <Navigate to={"/registration"} userType="" />;
+    }
+  }
+  if (!userData) {
+    if (!googleUserData) {
+      return <Navigate to={"/"} />;
+    }
+    if (googleUserData) {
+      return <Navigate to={"/googleRegistration"} />;
+    }
+  }
   return (
     <>
       <div className="dekstop-view p-5">
@@ -182,8 +199,8 @@ const Checkout = () => {
                       </CardHeader>
                       <CardBody>
                         <div className="flex flex-col justify-start items-center">
-                          <div className="flex w-[100%] justify-between items-center text-lg">
-                            Price as Per Route
+                          <div className="flex w-[100%] justify-between items-center text-lg gap-5">
+                            Price
                             <span className="text-lg text-[#020202b7]">
                               {amount}
                             </span>
@@ -336,7 +353,7 @@ const Checkout = () => {
                                     width: "300px",
                                   }}
                                 >
-                                  Pay with Cash
+                                  Pay with GiftCard
                                 </Button>
                               </>
                             )}
@@ -406,7 +423,7 @@ const Checkout = () => {
                                     _hover: `bgColor:"#E51B23"`,
                                   }}
                                 >
-                                  Pay with Cash
+                                  Pay with GiftCard
                                 </Button>
                               </>
                             ) : (
@@ -422,7 +439,7 @@ const Checkout = () => {
                                     width: "300px",
                                   }}
                                 >
-                                  Pay with Cash
+                                  Pay with GiftCard
                                 </Button>
                               </>
                             )}
@@ -735,7 +752,7 @@ const Checkout = () => {
                                     width: "300px",
                                   }}
                                 >
-                                  Pay with Cash
+                                  Pay with GiftCard
                                 </Button>
                               </>
                             )}
@@ -805,7 +822,7 @@ const Checkout = () => {
                                     _hover: `bgColor:"#E51B23"`,
                                   }}
                                 >
-                                  Pay with Cash
+                                  Pay with GiftCard
                                 </Button>
                               </>
                             ) : (
@@ -821,7 +838,7 @@ const Checkout = () => {
                                     width: "300px",
                                   }}
                                 >
-                                  Pay with Cash
+                                  Pay with GiftCard
                                 </Button>
                               </>
                             )}
