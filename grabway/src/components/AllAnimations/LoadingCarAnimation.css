@@ -459,3 +459,22 @@ h2 span:last-child {
     color: rgb(228, 167, 0);
   }
 }
+
+@media (max-width: 768px) {
+  .container-loading {
+    display: none;
+  }
+
+  .mobile-gif {
+    background-image: url("https://cdn.dribbble.com/users/1716464/screenshots/6247572/happy_man_instagram_2.gif");
+    background-size: cover;
+    background-repeat: no-repeat;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 90%;
+    height: 300px;
+    padding: 10%;
+    margin: 10% auto;
+  }
+}
