@@ -40,6 +40,8 @@ const DriverDetails = () => {
         name: "User 1",
         email: "user1@example.com",
         phone: "123-456-7890",
+        from: "New York",
+        to: "San Francisco",
         details: "Passenger Details 1",
       },
       {
@@ -47,6 +49,8 @@ const DriverDetails = () => {
         name: "User 2",
         email: "user2@example.com",
         phone: "987-654-3210",
+        from: "Los Angeles",
+        to: "Las Vegas",
         details: "Passenger Details 2",
       },
     ],
@@ -61,52 +65,58 @@ const DriverDetails = () => {
       bg="white"
       color="red.800"
     >
-      <VStack spacing={4} align="start">
-        <HStack spacing={4} align="center">
-          <Image
-            src={driver.profileImage}
-            alt={`Profile of ${driver.name}`}
-            borderRadius="full"
-            boxSize="150px"
-            objectFit="cover"
-          />
-          <VStack align="start">
-            <Text fontSize="2xl">{driver.name}</Text>
-            <Text fontSize="md">Email: {driver.email}</Text>
-            <Text fontSize="md">DL Number: {driver.licenseNumber}</Text>
-            <Text fontSize="md">Vehicle Number: {driver.vehicleNumber}</Text>
-            <Text fontSize="md">Car Type: {driver.carType}</Text>
-            <HStack>
-              <Badge colorScheme="green">Top Rated</Badge>
-              <Text fontSize="md">Rating: {driver.rating}</Text>
-            </HStack>
+      <HStack spacing={8}>
+        <Box flex="1">
+          <HStack spacing={4} align="center">
+            <Image
+              src={driver.profileImage}
+              alt={`Profile of ${driver.name}`}
+              borderRadius="full"
+              boxSize="150px"
+              objectFit="cover"
+            />
+            <VStack align="start">
+              <Text fontSize="2xl">{driver.name}</Text>
+              <Text fontSize="md">Email: {driver.email}</Text>
+              <Text fontSize="md">DL Number: {driver.licenseNumber}</Text>
+              <Text fontSize="md">Vehicle Number: {driver.vehicleNumber}</Text>
+              <Text fontSize="md">Car Type: {driver.carType}</Text>
+              <HStack>
+                <Badge colorScheme="green">Top Rated</Badge>
+                <Text fontSize="md">Rating: {driver.rating}</Text>
+              </HStack>
+            </VStack>
+          </HStack>
+        </Box>
+        <Box flex="1">
+          <VStack spacing={4} align="start">
+            <Text fontSize="2xl">Route Information</Text>
+            <Text fontSize="md">From: {route.from}</Text>
+            <Text fontSize="md">To: {route.to}</Text>
+            <Text fontSize="md">Pickup Time: {route.pickupTime}</Text>
+            <Text fontSize="md">Drop Time: {route.dropTime}</Text>
           </VStack>
-        </HStack>
-        <Divider borderColor="red.300" />
-        <Text fontSize="2xl">Route Information</Text>
-        <Text fontSize="md">From: {route.from}</Text>
-        <Text fontSize="md">To: {route.to}</Text>
-        <Divider borderColor="red.300" />
-        <Grid templateColumns="repeat(2, 1fr)" gap={4}>
-          {route.passengers.map((passenger) => (
-            <GridItem key={passenger.id}>
-              <Card p={4} borderWidth="1px" borderRadius="md" boxShadow="md">
-                <VStack align="start">
-                  <Text fontSize="xl">Customer Information</Text>
-                  <Text fontSize="md">Name: {passenger.name}</Text>
-                  <Text fontSize="md">Email: {passenger.email}</Text>
-                  <Text fontSize="md">Phone: {passenger.phone}</Text>
-                  <Divider my={1} borderColor="red.300" />
-                  <Text fontSize="sm">{passenger.details}</Text>
-                </VStack>
-                <Divider my={2} borderColor="red.300" />
-                <Text fontSize="md">Pickup Time: {route.pickupTime}</Text>
-                <Text fontSize="md">Drop Time: {route.dropTime}</Text>
-              </Card>
-            </GridItem>
-          ))}
-        </Grid>
-      </VStack>
+        </Box>
+      </HStack>
+      <Divider borderColor="red.300" />
+      <Grid templateColumns="repeat(2, 1fr)" gap={4}>
+        {route.passengers.map((passenger) => (
+          <GridItem key={passenger.id}>
+            <Card p={4} borderWidth="1px" borderRadius="md" boxShadow="md">
+              <VStack align="start">
+                <Text fontSize="xl">Customer Information</Text>
+                <Text fontSize="md">Name: {passenger.name}</Text>
+                <Text fontSize="md">Email: {passenger.email}</Text>
+                <Text fontSize="md">Phone: {passenger.phone}</Text>
+                <Text fontSize="md">From: {passenger.from}</Text>
+                <Text fontSize="md">To: {passenger.to}</Text>
+                <Divider my={1} borderColor="red.300" />
+                <Text fontSize="sm">{passenger.details}</Text>
+              </VStack>
+            </Card>
+          </GridItem>
+        ))}
+      </Grid>
     </Box>
   );
 };
