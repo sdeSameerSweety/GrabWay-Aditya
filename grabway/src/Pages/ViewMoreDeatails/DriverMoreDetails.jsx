@@ -5,12 +5,14 @@ import {
   Image,
   Text,
   VStack,
+  HStack,
   Badge,
   Divider,
+  Grid,
+  GridItem,
   Card,
   List,
-  HStack,
-  //   ListItem,
+  ListItem,
 } from "@chakra-ui/react";
 
 const DriverDetails = () => {
@@ -30,8 +32,8 @@ const DriverDetails = () => {
   const route = {
     from: "New York",
     to: "San Francisco",
-    timing: "Departure: 8:00 AM",
-    availableSeats: 3,
+    pickupTime: "8:00 AM",
+    dropTime: "5:00 PM",
     passengers: [
       {
         id: 1,
@@ -81,28 +83,29 @@ const DriverDetails = () => {
           </VStack>
         </HStack>
         <Divider borderColor="red.300" />
-        <Text fontSize="2xl">Trip Information</Text>
+        <Text fontSize="2xl">Route Information</Text>
         <Text fontSize="md">From: {route.from}</Text>
         <Text fontSize="md">To: {route.to}</Text>
-        <Text fontSize="md">Pickup Timing: {route.timing}</Text>
-        <Text fontSize="md">Available Seats: {route.availableSeats}</Text>
         <Divider borderColor="red.300" />
-        <Text fontSize="2xl">Customers of this route</Text>
-        <List spacing={2}>
+        <Grid templateColumns="repeat(2, 1fr)" gap={4}>
           {route.passengers.map((passenger) => (
-            <List key={passenger.id}>
-              <Text fontSize="md">{passenger.name}</Text>
-              <Text fontSize="sm" color="gray.500">
-                Email: {passenger.email}
-              </Text>
-              <Text fontSize="sm" color="gray.500">
-                Phone: {passenger.phone}
-              </Text>
-              <Divider my={1} borderColor="red.300" />
-              <Text fontSize="sm">{passenger.details}</Text>
-            </List>
+            <GridItem key={passenger.id}>
+              <Card p={4} borderWidth="1px" borderRadius="md" boxShadow="md">
+                <VStack align="start">
+                  <Text fontSize="xl">Customer Information</Text>
+                  <Text fontSize="md">Name: {passenger.name}</Text>
+                  <Text fontSize="md">Email: {passenger.email}</Text>
+                  <Text fontSize="md">Phone: {passenger.phone}</Text>
+                  <Divider my={1} borderColor="red.300" />
+                  <Text fontSize="sm">{passenger.details}</Text>
+                </VStack>
+                <Divider my={2} borderColor="red.300" />
+                <Text fontSize="md">Pickup Time: {route.pickupTime}</Text>
+                <Text fontSize="md">Drop Time: {route.dropTime}</Text>
+              </Card>
+            </GridItem>
           ))}
-        </List>
+        </Grid>
       </VStack>
     </Box>
   );
