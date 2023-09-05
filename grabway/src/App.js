@@ -29,7 +29,6 @@ import UserPackages from "./Pages/UserPackages/UserPackages";
 import MoreDetails from "./Pages/MoreDetails/MoreDetails";
 import Checkout from "./Pages/Checkout/Checkout";
 import ErrorNotFound from "./Pages/404NotFound/ErrorNotFound";
-import DriverDetails from "./Pages/ViewMoreDeatails/DriverMoreDetails";
 axios.defaults.baseURL = "http://localhost:8080";
 axios.defaults.withCredentials = true;
 // import NearbyMap from "./components/Map/NearbyMap";
@@ -93,7 +92,6 @@ function App() {
         />
 
         <div style={intDivStyle}>
-          <DriverDetails />
           <Routes>
             {/* <Route path="/nearby" element={<NearbyMap nonceVal={nonce} />} /> */}
             <Route

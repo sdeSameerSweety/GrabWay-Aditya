@@ -4,17 +4,15 @@ import {
   Image,
   Text,
   VStack,
-  HStack,
   Badge,
   Divider,
   Grid,
   GridItem,
   Card,
 } from "@chakra-ui/react";
-import "./DriverDetails.css"; // Import the CSS file
+import "./DriverMoreDetails.css";
 
 const DriverDetails = () => {
-  // Realistic driver and route data for a driver in Bhubaneswar, Odisha
   const driver = {
     name: "Rajesh Kumar",
     email: "rajesh@example.com",
@@ -76,22 +74,30 @@ const DriverDetails = () => {
     >
       {/* Route Information in the top-right corner */}
       <Box
-        position="absolute"
-        top="1rem"
-        right="1rem"
+        position={{ base: "static", md: "absolute" }}
+        top={{ base: "auto", md: "1rem" }}
+        right={{ base: "auto", md: "1rem" }}
         bg="gray.100"
         p={2}
         borderRadius="md"
       >
-        <Text fontSize="sm" fontWeight="bold">
+        <Text fontSize={{ base: "md", md: "sm" }} fontWeight="bold">
           Route Information
         </Text>
-        <Text fontSize="sm">From: {route.from}</Text>
-        <Text fontSize="sm">To: {route.to}</Text>
-        <Text fontSize="sm">Pickup Time: {route.pickupTime}</Text>
-        <Text fontSize="sm">Drop Time: {route.dropTime}</Text>
-        <Text fontSize="sm">Total Seats: {driver.totalSeats}</Text>
-        <Text fontSize="sm">Total Fare: {driver.totalFare}</Text>
+        <Text fontSize={{ base: "md", md: "sm" }}>From: {route.from}</Text>
+        <Text fontSize={{ base: "md", md: "sm" }}>To: {route.to}</Text>
+        <Text fontSize={{ base: "md", md: "sm" }}>
+          Pickup Time: {route.pickupTime}
+        </Text>
+        <Text fontSize={{ base: "md", md: "sm" }}>
+          Drop Time: {route.dropTime}
+        </Text>
+        <Text fontSize={{ base: "md", md: "sm" }}>
+          Total Seats: {driver.totalSeats}
+        </Text>
+        <Text fontSize={{ base: "md", md: "sm" }}>
+          Total Fare: {driver.totalFare}
+        </Text>
       </Box>
 
       {/* Driver Profile */}
@@ -121,9 +127,8 @@ const DriverDetails = () => {
         <Grid templateColumns={{ sm: "1fr", md: "repeat(3, 1fr)" }} gap={4}>
           {route.passengers.map((passenger) => (
             <GridItem key={passenger.id}>
-              <Card>
+              <Card className="customer-info-card">
                 <VStack align="start">
-                  {/* <h4>Customer Information</h4> */}
                   <p>Name: {passenger.name}</p>
                   <p>Email: {passenger.email}</p>
                   <p>Phone: {passenger.phone}</p>

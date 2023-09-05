@@ -1,21 +1,6 @@
-/* DriverDetails.css */
-
-/* Reset some default styles */
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
-
-/* Apply a clean and professional font stack */
-body {
-  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
-  background-color: #f7f7f7;
-}
-
-/* Styling for the main container */
 .container-driver-view-details {
-  max-width: 80%;
+  max-width: 85%;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
   margin: 0 auto;
   padding: 20px;
   background-color: #fff;
@@ -23,7 +8,6 @@ body {
   border-radius: 12px;
 }
 
-/* Styling for the profile header */
 .profile-header {
   display: flex;
   align-items: center;
@@ -36,7 +20,7 @@ body {
   height: 150px;
   object-fit: cover;
   margin-right: 20px;
-  border: 6px solid #fff; /* Add a white border around the image */
+  border: 6px solid #fff;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
 }
 
@@ -45,28 +29,40 @@ body {
 }
 
 .profile-header h2 {
-  font-size: 28px;
-  font-weight: bold;
-  margin-bottom: 10px;
-  color: #333; /* Darken the text color */
-}
-
-/* Styling for route information */
-.route-info h3 {
-  font-size: 24px;
+  font-size: 32px;
   font-weight: bold;
   margin-bottom: 10px;
   color: #333;
 }
 
-/* Styling for the customer card */
+.route-info h3 {
+  font-size: 26px;
+  font-weight: bold;
+  margin-bottom: 10px;
+  color: #333;
+}
+
 .customer-card {
   background-color: #fff;
-  border: 1px solid #e0e0e0; /* Light gray border */
+  border: 1px solid #e0e0e0;
   border-radius: 12px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
   padding: 20px;
   margin-bottom: 20px;
+}
+
+.customer-card .customer-info-card {
+  background-color: #fff;
+  border: 1px solid #e0e0e0;
+  border-radius: 8px;
+  padding: 16px;
+  margin-bottom: 20px;
+  transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+}
+
+.customer-card .customer-info-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 20px rgba(0, 0, 0, 0.2);
 }
 
 .customer-card h4 {
@@ -78,6 +74,12 @@ body {
 
 .customer-card p {
   font-size: 18px;
-  margin-bottom: 8px;
-  color: #666; /* Dark gray text color */
+  margin-bottom: 12px;
+  color: #666;
+}
+
+.customer-card .customer-info-card .card-header {
+  background-color: #e0e0e0;
+  padding: 8px;
+  border-radius: 8px 8px 0 0;
 }
