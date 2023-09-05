@@ -131,7 +131,6 @@ function App() {
             <Route path="/userPackages" element={<UserPackages />} />
             <Route path="/userCheckout" element={<Checkout />} />
 
-
             <Route path="*" element={<ErrorNotFound />} />
           </Routes>
           <Footer />
