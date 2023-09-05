@@ -82,7 +82,10 @@ function DriverCard(props) {
                         <h3 class="text-xl font-bold text-gray-900">
                           {driver.driverName}
                         </h3>
-                        <button class="bg-white text-black border-black border-2 py-2 px-4 font-bold rounded-md">
+                        <button
+                          class="bg-white text-black border-black border-2 py-2 px-4 font-bold rounded-md"
+                          onClick={() => handleMoreDetails(driverIndex)}
+                        >
                           More
                         </button>
                       </div>
@@ -118,10 +121,7 @@ function DriverCard(props) {
                           Seats:{" "}
                           {driver.route.seats - driver.route.customers.length}
                         </span>
-                        <button
-                          class="bg-theme text-white py-2 px-4 rounded-full font-bold hover:bg-gray-800"
-                          onClick={() => handleMoreDetails(driverIndex)}
-                        >
+                        <button class="bg-theme text-white py-2 px-4 rounded-full font-bold hover:bg-gray-800">
                           Grab it
                         </button>
                       </div>
