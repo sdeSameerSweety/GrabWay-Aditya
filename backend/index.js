@@ -687,7 +687,8 @@ app.post("/routeUserSearch", async (req, res) => {
 });
 
 app.post("/moreDetailsForMatchRoutes", async (req, res) => {
-  //console.log(req.body.matchDriverRoute);
+  await mongoose.connect(MONGO_URL);
+  console.log(req.body.matchDriverRoute);
   const matchDriverRoute = req.body.matchDriverRoute;
   const email = matchDriverRoute.email;
   const RouteAtIndex = matchDriverRoute.RouteAtIndex;
@@ -698,6 +699,7 @@ app.post("/moreDetailsForMatchRoutes", async (req, res) => {
       console.log(DriverData);
       if (DriverData) {
         const ResponseData = {
+          profilePicture: DriverData.profilePicture,
           email: DriverData.email,
           name: DriverData.name,
           phoneNumber: DriverData.phoneNumber,
@@ -708,14 +710,14 @@ app.post("/moreDetailsForMatchRoutes", async (req, res) => {
           drivingLicenseNumber: DriverData.drivingLicenseNumber,
           profilePicture: DriverData.profilePicture,
         };
-        res.status(200).json(ResponseData);
+        return res.status(200).json(ResponseData);
       } else {
-        res.status(500).json("Didnt find Driver in Database");
+        return res.status(500).json("Didnt find Driver in Database");
       }
     }
   } catch (err) {
     console.log(err);
-    res.status(200).json("Error caught in catch block");
+    return res.status(200).json("Error caught in catch block");
   }
 });
 
@@ -736,7 +738,7 @@ app.post("/bookRoute", async (req, res) => {
   const userOriginTime = userQuery.originStartTime;
   const userDestinationTime = userQuery.destinationStartTime;
   const plan = matchDriverRoute.plan;
-  const driverName=matchDriverRoute.name;
+  const driverName = matchDriverRoute.name;
   const amount = 2000; //make it dynamic
   const paymentMethod = "cash"; //make it dyanmic
   try {
@@ -777,7 +779,7 @@ app.post("/bookRoute", async (req, res) => {
               "destination.text": userDestinationText,
               "destination.lat": userDestinationLat,
               "destination.long": userDestinationLong,
-              "plan": plan,
+              plan: plan,
               //driverEmail:driverEmail,
               //driverName:driverName,
               //routeId:RouteId
@@ -792,18 +794,21 @@ app.post("/bookRoute", async (req, res) => {
         amount: amount,
         paymentMethod: paymentMethod,
       });
-      if (OrderCreationResponse && DriverModificationResponse && UserModificationResponse) {
+      if (
+        OrderCreationResponse &&
+        DriverModificationResponse &&
+        UserModificationResponse
+      ) {
         res.status(200).json({
           DriverAddtitionResponse: DriverModificationResponse,
           OrderCreationResponse: OrderCreationResponse,
-          UserModificationResponse:UserModificationResponse
+          UserModificationResponse: UserModificationResponse,
         });
       } else {
         res.status(500).json("Problem in if else");
       }
-    }
-    else{
-      res.status(500).json("Didn't get data")
+    } else {
+      res.status(500).json("Didn't get data");
     }
   } catch (err) {
     console.log(err);
