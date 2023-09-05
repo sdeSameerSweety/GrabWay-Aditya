@@ -34,8 +34,20 @@ const DriverDetails = () => {
         timing: "Departure: 8:00 AM",
         availableSeats: 3,
         passengers: [
-          { id: 1, name: "User 1", details: "Passenger Details 1" },
-          { id: 2, name: "User 2", details: "Passenger Details 2" },
+          {
+            id: 1,
+            name: "User 1",
+            email: "user1@example.com",
+            phone: "123-456-7890",
+            details: "Passenger Details 1",
+          },
+          {
+            id: 2,
+            name: "User 2",
+            email: "user2@example.com",
+            phone: "987-654-3210",
+            details: "Passenger Details 2",
+          },
         ],
       },
       {
@@ -45,8 +57,20 @@ const DriverDetails = () => {
         timing: "Departure: 10:00 AM",
         availableSeats: 2,
         passengers: [
-          { id: 3, name: "User 3", details: "Passenger Details 3" },
-          { id: 4, name: "User 4", details: "Passenger Details 4" },
+          {
+            id: 3,
+            name: "User 3",
+            email: "user3@example.com",
+            phone: "555-555-5555",
+            details: "Passenger Details 3",
+          },
+          {
+            id: 4,
+            name: "User 4",
+            email: "user4@example.com",
+            phone: "444-444-4444",
+            details: "Passenger Details 4",
+          },
         ],
       },
     ],
@@ -98,23 +122,19 @@ const DriverDetails = () => {
           <GridItem key={route.id}>
             <Card p={4} borderWidth="1px" borderRadius="md" boxShadow="md">
               <VStack align="start">
-                <Text fontSize="xl">Route Details</Text>
-                <Text fontSize="md">From: {route.from}</Text>
-                <Text fontSize="md">To: {route.to}</Text>
-                <Text fontSize="md">{route.timing}</Text>
-                <Text fontSize="md">
-                  Available Seats: {route.availableSeats}
-                </Text>
-                <Text fontSize="xl" mt={2}>
-                  Passengers
-                </Text>
+                <Text fontSize="xl">Customers of this route</Text>
                 <List spacing={2}>
                   {route.passengers.map((passenger) => (
                     <ListItem key={passenger.id}>
                       <Text fontSize="md">{passenger.name}</Text>
                       <Text fontSize="sm" color="gray.500">
-                        {passenger.details}
+                        Email: {passenger.email}
                       </Text>
+                      <Text fontSize="sm" color="gray.500">
+                        Phone: {passenger.phone}
+                      </Text>
+                      <Divider my={1} borderColor="red.300" />
+                      <Text fontSize="sm">{passenger.details}</Text>
                     </ListItem>
                   ))}
                 </List>
