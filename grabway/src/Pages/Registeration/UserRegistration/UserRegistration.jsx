@@ -14,6 +14,7 @@ import {
   AlertIcon,
   Checkbox,
   Avatar,
+  Image,
 } from "@chakra-ui/react";
 import Cookies from "js-cookie";
 import { Navigate } from "react-router-dom";
@@ -211,222 +212,234 @@ const UserRegistration = () => {
   }
 
   return (
-    <Container className="container-reg" maxW="80%" mt={8}>
-      <Box
-        className="tab-list"
-        display="flex"
-        alignItems="center"
-        justifyContent="center"
-        flexDirection={{ base: "column", md: "row" }} // Adjust flex direction for different screen sizes
-        // alignItems={{ base: "stretch", md: "center" }} // Align items for different screen sizes
-      >
-        <Box flex={1} p={8}>
-          <Heading className="heading">Dear User</Heading>
-          <Text className="text">
-            Step into Grabway, where your commute becomes a canvas of
-            connections, savings, and sustainability - all painted in shared
-            journeys.
-          </Text>
-          <Text className="text-sm" color={"black"}>
-            Already have a account?
-          </Text>
-          <Button className="button" colorScheme="blue" size="md">
-            Login
-          </Button>
-        </Box>
+    <div className="background-container">
+      <img
+        src="https://wallpapercave.com/wp/wp8336287.jpg"
+        alt="Background GIF"
+        className="background-gif"
+      />
+      <Container className="container-reg" maxW="80%" mt={8}>
         <Box
-          flex={3}
-          p={8}
-          isFitted
-          variant="enclosed-colored"
-          colorScheme="teal"
+          className="tab-list"
+          display="flex"
+          alignItems="center"
+          justifyContent="center"
+          flexDirection={{ base: "column", md: "row" }} // Adjust flex direction for different screen sizes
+          // alignItems={{ base: "stretch", md: "center" }} // Align items for different screen sizes
         >
-          <Heading
-            size="xl"
-            mt={4}
-            fontFamily="cursive"
-            letterSpacing="wide"
-            color="black.500"
-            textAlign="justify"
-            textShadow="2px 2px 4px rgba(0, 0, 0, 0.4)"
+          <Box flex={1} p={8}>
+            <Heading className="heading">Dear User</Heading>
+            <Text className="text">
+              Step into Grabway, where your commute becomes a canvas of
+              connections, savings, and sustainability - all painted in shared
+              journeys.
+            </Text>
+            <Text className="text-sm" color={"black"}>
+              Already have a account?
+            </Text>
+            <Button className="button" colorScheme="blue" size="md">
+              Login
+            </Button>
+            <Image
+              p={2}
+              src="https://mir-s3-cdn-cf.behance.net/project_modules/1400/54a0ae72816947.5bf59bc4d988b.gif"
+              alt="Background GIF"
+            />
+          </Box>
+          <Box
+            flex={3}
+            p={8}
+            isFitted
+            variant="enclosed-colored"
+            colorScheme="teal"
           >
-            Welcome to Grabway!
-          </Heading>
-          <Box mt={4}>
-            <FormControl>
-              <FormLabel>Profile Photo</FormLabel>
-              <Avatar size="xl" mb={4} src={formData.imgDp} />
-              <Input
-                type="file"
-                accept="image/*"
-                // value={formData.imgDp}
-                onChange={handlePhotoChange}
-                mb={4}
-              />
-            </FormControl>
-            <FormControl isRequired isInvalid={!!errors.name}>
-              <FormLabel>Full Name</FormLabel>
-              <Input
-                type="text"
-                placeholder="Full Name"
-                value={formData.name}
-                onChange={(e) =>
-                  setFormData({ ...formData, name: e.target.value })
-                }
-              />
-              <FormErrorMessage>{errors.name}</FormErrorMessage>
-            </FormControl>
+            <Heading
+              size="xl"
+              mt={4}
+              fontFamily="cursive"
+              letterSpacing="wide"
+              color="black.500"
+              textAlign="justify"
+              textShadow="2px 2px 4px rgba(0, 0, 0, 0.4)"
+            >
+              Welcome to Grabway!
+            </Heading>
+            <Box mt={4}>
+              <FormControl>
+                <FormLabel>Profile Photo</FormLabel>
+                <Avatar size="xl" mb={4} src={formData.imgDp} />
+                <Input
+                  type="file"
+                  accept="image/*"
+                  // value={formData.imgDp}
+                  onChange={handlePhotoChange}
+                  mb={4}
+                />
+              </FormControl>
+              <FormControl isRequired isInvalid={!!errors.name}>
+                <FormLabel>Full Name</FormLabel>
+                <Input
+                  type="text"
+                  placeholder="Full Name"
+                  value={formData.name}
+                  onChange={(e) =>
+                    setFormData({ ...formData, name: e.target.value })
+                  }
+                />
+                <FormErrorMessage>{errors.name}</FormErrorMessage>
+              </FormControl>
 
-            {/* Email */}
-            <FormControl mt={4} isRequired isInvalid={!!errors.email}>
-              <FormLabel>Email</FormLabel>
-              <Input
-                type="email"
-                placeholder="Email"
-                value={formData.email}
-                onChange={(e) =>
-                  setFormData({ ...formData, email: e.target.value })
-                }
-                disabled={hasUserData}
-              />
-              <FormErrorMessage>{errors.email}</FormErrorMessage>
-            </FormControl>
+              {/* Email */}
+              <FormControl mt={4} isRequired isInvalid={!!errors.email}>
+                <FormLabel>Email</FormLabel>
+                <Input
+                  type="email"
+                  placeholder="Email"
+                  value={formData.email}
+                  onChange={(e) =>
+                    setFormData({ ...formData, email: e.target.value })
+                  }
+                  disabled={hasUserData}
+                />
+                <FormErrorMessage>{errors.email}</FormErrorMessage>
+              </FormControl>
 
-            {/* Phone Number */}
-            <FormControl mt={4} isRequired isInvalid={!!errors.phoneNumber}>
-              <FormLabel>Phone Number</FormLabel>
-              <Input
-                type="number"
-                placeholder="Phone Number"
-                value={formData.phoneNumber}
-                onChange={(e) => {
-                  const inputPhoneNumber = e.target.value;
+              {/* Phone Number */}
+              <FormControl mt={4} isRequired isInvalid={!!errors.phoneNumber}>
+                <FormLabel>Phone Number</FormLabel>
+                <Input
+                  type="number"
+                  placeholder="Phone Number"
+                  value={formData.phoneNumber}
+                  onChange={(e) => {
+                    const inputPhoneNumber = e.target.value;
 
-                  // Ensure the input value is not exceeding the maximum length
-                  if (inputPhoneNumber.length <= 10) {
+                    // Ensure the input value is not exceeding the maximum length
+                    if (inputPhoneNumber.length <= 10) {
+                      setFormData({
+                        ...formData,
+                        phoneNumber: inputPhoneNumber,
+                      });
+                    }
+                  }}
+                  minLength={10}
+                  maxLength={10}
+                  disabled={hasUserData}
+                />
+
+                <FormErrorMessage>{errors.phoneNumber}</FormErrorMessage>
+              </FormControl>
+              {/* Address Line 1 */}
+              <FormControl mt={4} isRequired isInvalid={!!errors.addressLine1}>
+                <FormLabel>Address Line 1</FormLabel>
+                <Input
+                  type="text"
+                  placeholder="Address Line 1"
+                  value={formData.addressLine1}
+                  onChange={(e) =>
                     setFormData({
                       ...formData,
-                      phoneNumber: inputPhoneNumber,
-                    });
+                      addressLine1: e.target.value,
+                    })
                   }
-                }}
-                minLength={10}
-                maxLength={10}
-                disabled={hasUserData}
-              />
+                />
+                <FormErrorMessage>{errors.addressLine1}</FormErrorMessage>
+              </FormControl>
 
-              <FormErrorMessage>{errors.phoneNumber}</FormErrorMessage>
-            </FormControl>
-            {/* Address Line 1 */}
-            <FormControl mt={4} isRequired isInvalid={!!errors.addressLine1}>
-              <FormLabel>Address Line 1</FormLabel>
-              <Input
-                type="text"
-                placeholder="Address Line 1"
-                value={formData.addressLine1}
-                onChange={(e) =>
-                  setFormData({
-                    ...formData,
-                    addressLine1: e.target.value,
-                  })
-                }
-              />
-              <FormErrorMessage>{errors.addressLine1}</FormErrorMessage>
-            </FormControl>
+              {/* Address Line 2 */}
+              <FormControl mt={4}>
+                <FormLabel>Address Line 2</FormLabel>
+                <Input
+                  type="text"
+                  placeholder="Address Line 2"
+                  value={formData.addressLine2}
+                  onChange={(e) =>
+                    setFormData({
+                      ...formData,
+                      addressLine2: e.target.value,
+                    })
+                  }
+                />
+              </FormControl>
 
-            {/* Address Line 2 */}
-            <FormControl mt={4}>
-              <FormLabel>Address Line 2</FormLabel>
-              <Input
-                type="text"
-                placeholder="Address Line 2"
-                value={formData.addressLine2}
-                onChange={(e) =>
-                  setFormData({
-                    ...formData,
-                    addressLine2: e.target.value,
-                  })
-                }
-              />
-            </FormControl>
+              {/* PIN */}
+              <FormControl mt={4} isRequired isInvalid={!!errors.pin}>
+                <FormLabel>PIN</FormLabel>
+                <Input
+                  type="number"
+                  placeholder="PIN Code"
+                  value={formData.pin}
+                  onChange={(e) => {
+                    setFormData({ ...formData, pin: e.target.value });
+                    handlePincodeChange(e);
+                  }}
+                  minLength={6}
+                  maxLength={6}
+                />
+                <FormErrorMessage>{errors.pin}</FormErrorMessage>
+              </FormControl>
 
-            {/* PIN */}
-            <FormControl mt={4} isRequired isInvalid={!!errors.pin}>
-              <FormLabel>PIN</FormLabel>
-              <Input
-                type="number"
-                placeholder="PIN Code"
-                value={formData.pin}
-                onChange={(e) => {
-                  setFormData({ ...formData, pin: e.target.value });
-                  handlePincodeChange(e);
-                }}
-                minLength={6}
-                maxLength={6}
-              />
-              <FormErrorMessage>{errors.pin}</FormErrorMessage>
-            </FormControl>
+              {/* City */}
+              <FormControl mt={4} isRequired isInvalid={!!errors.city}>
+                <FormLabel>City</FormLabel>
+                <Input
+                  type="text"
+                  placeholder="City"
+                  value={formData.city}
+                  onChange={(e) =>
+                    setFormData({ ...formData, city: e.target.value })
+                  }
+                />
+                <FormErrorMessage>{errors.city}</FormErrorMessage>
+              </FormControl>
 
-            {/* City */}
-            <FormControl mt={4} isRequired isInvalid={!!errors.city}>
-              <FormLabel>City</FormLabel>
-              <Input
-                type="text"
-                placeholder="City"
-                value={formData.city}
-                onChange={(e) =>
-                  setFormData({ ...formData, city: e.target.value })
-                }
-              />
-              <FormErrorMessage>{errors.city}</FormErrorMessage>
-            </FormControl>
+              {/* State */}
+              <FormControl mt={4} isRequired isInvalid={!!errors.state}>
+                <FormLabel>State</FormLabel>
+                <Input
+                  type="text"
+                  placeholder="State"
+                  value={formData.state}
+                  onChange={(e) =>
+                    setFormData({
+                      ...formData,
+                      state: e.target.value,
+                    })
+                  }
+                />
+                <FormErrorMessage>{errors.state}</FormErrorMessage>
+              </FormControl>
 
-            {/* State */}
-            <FormControl mt={4} isRequired isInvalid={!!errors.state}>
-              <FormLabel>State</FormLabel>
-              <Input
-                type="text"
-                placeholder="State"
-                value={formData.state}
-                onChange={(e) =>
-                  setFormData({
-                    ...formData,
-                    state: e.target.value,
-                  })
-                }
-              />
-              <FormErrorMessage>{errors.state}</FormErrorMessage>
-            </FormControl>
-
-            <FormControl isInvalid={!!error} mt={4}>
-              <Checkbox
-                isChecked={isChecked}
-                onChange={handleCheckboxChange}
-                size="lg"
-                onSubmit={handleFormSubmit}
+              <FormControl isInvalid={!!error} mt={4}>
+                <Checkbox
+                  isChecked={isChecked}
+                  onChange={handleCheckboxChange}
+                  size="lg"
+                  onSubmit={handleFormSubmit}
+                >
+                  I accept the terms and conditions
+                </Checkbox>
+                <FormErrorMessage>{error}</FormErrorMessage>
+              </FormControl>
+              {error && (
+                <Alert status="error" mt={5}>
+                  <AlertIcon />
+                  {error}
+                </Alert>
+              )}
+              <Button
+                colorScheme="blue"
+                mt={4}
+                onClick={handleSubmit}
+                isDisabled={!isChecked}
               >
-                I accept the terms and conditions
-              </Checkbox>
-              <FormErrorMessage>{error}</FormErrorMessage>
-            </FormControl>
-            {error && (
-              <Alert status="error" mt={5}>
-                <AlertIcon />
-                {error}
-              </Alert>
-            )}
-            <Button
-              colorScheme="blue"
-              mt={4}
-              onClick={handleSubmit}
-              isDisabled={!isChecked}
-            >
-              Register
-            </Button>
+                Register
+              </Button>
+            </Box>
           </Box>
         </Box>
-      </Box>
-    </Container>
+      </Container>
+    </div>
   );
 };
 

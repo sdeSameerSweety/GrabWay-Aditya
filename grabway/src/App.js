@@ -90,7 +90,7 @@ function App() {
           setLoginState={setLoginState}
           loginState={loginState}
         />
-
+        <DriverRegistration />
         <div style={intDivStyle}>
           <Routes>
             {/* <Route path="/nearby" element={<NearbyMap nonceVal={nonce} />} /> */}
