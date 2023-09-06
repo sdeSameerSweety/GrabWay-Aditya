@@ -39,6 +39,11 @@ const TopSection = ({ nonceVal, loginState }) => {
   if (!Cookies.get("grabwayToken")) {
     return <Navigate to={"/"} />;
   }
+
+  const handlemoredetails = (index) => {
+    console.log(routes[index]);
+  };
+
   return (
     <>
       <div className="dekstop-view-driver">
@@ -157,7 +162,11 @@ const TopSection = ({ nonceVal, loginState }) => {
                                       </div>
                                     </CardBody>
                                     <CardFooter>
-                                      <Button>View More Details</Button>
+                                      <Button
+                                        onClick={() => handlemoredetails(index)}
+                                      >
+                                        View More Details
+                                      </Button>
                                     </CardFooter>
                                   </Card>
                                 </div>
@@ -236,7 +245,11 @@ const TopSection = ({ nonceVal, loginState }) => {
                                       </div>
                                     </CardBody>
                                     <CardFooter>
-                                      <Button>View More Details</Button>
+                                      <Button
+                                        onClick={() => handlemoredetails(index)}
+                                      >
+                                        View More Details
+                                      </Button>
                                     </CardFooter>
                                   </Card>
                                 </div>
@@ -368,7 +381,11 @@ const TopSection = ({ nonceVal, loginState }) => {
                                       </div>
                                     </CardBody>
                                     <CardFooter>
-                                      <Button>View More Details</Button>
+                                      <Button
+                                        onClick={() => handlemoredetails(index)}
+                                      >
+                                        View More Details
+                                      </Button>
                                     </CardFooter>
                                   </Card>
                                 </div>
@@ -441,7 +458,11 @@ const TopSection = ({ nonceVal, loginState }) => {
                                       </div>
                                     </CardBody>
                                     <CardFooter>
-                                      <Button>View More Details</Button>
+                                      <Button
+                                        onClick={() => handlemoredetails(index)}
+                                      >
+                                        View More Details
+                                      </Button>
                                     </CardFooter>
                                   </Card>
                                 </div>
