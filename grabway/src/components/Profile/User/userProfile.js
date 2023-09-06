@@ -9,19 +9,42 @@ export default function userProfile({ userData, profilePhoto }) {
   };
 
   const data = JSON.parse(userData);
+  console.log(userData);
   return (
     <>
       <div className="relative flex flex-col min-w-0 break-words bg-white w-full mb-6 shadow-xl rounded-lg mt-16">
         <div className="px-6">
           <div className="flex flex-wrap justify-center">
             <div className="w-full px-4 flex justify-center">
-              <div className="relative flex justify-center">
+              <div className="relative">
                 <img
                   alt="..."
                   src={profilePhoto ? profilePhoto : "assets/images/user.png"}
-                  style={imgProfile}
+                  className="shadow-xl rounded-full h-auto align-middle border-none absolute -m-16 -ml-20 lg:-ml-16 max-w-150-px"
                 />
               </div>
+            </div>
+            <div className="w-full px-4 text-center mt-20">
+              {/* <div className="flex justify-center py-4 lg:pt-4 pt-8">
+                <div className="mr-4 p-3 text-center">
+                  <span className="text-xl font-bold block uppercase tracking-wide text-blueGray-600">
+                    22
+                  </span>
+                  <span className="text-sm text-blueGray-400">Friends</span>
+                </div>
+                <div className="mr-4 p-3 text-center">
+                  <span className="text-xl font-bold block uppercase tracking-wide text-blueGray-600">
+                    10
+                  </span>
+                  <span className="text-sm text-blueGray-400">Photos</span>
+                </div>
+                <div className="lg:mr-4 p-3 text-center">
+                  <span className="text-xl font-bold block uppercase tracking-wide text-blueGray-600">
+                    89
+                  </span>
+                  <span className="text-sm text-blueGray-400">Comments</span>
+                </div>
+              </div> */}
             </div>
           </div>
           <div className="text-center mt-12">
@@ -33,12 +56,33 @@ export default function userProfile({ userData, profilePhoto }) {
               {data.address[0].addressLine1 +
                 ", " +
                 data.address[0].addressLine2 +
-                ", " +
-                data.address[0].city +
-                ", " +
-                data.address[0].state}
+                ", "}
+              <br />
+              {data.address[0].city + ", " + data.address[0].state}
+              <br />
+              Pin code: {data.address[0].pincode}
             </div>
           </div>
+          {/* <div className="mt-10 py-10 border-t border-blueGray-200 text-center">
+            <div className="flex flex-wrap justify-center">
+              <div className="w-full lg:w-9/12 px-4">
+                <p className="mb-4 text-lg leading-relaxed text-blueGray-700">
+                  An artist of considerable range, Jenna the name taken by
+                  Melbourne-raised, Brooklyn-based Nick Murphy writes, performs
+                  and records all of his own music, giving it a warm, intimate
+                  feel with a solid groove structure. An artist of considerable
+                  range.
+                </p>
+                <a
+                  href="#pablo"
+                  className="font-normal text-lightBlue-500"
+                  onClick={(e) => e.preventDefault()}
+                >
+                  Show more
+                </a>
+              </div>
+            </div>
+          </div> */}
         </div>
       </div>
     </>

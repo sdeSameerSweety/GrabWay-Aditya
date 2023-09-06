@@ -1,68 +1,65 @@
-import React from "react";
-import { useLocation, useNavigate } from "react-router-dom";
+import React, { useEffect } from "react";
+import { useLocation, Navigate } from "react-router-dom";
 import "./details.css";
 
 export default function MoreDetails() {
-  const navigate = useNavigate();
   const location = useLocation();
-  if (!location) {
-    navigate(-1);
-  } else {
-    if (!location.state) navigate(-1);
+  if (!location.state) {
+    return <Navigate to={"/"} />;
   }
-  const displayData = location.state;
+  // const location.state = location.state;
 
   //origin
   const orgMst =
-    Number(displayData.route.originTime[0].start.split(":")[0]) >= 12
+    Number(location.state.route.originTime[0].start.split(":")[0]) >= 12
       ? " PM"
       : " AM";
   let orgtimest =
     (
-      Number(displayData.route.originTime[0].start.split(":")[0]) % 12
+      Number(location.state.route.originTime[0].start.split(":")[0]) % 12
     ).toString() +
     ":" +
-    displayData.route.originTime[0].start.split(":")[1] +
+    location.state.route.originTime[0].start.split(":")[1] +
     orgMst;
 
   const orgMen =
-    Number(displayData.route.originTime[0].end.split(":")[0]) >= 12
+    Number(location.state.route.originTime[0].end.split(":")[0]) >= 12
       ? " PM"
       : " AM";
   let orgtimeen =
     (
-      Number(displayData.route.originTime[0].end.split(":")[0]) % 12
+      Number(location.state.route.originTime[0].end.split(":")[0]) % 12
     ).toString() +
     ":" +
-    displayData.route.originTime[0].end.split(":")[1] +
+    location.state.route.originTime[0].end.split(":")[1] +
     orgMen;
 
   //destination
   const destMst =
-    Number(displayData.route.destinationTime[0].start.split(":")[0]) >= 12
+    Number(location.state.route.destinationTime[0].start.split(":")[0]) >= 12
       ? " PM"
       : " AM";
   let desttimest =
     (
-      Number(displayData.route.destinationTime[0].start.split(":")[0]) % 12
+      Number(location.state.route.destinationTime[0].start.split(":")[0]) % 12
     ).toString() +
     ":" +
-    displayData.route.destinationTime[0].start.split(":")[1] +
+    location.state.route.destinationTime[0].start.split(":")[1] +
     destMst;
 
   const destMen =
-    Number(displayData.route.destinationTime[0].end.split(":")[0]) >= 12
+    Number(location.state.route.destinationTime[0].end.split(":")[0]) >= 12
       ? " PM"
       : " AM";
   let desttimeen =
     (
-      Number(displayData.route.destinationTime[0].end.split(":")[0]) % 12
+      Number(location.state.route.destinationTime[0].end.split(":")[0]) % 12
     ).toString() +
     ":" +
-    displayData.route.destinationTime[0].end.split(":")[1] +
+    location.state.route.destinationTime[0].end.split(":")[1] +
     destMen;
 
-  console.log(displayData);
+  console.log(location.state);
 
   const finalTime = {
     origin: [orgtimest, orgtimeen],
@@ -113,8 +110,8 @@ export default function MoreDetails() {
                     <img
                       alt="..."
                       src={
-                        displayData.profilePicture.length !== 0
-                          ? displayData.profilePicture
+                        location.state.profilePicture.length !== 0
+                          ? location.state.profilePicture
                           : "/assets/images/user.png"
                       }
                       class="shadow-xl rounded-full h-auto align-middle border-none absolute -m-16 -ml-20 lg:-ml-16 max-w-150-px"
@@ -130,9 +127,9 @@ export default function MoreDetails() {
                       class="bg-pink-500 active:bg-pink-600 uppercase text-white font-bold hover:shadow-md shadow text-xs px-4 py-2 rounded outline-none focus:outline-none sm:mr-2 mb-1 ease-linear transition-all duration-150"
                       type="button"
                     >
-                      {displayData.VehicleNumber.slice(0, 2) +
+                      {location.state.VehicleNumber.slice(0, 2) +
                         " " +
-                        displayData.VehicleNumber.slice(2)}
+                        location.state.VehicleNumber.slice(2)}
                     </button>
                   </div>
                 </div>
@@ -143,11 +140,11 @@ export default function MoreDetails() {
                         Driving License
                       </span>
                       <span class="text-lg text-blueGray-400 font-bold">
-                        {displayData.drivingLicenseNumber.slice(0, 2) +
+                        {location.state.drivingLicenseNumber.slice(0, 2) +
                           "*".repeat(
-                            displayData.drivingLicenseNumber.length - 4
+                            location.state.drivingLicenseNumber.length - 4
                           ) +
-                          displayData.drivingLicenseNumber.slice(-2)}
+                          location.state.drivingLicenseNumber.slice(-2)}
                       </span>
                     </div>
                   </div>
@@ -155,7 +152,7 @@ export default function MoreDetails() {
               </div>
               <div class="text-center mt-12">
                 <h3 class="text-4xl font-semibold leading-normal mb-2 text-blueGray-700 mb-2">
-                  {displayData.name}
+                  {location.state.name}
                 </h3>
               </div>
               <div class="py-10 border-t border-blueGray-200 text-center">
@@ -173,7 +170,7 @@ export default function MoreDetails() {
                       <span className="pr-[8px]">
                         The Driver usually picks up at
                       </span>
-                      <span class="before:block before:absolute before:-inset-1 before:-skew-y-3 before:bg-green-900 relative inline-block pl-[4px]">
+                      <span class="before:block before:absolute before:-inset-1 before:-skew-y-0 before:bg-green-900 relative inline-block pl-[4px]">
                         <span class="relative text-white">
                           {finalTime.origin[0]}
                         </span>
@@ -183,7 +180,7 @@ export default function MoreDetails() {
                       <span className="pr-[8px]">
                         but he can still manages to pick you up till
                       </span>
-                      <span class="before:block before:absolute before:-inset-1 before:-skew-y-3 before:bg-pink-500 relative inline-block pl-[4px]">
+                      <span class="before:block before:absolute before:-inset-1 before:-skew-y-0 before:bg-pink-500 relative inline-block pl-[4px]">
                         <span class="relative text-white">
                           {finalTime.origin[1]}
                         </span>
@@ -205,7 +202,7 @@ export default function MoreDetails() {
                       <span className="pr-[8px]">
                         The Driver will peacefully drop you by
                       </span>
-                      <span class="before:block before:absolute before:-inset-1 before:-skew-y-3 before:bg-green-900 relative inline-block pl-[4px]">
+                      <span class="before:block before:absolute before:-inset-1 before:-skew-y-0 before:bg-green-900 relative inline-block pl-[4px]">
                         <span class="relative text-white">
                           {finalTime.destination[0]}
                         </span>
@@ -215,7 +212,7 @@ export default function MoreDetails() {
                       <span className="pr-[8px]">
                         but in some scenarios it can be extended till
                       </span>
-                      <span class="before:block before:absolute before:-inset-1 before:-skew-y-3 before:bg-pink-500 relative inline-block pl-[4px]">
+                      <span class="before:block before:absolute before:-inset-1 before:-skew-y-0 before:bg-pink-500 relative inline-block pl-[4px]">
                         <span class="relative text-white">
                           {finalTime.destination[1]}
                         </span>

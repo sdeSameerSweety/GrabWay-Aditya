@@ -6,23 +6,37 @@ import {
   DirectionsRenderer,
 } from "@react-google-maps/api";
 import { Button, Mark, useControllableProp, useToast } from "@chakra-ui/react";
-import { useLocation } from "react-router-dom";
+import { Navigate, useLocation } from "react-router-dom";
 import Cookies from "js-cookie";
 import { useNavigate } from "react-router-dom";
 import { Card, CardBody } from "@chakra-ui/react";
 import axios from "axios";
-const containerStyle = {
-  width: "1000px",
-  height: "500px",
-  border: "1px solid white",
-  borderRadius: "30px",
-};
 
 function MyComponent({ nonceVal }, { route, state }) {
+  const [windowSize, setWindowSize] = useState(window.innerWidth);
+  useEffect(() => {
+    const handleWindowResize = () => {
+      setWindowSize(window.innerWidth);
+    };
+
+    window.addEventListener("resize", handleWindowResize);
+    return () => {
+      window.removeEventListener("resize", handleWindowResize);
+    };
+  }, []);
+  const containerStyle = {
+    width: `${windowSize <= 600 ? "500px" : "1000px"}`,
+    height: "500px",
+    border: "1px solid white",
+    borderRadius: "30px",
+  };
   const navigate = useNavigate();
-  const usData = JSON.parse(localStorage.getItem('grabwayUser'));
+  const usData = JSON.parse(localStorage.getItem("grabwayUser"));
   console.log(usData);
   const location = useLocation();
+  if (!location.state) {
+    <Navigate to={"/"} />;
+  }
   const toast = useToast();
   const [showCards, setShowCards] = useState(false);
   console.log(location);
@@ -196,7 +210,10 @@ function MyComponent({ nonceVal }, { route, state }) {
                 <section class="bg-white">
                   <div class="py-8 px-4 mx-auto max-w-screen-xl lg:py-16 lg:px-6">
                     <div class="mx-auto max-w-screen-md text-center mb-8 lg:mb-12">
-                      <h2 class="mb-4 text-4xl tracking-tight font-extrabold text-gray-900"  id="package-cards">
+                      <h2
+                        class="mb-4 text-4xl tracking-tight font-extrabold text-gray-900"
+                        id="package-cards"
+                      >
                         Explore Our Packages
                       </h2>
                       <p class="mb-5 font-light text-gray-500 sm:text-xl">
@@ -547,7 +564,10 @@ function MyComponent({ nonceVal }, { route, state }) {
                 <section class="bg-white">
                   <div class="py-8 px-4 mx-auto max-w-screen-xl lg:py-16 lg:px-6">
                     <div class="mx-auto max-w-screen-md text-center mb-8 lg:mb-12">
-                      <h2 class="mb-4 text-4xl tracking-tight font-extrabold text-gray-900"  id="package-cards">
+                      <h2
+                        class="mb-4 text-4xl tracking-tight font-extrabold text-gray-900"
+                        id="package-cards"
+                      >
                         Explore Our Packages
                       </h2>
                       <p class="mb-5 font-light text-gray-500 sm:text-xl">
