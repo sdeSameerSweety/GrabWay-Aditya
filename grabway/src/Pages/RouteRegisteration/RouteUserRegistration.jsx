@@ -182,26 +182,26 @@ const RouteUserRegisteration = () => {
         <Box flex={1} p={8}>
           <Heading className="heading">Register Your Schedule</Heading>
           <FormControl mt={4}>
-            <FormLabel>Origin Text</FormLabel>
+            <FormLabel>Your Pickup Location</FormLabel>
             <Input type="text" value={originText} isReadOnly />
           </FormControl>
           <FormControl mt={4}>
-            <FormLabel>Destination Text</FormLabel>
+            <FormLabel>Your Drop Location</FormLabel>
             <Input type="text" value={destinationText} isReadOnly />
           </FormControl>
           <FormControl isInvalid={!!originTimeError} mt={4}>
-            <FormLabel>Your Start Time</FormLabel>
+            <FormLabel>Your Pickup Time</FormLabel>
             <Flex>
               <Input
                 type="time"
-                placeholder="From"
+                placeholder="Pickup From"
                 value={originStartTime}
                 onChange={(e) => setOriginStartTime(e.target.value)}
               />
 
               <Input
                 type="time"
-                placeholder="To"
+                placeholder="Pickup To"
                 value={originEndTime}
                 onChange={(e) => setOriginEndTime(e.target.value)}
                 ml={5}
@@ -210,18 +210,18 @@ const RouteUserRegisteration = () => {
             <FormErrorMessage>{originTimeError}</FormErrorMessage>
           </FormControl>
           <FormControl isInvalid={!!destinationTimeError} mt={4}>
-            <FormLabel>Your End Time</FormLabel>
+            <FormLabel>Your Drop Time</FormLabel>
             <Flex>
               <Input
                 type="time"
-                placeholder="From"
+                placeholder="Drop From"
                 value={destinationStartTime}
                 onChange={(e) => setDestinationStartTime(e.target.value)}
               />
 
               <Input
                 type="time"
-                placeholder="To"
+                placeholder="Drop To"
                 value={destinationEndTime}
                 onChange={(e) => setDestinationEndTime(e.target.value)}
                 ml={5}
@@ -255,7 +255,7 @@ const RouteUserRegisteration = () => {
             onClick={handleSubmit}
             isDisabled={!isChecked}
           >
-            Register
+            Search Drivers
           </Button>
         </Box>
       </Box>

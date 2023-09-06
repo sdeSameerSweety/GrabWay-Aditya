@@ -203,28 +203,28 @@ const RouteDriverRegisteration = () => {
       >
         <FormAnimation />
         <Box flex={1} p={8}>
-          <Heading className="heading">Register Your Schedule</Heading>
+          <Heading className="heading">Register Your Route Schedule</Heading>
           <FormControl mt={4}>
-            <FormLabel>Origin Text</FormLabel>
+            <FormLabel>Journey Start From</FormLabel>
             <Input type="text" value={originText} isReadOnly />
           </FormControl>
           <FormControl mt={4}>
-            <FormLabel>Destination Text</FormLabel>
+            <FormLabel>Journey End At</FormLabel>
             <Input type="text" value={destinationText} isReadOnly />
           </FormControl>
           <FormControl isInvalid={!!originTimeError} mt={4}>
-            <FormLabel>Your Start Time</FormLabel>
+            <FormLabel>Your Starting Time In Between</FormLabel>
             <Flex>
               <Input
                 type="time"
-                placeholder="From"
+                placeholder="StartFrom"
                 value={originStartTime}
                 onChange={(e) => setOriginStartTime(e.target.value)}
               />
 
               <Input
                 type="time"
-                placeholder="To"
+                placeholder="Start To"
                 value={originEndTime}
                 onChange={(e) => setOriginEndTime(e.target.value)}
                 ml={5}
@@ -233,18 +233,18 @@ const RouteDriverRegisteration = () => {
             <FormErrorMessage>{originTimeError}</FormErrorMessage>
           </FormControl>
           <FormControl isInvalid={!!destinationTimeError} mt={4}>
-            <FormLabel>Your End Time</FormLabel>
+            <FormLabel>Your Ending Time In Between</FormLabel>
             <Flex>
               <Input
                 type="time"
-                placeholder="From"
+                placeholder="End From"
                 value={destinationStartTime}
                 onChange={(e) => setDestinationStartTime(e.target.value)}
               />
 
               <Input
                 type="time"
-                placeholder="To"
+                placeholder="End To"
                 value={destinationEndTime}
                 onChange={(e) => setDestinationEndTime(e.target.value)}
                 ml={5}
@@ -253,7 +253,7 @@ const RouteDriverRegisteration = () => {
             <FormErrorMessage>{destinationTimeError}</FormErrorMessage>
           </FormControl>
           <FormControl mt={4} isRequired isInvalid={!!errors.seats}>
-            <FormLabel>Seats</FormLabel>
+            <FormLabel>Seats Avaliabe For This Route</FormLabel>
             <Input
               type="number"
               placeholder="Number of available seats"
@@ -278,7 +278,7 @@ const RouteDriverRegisteration = () => {
             onClick={handleSubmit}
             isDisabled={!isChecked}
           >
-            Register
+            Add Route
           </Button>
         </Box>
       </Box>
