@@ -1,2 +1,9 @@
 @import url("https://demos.creative-tim.com/notus-js/assets/vendor/@fortawesome/fontawesome-free/css/all.min.css");
 @import url("https://demos.creative-tim.com/notus-js/assets/styles/tailwind.css");
+.ico1 .fa-map-marker-alt {
+  color: red;
+}
+
+.ico2 .fa-map-marker-alt {
+  color: green;
+}
