@@ -156,10 +156,7 @@ export default function MoreDetails() {
                 </h3>
               </div>
               <div class="py-10 border-t border-blueGray-200 text-center">
-                <button
-                  class="relative inline-flex items-center justify-center p-0.5 mb-2 mr-2 overflow-hidden text-sm font-medium text-gray-900 rounded-lg group bg-gradient-to-br from-red-200 via-red-300 to-yellow-200 group-hover:from-red-200 group-hover:via-red-300 group-hover:to-yellow-200 dark:text-white dark:hover:text-gray-900 focus:ring-4 focus:outline-none focus:ring-red-100 dark:focus:ring-red-400"
-                  disabled="true"
-                >
+                <button class="relative inline-flex items-center justify-center p-0.5 mb-2 mr-2 overflow-hidden text-sm font-medium text-gray-900 rounded-lg group bg-gradient-to-br from-red-200 via-red-300 to-yellow-200 group-hover:from-red-200 group-hover:via-red-300 group-hover:to-yellow-200 dark:text-white dark:hover:text-gray-900 focus:ring-4 focus:outline-none focus:ring-red-100 dark:focus:ring-red-400">
                   <span class="relative px-5 py-2.5 transition-all ease-in duration-75 bg-white dark:bg-gray-900 rounded-md group-hover:bg-opacity-0">
                     Pickup
                   </span>
@@ -167,20 +164,37 @@ export default function MoreDetails() {
                 <div class="flex flex-wrap justify-center">
                   <div class="w-full lg:w-9/12 px-4">
                     <blockquote class="text-2xl font-semibold italic text-center text-slate-900">
-                      <span className="pr-[8px]">
+                      <span style={{ paddingRight: "10px" }}>
                         The Driver usually picks up at
                       </span>
-                      <span class="before:block before:absolute before:-inset-1 before:-skew-y-0 before:bg-green-900 relative inline-block pl-[4px]">
+                      <span
+                        class="before:block before:absolute before:-inset-1 before:-skew-y-0 relative inline-block"
+                        style={{
+                          background: "#e51b23",
+                          paddingRight: "1%",
+                          paddingLeft: "1%",
+                        }}
+                      >
                         <span class="relative text-white">
                           {finalTime.origin[0]}
                         </span>
                       </span>
                     </blockquote>
-                    <blockquote class="text-2xl font-semibold italic text-center text-slate-900 mt-[2%]">
-                      <span className="pr-[8px]">
+                    <blockquote
+                      class="text-2xl font-semibold italic text-center text-slate-900"
+                      style={{ marginTop: "2%" }}
+                    >
+                      <span style={{ paddingRight: "10px" }}>
                         but he can still manages to pick you up till
                       </span>
-                      <span class="before:block before:absolute before:-inset-1 before:-skew-y-0 before:bg-pink-500 relative inline-block pl-[4px]">
+                      <span
+                        class="before:block before:absolute before:-inset-1 before:-skew-y-0 relative inline-block"
+                        style={{
+                          background: "green",
+                          paddingRight: "1%",
+                          paddingLeft: "1%",
+                        }}
+                      >
                         <span class="relative text-white">
                           {finalTime.origin[1]}
                         </span>
@@ -199,20 +213,37 @@ export default function MoreDetails() {
                 <div class="flex flex-wrap justify-center">
                   <div class="w-full lg:w-9/12 px-4">
                     <blockquote class="text-2xl font-semibold italic text-center text-slate-900">
-                      <span className="pr-[8px]">
+                      <span style={{ paddingRight: "10px" }}>
                         The Driver will peacefully drop you by
                       </span>
-                      <span class="before:block before:absolute before:-inset-1 before:-skew-y-0 before:bg-green-900 relative inline-block pl-[4px]">
+                      <span
+                        class="before:block before:absolute before:-inset-1 before:-skew-y-0 relative inline-block"
+                        style={{
+                          background: "#e51b23",
+                          paddingRight: "1%",
+                          paddingLeft: "1%",
+                        }}
+                      >
                         <span class="relative text-white">
                           {finalTime.destination[0]}
                         </span>
                       </span>
                     </blockquote>
-                    <blockquote class="text-2xl font-semibold italic text-center text-slate-900 mt-[2%]">
-                      <span className="pr-[8px]">
+                    <blockquote
+                      class="text-2xl font-semibold italic text-center text-slate-900"
+                      style={{ marginTop: "2%" }}
+                    >
+                      <span style={{ paddingRight: "10px" }}>
                         but in some scenarios it can be extended till
                       </span>
-                      <span class="before:block before:absolute before:-inset-1 before:-skew-y-0 before:bg-pink-500 relative inline-block pl-[4px]">
+                      <span
+                        class="before:block before:absolute before:-inset-1 before:-skew-y-0 relative inline-block"
+                        style={{
+                          background: "green",
+                          paddingRight: "1%",
+                          paddingLeft: "1%",
+                        }}
+                      >
                         <span class="relative text-white">
                           {finalTime.destination[1]}
                         </span>
