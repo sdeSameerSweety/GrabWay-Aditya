@@ -229,7 +229,7 @@ const RouteUserRegisteration = () => {
             </Flex>
             <FormErrorMessage>{destinationTimeError}</FormErrorMessage>
           </FormControl>
-          <FormControl mt={4} isRequired isInvalid={!!errors.seats}>
+          {/* <FormControl mt={4} isRequired isInvalid={!!errors.seats}>
             <FormLabel>Seats</FormLabel>
             <Input
               type="number"
@@ -238,7 +238,7 @@ const RouteUserRegisteration = () => {
               onChange={(e) => setSeats(e.target.value.slice(0, 2))}
             />
             <FormErrorMessage>{errors.seats}</FormErrorMessage>
-          </FormControl>
+          </FormControl> */}
           <FormControl isInvalid={!!error} mt={4}>
             <Checkbox
               isChecked={isChecked}

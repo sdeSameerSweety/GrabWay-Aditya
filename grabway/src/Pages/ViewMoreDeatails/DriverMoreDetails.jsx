@@ -39,6 +39,8 @@ const DriverDetails = () => {
         from: "Bhubaneswar, Odisha",
         to: "Puri, Odisha",
         details: "Frequent traveler to Puri",
+        profileImage:
+          "https://straightforwardguidance.com/wp-content/uploads/2023/02/28ac7dea21d5507f/what-are-lucid-dreams.jpeg",
       },
       {
         id: 2,
@@ -48,6 +50,8 @@ const DriverDetails = () => {
         from: "Bhubaneswar, Odisha",
         to: "Puri, Odisha",
         details: "Visiting Jagannath Temple",
+        profileImage:
+          "https://www.liquidsandsolids.com/wp-content/uploads/2022/09/talking-to-a-dead-person.jpg",
       },
       {
         id: 3,
@@ -57,6 +61,8 @@ const DriverDetails = () => {
         from: "Bhubaneswar, Odisha",
         to: "Puri, Odisha",
         details: "Solo traveler for leisure",
+        profileImage:
+          "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQVzEtCIxnrCYfIXJXwfJNRY9M65m8k5Eo5HQ&usqp=CAU",
       },
     ],
   };
@@ -128,6 +134,16 @@ const DriverDetails = () => {
           {route.passengers.map((passenger) => (
             <GridItem key={passenger.id}>
               <Card className="customer-info-card">
+                {/* User profile picture in the top half */}
+                <div className="customer-profile-picture-container">
+                  <div className="customer-profile-picture">
+                    <Image
+                      src={passenger.profileImage}
+                      alt={`Profile of ${passenger.name}`}
+                      className="profile-image"
+                    />
+                  </div>
+                </div>
                 <VStack align="start">
                   <p>Name: {passenger.name}</p>
                   <p>Email: {passenger.email}</p>
