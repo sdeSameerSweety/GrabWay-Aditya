@@ -1,8 +1,27 @@
 /* Registration.css */
+.background-container {
+  display: flex;
+  justify-content: center; /* Horizontally center the content */
+  align-items: center; /* Vertically center the content */
+  width: 100%;
+  height: auto; /* Use viewport height for full-screen effect */
+  overflow: hidden;
+  position: relative;
+}
 
-/* Style for the whole container */
+.background-gif {
+    padding: 1% 1% 0% 7%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover; /* Make the GIF cover the entire container */
+  z-index: -1; /* Place it behind other content */
+}
+
+
 .container-reg {
-  /* background-color: #f7f7f7; */
   padding: 40px;
 }
 
