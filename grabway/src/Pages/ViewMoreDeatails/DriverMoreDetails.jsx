@@ -39,7 +39,8 @@ const DriverDetails = () => {
         from: "Bhubaneswar, Odisha",
         to: "Puri, Odisha",
         details: "Frequent traveler to Puri",
-        profileImage: "customer1-avatar.jpg", // Add the path to the customer's profile picture
+        profileImage:
+          "https://straightforwardguidance.com/wp-content/uploads/2023/02/28ac7dea21d5507f/what-are-lucid-dreams.jpeg",
       },
       {
         id: 2,
@@ -49,7 +50,8 @@ const DriverDetails = () => {
         from: "Bhubaneswar, Odisha",
         to: "Puri, Odisha",
         details: "Visiting Jagannath Temple",
-        profileImage: "customer2-avatar.jpg", // Add the path to the customer's profile picture
+        profileImage:
+          "https://www.liquidsandsolids.com/wp-content/uploads/2022/09/talking-to-a-dead-person.jpg",
       },
       {
         id: 3,
@@ -59,7 +61,7 @@ const DriverDetails = () => {
         from: "Bhubaneswar, Odisha",
         to: "Puri, Odisha",
         details: "Solo traveler for leisure",
-        profileImage: "customer3-avatar.jpg", // Add the path to the customer's profile picture
+        profileImage: "",
       },
     ],
   };
@@ -123,7 +125,6 @@ const DriverDetails = () => {
         </div>
       </div>
       <Divider borderColor="gray.300" />
-
       {/* Customer Information */}
       <div className="customer-card">
         <h4>Customers Information</h4>

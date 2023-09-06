@@ -35,6 +35,33 @@
   color: #333;
 }
 
+.customer-info-card {
+  position: relative;
+  overflow: hidden;
+  border-radius: 12px;
+}
+
+.customer-profile-picture {
+  width: 100px; /* Adjust the size of the profile picture as needed */
+  height: 100px; /* Adjust the size of the profile picture as needed */
+  border-radius: 50%;
+  border: 2px solid #fff; /* Add border if needed */
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+  z-index: 1; /* Ensure the profile picture is above the card content */
+  position: absolute;
+  top: -50px; /* Adjust this value to position the picture correctly */
+  left: 50%;
+  transform: translateX(-50%);
+  overflow: hidden;
+}
+
+.customer-info-card .profile-image {
+  width: 100%; /* Ensure the image takes up the full width of its container */
+  height: 100%; /* Ensure the image takes up the full height of its container */
+  object-fit: cover; /* Ensures the image fills the container while preserving its aspect ratio */
+}
+
+
 .route-info h3 {
   font-size: 26px;
   font-weight: bold;
@@ -68,7 +95,7 @@
 .customer-card h4 {
   font-size: 20px;
   font-weight: bold;
-  margin-bottom: 10px;
+  margin-bottom: 35px;
   color: #333;
 }
 
