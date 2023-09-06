@@ -61,7 +61,8 @@ const DriverDetails = () => {
         from: "Bhubaneswar, Odisha",
         to: "Puri, Odisha",
         details: "Solo traveler for leisure",
-        profileImage: "",
+        profileImage:
+          "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQVzEtCIxnrCYfIXJXwfJNRY9M65m8k5Eo5HQ&usqp=CAU",
       },
     ],
   };
@@ -125,6 +126,7 @@ const DriverDetails = () => {
         </div>
       </div>
       <Divider borderColor="gray.300" />
+
       {/* Customer Information */}
       <div className="customer-card">
         <h4>Customers Information</h4>
@@ -133,12 +135,14 @@ const DriverDetails = () => {
             <GridItem key={passenger.id}>
               <Card className="customer-info-card">
                 {/* User profile picture in the top half */}
-                <div className="customer-profile-picture">
-                  <Image
-                    src={passenger.profileImage}
-                    alt={`Profile of ${passenger.name}`}
-                    className="profile-image"
-                  />
+                <div className="customer-profile-picture-container">
+                  <div className="customer-profile-picture">
+                    <Image
+                      src={passenger.profileImage}
+                      alt={`Profile of ${passenger.name}`}
+                      className="profile-image"
+                    />
+                  </div>
                 </div>
                 <VStack align="start">
                   <p>Name: {passenger.name}</p>
