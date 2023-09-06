@@ -1,9 +1,26 @@
 @import url("https://demos.creative-tim.com/notus-js/assets/vendor/@fortawesome/fontawesome-free/css/all.min.css");
-@import url("https://demos.creative-tim.com/notus-js/assets/styles/tailwind.css");
+@import url("./unique.css");
 .ico1 .fa-map-marker-alt {
   color: red;
 }
 
 .ico2 .fa-map-marker-alt {
   color: green;
+}
+
+.cards-similar .card {
+  background-color: dodgerblue;
+  color: white;
+  padding: 1rem;
+  height: 4rem;
+}
+
+.cards-similar {
+  max-width: 1200px;
+  margin: 0px auto;
+  display: grid;
+  gap: 1rem;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  padding-left: 5%;
+  padding-right: 5%;
 }
