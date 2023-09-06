@@ -122,7 +122,10 @@ function DriverCard(props) {
                           Seats:{" "}
                           {driver.route.seats - driver.route.customers.length}
                         </span>
-                        <button onClick={handleBookNow} class="bg-theme text-white py-2 px-4 rounded-full font-bold hover:bg-gray-800">
+                        <button
+                          onClick={() => handleBookNow(driverIndex)}
+                          class="bg-theme text-white py-2 px-4 rounded-full font-bold hover:bg-gray-800"
+                        >
                           Grab it
                         </button>
                       </div>
