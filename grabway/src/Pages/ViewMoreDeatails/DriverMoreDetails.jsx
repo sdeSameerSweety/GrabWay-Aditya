@@ -39,6 +39,7 @@ const DriverDetails = () => {
         from: "Bhubaneswar, Odisha",
         to: "Puri, Odisha",
         details: "Frequent traveler to Puri",
+        profileImage: "customer1-avatar.jpg", // Add the path to the customer's profile picture
       },
       {
         id: 2,
@@ -48,6 +49,7 @@ const DriverDetails = () => {
         from: "Bhubaneswar, Odisha",
         to: "Puri, Odisha",
         details: "Visiting Jagannath Temple",
+        profileImage: "customer2-avatar.jpg", // Add the path to the customer's profile picture
       },
       {
         id: 3,
@@ -57,6 +59,7 @@ const DriverDetails = () => {
         from: "Bhubaneswar, Odisha",
         to: "Puri, Odisha",
         details: "Solo traveler for leisure",
+        profileImage: "customer3-avatar.jpg", // Add the path to the customer's profile picture
       },
     ],
   };
@@ -128,6 +131,14 @@ const DriverDetails = () => {
           {route.passengers.map((passenger) => (
             <GridItem key={passenger.id}>
               <Card className="customer-info-card">
+                {/* User profile picture in the top half */}
+                <div className="customer-profile-picture">
+                  <Image
+                    src={passenger.profileImage}
+                    alt={`Profile of ${passenger.name}`}
+                    className="profile-image"
+                  />
+                </div>
                 <VStack align="start">
                   <p>Name: {passenger.name}</p>
                   <p>Email: {passenger.email}</p>
