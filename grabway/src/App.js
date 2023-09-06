@@ -29,6 +29,7 @@ import UserPackages from "./Pages/UserPackages/UserPackages";
 import MoreDetails from "./Pages/MoreDetails/MoreDetails";
 import Checkout from "./Pages/Checkout/Checkout";
 import ErrorNotFound from "./Pages/404NotFound/ErrorNotFound";
+import DriverDetails from "./Pages/ViewMoreDeatails/DriverMoreDetails";
 axios.defaults.baseURL = "http://localhost:8080";
 axios.defaults.withCredentials = true;
 // import NearbyMap from "./components/Map/NearbyMap";
@@ -107,6 +108,7 @@ function App() {
             <Route path="/profile" element={<ProfilePage />} />
             <Route path="/driverHomePage" element={<DriverHomePage />} />
             <Route path="/moredetails" element={<MoreDetails />} />
+            <Route path="/drivermoredetails" element={<DriverDetails />} />
             <Route
               path="/routeDriverLocation"
               element={
