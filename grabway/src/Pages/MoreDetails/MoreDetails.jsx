@@ -147,6 +147,14 @@ export default function MoreDetails() {
                           location.state.drivingLicenseNumber.slice(-2)}
                       </span>
                     </div>
+                    <div class="mr-4 p-3 text-center">
+                      <button
+                        // onClick={handleBookNow}
+                        class="bg-theme text-white py-2 px-4 rounded-full font-bold hover:bg-gray-800"
+                      >
+                        Grab it
+                      </button>
+                    </div>
                   </div>
                 </div>
               </div>
