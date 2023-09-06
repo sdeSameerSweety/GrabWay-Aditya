@@ -95,9 +95,9 @@ const RouteUserRegisteration = () => {
   const validateForm = () => {
     const newErrors = {};
 
-    if (!formData.seats) {
-      newErrors.seats = "Number of seats required";
-    }
+    // if (!formData.seats) {
+    //   newErrors.seats = "Number of seats required";
+    // }
 
     if (!originStartTime || !originEndTime) {
       newErrors.originTime =
@@ -146,7 +146,7 @@ const RouteUserRegisteration = () => {
       setSearch(true);
     }
   };
-
+  console.log("search", search);
   if (search) {
     return navigate("/matchedRoutes", { state: formData });
   }
