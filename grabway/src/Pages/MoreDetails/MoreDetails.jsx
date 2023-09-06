@@ -154,6 +154,14 @@ export default function MoreDetails() {
                 <h3 class="text-4xl font-semibold leading-normal mb-2 text-blueGray-700 mb-2">
                   {location.state.name}
                 </h3>
+                <div className="ico1 text-sm leading-normal mt-0 mb-2 text-blueGray-400 font-bold uppercase">
+                  <i className="fas fa-map-marker-alt mr-2 text-lg text-blueGray-400"></i>
+                  {location.state.route.origin[0].text}
+                </div>
+                <div className="ico2 text-sm leading-normal mt-0 mb-2 text-blueGray-400 font-bold uppercase">
+                  <i className="fas fa-map-marker-alt mr-2 text-lg text-blueGray-400"></i>{" "}
+                  {location.state.route.destination[0].text}
+                </div>
               </div>
               <div class="py-10 border-t border-blueGray-200 text-center">
                 <button class="relative inline-flex items-center justify-center p-0.5 mb-2 mr-2 overflow-hidden text-sm font-medium text-gray-900 rounded-lg group bg-gradient-to-br from-red-200 via-red-300 to-yellow-200 group-hover:from-red-200 group-hover:via-red-300 group-hover:to-yellow-200 dark:text-white dark:hover:text-gray-900 focus:ring-4 focus:outline-none focus:ring-red-100 dark:focus:ring-red-400">
