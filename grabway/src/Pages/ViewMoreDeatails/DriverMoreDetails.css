@@ -47,22 +47,24 @@
   height: 100px; /* Adjust the size of the container as needed */
   overflow: hidden; /* Hide any overflow */
   border-radius: 50%;
-  background-color: aqua;
+  /* background-color: aqua; */
 }
 
 .customer-profile-picture {
   position: absolute;
-  top: 0;
-  left: 0;
-  overflow: hidden;
-  width: 100%; /* Ensure the picture covers the container */
-  height: 100%; /* Ensure the picture covers the container */
-  object-fit: fill; /* Maintain aspect ratio and cover the container */
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 100%;
+  height: 100%;
+  object-fit: cover; /* Maintain aspect ratio and cover the container */
   border-radius: 50%;
-  border: 2px solid #fff; /* Add border if needed */
+  border: 2px solid #fff;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
-  z-index: 1; /* Ensure the profile picture is above the card content */
+  z-index: 1;
+    background-color: aqua;
 }
+
 
 .route-info h3 {
   font-size: 26px;
