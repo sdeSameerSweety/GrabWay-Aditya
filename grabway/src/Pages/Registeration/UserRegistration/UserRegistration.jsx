@@ -414,10 +414,10 @@ const UserRegistration = () => {
                 <Checkbox
                   isChecked={isChecked}
                   onChange={handleCheckboxChange}
-                  size="lg"
+                  size="sm"
                   onSubmit={handleFormSubmit}
                 >
-                  I accept the terms and conditions
+                  I accept the terms and conditions**
                 </Checkbox>
                 <FormErrorMessage>{error}</FormErrorMessage>
               </FormControl>
