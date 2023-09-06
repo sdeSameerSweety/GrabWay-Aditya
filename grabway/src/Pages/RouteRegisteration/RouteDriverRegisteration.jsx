@@ -192,7 +192,7 @@ const RouteDriverRegisteration = () => {
   }
 
   return (
-    <Container id="form-div" className=" container-reg" maxW="75%" mt={8}>
+    <Container id="form-div" className=" container-reg" maxW="100%" mt={8}>
       <Box
         className="tab-list"
         display="flex"
