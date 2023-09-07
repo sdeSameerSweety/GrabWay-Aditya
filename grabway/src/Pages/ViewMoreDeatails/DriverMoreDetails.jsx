@@ -179,7 +179,6 @@ const DriverDetails = () => {
           Total Fare: {driver.totalFare}
         </Text>
       </Box>
-
       {/* Driver Profile */}
       <div className="profile-header">
         <Image
@@ -204,7 +203,7 @@ const DriverDetails = () => {
       {/* Customer Information */}
       <div className="customer-card">
         <h4>Customers Information</h4>
-        <Grid templateColumns={{ sm: "1fr", md: "repeat(3, 1fr)" }} gap={4}>
+        <Grid templateColumns={{ base: "1fr", md: "repeat(3, 1fr)" }} gap={4}>
           {route.passengers.map((passenger) => (
             <GridItem key={passenger.id}>
               <Card className="customer-info-card">
