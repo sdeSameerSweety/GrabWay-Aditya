@@ -43,24 +43,45 @@ const DriverDetails = () => {
     return rettime;
   }
 
-  // function getCutomers() {
-  //   let retlist = [];
-  //   for(var i=0;i<location.state.customers.length;i++)
-  //   {
-  //     let tmpset = {
-  //        id: (i+1),
-  //       name: ,
-  //       email: "amit@example.com",
-  //       phone: "987-654-3210",
-  //       from: "Bhubaneswar, Odisha",
-  //       to: "Puri, Odisha",
-  //       details: "Frequent traveler to Puri",
-  //       profileImage:
-  //         "https://straightforwardguidance.com/wp-content/uploads/2023/02/28ac7dea21d5507f/what-are-lucid-dreams.jpeg",
-  //     }
-  //   }
-  // }
+  function getTimein12customers(time) {
+    let rettime = "";
+    rettime +=
+      (Number(time.split(":")[0]) % 12).toString() +
+      ":" +
+      time.split(":")[1] +
+      getampm(time);
+    return rettime;
+  }
 
+  function getCutomers() {
+    let retlist = [];
+    for (var i = 0; i < location.state.customers.length; i++) {
+      let tmpset = {
+        id: i + 1,
+        name: location.state.customers[i].name,
+        email: location.state.customers[i].email,
+        phone: `${getTimein12customers(
+          location.state.customers[i].originTime
+        )}`,
+        from:
+          location.state.customers[i].originLocation[0].text.split(",")[0] +
+          ", " +
+          location.state.customers[i].originLocation[0].text.split(",")[1],
+        to:
+          location.state.customers[i].destinationLocation[0].text.split(
+            ","
+          )[0] +
+          ", " +
+          location.state.customers[i].destinationLocation[0].text.split(",")[1],
+        details: "Frequent traveler to Puri",
+        profileImage: "assets/images/user.png",
+      };
+      retlist.push(tmpset);
+    }
+    return retlist;
+  }
+
+  console.log(location.state);
   function getPpic() {
     if ("profilePictutre" in driverData) return driverData.profilePicture;
     else return "assets/images/user.png";
@@ -98,41 +119,7 @@ const DriverDetails = () => {
       location.state.destination[0].text.split(",")[1],
     pickupTime: getTimein12(location.state.originTime[0].start),
     dropTime: getTimein12(location.state.destinationTime[0].start),
-    passengers: [
-      {
-        id: 1,
-        name: "Amit Patel",
-        email: "amit@example.com",
-        phone: "987-654-3210",
-        from: "Bhubaneswar, Odisha",
-        to: "Puri, Odisha",
-        details: "Frequent traveler to Puri",
-        profileImage:
-          "https://straightforwardguidance.com/wp-content/uploads/2023/02/28ac7dea21d5507f/what-are-lucid-dreams.jpeg",
-      },
-      {
-        id: 2,
-        name: "Neha Singh",
-        email: "neha@example.com",
-        phone: "789-123-4567",
-        from: "Bhubaneswar, Odisha",
-        to: "Puri, Odisha",
-        details: "Visiting Jagannath Temple",
-        profileImage:
-          "https://www.liquidsandsolids.com/wp-content/uploads/2022/09/talking-to-a-dead-person.jpg",
-      },
-      {
-        id: 3,
-        name: "Rahul Sharma",
-        email: "rahul@example.com",
-        phone: "888-555-3333",
-        from: "Bhubaneswar, Odisha",
-        to: "Puri, Odisha",
-        details: "Solo traveler for leisure",
-        profileImage:
-          "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQVzEtCIxnrCYfIXJXwfJNRY9M65m8k5Eo5HQ&usqp=CAU",
-      },
-    ],
+    passengers: getCutomers(),
   };
 
   // console.log(route.pickupTime);
@@ -220,7 +207,7 @@ const DriverDetails = () => {
                 <VStack align="start">
                   <p>Name: {passenger.name}</p>
                   <p>Email: {passenger.email}</p>
-                  <p>Phone: {passenger.phone}</p>
+                  <p>Start: {passenger.phone}</p>
                   <p>From: {passenger.from}</p>
                   <p>To: {passenger.to}</p>
                   <Divider my={1} borderColor="gray.300" />
