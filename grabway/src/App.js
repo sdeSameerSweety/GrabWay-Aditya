@@ -30,6 +30,7 @@ import MoreDetails from "./Pages/MoreDetails/MoreDetails";
 import Checkout from "./Pages/Checkout/Checkout";
 import ErrorNotFound from "./Pages/404NotFound/ErrorNotFound";
 import DriverDetails from "./Pages/ViewMoreDeatails/DriverMoreDetails";
+import Invoice from "./Pages/invoice/Invoice";
 axios.defaults.baseURL = "http://localhost:8080";
 axios.defaults.withCredentials = true;
 // import NearbyMap from "./components/Map/NearbyMap";
@@ -91,7 +92,7 @@ function App() {
           setLoginState={setLoginState}
           loginState={loginState}
         />
-
+        <Invoice />
         <div style={intDivStyle}>
           <Routes>
             {/* <Route path="/nearby" element={<NearbyMap nonceVal={nonce} />} /> */}
