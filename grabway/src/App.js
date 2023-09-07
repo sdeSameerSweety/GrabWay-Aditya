@@ -63,7 +63,7 @@ function App() {
       window.removeEventListener("resize", handleWindowResize);
     };
   }, []);
-  console.log(cookieVal);
+  // console.log(cookieVal);
 
   const [classDisplay, setClassDisplay] = useState("sidebar");
   const [displayVal, setDisplayVal] = useState("no");
@@ -79,7 +79,7 @@ function App() {
         : "0px",
     transition: "all 0.5s ease",
   };
-  console.log(valshow);
+  // console.log(valshow);
   return (
     <BrowserRouter>
       <UserContextProvider>
