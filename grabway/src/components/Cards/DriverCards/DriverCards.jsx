@@ -14,7 +14,7 @@ import {
 import AdvertisementCard from "./AdvertisementCard/AdvertisementCard";
 import "./DriverCard.css";
 import axios from "axios";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import Cookies from "js-cookie";
 import { Navigate } from "react-router-dom";
 const sections = ["Essential Commuter", "Comfort Traveler", "Premier Business"];
@@ -27,19 +27,6 @@ function DriverCard(props) {
   const UserQuery = props.UserQuery;
   //console.log(matchDriverRoute);
 
-  async function handleBookNow(index) {
-    /*console.log("book now");
-    const response = await axios
-      .post("/bookRoute", {
-        matchDriverRoute: matchDriverRoute[index],
-        userDetails: JSON.parse(userData),
-        UserQuery: { UserQuery },
-      })
-      .then(() => {
-        console.log("data sent");
-      });*/
-  }
-
   async function handleMoreDetails(index) {
     const response = await axios
       .post("/moreDetailsForMatchRoutes", {
@@ -47,7 +34,7 @@ function DriverCard(props) {
       })
       .then((res) => {
         // console.log(res.data);
-        navigate("/moredetails", { state: res.data });
+        navigate("/moredetails", { state:{ state:res.data , matchDriverRoute:matchDriverRoute[index],UserQuery:UserQuery}});
       })
       .catch((err) => {
         console.log(err);
@@ -122,12 +109,13 @@ function DriverCard(props) {
                           Seats:{" "}
                           {driver.route.seats - driver.route.customers.length}
                         </span>
+                        <Link to='/userCheckout' state={{matchDriverRoute:matchDriverRoute[driverIndex], UserQuery:UserQuery}}>
                         <button
-                          onClick={() => handleBookNow(driverIndex)}
                           class="bg-theme text-white py-2 px-4 rounded-full font-bold hover:bg-gray-800"
                         >
                           Grab it
                         </button>
+                        </Link>
                       </div>
                     </div>
                   ))}

@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import { useLocation, Navigate } from "react-router-dom";
+import { useLocation, Navigate, Link } from "react-router-dom";
 import "./details.css";
 
 export default function MoreDetails() {
@@ -8,55 +8,56 @@ export default function MoreDetails() {
     return <Navigate to={"/"} />;
   }
   // const location.state = location.state;
-
+  const matchDriverRoute=location.state.matchDriverRoute;
+  const UserQuery=location.state.UserQuery;
   //origin
   const orgMst =
-    Number(location.state.route.originTime[0].start.split(":")[0]) >= 12
+    Number(location.state.state.route.originTime[0].start.split(":")[0]) >= 12
       ? " PM"
       : " AM";
   let orgtimest =
     (
-      Number(location.state.route.originTime[0].start.split(":")[0]) % 12
+      Number(location.state.state.route.originTime[0].start.split(":")[0]) % 12
     ).toString() +
     ":" +
-    location.state.route.originTime[0].start.split(":")[1] +
+    location.state.state.route.originTime[0].start.split(":")[1] +
     orgMst;
 
   const orgMen =
-    Number(location.state.route.originTime[0].end.split(":")[0]) >= 12
+    Number(location.state.state.route.originTime[0].end.split(":")[0]) >= 12
       ? " PM"
       : " AM";
   let orgtimeen =
     (
-      Number(location.state.route.originTime[0].end.split(":")[0]) % 12
+      Number(location.state.state.route.originTime[0].end.split(":")[0]) % 12
     ).toString() +
     ":" +
-    location.state.route.originTime[0].end.split(":")[1] +
+    location.state.state.route.originTime[0].end.split(":")[1] +
     orgMen;
 
   //destination
   const destMst =
-    Number(location.state.route.destinationTime[0].start.split(":")[0]) >= 12
+    Number(location.state.state.route.destinationTime[0].start.split(":")[0]) >= 12
       ? " PM"
       : " AM";
   let desttimest =
     (
-      Number(location.state.route.destinationTime[0].start.split(":")[0]) % 12
+      Number(location.state.state.route.destinationTime[0].start.split(":")[0]) % 12
     ).toString() +
     ":" +
-    location.state.route.destinationTime[0].start.split(":")[1] +
+    location.state.state.route.destinationTime[0].start.split(":")[1] +
     destMst;
 
   const destMen =
-    Number(location.state.route.destinationTime[0].end.split(":")[0]) >= 12
+    Number(location.state.state.route.destinationTime[0].end.split(":")[0]) >= 12
       ? " PM"
       : " AM";
   let desttimeen =
     (
-      Number(location.state.route.destinationTime[0].end.split(":")[0]) % 12
+      Number(location.state.state.route.destinationTime[0].end.split(":")[0]) % 12
     ).toString() +
     ":" +
-    location.state.route.destinationTime[0].end.split(":")[1] +
+    location.state.state.route.destinationTime[0].end.split(":")[1] +
     destMen;
 
   console.log(location.state);
@@ -110,8 +111,8 @@ export default function MoreDetails() {
                     <img
                       alt="..."
                       src={
-                        location.state.profilePicture.length !== 0
-                          ? location.state.profilePicture
+                        location.state.state.profilePicture.length !== 0
+                          ? location.state.state.profilePicture
                           : "/assets/images/user.png"
                       }
                       class="shadow-xl rounded-full h-auto align-middle border-none absolute -m-16 -ml-20 lg:-ml-16 max-w-150-px"
@@ -127,9 +128,9 @@ export default function MoreDetails() {
                       class="bg-pink-500 active:bg-pink-600 uppercase text-white font-bold hover:shadow-md shadow text-xs px-4 py-2 rounded outline-none focus:outline-none sm:mr-2 mb-1 ease-linear transition-all duration-150"
                       type="button"
                     >
-                      {location.state.VehicleNumber.slice(0, 2) +
+                      {location.state.state.VehicleNumber.slice(0, 2) +
                         " " +
-                        location.state.VehicleNumber.slice(2)}
+                        location.state.state.VehicleNumber.slice(2)}
                     </button>
                   </div>
                 </div>
@@ -140,20 +141,21 @@ export default function MoreDetails() {
                         Driving License
                       </span>
                       <span class="text-lg text-blueGray-400 font-bold">
-                        {location.state.drivingLicenseNumber.slice(0, 2) +
+                        {location.state.state.drivingLicenseNumber.slice(0, 2) +
                           "*".repeat(
-                            location.state.drivingLicenseNumber.length - 4
+                            location.state.state.drivingLicenseNumber.length - 4
                           ) +
-                          location.state.drivingLicenseNumber.slice(-2)}
+                          location.state.state.drivingLicenseNumber.slice(-2)}
                       </span>
                     </div>
                     <div class="mr-4 p-3 text-center">
+                    <Link to='/userCheckout' state={{matchDriverRoute:matchDriverRoute, UserQuery:UserQuery}}>
                       <button
                         // onClick={handleBookNow}
                         class="bg-theme text-white py-2 px-4 rounded-full font-bold hover:bg-gray-800"
                       >
                         Grab it
-                      </button>
+                      </button></Link>
                     </div>
                   </div>
                 </div>
@@ -164,11 +166,11 @@ export default function MoreDetails() {
                 </h3>
                 <div className="ico1 text-sm leading-normal mt-0 mb-2 text-blueGray-400 font-bold uppercase">
                   <i className="fas fa-map-marker-alt mr-2 text-lg text-blueGray-400"></i>
-                  {location.state.route.origin[0].text}
+                  {location.state.state.route.origin[0].text}
                 </div>
                 <div className="ico2 text-sm leading-normal mt-0 mb-2 text-blueGray-400 font-bold uppercase">
                   <i className="fas fa-map-marker-alt mr-2 text-lg text-blueGray-400"></i>{" "}
-                  {location.state.route.destination[0].text}
+                  {location.state.state.route.destination[0].text}
                 </div>
               </div>
               <div class="py-10 border-t border-blueGray-200 text-center">
