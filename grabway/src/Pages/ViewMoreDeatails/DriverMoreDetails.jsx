@@ -11,25 +11,74 @@ import {
   Card,
 } from "@chakra-ui/react";
 import "./DriverMoreDetails.css";
+import { useLocation, Navigate } from "react-router-dom";
+import { getApp } from "firebase/app";
 
 const DriverDetails = () => {
+  const location = useLocation();
+  const driverData = JSON.parse(localStorage.getItem("grabwayUser"));
+  if (location.state === null || location.state === undefined) {
+    return <Navigate to={"/"} />;
+  }
+  if (driverData === null || driverData === undefined) {
+    return <Navigate to={"/"} />;
+  }
+
+  function getampm(time) {
+    if (Number(time.split(":")[0]) >= 12) return " PM";
+    else return " AM";
+  }
+
+  function getTimein12(time) {
+    let rettime = "";
+    if (Number(time.split(":")[0]) >= 12) rettime += "Evening: ";
+    else rettime += "Morning: ";
+
+    rettime +=
+      (Number(time.split(":")[0]) % 12).toString() +
+      ":" +
+      time.split(":")[1] +
+      getampm(time);
+    return rettime;
+  }
+
+  function getPpic() {
+    if ("profilePictutre" in driverData) return driverData.profilePicture;
+    else return "assets/images/user.png";
+  }
+
+  console.log(location.state);
+  console.log(driverData);
   const driver = {
-    name: "Rajesh Kumar",
-    email: "rajesh@example.com",
-    licenseNumber: "OD123456",
-    vehicleNumber: "OD-02-AB-1234",
+    name: driverData.name,
+    email: driverData.email,
+    licenseNumber: driverData.drivingLicenseNumber,
+    vehicleNumber:
+      driverData.VehicleNumber.slice(0, 2) +
+      "-" +
+      driverData.VehicleNumber.slice(2, 4) +
+      "-" +
+      driverData.VehicleNumber.slice(4, 6) +
+      "-" +
+      driverData.VehicleNumber.slice(-4),
     carType: "Sedan",
-    totalSeats: 3,
+    totalSeats: location.state.seats,
     totalFare: "₹500",
-    profileImage: "driver-avatar.jpg",
+    profileImage: getPpic(),
     rating: 4.9,
   };
 
   const route = {
-    from: "Bhubaneswar, Odisha",
-    to: "Puri, Odisha",
-    pickupTime: "Morning: 7:30 AM",
-    dropTime: "Evening: 5:00 PM",
+    from:
+      location.state.origin[0].text.split(",")[0] +
+      ", " +
+      location.state.origin[0].text.split(",")[1],
+    to:
+      location.state.destination[0].text.split(",")[0] +
+      ", " +
+      location.state.destination[0].text.split(",")[1],
+    pickupTime: getTimein12(location.state.originTime[0].start),
+    dropTime: getTimein12(location.state.destinationTime[0].start),
     passengers: [
       {
         id: 1,
@@ -67,6 +116,8 @@ const DriverDetails = () => {
     ],
   };
 
+  // console.log(route.pickupTime);
+
   return (
     <Box
       p={6}
@@ -90,18 +141,22 @@ const DriverDetails = () => {
         <Text fontSize={{ base: "md", md: "sm" }} fontWeight="bold">
           Route Information
         </Text>
-        <Text fontSize={{ base: "md", md: "sm" }}>From: {route.from}</Text>
-        <Text fontSize={{ base: "md", md: "sm" }}>To: {route.to}</Text>
-        <Text fontSize={{ base: "md", md: "sm" }}>
+        <Text textOverflow="ellipsis" fontSize={{ base: "md", md: "sm" }}>
+          From: {route.from}
+        </Text>
+        <Text textOverflow="ellipsis" fontSize={{ base: "md", md: "sm" }}>
+          To: {route.to}
+        </Text>
+        <Text textOverflow="ellipsis" fontSize={{ base: "md", md: "sm" }}>
           Pickup Time: {route.pickupTime}
         </Text>
-        <Text fontSize={{ base: "md", md: "sm" }}>
+        <Text textOverflow="ellipsis" fontSize={{ base: "md", md: "sm" }}>
           Drop Time: {route.dropTime}
         </Text>
-        <Text fontSize={{ base: "md", md: "sm" }}>
+        <Text textOverflow="ellipsis" fontSize={{ base: "md", md: "sm" }}>
           Total Seats: {driver.totalSeats}
         </Text>
-        <Text fontSize={{ base: "md", md: "sm" }}>
+        <Text textOverflow="ellipsis" fontSize={{ base: "md", md: "sm" }}>
           Total Fare: {driver.totalFare}
         </Text>
       </Box>

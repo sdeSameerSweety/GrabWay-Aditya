@@ -1,5 +1,6 @@
 import React, { useEffect, useRef, useState } from "react";
 import { Navigate, Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import "./DriverHomePage.css";
 import {
   Card,
@@ -11,6 +12,7 @@ import {
 } from "@chakra-ui/react";
 import Cookies from "js-cookie";
 const TopSection = ({ nonceVal, loginState }) => {
+  const navigate = useNavigate();
   const userData = localStorage.getItem("grabwayUser");
   const [routes, setRoutes] = useState(null);
   const [routesEmpty, setRoutesEmpty] = useState(false);
@@ -42,6 +44,7 @@ const TopSection = ({ nonceVal, loginState }) => {
 
   const handlemoredetails = (index) => {
     console.log(routes[index]);
+    navigate("/drivermoredetails", { state: routes[index] });
   };
 
   return (
