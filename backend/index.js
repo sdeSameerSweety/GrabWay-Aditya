@@ -99,7 +99,7 @@ app.post("/verifyEmail", (req, res) => {
   }
   try {
     const otp = randomNumber(1000, 9999);
-    const randomOTP=otp+2025;
+    const randomOTP = otp + 2025;
     const email = req.body.signupEmail;
     const Email = sendMail(email, otp);
     if (Email) {
@@ -753,6 +753,7 @@ app.post("/bookRoute", async (req, res) => {
           $push: {
             "routes.$.customers": {
               email: userEmail,
+              name: userData.name,
               seatNumber: seatNumber,
               "originLocation.0.text": userOriginText,
               "originLocation.0.lat": userOriginLat,
@@ -833,6 +834,7 @@ app.post("/profiledata", async (req, res) => {
     res.json(null);
   }
 });
+
 /*
 app.post('/addtocart', async (req, res) => {
   await mongoose.connect(MONGO_URL);

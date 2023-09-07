@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import {
   Box,
   Image,
@@ -17,6 +17,7 @@ import { getApp } from "firebase/app";
 const DriverDetails = () => {
   const location = useLocation();
   const driverData = JSON.parse(localStorage.getItem("grabwayUser"));
+  // const [customerdetails, setcustomerdetails] = useState([]);
   if (location.state === null || location.state === undefined) {
     return <Navigate to={"/"} />;
   }
@@ -41,6 +42,24 @@ const DriverDetails = () => {
       getampm(time);
     return rettime;
   }
+
+  // function getCutomers() {
+  //   let retlist = [];
+  //   for(var i=0;i<location.state.customers.length;i++)
+  //   {
+  //     let tmpset = {
+  //        id: (i+1),
+  //       name: ,
+  //       email: "amit@example.com",
+  //       phone: "987-654-3210",
+  //       from: "Bhubaneswar, Odisha",
+  //       to: "Puri, Odisha",
+  //       details: "Frequent traveler to Puri",
+  //       profileImage:
+  //         "https://straightforwardguidance.com/wp-content/uploads/2023/02/28ac7dea21d5507f/what-are-lucid-dreams.jpeg",
+  //     }
+  //   }
+  // }
 
   function getPpic() {
     if ("profilePictutre" in driverData) return driverData.profilePicture;
