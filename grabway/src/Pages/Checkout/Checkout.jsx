@@ -19,21 +19,39 @@ import { AiOutlineHeart } from "react-icons/ai";
 import { BiShareAlt, BiChat } from "react-icons/bi";
 import "./Checkout.css";
 import { SiRazorpay } from "react-icons/si";
-import { Navigate } from "react-router-dom";
+import { Navigate, useLocation } from "react-router-dom";
 import Cookies from "js-cookie";
+import axios from "axios";
 const Checkout = () => {
   const toast = useToast();
   const [confirmOrigin, setConfirmOrigin] = useState(false);
   const [paymentSelected, setPaymentSelected] = useState(null);
-  const driverName = "Kittu Singh";
+  const location=useLocation();
+  const matchDriverRoute=location.state.matchDriverRoute;
+  const UserQuery=location.state.UserQuery;
+  const driverName = matchDriverRoute.driverName;
   const driverState = "West Bengal";
   const driverCity = "Kolkata";
-  const originText = "Silicon Insititute of Technology";
-  const destinationText = "Bhubaneshwar Railway Station, MasterCanteen Area";
-  const pickupTime = "10:00";
-  const dropTime = "12:00";
+  const originText = UserQuery.originText;
+  const destinationText = UserQuery.destinationText;
+  const pickupTime = UserQuery.originStartTime;
+  const dropTime = UserQuery.destinationStartTime;
   const amount = 3000;
   const taxOnAmount = 3000 * 0.12;
+
+  async function bookNow(){
+    const response = await axios
+      .post("/bookRoute", {
+        matchDriverRoute: matchDriverRoute,
+        userDetails: JSON.parse(userData),
+        UserQuery: { UserQuery },
+      })
+      .then(() => {
+        console.log("data sent");
+      });
+  }
+
+
   function handlePay() {
     if (!paymentSelected) {
       toast({
@@ -42,6 +60,9 @@ const Checkout = () => {
         duration: 2000,
         isClosable: true,
       });
+    }
+    else{
+      bookNow();
     }
   }
 
@@ -70,6 +91,8 @@ const Checkout = () => {
       return <Navigate to={"/googleRegistration"} />;
     }
   }
+  console.log(matchDriverRoute);
+  console.log(UserQuery);
   return (
     <>
       <div className="dekstop-view p-5">
