@@ -1,6 +1,4 @@
-/* Default styles for larger screens */
 .container-driver-view-details {
-  /* max-width: 85%; */
   font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
   margin: 0 auto;
   background-color: #fff;
@@ -35,7 +33,6 @@
   color: #333;
 }
 
-/* Styles for smaller screens (e.g., mobile devices) */
 @media (max-width: 768px) {
   .profile-header .profile-image {
     width: 100px;
@@ -101,7 +98,6 @@
   transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
 }
 
-/* Styles for smaller screens (e.g., mobile devices) */
 @media (max-width: 768px) {
   .customer-card .customer-info-card {
     padding: 12px;
