@@ -202,7 +202,7 @@ export default function ContactFaq() {
                             <InputLeftElement pointerEvents="none">
                               <MdOutlineEmail color="gray.800" />
                             </InputLeftElement>
-                            <Input type="text" size="md" />
+                            <Input type="email" size="md" />
                           </InputGroup>
                         </FormControl>
                         <FormControl id="name">
