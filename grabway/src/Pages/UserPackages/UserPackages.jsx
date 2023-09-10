@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from "react";
-import { Navigate, Link } from "react-router-dom";
+import { Navigate, Link, useNavigate } from "react-router-dom";
 import "../HomePage/DriverHomepage/DriverHomePage";
 import {
   Card,
@@ -11,6 +11,7 @@ import {
 } from "@chakra-ui/react";
 import Cookies from "js-cookie";
 const UserPackages = ({ nonceVal, loginState }) => {
+  const navigate = useNavigate();
   const userData = localStorage.getItem("grabwayUser");
   const [routes, setRoutes] = useState(null);
   const [routesEmpty, setRoutesEmpty] = useState(false);
@@ -39,12 +40,17 @@ const UserPackages = ({ nonceVal, loginState }) => {
   if (!Cookies.get("grabwayToken")) {
     return <Navigate to={"/"} />;
   }
+
+  const handleClickDetails = (e) => {
+    console.log("Aditya");
+    navigate("/userbookeddetails");
+  };
   return (
     <>
       <div className="dekstop-view-driver">
         {routesEmpty && (
           <>
-            <div className="flex flex-row justify-between items-center gap-20 mt-[8vh]">
+            {/* <div className="flex flex-row justify-between items-center gap-20 mt-[8vh]">
               <div className="flex justify-center items-center">
                 <img
                   className="flex justify-center items-center w-[30vw]"
@@ -73,14 +79,14 @@ const UserPackages = ({ nonceVal, loginState }) => {
                   </Link>
                 </div>
               </div>
-            </div>
+            </div> */}
           </>
         )}
         {!routesEmpty && (
           <>
             <div className="flex justify-center items-center flex-row m-5">
               <div className="flex justify-center items-center flex-col mt-5 ">
-                <div className="flex justify-center items-center mb-10">
+                {/* <div className="flex justify-center items-center mb-10">
                   <Link to="/userHomepage">
                     <Button
                       colorScheme="red"
@@ -93,7 +99,7 @@ const UserPackages = ({ nonceVal, loginState }) => {
                       Add New Route
                     </Button>
                   </Link>
-                </div>
+                </div> */}
                 <div className="flex flex-col justify-between items-center gap-10 mt-5">
                   {routes &&
                     routes.map((element, index) => {
@@ -134,7 +140,11 @@ const UserPackages = ({ nonceVal, loginState }) => {
                                     </CardHeader>
                                     <CardBody></CardBody>
                                     <CardFooter>
-                                      <Button>View More Details</Button>
+                                      <Button
+                                        onClick={(e) => handleClickDetails(e)}
+                                      >
+                                        View More Details
+                                      </Button>
                                     </CardFooter>
                                   </Card>
                                 </div>
@@ -188,7 +198,11 @@ const UserPackages = ({ nonceVal, loginState }) => {
                                     </CardHeader>
                                     <CardBody></CardBody>
                                     <CardFooter>
-                                      <Button>View More Details</Button>
+                                      <Button
+                                        onClick={(e) => handleClickDetails(e)}
+                                      >
+                                        View More Details
+                                      </Button>
                                     </CardFooter>
                                   </Card>
                                 </div>
@@ -207,7 +221,7 @@ const UserPackages = ({ nonceVal, loginState }) => {
       <div className="mobile-view-driver">
         {routesEmpty && (
           <>
-            <div className="flex flex-col justify-between items-center gap-20 mt-[8vh]">
+            {/* <div className="flex flex-col justify-between items-center gap-20 mt-[8vh]">
               <div className="flex justify-center items-center">
                 <img
                   className="flex justify-center items-center pl-[5%] pr-[5%]"
@@ -234,14 +248,14 @@ const UserPackages = ({ nonceVal, loginState }) => {
                   </Link>
                 </div>
               </div>
-            </div>
+            </div> */}
           </>
         )}
         {!routesEmpty && (
           <>
             <div className="flex justify-center items-center flex-row m-5">
               <div className="flex justify-center items-center flex-col mt-5 ">
-                <div className="flex justify-center items-center mb-10">
+                {/* <div className="flex justify-center items-center mb-10">
                   <Link to="/userHomepage">
                     <Button
                       colorScheme="red"
@@ -254,7 +268,7 @@ const UserPackages = ({ nonceVal, loginState }) => {
                       Add New Route
                     </Button>
                   </Link>
-                </div>
+                </div> */}
                 <div className="flex flex-col justify-between items-center gap-10 mt-5">
                   {routes &&
                     routes.map((element, index) => {
@@ -295,7 +309,11 @@ const UserPackages = ({ nonceVal, loginState }) => {
                                     </CardHeader>
                                     <CardBody></CardBody>
                                     <CardFooter>
-                                      <Button>View More Details</Button>
+                                      <Button
+                                        onClick={(e) => handleClickDetails(e)}
+                                      >
+                                        View More Details
+                                      </Button>
                                     </CardFooter>
                                   </Card>
                                 </div>
@@ -343,7 +361,11 @@ const UserPackages = ({ nonceVal, loginState }) => {
                                     </CardHeader>
                                     <CardBody></CardBody>
                                     <CardFooter>
-                                      <Button>View More Details</Button>
+                                      <Button
+                                        onClick={(e) => handleClickDetails(e)}
+                                      >
+                                        View More Details
+                                      </Button>
                                     </CardFooter>
                                   </Card>
                                 </div>
