@@ -32,14 +32,14 @@ function MyComponent({ nonceVal }, { route, state }) {
   };
   const navigate = useNavigate();
   const usData = JSON.parse(localStorage.getItem("grabwayUser"));
-  console.log(usData);
+  //console.log(usData);
   const location = useLocation();
   if (!location.state) {
     <Navigate to={"/"} />;
   }
   const toast = useToast();
   const [showCards, setShowCards] = useState(false);
-  console.log(location);
+  //console.log(location);
   const { isLoaded } = useJsApiLoader({
     id: "google-map-script",
     googleMapsApiKey: "AIzaSyDJaFr-HFXGBOg8pUSdQfGjGwGdIwtbXhY",
@@ -53,7 +53,10 @@ function MyComponent({ nonceVal }, { route, state }) {
     source: location.state.source,
     destination: location.state.destination,
   };
-  console.log(rideDataText, location);
+  //console.log(rideDataText, location);
+
+  const petrolPrice=105;
+
 
   const handlemapDriverRoute = (type) => {
     if (type === "driver")
@@ -105,6 +108,7 @@ function MyComponent({ nonceVal }, { route, state }) {
           setDurationNum(res.rows[0].elements[0].duration.value);
           setDurationText(res.rows[0].elements[0].duration.text);
           console.log(res);
+          packagePrice(res.rows[0].elements[0].distance.value);
         });
       setShowCards(true);
     } catch (err) {
@@ -154,6 +158,15 @@ function MyComponent({ nonceVal }, { route, state }) {
   //const declaration for display outputs
   const [fromVerifed, setFromVerified] = useState(false);
   const [showFinalButtonDisplay, setShowFinalButtonDisplay] = useState(true);
+  const [amount,setAmount]=useState(null);
+  function packagePrice(distanceNum){
+    if(distanceNum){
+      setAmount(Math.floor(distanceNum/1000*15*30));
+      //console.log(price);
+    }
+  }
+
+
   return isLoaded ? (
     <>
       <div className="flex justify-center items-center ">
@@ -229,7 +242,8 @@ function MyComponent({ nonceVal }, { route, state }) {
                         </p>
                         <div class="flex justify-center items-baseline my-8">
                           <span class="mr-2 text-5xl font-extrabold">
-                            ₹3000
+                            {amount && <>₹{amount}</>}
+                            {!amount && <>Calculating...</>}
                           </span>
                           <span class="text-gray-500">/month</span>
                         </div>
@@ -346,7 +360,7 @@ function MyComponent({ nonceVal }, { route, state }) {
                         </p>
                         <div class="flex justify-center items-baseline my-8">
                           <span class="mr-2 text-5xl font-extrabold">
-                            ₹5000
+                            ₹XXXX
                           </span>
                           <span class="text-gray-500">/month</span>
                         </div>
@@ -460,7 +474,7 @@ function MyComponent({ nonceVal }, { route, state }) {
                         </p>
                         <div class="flex justify-center items-baseline my-8">
                           <span class="mr-2 text-5xl font-extrabold">
-                            ₹8000
+                            ₹XXXX
                           </span>
                           <span class="text-gray-500">/month</span>
                         </div>
