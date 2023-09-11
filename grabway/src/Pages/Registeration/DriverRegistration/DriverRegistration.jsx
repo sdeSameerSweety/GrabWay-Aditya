@@ -27,7 +27,7 @@ const DriverRegistration = () => {
   const { setRunContext } = useContext(UserContext);
   const userData = localStorage.getItem("grabwayUser");
   const hasUserData = userData;
-  //console.log(userData);
+  ////console.log(userData);
   const [tmpPin, setTmpPin] = useState("");
   const [formData, setFormData] = useState({
     name: "",
@@ -92,7 +92,7 @@ const DriverRegistration = () => {
     if (!isChecked) {
       setError("Please accept the terms and conditions.");
     } else {
-      console.log("Terms accepted, proceed with further actions.");
+      //console.log("Terms accepted, proceed with further actions.");
     }
   };
 
@@ -149,16 +149,16 @@ const DriverRegistration = () => {
   const handleSubmit = async (e) => {
     e.preventDefault(); // Prevent the default form submission behavior
     const newErrors = validateForm();
-    console.log(Object.keys(newErrors));
+    //console.log(Object.keys(newErrors));
     if (Object.keys(newErrors).length === 0) {
       //Submission logic here
-      console.log("clicked");
+      //console.log("clicked");
       const response = await axios
         .post("/registerNewDriver", {
           formData,
         })
         .then((res) => {
-          console.log(res);
+          //console.log(res);
           setTimeout(() => {
             setRunContext("driver from submited");
           }, 1500);
@@ -166,7 +166,7 @@ const DriverRegistration = () => {
             window.location.reload(false);
           }
         });
-      console.log("Form submitted successfully:", formData);
+      //console.log("Form submitted successfully:", formData);
       setErrors({});
     } else {
       setErrors(newErrors);

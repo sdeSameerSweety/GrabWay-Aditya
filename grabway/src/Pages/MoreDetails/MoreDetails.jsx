@@ -8,8 +8,8 @@ export default function MoreDetails() {
     return <Navigate to={"/"} />;
   }
   // const location.state = location.state;
-  const matchDriverRoute=location.state.matchDriverRoute;
-  const UserQuery=location.state.UserQuery;
+  const matchDriverRoute = location.state.matchDriverRoute;
+  const UserQuery = location.state.UserQuery;
   //origin
   const orgMst =
     Number(location.state.state.route.originTime[0].start.split(":")[0]) >= 12
@@ -37,30 +37,35 @@ export default function MoreDetails() {
 
   //destination
   const destMst =
-    Number(location.state.state.route.destinationTime[0].start.split(":")[0]) >= 12
+    Number(location.state.state.route.destinationTime[0].start.split(":")[0]) >=
+    12
       ? " PM"
       : " AM";
   let desttimest =
     (
-      Number(location.state.state.route.destinationTime[0].start.split(":")[0]) % 12
+      Number(
+        location.state.state.route.destinationTime[0].start.split(":")[0]
+      ) % 12
     ).toString() +
     ":" +
     location.state.state.route.destinationTime[0].start.split(":")[1] +
     destMst;
 
   const destMen =
-    Number(location.state.state.route.destinationTime[0].end.split(":")[0]) >= 12
+    Number(location.state.state.route.destinationTime[0].end.split(":")[0]) >=
+    12
       ? " PM"
       : " AM";
   let desttimeen =
     (
-      Number(location.state.state.route.destinationTime[0].end.split(":")[0]) % 12
+      Number(location.state.state.route.destinationTime[0].end.split(":")[0]) %
+      12
     ).toString() +
     ":" +
     location.state.state.route.destinationTime[0].end.split(":")[1] +
     destMen;
 
-  console.log(location.state);
+  //console.log(location.state);
 
   const finalTime = {
     origin: [orgtimest, orgtimeen],
@@ -149,13 +154,20 @@ export default function MoreDetails() {
                       </span>
                     </div>
                     <div class="mr-4 p-3 text-center">
-                    <Link to='/userCheckout' state={{matchDriverRoute:matchDriverRoute, UserQuery:UserQuery}}>
-                      <button
-                        // onClick={handleBookNow}
-                        class="bg-theme text-white py-2 px-4 rounded-full font-bold hover:bg-gray-800"
+                      <Link
+                        to="/userCheckout"
+                        state={{
+                          matchDriverRoute: matchDriverRoute,
+                          UserQuery: UserQuery,
+                        }}
                       >
-                        Grab it
-                      </button></Link>
+                        <button
+                          // onClick={handleBookNow}
+                          class="bg-theme text-white py-2 px-4 rounded-full font-bold hover:bg-gray-800"
+                        >
+                          Grab it
+                        </button>
+                      </Link>
                     </div>
                   </div>
                 </div>

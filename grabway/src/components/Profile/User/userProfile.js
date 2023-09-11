@@ -9,7 +9,7 @@ export default function userProfile({ userData, profilePhoto }) {
   };
 
   const data = JSON.parse(userData);
-  console.log(userData);
+  //console.log(userData);
   return (
     <>
       <div className="relative flex flex-col min-w-0 break-words bg-gray-700 w-full mb-6 shadow-xl rounded-lg mt-16">

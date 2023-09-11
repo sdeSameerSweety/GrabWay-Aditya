@@ -51,9 +51,9 @@ function App() {
   useEffect(() => {
     if (cookieVal) setValShow(true);
   });
-  //console.log(loginState);
+  ////console.log(loginState);
   const { userEmail, setUserEmail } = useContext(UserContext);
-  //console.log(userEmail);
+  ////console.log(userEmail);
   useEffect(() => {
     const handleWindowResize = () => {
       setWindowSize(window.innerWidth);
@@ -64,7 +64,7 @@ function App() {
       window.removeEventListener("resize", handleWindowResize);
     };
   }, []);
-  // console.log(cookieVal);
+  // //console.log(cookieVal);
 
   const [classDisplay, setClassDisplay] = useState("sidebar");
   const [displayVal, setDisplayVal] = useState("no");
@@ -80,7 +80,7 @@ function App() {
         : "0px",
     transition: "all 0.5s ease",
   };
-  // console.log(valshow);
+  // //console.log(valshow);
   return (
     <BrowserRouter>
       <UserContextProvider>

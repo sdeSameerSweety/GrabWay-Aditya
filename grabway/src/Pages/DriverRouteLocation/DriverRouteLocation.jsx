@@ -36,14 +36,14 @@ const TopSection = ({ nonceVal, loginState }) => {
       navigator.geolocation.getCurrentPosition(
         (position) => {
           setCurrlocation(position.coords);
-          console.log(position.coords);
+          //console.log(position.coords);
         },
         (error) => {
-          console.log(error);
+          //console.log(error);
         }
       );
     } else {
-      console.log("Geolocation is not supported by this browser.");
+      //console.log("Geolocation is not supported by this browser.");
     }
   }, []);
   const navigate = useNavigate();
@@ -90,7 +90,7 @@ const TopSection = ({ nonceVal, loginState }) => {
     ).then(
       (response) => {
         const coordData = response.results[0].geometry.location;
-        console.log(coordData);
+        //console.log(coordData);
         if (type == "Source") setsrcCord(coordData);
         else setDestCord(coordData);
         return true;
@@ -192,19 +192,19 @@ const TopSection = ({ nonceVal, loginState }) => {
   };
   const userData = localStorage.getItem("grabwayUser");
   if (userData) {
-    if ((JSON.parse(userData)).name==='') {
-      return <Navigate to={"/registration"} userType=""/>;
+    if (JSON.parse(userData).name === "") {
+      return <Navigate to={"/registration"} userType="" />;
     }
-    if((JSON.parse(userData)).userType!=='driver'){
-        return <Navigate to={'/'}/>
+    if (JSON.parse(userData).userType !== "driver") {
+      return <Navigate to={"/"} />;
     }
   }
-  const googleUserData=Cookies.get('grabwayGoogleToken');
-  if(googleUserData){
-    return <Navigate to={'/googleRegistration'}/>
+  const googleUserData = Cookies.get("grabwayGoogleToken");
+  if (googleUserData) {
+    return <Navigate to={"/googleRegistration"} />;
   }
-  if(!Cookies.get('grabwayToken')){
-    return <Navigate to={'/'}/>
+  if (!Cookies.get("grabwayToken")) {
+    return <Navigate to={"/"} />;
   }
   if (!isLoaded) {
     return (

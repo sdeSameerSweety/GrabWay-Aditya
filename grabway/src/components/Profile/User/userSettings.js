@@ -27,7 +27,7 @@ export default function UserSettings({ userData }) {
   //For Driver
   const [vnumber, setvnumber] = useState(data.VehicleNumber);
   const [dlnumber, setdlnumber] = useState(data.drivingLicenseNumber);
-  // console.log(displayData);
+  // //console.log(displayData);
   const [editData, setEditData] = useState({});
   const [disabledState, setDisabledState] = useState(true);
   const [editVal, setEditVal] = useState("Edit Profile");
@@ -81,14 +81,14 @@ export default function UserSettings({ userData }) {
         setPostData(data);
         setstate(data[0].PostOffice[0].State);
         setcity(data[0].PostOffice[0].Name);
-        console.log(data[0].PostOffice[0].Name);
+        //console.log(data[0].PostOffice[0].Name);
       }
     } catch (error) {
       console.error("Error fetching data:", error);
     }
   };
-  // console.log(editData);
-  // console.log(postData);
+  // //console.log(editData);
+  // //console.log(postData);
 
   const handleProfileChanges = async () => {
     if (data.userType === "user") {
@@ -107,7 +107,7 @@ export default function UserSettings({ userData }) {
       let tmpStr = "";
       let emptyStatus = false;
       for (let prop in sendData) {
-        // console.log(sendData[prop], prop, typeof sendData[prop]);
+        // //console.log(sendData[prop], prop, typeof sendData[prop]);
         if (sendData[prop].length === 0) {
           if (tmpStr.length === 0) tmpStr = tmpStr + propDetails[prop];
           else tmpStr = tmpStr + ", " + propDetails[prop];
@@ -122,7 +122,7 @@ export default function UserSettings({ userData }) {
           position: "top-right",
         });
       } else {
-        // console.log(sendData["phone"]);
+        // //console.log(sendData["phone"]);
         if (sendData.phone.length !== 10) {
           toast({
             title: `Phone Number must not be less than 10 digits`,
@@ -139,11 +139,11 @@ export default function UserSettings({ userData }) {
               position: "top-right",
             });
           } else {
-            console.log(sendData);
+            //console.log(sendData);
             const retData = await axios
               .post("/editprofile", { sendData })
               .then((res) => {
-                console.log(res.data);
+                //console.log(res.data);
                 toast({
                   title: "Profile Updated Successfully",
                   status: "success",
@@ -155,7 +155,7 @@ export default function UserSettings({ userData }) {
                 setRunContext(randomString());
               })
               .catch((err) => {
-                console.log(err);
+                //console.log(err);
               });
           }
         }
@@ -178,7 +178,7 @@ export default function UserSettings({ userData }) {
       let tmpStr = "";
       let emptyStatus = false;
       for (let prop in sendData) {
-        // console.log(sendData[prop], prop, typeof sendData[prop]);
+        // //console.log(sendData[prop], prop, typeof sendData[prop]);
         if (sendData[prop].length === 0) {
           if (tmpStr.length === 0) tmpStr = tmpStr + propDetails[prop];
           else tmpStr = tmpStr + ", " + propDetails[prop];
@@ -193,7 +193,7 @@ export default function UserSettings({ userData }) {
           position: "top-right",
         });
       } else {
-        // console.log(sendData["phone"]);
+        // //console.log(sendData["phone"]);
         if (sendData.phone.length !== 10) {
           toast({
             title: `Phone Number must not be less than 10 digits`,
@@ -234,11 +234,11 @@ export default function UserSettings({ userData }) {
                   position: "top-right",
                 });
               } else {
-                console.log(sendData);
+                //console.log(sendData);
                 const retData = await axios
                   .post("/editprofile", { sendData })
                   .then((res) => {
-                    console.log(res.data);
+                    //console.log(res.data);
                     toast({
                       title: "Profile Updated Successfully",
                       status: "success",
@@ -250,7 +250,7 @@ export default function UserSettings({ userData }) {
                     setRunContext(randomString());
                   })
                   .catch((err) => {
-                    console.log(err);
+                    //console.log(err);
                   });
               }
             }

@@ -8,7 +8,7 @@ import { HiOutlineMail } from "react-icons/hi";
 import { RiLockPasswordLine } from "react-icons/ri";
 import { BsTelephone } from "react-icons/bs";
 import { AiFillCar, AiOutlineUser } from "react-icons/ai";
-import {BsShieldLock} from 'react-icons/bs';
+import { BsShieldLock } from "react-icons/bs";
 import { useToast } from "@chakra-ui/react";
 import {
   getAuth,
@@ -59,9 +59,9 @@ const TopBar = ({ counter, setCounter, setLoginState, loginState }) => {
   const [signupPassword, setSignupPassword] = useState("");
   const [signupPhone, setSignupPhone] = useState("");
   const [signupUserType, setSignupUserType] = useState("");
-  const [otp,setOtp]=useState(null);
-  const [signupOtp,setSignupOtp]=useState('');
-  const [showOtpInput, setShowOtpInput]=useState(false);
+  const [otp, setOtp] = useState(null);
+  const [signupOtp, setSignupOtp] = useState("");
+  const [showOtpInput, setShowOtpInput] = useState(false);
   const toast = useToast();
   const [weatherData, setWeatherData] = useState(null);
   let dt = useContext(UserContext);
@@ -75,12 +75,11 @@ const TopBar = ({ counter, setCounter, setLoginState, loginState }) => {
     );
 
     const myJson = await res.json();
-    console.log(myJson);
+    //console.log(myJson);
     setWeatherData(myJson);
   }
 
   const [city, setCity] = useState("");
-
 
   useEffect(() => {
     const UserData = localStorage.getItem("grabwayUser");
@@ -90,7 +89,7 @@ const TopBar = ({ counter, setCounter, setLoginState, loginState }) => {
       }
     }
   });
-  // console.log(city);
+  // //console.log(city);
   // if (city !== null) {
   //   getWeather(city);
   // }
@@ -133,7 +132,7 @@ const TopBar = ({ counter, setCounter, setLoginState, loginState }) => {
       signInWithEmailAndPassword(auth, loginEmail, loginPassword)
         .then(async (userCredential) => {
           const user = userCredential.user;
-          // console.log(user.uid);
+          // //console.log(user.uid);
           onClose();
           toast({
             title: "Login Successful",
@@ -183,27 +182,28 @@ const TopBar = ({ counter, setCounter, setLoginState, loginState }) => {
     }
   }
 
-  async function handleSignUpInitial(){
-    var otpResponse=await axios.post('/verifyEmail',{signupEmail}).then((res)=>{
-      setOtp(res.data);
-    })
+  async function handleSignUpInitial() {
+    var otpResponse = await axios
+      .post("/verifyEmail", { signupEmail })
+      .then((res) => {
+        setOtp(res.data);
+      });
   }
 
-  async function VerifyOtp(){
-    console.log(JSON.stringify(otp));
-    console.log(parseInt(signupOtp));
-    let generatedOtp=JSON.stringify(otp);
-    generatedOtp=parseInt(generatedOtp);
-    generatedOtp=generatedOtp-2025;
-    console.log(generatedOtp)
-    if(parseInt(signupOtp)===generatedOtp){
+  async function VerifyOtp() {
+    //console.log(JSON.stringify(otp));
+    //console.log(parseInt(signupOtp));
+    let generatedOtp = JSON.stringify(otp);
+    generatedOtp = parseInt(generatedOtp);
+    generatedOtp = generatedOtp - 2025;
+    //console.log(generatedOtp)
+    if (parseInt(signupOtp) === generatedOtp) {
       setShowOtpInput(true);
       //display the other fields
-    }
-    else{
+    } else {
       toast({
         title: `Invalid Otp`,
-        message:'Note: OTP must be 4-digit',
+        message: "Note: OTP must be 4-digit",
         status: "error",
         isClosable: true,
         position: "top-right",
@@ -233,9 +233,9 @@ const TopBar = ({ counter, setCounter, setLoginState, loginState }) => {
           });
           Cookies.set("grabwayToken", signupEmail, { expires: 7 });
 
-          //console.log(signupUserType);
+          ////console.log(signupUserType);
           if (signupUserType === "user") {
-            console.log("inside user if");
+            //console.log("inside user if");
             const res = await axios.post(`/createUser`, {
               signupEmail,
               signupPhone,
@@ -261,7 +261,7 @@ const TopBar = ({ counter, setCounter, setLoginState, loginState }) => {
           }
         })
         .catch((error) => {
-          console.log(error.message);
+          //console.log(error.message);
           if (
             error.message === "Firebase: Error (auth/email-already-in-use)."
           ) {
@@ -334,8 +334,8 @@ const TopBar = ({ counter, setCounter, setLoginState, loginState }) => {
         const token = credential.accessToken;
         // The signed-in user info.
         const user = result.user;
-        console.log(user);
-        console.log(result);
+        //console.log(user);
+        //console.log(result);
         Cookies.set("grabwayToken", user.email, { expires: 7 });
         // IdP data available using getAdditionalUserInfo(result)
         // ...
@@ -347,7 +347,7 @@ const TopBar = ({ counter, setCounter, setLoginState, loginState }) => {
           duration: 3000,
           isClosable: true,
         });
-        console.log(user.email);
+        //console.log(user.email);
         try {
           const userFound = await axios.post("/googlecheckUser", {
             email: user.email,
@@ -360,7 +360,7 @@ const TopBar = ({ counter, setCounter, setLoginState, loginState }) => {
             window.location.reload(false);
           }
         } catch (err) {
-          console.log("not found");
+          //console.log("not found");
           Cookies.set("grabwayGoogleToken", user.email);
 
           setCounter(true);
@@ -614,127 +614,133 @@ const TopBar = ({ counter, setCounter, setLoginState, loginState }) => {
                               </InputGroup>
                             </div>
 
-                            {otp!==null && <div>
-                              <InputGroup>
-                                <InputLeftElement pointerEvents="none">
-                                  <div className="flex justify-center items-center mt-2">
-                                    <BsShieldLock fill="grey" />
-                                  </div>
-                                </InputLeftElement>
-                                <Input
-                                  onChange={(e) =>
-                                    setSignupOtp(e.target.value)
-                                  }
-                                  size={"lg"}
-                                  sx={{ width: "320px" }}
-                                  variant={"filled"}
-                                  type="number"
-                                  placeholder="4-digit OTP sent to your E-Mail"
-                                />
-                              </InputGroup>
-
-                            </div>
-                            }
-                            {showOtpInput && <>
+                            {otp !== null && (
                               <div>
-                              <InputGroup>
-                                <InputLeftElement pointerEvents="none">
-                                  <div className="flex justify-center items-center mt-2">
-                                    <RiLockPasswordLine fill="grey" />
-                                  </div>
-                                </InputLeftElement>
-                                <Input
-                                  onChange={(e) =>
-                                    setSignupPassword(e.target.value)
-                                  }
-                                  size={"lg"}
-                                  sx={{ width: "320px" }}
-                                  variant={"filled"}
-                                  type={showPassword ? "text" : "password"}
-                                  placeholder="Enter Your Password"
-                                />
-                                <InputRightElement>
-                                  <IconButton
-                                    aria-label={
-                                      showPassword
-                                        ? "Hide password"
-                                        : "Show password"
+                                <InputGroup>
+                                  <InputLeftElement pointerEvents="none">
+                                    <div className="flex justify-center items-center mt-2">
+                                      <BsShieldLock fill="grey" />
+                                    </div>
+                                  </InputLeftElement>
+                                  <Input
+                                    onChange={(e) =>
+                                      setSignupOtp(e.target.value)
                                     }
-                                    icon={
-                                      showPassword ? (
-                                        <RiEyeOffLine />
-                                      ) : (
-                                        <RiEyeLine />
-                                      )
-                                    }
-                                    onClick={() =>
-                                      setShowPassword(!showPassword)
-                                    }
-                                    variant="unstyled"
-                                    size="md"
+                                    size={"lg"}
+                                    sx={{ width: "320px" }}
+                                    variant={"filled"}
+                                    type="number"
+                                    placeholder="4-digit OTP sent to your E-Mail"
                                   />
-                                </InputRightElement>
-                              </InputGroup>
-                            </div>
-                            <div>
-                              <InputGroup>
-                                <InputLeftElement pointerEvents="none">
-                                  <div className="flex justify-center items-center mt-2">
-                                    <BsTelephone fill="grey" />
-                                  </div>
-                                </InputLeftElement>
-                                <Input
-                                  onChange={(e) =>
-                                    setSignupPhone(e.target.value)
-                                  }
-                                  size={"lg"}
-                                  sx={{ width: "320px" }}
-                                  variant={"filled"}
-                                  type="number"
-                                  placeholder="Enter Your Phone"
-                                />
-                              </InputGroup>
-                            </div>
-                            <div className="mb-[5%]">
-                              <InputGroup>
-                                <div className="flex flex-row justify-center items-center">
-                                  <div className="flex justify-center items-center">
-                                    You are&nbsp;&nbsp;
-                                  </div>
-                                  <div className="flex justify-center items-center">
-                                    <RadioGroup aria-required>
-                                      <Stack spacing={10} direction="row">
-                                        <Radio
-                                          onChange={(e) =>
-                                            setSignupUserType(e.target.value)
-                                          }
-                                          colorScheme="red"
-                                          value="driver"
-                                        >
-                                          <div className="flex gap-2 justify-center items-center">
-                                            <AiFillCar />
-                                            &nbsp;Driver
-                                          </div>
-                                        </Radio>
-                                        <Radio
-                                          onChange={(e) =>
-                                            setSignupUserType(e.target.value)
-                                          }
-                                          colorScheme="green"
-                                          value="user"
-                                        >
-                                          <div className="flex gap-2 justify-center items-center">
-                                            <AiOutlineUser />
-                                            &nbsp;User
-                                          </div>
-                                        </Radio>
-                                      </Stack>
-                                    </RadioGroup>
-                                  </div>
+                                </InputGroup>
+                              </div>
+                            )}
+                            {showOtpInput && (
+                              <>
+                                <div>
+                                  <InputGroup>
+                                    <InputLeftElement pointerEvents="none">
+                                      <div className="flex justify-center items-center mt-2">
+                                        <RiLockPasswordLine fill="grey" />
+                                      </div>
+                                    </InputLeftElement>
+                                    <Input
+                                      onChange={(e) =>
+                                        setSignupPassword(e.target.value)
+                                      }
+                                      size={"lg"}
+                                      sx={{ width: "320px" }}
+                                      variant={"filled"}
+                                      type={showPassword ? "text" : "password"}
+                                      placeholder="Enter Your Password"
+                                    />
+                                    <InputRightElement>
+                                      <IconButton
+                                        aria-label={
+                                          showPassword
+                                            ? "Hide password"
+                                            : "Show password"
+                                        }
+                                        icon={
+                                          showPassword ? (
+                                            <RiEyeOffLine />
+                                          ) : (
+                                            <RiEyeLine />
+                                          )
+                                        }
+                                        onClick={() =>
+                                          setShowPassword(!showPassword)
+                                        }
+                                        variant="unstyled"
+                                        size="md"
+                                      />
+                                    </InputRightElement>
+                                  </InputGroup>
                                 </div>
-                              </InputGroup>
-                            </div>
-                            </>}
+                                <div>
+                                  <InputGroup>
+                                    <InputLeftElement pointerEvents="none">
+                                      <div className="flex justify-center items-center mt-2">
+                                        <BsTelephone fill="grey" />
+                                      </div>
+                                    </InputLeftElement>
+                                    <Input
+                                      onChange={(e) =>
+                                        setSignupPhone(e.target.value)
+                                      }
+                                      size={"lg"}
+                                      sx={{ width: "320px" }}
+                                      variant={"filled"}
+                                      type="number"
+                                      placeholder="Enter Your Phone"
+                                    />
+                                  </InputGroup>
+                                </div>
+                                <div className="mb-[5%]">
+                                  <InputGroup>
+                                    <div className="flex flex-row justify-center items-center">
+                                      <div className="flex justify-center items-center">
+                                        You are&nbsp;&nbsp;
+                                      </div>
+                                      <div className="flex justify-center items-center">
+                                        <RadioGroup aria-required>
+                                          <Stack spacing={10} direction="row">
+                                            <Radio
+                                              onChange={(e) =>
+                                                setSignupUserType(
+                                                  e.target.value
+                                                )
+                                              }
+                                              colorScheme="red"
+                                              value="driver"
+                                            >
+                                              <div className="flex gap-2 justify-center items-center">
+                                                <AiFillCar />
+                                                &nbsp;Driver
+                                              </div>
+                                            </Radio>
+                                            <Radio
+                                              onChange={(e) =>
+                                                setSignupUserType(
+                                                  e.target.value
+                                                )
+                                              }
+                                              colorScheme="green"
+                                              value="user"
+                                            >
+                                              <div className="flex gap-2 justify-center items-center">
+                                                <AiOutlineUser />
+                                                &nbsp;User
+                                              </div>
+                                            </Radio>
+                                          </Stack>
+                                        </RadioGroup>
+                                      </div>
+                                    </div>
+                                  </InputGroup>
+                                </div>
+                              </>
+                            )}
                           </div>
                           <div className="flex justify-center items-center mt-[5%]">
                             Already our User?&nbsp;&nbsp;{" "}
@@ -751,38 +757,42 @@ const TopBar = ({ counter, setCounter, setLoginState, loginState }) => {
                           <Button color={"red"} mr={3} onClick={onClose}>
                             Close
                           </Button>
-                          {!otp && !showOtpInput && <>
-                            <Button
-                            onClick={handleSignUpInitial}
-                            bgColor={"red"}
-                            textColor={"white"}
-                            sx={{ _hover: `bgColor:"red"` }}
-                          >
-                            Send Otp
-                          </Button>
-                          </>}
-                          {otp && !showOtpInput && <>
-                            <Button
-                            onClick={VerifyOtp}
-                            bgColor={"red"}
-                            textColor={"white"}
-                            sx={{ _hover: `bgColor:"red"` }}
-                          >
-                            Verify Otp
-                          </Button>
-                          </>}
-                          {otp && showOtpInput && <>
-                            <Button
-                            onClick={handleSignup}
-                            bgColor={"red"}
-                            textColor={"white"}
-                            sx={{ _hover: `bgColor:"red"` }}
-                          >
-                            Sign Up
-                          </Button>
-                          </>
-
-                          }
+                          {!otp && !showOtpInput && (
+                            <>
+                              <Button
+                                onClick={handleSignUpInitial}
+                                bgColor={"red"}
+                                textColor={"white"}
+                                sx={{ _hover: `bgColor:"red"` }}
+                              >
+                                Send Otp
+                              </Button>
+                            </>
+                          )}
+                          {otp && !showOtpInput && (
+                            <>
+                              <Button
+                                onClick={VerifyOtp}
+                                bgColor={"red"}
+                                textColor={"white"}
+                                sx={{ _hover: `bgColor:"red"` }}
+                              >
+                                Verify Otp
+                              </Button>
+                            </>
+                          )}
+                          {otp && showOtpInput && (
+                            <>
+                              <Button
+                                onClick={handleSignup}
+                                bgColor={"red"}
+                                textColor={"white"}
+                                sx={{ _hover: `bgColor:"red"` }}
+                              >
+                                Sign Up
+                              </Button>
+                            </>
+                          )}
                         </ModalFooter>
                       </ModalContent>
                     </Modal>

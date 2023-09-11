@@ -44,13 +44,13 @@ const UserPackages = ({ nonceVal, loginState }) => {
 
   let backData;
   const handleClickDetails = async (index) => {
-    console.log(routes[index]);
+    //console.log(routes[index]);
     const retData = await axios
       .post("/getdriverdetailsfromemail", {
         email: routes[index].driverEmail,
       })
       .then((res) => {
-        console.log(res.data);
+        //console.log(res.data);
         backData = {
           name: res.data.name,
           email: res.data.email,
@@ -62,7 +62,7 @@ const UserPackages = ({ nonceVal, loginState }) => {
           phone: res.data.phone,
           price: routes[index].amount,
         };
-        // console.log(backData);
+        // //console.log(backData);
         navigate("/userbookeddetails", { state: backData });
       })
       .catch((err) => console.log(err));

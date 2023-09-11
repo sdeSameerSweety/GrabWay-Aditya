@@ -56,9 +56,9 @@ const RouteDriverRegisteration = () => {
     }
   }, []);
 
-  console.log(location);
+  //console.log(location);
 
-  // console.log(location.state.state);
+  // //console.log(location.state.state);
 
   const formData = {
     email,
@@ -75,7 +75,7 @@ const RouteDriverRegisteration = () => {
     seats,
   };
 
-  // console.log(formData);
+  // //console.log(formData);
 
   const handleSubmit = async (e) => {
     e.preventDefault(); // Prevent the default form submission behavior
@@ -89,7 +89,7 @@ const RouteDriverRegisteration = () => {
         });
 
         if (response.data) {
-          console.log("driver route added");
+          //console.log("driver route added");
           setRunContext("driver route added");
 
           toast({

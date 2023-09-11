@@ -14,9 +14,9 @@ export function UserContextProvider({ children }) {
   useEffect(() => {
     if (email && !googleToken) {
       axios.post("/checkuser", { email }).then((res) => {
-        // console.log(res.data);
+        // //console.log(res.data);
         let data = res.data;
-        // console.log(data);
+        // //console.log(data);
         if (data !== null) {
           if ("profilePicture" in data) setProfilePhoto(data.profilePicture);
           if (delete data.profilePicture)
@@ -42,9 +42,9 @@ export function UserContextProvider({ children }) {
   useEffect(() => {
     if (email && !googleToken) {
       axios.post("/checkuser", { email }).then((res) => {
-        // console.log("I am here", res.data);
+        // //console.log("I am here", res.data);
         let data = res.data;
-        // console.log(data);
+        // //console.log(data);
         if (data !== null) {
           if ("profilePicture" in data) setProfilePhoto(data.profilePicture);
           if (delete data.profilePicture)

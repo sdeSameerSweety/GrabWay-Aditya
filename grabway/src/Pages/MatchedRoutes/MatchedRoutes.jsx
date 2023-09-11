@@ -13,14 +13,14 @@ const MatchedRoutes = () => {
   const [driverFound, setDriverFound] = useState(false);
   const location = useLocation();
   const formData = location.state;
-  console.log(formData);
+  //console.log(formData);
   async function searchData() {
     try {
       const response = await axios
         .post("/routeUserSearch", { formData })
         .then((res) => {
           setMatchedRoutes(res.data);
-          console.log(res.data);
+          //console.log(res.data);
         });
     } catch (err) {
       setMatchedRoutes("empty");

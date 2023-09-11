@@ -19,10 +19,11 @@ import { AiOutlineHeart } from "react-icons/ai";
 import { BiShareAlt, BiChat } from "react-icons/bi";
 import "./Checkout.css";
 import { SiRazorpay } from "react-icons/si";
-import { Navigate, useLocation } from "react-router-dom";
+import { Navigate, useLocation, useNavigate } from "react-router-dom";
 import Cookies from "js-cookie";
 import axios from "axios";
 const Checkout = () => {
+  const navigate = useNavigate();
   const toast = useToast();
   const [confirmOrigin, setConfirmOrigin] = useState(false);
   const [paymentSelected, setPaymentSelected] = useState(null);
@@ -39,9 +40,9 @@ const Checkout = () => {
   const amount = UserQuery.amount;
   const taxOnAmount = UserQuery.amount * 0.12;
 
-  console.log(matchDriverRoute);
+  // //console.log(matchDriverRoute);
 
-  console.log("Price User Query", UserQuery.amount);
+  //console.log("Price User Query", UserQuery.amount);
   async function bookNow() {
     const response = await axios
       .post("/bookRoute", {
@@ -51,7 +52,17 @@ const Checkout = () => {
         price: Math.floor(amount + taxOnAmount),
       })
       .then(() => {
-        console.log("data sent");
+        // //console.log("data sent");
+        toast({
+          title: "Packaged Purchased Successfully",
+          status: "success",
+          duration: 2000,
+          isClosable: true,
+        });
+        setTimeout(() => {
+          navigate("/");
+          window.location.reload(false);
+        }, 2000);
       });
   }
 
@@ -93,8 +104,8 @@ const Checkout = () => {
       return <Navigate to={"/googleRegistration"} />;
     }
   }
-  console.log(matchDriverRoute);
-  console.log(UserQuery);
+  // //console.log(matchDriverRoute);
+  // //console.log(UserQuery);
   return (
     <>
       <div className="dekstop-view p-5">
