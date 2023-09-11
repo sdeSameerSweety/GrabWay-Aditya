@@ -42,14 +42,31 @@ const UserPackages = ({ nonceVal, loginState }) => {
     return <Navigate to={"/"} />;
   }
 
+  let backData;
   const handleClickDetails = async (index) => {
     console.log(routes[index]);
-    const retData = await axios.post("/getdriverdetailsfromemail", {
-      email: routes[index].driverEmail,
-    });
-    // console.log("Aditya");
-    // navigate("/userbookeddetails");
+    const retData = await axios
+      .post("/getdriverdetailsfromemail", {
+        email: routes[index].driverEmail,
+      })
+      .then((res) => {
+        console.log(res.data);
+        backData = {
+          name: res.data.name,
+          email: res.data.email,
+          origin: routes[index].origin.text,
+          destination: routes[index].destination.text,
+          address: res.data.address,
+          dlNumber: res.data.dlNumber,
+          vehicleNo: res.data.vehiclenumber,
+          phone: res.data.phone,
+        };
+        // console.log(backData);
+        navigate("/userbookeddetails", { state: backData });
+      })
+      .catch((err) => console.log(err));
   };
+
   return (
     <>
       <div className="dekstop-view-driver">
