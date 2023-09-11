@@ -16,7 +16,8 @@ import { getApp } from "firebase/app";
 
 const UserBooked = () => {
   const location = useLocation();
-  const driverData = JSON.parse(localStorage.getItem("grabwayUser"));
+  const driverData = location.state;
+
   // const [customerdetails, setcustomerdetails] = useState([]);
   if (location.state === null || location.state === undefined) {
     return <Navigate to={"/"} />;
@@ -92,15 +93,16 @@ const UserBooked = () => {
   const driver = {
     name: driverData.name,
     email: driverData.email,
-    licenseNumber: driverData.drivingLicenseNumber,
+    licenseNumber: driverData.dlNumber,
     vehicleNumber:
-      driverData.VehicleNumber.slice(0, 2) +
+      driverData.vehicleNo.slice(0, 2) +
       "-" +
-      driverData.VehicleNumber.slice(2, 4) +
+      driverData.vehicleNo.slice(2, 4) +
       "-" +
-      driverData.VehicleNumber.slice(4, 6) +
+      driverData.vehicleNo.slice(4, 6) +
       "-" +
-      driverData.VehicleNumber.slice(-4),
+      driverData.vehicleNo.slice(-4),
+    phone: driverData.phone,
     carType: "Sedan",
     totalSeats: location.state.seats,
     totalFare: "₹500",
@@ -110,16 +112,13 @@ const UserBooked = () => {
 
   const route = {
     from:
-      location.state.origin[0].text.split(",")[0] +
+      location.state.origin.split(",")[0] +
       ", " +
-      location.state.origin[0].text.split(",")[1],
+      location.state.origin.split(",")[1],
     to:
-      location.state.destination[0].text.split(",")[0] +
+      location.state.destination.split(",")[0] +
       ", " +
-      location.state.destination[0].text.split(",")[1],
-    pickupTime: getTimein12(location.state.originTime[0].start),
-    dropTime: getTimein12(location.state.destinationTime[0].start),
-    passengers: getCutomers(),
+      location.state.destination.split(",")[1],
   };
 
   // console.log(route.pickupTime);
@@ -153,7 +152,7 @@ const UserBooked = () => {
         <Text textOverflow="ellipsis" fontSize={{ base: "md", md: "sm" }}>
           To: {route.to}
         </Text>
-        <Text textOverflow="ellipsis" fontSize={{ base: "md", md: "sm" }}>
+        {/* <Text textOverflow="ellipsis" fontSize={{ base: "md", md: "sm" }}>
           Pickup Time: {route.pickupTime}
         </Text>
         <Text textOverflow="ellipsis" fontSize={{ base: "md", md: "sm" }}>
@@ -161,9 +160,9 @@ const UserBooked = () => {
         </Text>
         <Text textOverflow="ellipsis" fontSize={{ base: "md", md: "sm" }}>
           Total Seats: {driver.totalSeats}
-        </Text>
+        </Text> */}
         <Text textOverflow="ellipsis" fontSize={{ base: "md", md: "sm" }}>
-          Total Fare: {driver.totalFare}
+          Total Fare: 5000rs
         </Text>
       </Box>
       {/* Driver Profile */}
@@ -177,6 +176,7 @@ const UserBooked = () => {
           <h2>{driver.name}</h2>
           <p>Email: {driver.email}</p>
           <p>DL Number: {driver.licenseNumber}</p>
+          <p>Phone: {driver.phone}</p>
           <p>Vehicle Number: {driver.vehicleNumber}</p>
           <p>Car Type: {driver.carType}</p>
           <div className="driver-rating">
