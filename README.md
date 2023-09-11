@@ -1,4 +1,3 @@
-
 # GrabWay
 
 GrabWay is a cutting-edge ride-sharing application developed with React.js and powered by Google Maps API, designed to make commuting more efficient, cost-effective, and environmentally friendly. With RideShareX, you can easily find and share rides with others who are traveling in similar routes, reducing traffic congestion and your transportation costs.
@@ -180,4 +179,3 @@ Install my-project with npm
 ## Support
 
 For support, email fake@fake.com or join our Slack channel.
-
