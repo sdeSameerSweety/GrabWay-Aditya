@@ -766,7 +766,7 @@ app.post("/bookRoute", async (req, res) => {
               "destinationLocation.0.long": userDestinationLong,
               originTime: userOriginTime,
               destinationTime: userDestinationTime,
-              //price:price for that user
+              price: amount - 0.05 * amount,
             },
           },
         }
