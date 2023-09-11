@@ -9,6 +9,7 @@ import {
   Heading,
   Button,
 } from "@chakra-ui/react";
+import axios from "axios";
 import Cookies from "js-cookie";
 const UserPackages = ({ nonceVal, loginState }) => {
   const navigate = useNavigate();
@@ -41,9 +42,13 @@ const UserPackages = ({ nonceVal, loginState }) => {
     return <Navigate to={"/"} />;
   }
 
-  const handleClickDetails = (e) => {
-    console.log("Aditya");
-    navigate("/userbookeddetails");
+  const handleClickDetails = async (index) => {
+    console.log(routes[index]);
+    const retData = await axios.post("/getdriverdetailsfromemail", {
+      email: routes[index].driverEmail,
+    });
+    // console.log("Aditya");
+    // navigate("/userbookeddetails");
   };
   return (
     <>
@@ -141,7 +146,9 @@ const UserPackages = ({ nonceVal, loginState }) => {
                                     <CardBody></CardBody>
                                     <CardFooter>
                                       <Button
-                                        onClick={(e) => handleClickDetails(e)}
+                                        onClick={(e) =>
+                                          handleClickDetails(index)
+                                        }
                                       >
                                         View More Details
                                       </Button>
@@ -199,7 +206,9 @@ const UserPackages = ({ nonceVal, loginState }) => {
                                     <CardBody></CardBody>
                                     <CardFooter>
                                       <Button
-                                        onClick={(e) => handleClickDetails(e)}
+                                        onClick={(e) =>
+                                          handleClickDetails(index)
+                                        }
                                       >
                                         View More Details
                                       </Button>
@@ -310,7 +319,9 @@ const UserPackages = ({ nonceVal, loginState }) => {
                                     <CardBody></CardBody>
                                     <CardFooter>
                                       <Button
-                                        onClick={(e) => handleClickDetails(e)}
+                                        onClick={(e) =>
+                                          handleClickDetails(index)
+                                        }
                                       >
                                         View More Details
                                       </Button>
@@ -362,7 +373,9 @@ const UserPackages = ({ nonceVal, loginState }) => {
                                     <CardBody></CardBody>
                                     <CardFooter>
                                       <Button
-                                        onClick={(e) => handleClickDetails(e)}
+                                        onClick={(e) =>
+                                          handleClickDetails(index)
+                                        }
                                       >
                                         View More Details
                                       </Button>
