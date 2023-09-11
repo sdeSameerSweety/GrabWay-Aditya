@@ -13,6 +13,7 @@ import { Card, CardBody } from "@chakra-ui/react";
 import axios from "axios";
 
 function MyComponent({ nonceVal }, { route, state }) {
+  const [amount, setAmount] = useState(null);
   const [windowSize, setWindowSize] = useState(window.innerWidth);
   useEffect(() => {
     const handleWindowResize = () => {
@@ -55,13 +56,17 @@ function MyComponent({ nonceVal }, { route, state }) {
   };
   //console.log(rideDataText, location);
 
-  const petrolPrice=105;
-
+  const petrolPrice = 105;
 
   const handlemapDriverRoute = (type) => {
     if (type === "driver")
-      navigate("/routeDriverRegistration", { state: location });
-    else navigate("/routeUserRegistration", { state: location });
+      navigate("/routeDriverRegistration", {
+        state: { data: location, amount: amount },
+      });
+    else
+      navigate("/routeUserRegistration", {
+        state: { data: location, amount: amount },
+      });
   };
   //Route setup and display function
   const [directionResponse, setDirectionResponse] = useState("");
@@ -158,14 +163,12 @@ function MyComponent({ nonceVal }, { route, state }) {
   //const declaration for display outputs
   const [fromVerifed, setFromVerified] = useState(false);
   const [showFinalButtonDisplay, setShowFinalButtonDisplay] = useState(true);
-  const [amount,setAmount]=useState(null);
-  function packagePrice(distanceNum){
-    if(distanceNum){
-      setAmount(Math.floor(distanceNum/1000*15*30));
+  function packagePrice(distanceNum) {
+    if (distanceNum) {
+      setAmount(Math.floor((distanceNum / 1000) * 15 * 30));
       //console.log(price);
     }
   }
-
 
   return isLoaded ? (
     <>

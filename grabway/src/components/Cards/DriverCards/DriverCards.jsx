@@ -25,7 +25,7 @@ function DriverCard(props) {
   const userData = localStorage.getItem("grabwayUser");
   const matchDriverRoute = props.matchDriverRoute;
   const UserQuery = props.UserQuery;
-  //console.log(matchDriverRoute);
+  // console.log("adiUserQuery);
 
   async function handleMoreDetails(index) {
     const response = await axios
@@ -34,7 +34,13 @@ function DriverCard(props) {
       })
       .then((res) => {
         // console.log(res.data);
-        navigate("/moredetails", { state:{ state:res.data , matchDriverRoute:matchDriverRoute[index],UserQuery:UserQuery}});
+        navigate("/moredetails", {
+          state: {
+            state: res.data,
+            matchDriverRoute: matchDriverRoute[index],
+            UserQuery: UserQuery,
+          },
+        });
       })
       .catch((err) => {
         console.log(err);
@@ -109,12 +115,16 @@ function DriverCard(props) {
                           Seats:{" "}
                           {driver.route.seats - driver.route.customers.length}
                         </span>
-                        <Link to='/userCheckout' state={{matchDriverRoute:matchDriverRoute[driverIndex], UserQuery:UserQuery}}>
-                        <button
-                          class="bg-theme text-white py-2 px-4 rounded-full font-bold hover:bg-gray-800"
+                        <Link
+                          to="/userCheckout"
+                          state={{
+                            matchDriverRoute: matchDriverRoute[driverIndex],
+                            UserQuery: UserQuery,
+                          }}
                         >
-                          Grab it
-                        </button>
+                          <button class="bg-theme text-white py-2 px-4 rounded-full font-bold hover:bg-gray-800">
+                            Grab it
+                          </button>
                         </Link>
                       </div>
                     </div>

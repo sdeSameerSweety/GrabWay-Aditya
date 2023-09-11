@@ -740,8 +740,9 @@ app.post("/bookRoute", async (req, res) => {
   const userDestinationTime = userQuery.destinationStartTime;
   const plan = matchDriverRoute.plan;
   const driverName = matchDriverRoute.name;
-  const amount = 2000; //make it dynamic
+  const amount = req.body.price; //make it dynamic
   const paymentMethod = "cash"; //make it dyanmic
+  console.log(amount);
   try {
     if (driverEmail && userEmail && userQuery) {
       const DriverModificationResponse = await DriverModel.updateOne(

@@ -56,6 +56,8 @@ const RouteDriverRegisteration = () => {
     }
   }, []);
 
+  console.log(location);
+
   // console.log(location.state.state);
 
   const formData = {
