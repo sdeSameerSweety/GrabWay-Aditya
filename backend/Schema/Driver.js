@@ -34,7 +34,7 @@ const CustomerSchema = new mongoose.Schema({
   originTime: { type: String },
   destinationLocation: [LocationSchema],
   destinationTime: { type: String },
-  //price:price for that user
+  price: { type: Number },
 });
 const RouteTime = new mongoose.Schema({
   start: { type: String },
