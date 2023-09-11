@@ -15,6 +15,7 @@ import {
   Image,
 } from "@chakra-ui/react";
 import { BsThreeDotsVertical } from "react-icons/bs";
+// import useRazorpay from "react-razorpay";
 import { AiOutlineHeart } from "react-icons/ai";
 import { BiShareAlt, BiChat } from "react-icons/bi";
 import "./Checkout.css";
@@ -23,6 +24,7 @@ import { Navigate, useLocation, useNavigate } from "react-router-dom";
 import Cookies from "js-cookie";
 import axios from "axios";
 const Checkout = () => {
+  // const [Razorpay] = useRazorpay();
   const navigate = useNavigate();
   const toast = useToast();
   const [confirmOrigin, setConfirmOrigin] = useState(false);
@@ -39,6 +41,50 @@ const Checkout = () => {
   const dropTime = UserQuery.destinationStartTime;
   const amount = UserQuery.amount;
   const taxOnAmount = UserQuery.amount * 0.12;
+
+  // const handlePayment = async (params) => {
+  //   // const order = await createOrder(params); //  Create order on your backend
+
+  //   const options = {
+  //     key: "rzp_test_pM0vDUp05pvdwo", // Enter the Key ID generated from the Dashboard
+  //     amount: "50000", // Amount is in currency subunits. Default currency is INR. Hence, 50000 refers to 50000 paise
+  //     currency: "INR",
+  //     name: "Acme Corp",
+  //     description: "Test Transaction",
+  //     image: "assets/images/user.png",
+  //     order_id: "order_9A33XWu170gUtm", //This is a sample Order ID. Pass the `id` obtained in the response of createOrder().
+  //     handler: function (response) {
+  //       alert(response.razorpay_payment_id);
+  //       alert(response.razorpay_order_id);
+  //       alert(response.razorpay_signature);
+  //     },
+  //     prefill: {
+  //       name: "Piyush Garg",
+  //       email: "youremail@example.com",
+  //       contact: "9999999999",
+  //     },
+  //     notes: {
+  //       address: "Razorpay Corporate Office",
+  //     },
+  //     theme: {
+  //       color: "#3399cc",
+  //     },
+  //   };
+
+  //   const rzp1 = new Razorpay(options);
+
+  //   rzp1.on("payment.failed", function (response) {
+  //     alert(response.error.code);
+  //     alert(response.error.description);
+  //     alert(response.error.source);
+  //     alert(response.error.step);
+  //     alert(response.error.reason);
+  //     alert(response.error.metadata.order_id);
+  //     alert(response.error.metadata.payment_id);
+  //   });
+
+  //   rzp1.open();
+  // };
 
   // //console.log(matchDriverRoute);
 
@@ -66,6 +112,33 @@ const Checkout = () => {
       });
   }
 
+  const handlerazorpay = (data) => {
+    const options = {
+      key: "rzp_test_pM0vDUp05pvdwo",
+      amount: 50000,
+      currency: "INR",
+      name: "GrabWay Checkout",
+      description: "Pay to proceed",
+      order_id: data.id,
+      handler: function (response) {
+        console.log(response, "Aditya");
+        bookNow();
+      },
+    };
+    const rzp = new window.Razorpay(options);
+    rzp.open();
+  };
+
+  async function bookrazor() {
+    const response = await axios
+      .post("/razorpay")
+      .then((res) => {
+        console.log(res.data, "Aditya");
+        handlerazorpay(res.data);
+      })
+      .catch((err) => console.log(err));
+  }
+
   function handlePay() {
     if (!paymentSelected) {
       toast({
@@ -75,7 +148,8 @@ const Checkout = () => {
         isClosable: true,
       });
     } else {
-      bookNow();
+      if (paymentSelected === 1) bookrazor();
+      else bookNow();
     }
   }
 

@@ -6,6 +6,7 @@ const jwt = require("jsonwebtoken");
 require("dotenv").config();
 const cookieParser = require("cookie-parser");
 const bcrypt = require("bcryptjs");
+const Razorpay = require("razorpay");
 const UserModel = require("./Schema/User");
 const DriverModel = require("./Schema/Driver");
 const EmailModel = require("./Schema/Email");
@@ -1387,6 +1388,26 @@ app.post("/getdriverdetailsfromemail", async (req, res) => {
     console.log("server Error in get drivers details from email");
     res.status(500).json("Internal Server error");
   }
+});
+
+app.post("/razorpay", async (req, res) => {
+  let instance = new Razorpay({
+    key_id: "rzp_test_pM0vDUp05pvdwo",
+    key_secret: "ssogMc4ga1crRhuQdoJPe0wa",
+  });
+
+  var options = {
+    amount: 50000,
+    currency: "INR",
+    receipt: "order_rcptid_11",
+  };
+
+  instance.orders.create(options, function (err, order) {
+    if (err) {
+      return res.status(500).json("Server Error");
+    }
+    return res.status(200).json(order);
+  });
 });
 
 app.listen(PORT, () => {

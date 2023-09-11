@@ -20,6 +20,7 @@
     "haversine-distance": "^1.2.1",
     "jsonwebtoken": "^9.0.1",
     "mongoose": "^7.4.4",
-    "nodemailer": "^6.9.4"
+    "nodemailer": "^6.9.4",
+    "razorpay": "^2.9.2"
   }
 }
