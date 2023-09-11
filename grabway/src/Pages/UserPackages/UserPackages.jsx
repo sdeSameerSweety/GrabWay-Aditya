@@ -60,6 +60,7 @@ const UserPackages = ({ nonceVal, loginState }) => {
           dlNumber: res.data.dlNumber,
           vehicleNo: res.data.vehiclenumber,
           phone: res.data.phone,
+          price: routes[index].amount,
         };
         // console.log(backData);
         navigate("/userbookeddetails", { state: backData });
