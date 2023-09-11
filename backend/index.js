@@ -1363,6 +1363,28 @@ app.post("/buyNow", async (req, res) => {
   }
 });
 
+app.post("/getdriverdetailsfromemail", async (req, res) => {
+  await mongoose.connect(MONGO_URL);
+  const email = req.body.email;
+  // console.log(email);
+  try {
+    const DriverData = await DriverModel.findOne({ email: email });
+    let sendData = {
+      name: DriverData.name,
+      email: DriverData.email,
+      phone: DriverData.phoneNumber,
+      address: DriverData.address,
+      vehiclenumber: DriverData.VehicleNumber,
+      dlNumber: DriverData.drivingLicenseNumber,
+    };
+    // console.log(sendData);
+    res.status(200).json(sendData);
+  } catch (error) {
+    console.log("server Error in get drivers details from email");
+    res.status(500).json("Internal Server error");
+  }
+});
+
 app.listen(PORT, () => {
   console.log(`Server running at http://localhost:${PORT}`);
 });
