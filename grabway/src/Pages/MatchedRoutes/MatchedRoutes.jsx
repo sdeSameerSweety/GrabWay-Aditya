@@ -13,6 +13,7 @@ const MatchedRoutes = () => {
   const [driverFound, setDriverFound] = useState(false);
   const location = useLocation();
   const formData = location.state;
+  console.log(formData);
   async function searchData() {
     try {
       const response = await axios
@@ -67,7 +68,7 @@ const MatchedRoutes = () => {
       )}
       {matchedRoutes !== null && matchedRoutes !== "empty" && (
         <>
-          <DriverCard matchDriverRoute={matchedRoutes} UserQuery={formData}/>
+          <DriverCard matchDriverRoute={matchedRoutes} UserQuery={formData} />
         </>
       )}
     </>

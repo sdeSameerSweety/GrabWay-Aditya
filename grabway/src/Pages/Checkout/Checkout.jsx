@@ -26,9 +26,9 @@ const Checkout = () => {
   const toast = useToast();
   const [confirmOrigin, setConfirmOrigin] = useState(false);
   const [paymentSelected, setPaymentSelected] = useState(null);
-  const location=useLocation();
-  const matchDriverRoute=location.state.matchDriverRoute;
-  const UserQuery=location.state.UserQuery;
+  const location = useLocation();
+  const matchDriverRoute = location.state.matchDriverRoute;
+  const UserQuery = location.state.UserQuery;
   const driverName = matchDriverRoute.driverName;
   const driverState = "West Bengal";
   const driverCity = "Kolkata";
@@ -36,21 +36,22 @@ const Checkout = () => {
   const destinationText = UserQuery.destinationText;
   const pickupTime = UserQuery.originStartTime;
   const dropTime = UserQuery.destinationStartTime;
-  const amount = 3000;
-  const taxOnAmount = 3000 * 0.12;
+  const amount = UserQuery.amount;
+  const taxOnAmount = UserQuery.amount * 0.12;
 
-  async function bookNow(){
+  console.log("Price User Query", UserQuery.amount);
+  async function bookNow() {
     const response = await axios
       .post("/bookRoute", {
         matchDriverRoute: matchDriverRoute,
         userDetails: JSON.parse(userData),
         UserQuery: { UserQuery },
+        price: amount + taxOnAmount,
       })
       .then(() => {
         console.log("data sent");
       });
   }
-
 
   function handlePay() {
     if (!paymentSelected) {
@@ -60,8 +61,7 @@ const Checkout = () => {
         duration: 2000,
         isClosable: true,
       });
-    }
-    else{
+    } else {
       bookNow();
     }
   }
@@ -198,7 +198,6 @@ const Checkout = () => {
                     <Card
                       variant={"elevated"}
                       sx={{
-                        
                         border: "2px solid black",
                       }}
                     >
@@ -271,10 +270,9 @@ const Checkout = () => {
                 <div className="second-box flex flex-col justify-between items-center gap-10">
                   <div className="flex-row justify-between items-center">
                     <Card
-                    className="card-second-box"
+                      className="card-second-box"
                       variant={"elevated"}
                       sx={{
-                       
                         border: "2px solid black",
                       }}
                     >
