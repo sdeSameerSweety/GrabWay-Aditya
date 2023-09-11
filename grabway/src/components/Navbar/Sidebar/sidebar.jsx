@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useContext } from "react";
 import "./sidebar.css";
-import { Link } from "react-router-dom";
+import { Link, Navigate } from "react-router-dom";
 import { UserContext } from "../../../context/Context";
 import Cookies from "js-cookie";
 
@@ -12,6 +12,9 @@ export default function Sidebar({
   setLoginState,
   setCounter,
 }) {
+  const datauser = JSON.parse(localStorage.getItem("grabwayUser"));
+  // console.log(datauser);
+  const { userEmail, setUserEmail, setRunContext } = useContext(UserContext);
   const [sidebarClass, setSidebarClass] = useState("sidebar");
   const toggleClass = () => {
     if (sidebarClass === "sidebar open") {
@@ -22,7 +25,7 @@ export default function Sidebar({
       setClassDisplay("sidebar open");
     }
   };
-  const { userEmail, setUserEmail, setRunContext } = useContext(UserContext);
+
   const handleSignout = () => {
     //console.log("Signout Successfull");
     localStorage.removeItem("grabwayToken");
@@ -89,6 +92,9 @@ export default function Sidebar({
     }
   });
 
+  if (!datauser) {
+    return <Navigate to={"/"} />;
+  }
   return (
     <>
       {windowSize[0] > 600 && (
@@ -161,7 +167,13 @@ export default function Sidebar({
               </Link>
             </li>
             <li>
-              <Link to="/userPackages">
+              <Link
+                to={
+                  datauser.userType === "user"
+                    ? "/userPackages"
+                    : "/driverpackage"
+                }
+              >
                 <div className="items-list-side">
                   <i
                     className={showState === true ? "bx bx-cart" : "hidden"}

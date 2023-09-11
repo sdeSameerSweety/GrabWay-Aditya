@@ -9,9 +9,11 @@ import {
   CardFooter,
   Heading,
   Button,
+  useToast,
 } from "@chakra-ui/react";
 import Cookies from "js-cookie";
 const DriverPackage = ({ nonceVal, loginState }) => {
+  const toast = useToast();
   const navigate = useNavigate();
   const userData = localStorage.getItem("grabwayUser");
   const [routes, setRoutes] = useState(null);
@@ -41,6 +43,18 @@ const DriverPackage = ({ nonceVal, loginState }) => {
   if (!Cookies.get("grabwayToken")) {
     return <Navigate to={"/"} />;
   }
+  if (routesEmpty) {
+    toast({
+      title: "No data to display",
+      status: "success",
+      duration: 2000,
+      isClosable: true,
+      position: "top",
+    });
+    setTimeout(() => {
+      navigate("/");
+    }, 1000);
+  }
 
   const handlemoredetails = (index) => {
     //console.log(routes[index]);
@@ -50,7 +64,7 @@ const DriverPackage = ({ nonceVal, loginState }) => {
   return (
     <>
       <div className="dekstop-view-driver">
-        {routesEmpty && (
+        {/* {routesEmpty && (
           <>
             <div className="flex flex-row justify-between items-center gap-20 mt-[8vh]">
               <div className="flex justify-center items-center">
@@ -81,12 +95,12 @@ const DriverPackage = ({ nonceVal, loginState }) => {
               </div>
             </div>
           </>
-        )}
+        )} */}
         {!routesEmpty && (
           <>
             <div className="flex justify-center items-center flex-row m-5">
               <div className="flex justify-center items-center flex-col mt-5 ">
-                <div className="flex justify-center items-center mb-10">
+                {/* <div className="flex justify-center items-center mb-10">
                   <Link to="/routeDriverLocation">
                     <Button
                       colorScheme="red"
@@ -99,7 +113,7 @@ const DriverPackage = ({ nonceVal, loginState }) => {
                       Add New Route
                     </Button>
                   </Link>
-                </div>
+                </div> */}
                 <div className="flex flex-col justify-between items-center gap-10 mt-5">
                   {routes &&
                     routes.map((element, index) => {
@@ -164,13 +178,13 @@ const DriverPackage = ({ nonceVal, loginState }) => {
                                         </div>
                                       </div>
                                     </CardBody>
-                                    <CardFooter>
+                                    {/* <CardFooter>
                                       <Button
                                         onClick={() => handlemoredetails(index)}
                                       >
                                         View More Details
                                       </Button>
-                                    </CardFooter>
+                                    </CardFooter> */}
                                   </Card>
                                 </div>
                                 <div className="flex justify-between items-center">
@@ -247,13 +261,13 @@ const DriverPackage = ({ nonceVal, loginState }) => {
                                         </div>
                                       </div>
                                     </CardBody>
-                                    <CardFooter>
+                                    {/* <CardFooter>
                                       <Button
                                         onClick={() => handlemoredetails(index)}
                                       >
                                         View More Details
                                       </Button>
-                                    </CardFooter>
+                                    </CardFooter> */}
                                   </Card>
                                 </div>
                               </div>
@@ -383,13 +397,13 @@ const DriverPackage = ({ nonceVal, loginState }) => {
                                         </div>
                                       </div>
                                     </CardBody>
-                                    <CardFooter>
+                                    {/* <CardFooter>
                                       <Button
                                         onClick={() => handlemoredetails(index)}
                                       >
                                         View More Details
                                       </Button>
-                                    </CardFooter>
+                                    </CardFooter> */}
                                   </Card>
                                 </div>
                                 <div className="flex justify-between items-center">
@@ -460,13 +474,13 @@ const DriverPackage = ({ nonceVal, loginState }) => {
                                         </div>
                                       </div>
                                     </CardBody>
-                                    <CardFooter>
+                                    {/* <CardFooter>
                                       <Button
                                         onClick={() => handlemoredetails(index)}
                                       >
                                         View More Details
                                       </Button>
-                                    </CardFooter>
+                                    </CardFooter> */}
                                   </Card>
                                 </div>
                                 <div className="flex justify-between items-center">
