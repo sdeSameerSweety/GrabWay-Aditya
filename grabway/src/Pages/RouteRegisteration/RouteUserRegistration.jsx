@@ -43,7 +43,7 @@ const RouteUserRegisteration = () => {
   const [destinationTimeError, setDestinationTimeError] = useState("");
   const [search, setSearch] = useState(false);
 
-  console.log(location);
+  //console.log(location);
 
   if (location === null) {
     navigate("/");
@@ -67,7 +67,7 @@ const RouteUserRegisteration = () => {
       position: "top",
     });
   }
-  // console.log(location.state.data.state);
+  // //console.log(location.state.data.state);
 
   const formData = {
     email,
@@ -85,7 +85,7 @@ const RouteUserRegisteration = () => {
     amount: location.state.amount,
   };
 
-  //console.log(formData);
+  ////console.log(formData);
 
   const [errors, setErrors] = useState({});
   const [isChecked, setIsChecked] = useState(false);
@@ -149,7 +149,7 @@ const RouteUserRegisteration = () => {
       setSearch(true);
     }
   };
-  console.log("search", search);
+  //console.log("search", search);
   if (search) {
     return navigate("/matchedRoutes", { state: formData });
   }

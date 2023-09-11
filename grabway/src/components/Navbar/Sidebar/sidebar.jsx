@@ -24,7 +24,7 @@ export default function Sidebar({
   };
   const { userEmail, setUserEmail, setRunContext } = useContext(UserContext);
   const handleSignout = () => {
-    console.log("Signout Successfull");
+    //console.log("Signout Successfull");
     localStorage.removeItem("grabwayToken");
     localStorage.removeItem("grabwayUser");
     localStorage.removeItem("grabwayGoogleToken");

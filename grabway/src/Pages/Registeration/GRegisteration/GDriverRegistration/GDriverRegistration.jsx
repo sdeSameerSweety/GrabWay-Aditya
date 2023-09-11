@@ -29,7 +29,7 @@ const DriverRegistration = () => {
   const userData = Cookies.get("grabwayGoogleToken");
   const GoogleUserType = "driver";
   const hasUserData = userData;
-  //console.log(userData);
+  ////console.log(userData);
   const [tmpPin, setTmpPin] = useState("");
   const [formData, setFormData] = useState({
     name: "",
@@ -94,7 +94,7 @@ const DriverRegistration = () => {
     if (!isChecked) {
       setError("Please accept the terms and conditions.");
     } else {
-      console.log("Terms accepted, proceed with further actions.");
+      //console.log("Terms accepted, proceed with further actions.");
     }
   };
 
@@ -151,14 +151,14 @@ const DriverRegistration = () => {
   const handleSubmit = async (e) => {
     e.preventDefault(); // Prevent the default form submission behavior
     const newErrors = validateForm();
-    console.log(Object.keys(newErrors));
+    //console.log(Object.keys(newErrors));
     if (Object.keys(newErrors).length === 0) {
       //Submission logic here
-      //console.log('clicked');
+      ////console.log('clicked');
       const response = await axios
         .post("/googleCreateDriver", { formData })
         .then((res) => {
-          //console.log(res.data);
+          ////console.log(res.data);
           setTimeout(() => {
             setRunContext("Google Driver form submited");
           }, 1500);
@@ -168,9 +168,9 @@ const DriverRegistration = () => {
           }
         })
         .catch(() => {
-          console.log("Internal server Error");
+          //console.log("Internal server Error");
         });
-      console.log("Form submitted successfully:", formData);
+      //console.log("Form submitted successfully:", formData);
       setErrors({});
     } else {
       setErrors(newErrors);

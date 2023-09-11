@@ -78,19 +78,19 @@ const DriverDetails = () => {
         price: location.state.customers[i].price,
       };
       retlist.push(tmpset);
-      console.log("cutomers", retlist);
+      //console.log("cutomers", retlist);
     }
     return retlist;
   }
 
-  console.log(location.state);
+  //console.log(location.state);
   function getPpic() {
     if ("profilePictutre" in driverData) return driverData.profilePicture;
     else return "assets/images/user.png";
   }
 
-  console.log(location.state);
-  console.log(driverData);
+  //console.log(location.state);
+  //console.log(driverData);
   const driver = {
     name: driverData.name,
     email: driverData.email,
@@ -124,7 +124,7 @@ const DriverDetails = () => {
     passengers: getCutomers(),
   };
 
-  console.log(location.state);
+  //console.log(location.state);
 
   return (
     <Box

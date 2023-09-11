@@ -27,7 +27,7 @@ const UserRegistration = () => {
   const userData = Cookies.get("grabwayGoogleToken");
   const googleUserType = "user";
   const hasUserData = userData;
-  //console.log(userData);
+  ////console.log(userData);
   const [formData, setFormData] = useState({
     name: "",
     lastName: "",
@@ -41,8 +41,8 @@ const UserRegistration = () => {
     pin: "",
     imgDp: "",
   });
-  // console.log(formData);
-  // console.log(tmpPin);
+  // //console.log(formData);
+  // //console.log(tmpPin);
   const handlePincodeChange = async (e) => {
     const pincode = e.target.value;
     setFormData({
@@ -55,7 +55,7 @@ const UserRegistration = () => {
         `https://api.postalpincode.in/pincode/${pincode}`
       );
       const data = await response.json();
-      console.log(data);
+      //console.log(data);
       if (data && data[0].Status === "Success") {
         const postOffice = data[0].PostOffice[0];
         setFormData({
@@ -88,7 +88,7 @@ const UserRegistration = () => {
     if (!isChecked) {
       setError("Please accept the terms and conditions.");
     } else {
-      console.log("Terms accepted, proceed with further actions.");
+      //console.log("Terms accepted, proceed with further actions.");
     }
   };
 
@@ -131,14 +131,14 @@ const UserRegistration = () => {
     e.preventDefault(); // Prevent the default form submission behavior
 
     const newErrors = validateForm();
-    console.log(Object.keys(newErrors));
+    //console.log(Object.keys(newErrors));
     if (Object.keys(newErrors).length === 0) {
       //Submission logic here
-      //console.log("Form submitted successfully:", formData);
+      ////console.log("Form submitted successfully:", formData);
       const response = await axios
         .post("/googleCreateUser", { formData })
         .then((res) => {
-          //console.log(res.data);
+          ////console.log(res.data);
           setTimeout(() => {
             setRunContext("Google User form submited");
           }, 1500);
@@ -148,7 +148,7 @@ const UserRegistration = () => {
           }
         })
         .catch(() => {
-          console.log("Internal server Error");
+          //console.log("Internal server Error");
         });
       setErrors({});
     } else {

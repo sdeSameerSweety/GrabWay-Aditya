@@ -33,9 +33,9 @@ function MyComponentNearby({ nonceVal }, { route, state }) {
   //         setsrcCord(res.data.results[0].geometry.location);
   //       else setDestCord(res.data.results[0].geometry.location);
   //     })
-  //     .catch((err) => console.log(err));
+  //     .catch((err) => //console.log(err));
   // }
-  // console.log({ srcCord, destCord });
+  // //console.log({ srcCord, destCord });
   const { isLoaded } = useJsApiLoader({
     id: "google-map-script",
     googleMapsApiKey: "AIzaSyDJaFr-HFXGBOg8pUSdQfGjGwGdIwtbXhY",
@@ -74,7 +74,7 @@ function MyComponentNearby({ nonceVal }, { route, state }) {
     setMap(map);
   }, []);
 
-  console.log(map);
+  //console.log(map);
   const onUnmount = React.useCallback(function callback(map) {
     setMap(null);
   }, []);

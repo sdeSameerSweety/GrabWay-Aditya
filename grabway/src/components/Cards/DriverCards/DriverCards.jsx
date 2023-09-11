@@ -25,7 +25,7 @@ function DriverCard(props) {
   const userData = localStorage.getItem("grabwayUser");
   const matchDriverRoute = props.matchDriverRoute;
   const UserQuery = props.UserQuery;
-  // console.log("adiUserQuery);
+  // //console.log("adiUserQuery);
 
   async function handleMoreDetails(index) {
     const response = await axios
@@ -33,7 +33,7 @@ function DriverCard(props) {
         matchDriverRoute: matchDriverRoute[index],
       })
       .then((res) => {
-        // console.log(res.data);
+        // //console.log(res.data);
         navigate("/moredetails", {
           state: {
             state: res.data,
@@ -43,9 +43,9 @@ function DriverCard(props) {
         });
       })
       .catch((err) => {
-        console.log(err);
+        //console.log(err);
       });
-    // console.log(matchDriverRoute[index]);
+    // //console.log(matchDriverRoute[index]);
   }
 
   return (

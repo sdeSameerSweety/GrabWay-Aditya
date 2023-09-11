@@ -33,14 +33,14 @@ function MyComponent({ nonceVal }, { route, state }) {
   };
   const navigate = useNavigate();
   const usData = JSON.parse(localStorage.getItem("grabwayUser"));
-  //console.log(usData);
+  ////console.log(usData);
   const location = useLocation();
   if (!location.state) {
     <Navigate to={"/"} />;
   }
   const toast = useToast();
   const [showCards, setShowCards] = useState(false);
-  //console.log(location);
+  ////console.log(location);
   const { isLoaded } = useJsApiLoader({
     id: "google-map-script",
     googleMapsApiKey: "AIzaSyDJaFr-HFXGBOg8pUSdQfGjGwGdIwtbXhY",
@@ -54,7 +54,7 @@ function MyComponent({ nonceVal }, { route, state }) {
     source: location.state.source,
     destination: location.state.destination,
   };
-  //console.log(rideDataText, location);
+  ////console.log(rideDataText, location);
 
   const petrolPrice = 105;
 
@@ -112,12 +112,12 @@ function MyComponent({ nonceVal }, { route, state }) {
           setDistanceText(res.rows[0].elements[0].distance.text);
           setDurationNum(res.rows[0].elements[0].duration.value);
           setDurationText(res.rows[0].elements[0].duration.text);
-          console.log(res);
+          //console.log(res);
           packagePrice(res.rows[0].elements[0].distance.value);
         });
       setShowCards(true);
     } catch (err) {
-      console.log("Error while calculating distnace");
+      //console.log("Error while calculating distnace");
       toast({
         title: "Didn't find Any such Route",
         description: "Presently we dont provide service in requested route",
@@ -166,7 +166,7 @@ function MyComponent({ nonceVal }, { route, state }) {
   function packagePrice(distanceNum) {
     if (distanceNum) {
       setAmount(Math.floor((distanceNum / 1000) * 15 * 30));
-      //console.log(price);
+      ////console.log(price);
     }
   }
 

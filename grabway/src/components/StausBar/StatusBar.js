@@ -15,7 +15,7 @@ export default function StatusBar() {
   const navigate = useNavigate();
 
   const handleSignout = () => {
-    console.log("Signout Successfull");
+    //console.log("Signout Successfull");
     localStorage.removeItem("grabwayToken");
     localStorage.removeItem("grabwayUser");
     localStorage.removeItem("grabwayGoogleToken");

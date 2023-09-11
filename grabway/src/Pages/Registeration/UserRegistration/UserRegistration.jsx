@@ -26,7 +26,7 @@ const UserRegistration = () => {
   const { setRunContext } = useContext(UserContext);
   const userData = localStorage.getItem("grabwayUser");
   const hasUserData = userData;
-  //console.log(userData);
+  ////console.log(userData);
   const [tmpPin, setTmpPin] = useState("");
   const [formData, setFormData] = useState({
     name: "",
@@ -65,7 +65,7 @@ const UserRegistration = () => {
     }
   };
 
-  console.log(formData.imgDp);
+  //console.log(formData.imgDp);
   const submitFormData = async (e) => {
     e.preventDefault();
     const newErrors = validateForm();
@@ -154,7 +154,7 @@ const UserRegistration = () => {
     if (!isChecked) {
       setError("Please accept the terms and conditions.");
     } else {
-      console.log("Terms accepted, proceed with further actions.");
+      //console.log("Terms accepted, proceed with further actions.");
     }
   };
 
@@ -186,14 +186,14 @@ const UserRegistration = () => {
     // e.preventDefault(); // Prevent the default form submission behavior
     submitFormData(e);
     const newErrors = validateForm();
-    console.log(Object.keys(newErrors));
+    //console.log(Object.keys(newErrors));
     if (Object.keys(newErrors).length === 0) {
       //Submission logic here
-      //console.log("Form submitted successfully:", formData);
+      ////console.log("Form submitted successfully:", formData);
       const response = await axios
         .post("/registerNewUser", { formData })
         .then((res) => {
-          console.log(res.data);
+          //console.log(res.data);
           setTimeout(() => {
             setRunContext("driver from submited");
           }, 1500);

@@ -82,14 +82,14 @@ const UserBooked = () => {
     return retlist;
   }
 
-  console.log(location.state);
+  //console.log(location.state);
   function getPpic() {
     if ("profilePictutre" in driverData) return driverData.profilePicture;
     else return "assets/images/user.png";
   }
 
-  console.log(location.state);
-  console.log(driverData);
+  //console.log(location.state);
+  //console.log(driverData);
   const driver = {
     name: driverData.name,
     email: driverData.email,
@@ -121,7 +121,7 @@ const UserBooked = () => {
       location.state.destination.split(",")[1],
   };
 
-  // console.log(route.pickupTime);
+  // //console.log(route.pickupTime);
 
   return (
     <Box

@@ -43,7 +43,7 @@ const TopSection = ({ nonceVal, loginState }) => {
   }
 
   const handlemoredetails = (index) => {
-    console.log(routes[index]);
+    //console.log(routes[index]);
     navigate("/drivermoredetails", { state: routes[index] });
   };
 
