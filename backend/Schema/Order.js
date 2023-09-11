@@ -5,7 +5,7 @@ const OrderSchema = new mongoose.Schema({
   driverEmail: { type: String },
   userEmail: { type: String },
   plan: { type: String },
-  amount: { type: Number },
+  amount: { type: String },
   paymentMethod: { type: String },
 });
 

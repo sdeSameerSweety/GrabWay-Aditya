@@ -39,6 +39,8 @@ const Checkout = () => {
   const amount = UserQuery.amount;
   const taxOnAmount = UserQuery.amount * 0.12;
 
+  console.log(matchDriverRoute);
+
   console.log("Price User Query", UserQuery.amount);
   async function bookNow() {
     const response = await axios
@@ -46,7 +48,7 @@ const Checkout = () => {
         matchDriverRoute: matchDriverRoute,
         userDetails: JSON.parse(userData),
         UserQuery: { UserQuery },
-        price: amount + taxOnAmount,
+        price: Math.floor(amount + taxOnAmount),
       })
       .then(() => {
         console.log("data sent");
@@ -236,7 +238,7 @@ const Checkout = () => {
                           <div className="flex w-[100%] justify-between items-center text-2xl font-semibold mt-[5%]">
                             Total
                             <span className="text-2xl text-[#E51B23]">
-                              {amount + taxOnAmount}
+                              {Math.floor(amount + taxOnAmount)}
                             </span>
                           </div>
                         </div>
@@ -635,7 +637,7 @@ const Checkout = () => {
                           <div className="flex w-[100%] justify-between items-center text-xl font-semibold mt-[5%]">
                             Total
                             <span className="text-lg text-[#E51B23]">
-                              {amount + taxOnAmount}
+                              {Math.floor(amount + taxOnAmount)}
                             </span>
                           </div>
                         </div>

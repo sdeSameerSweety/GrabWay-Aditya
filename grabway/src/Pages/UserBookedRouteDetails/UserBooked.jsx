@@ -162,7 +162,7 @@ const UserBooked = () => {
           Total Seats: {driver.totalSeats}
         </Text> */}
         <Text textOverflow="ellipsis" fontSize={{ base: "md", md: "sm" }}>
-          Total Fare: 5000rs
+          Total Fare: ₹ {driverData.price}
         </Text>
       </Box>
       {/* Driver Profile */}

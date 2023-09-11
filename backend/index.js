@@ -99,6 +99,7 @@ app.post("/verifyEmail", (req, res) => {
   }
   try {
     const otp = randomNumber(1000, 9999);
+    console.log(otp);
     const randomOTP = otp + 2025;
     const email = req.body.signupEmail;
     const Email = sendMail(email, otp);
@@ -739,10 +740,11 @@ app.post("/bookRoute", async (req, res) => {
   const userOriginTime = userQuery.originStartTime;
   const userDestinationTime = userQuery.destinationStartTime;
   const plan = matchDriverRoute.plan;
-  const driverName = matchDriverRoute.name;
+  const driverName = matchDriverRoute.driverName;
   const amount = req.body.price; //make it dynamic
   const paymentMethod = "cash"; //make it dyanmic
   console.log(amount);
+  console.log(driverEmail, driverName);
   try {
     if (driverEmail && userEmail && userQuery) {
       const DriverModificationResponse = await DriverModel.updateOne(
@@ -783,9 +785,10 @@ app.post("/bookRoute", async (req, res) => {
               "destination.lat": userDestinationLat,
               "destination.long": userDestinationLong,
               plan: plan,
-              //driverEmail:driverEmail,
-              //driverName:driverName,
-              //routeId:RouteId
+              driverEmail: driverEmail,
+              driverName: driverName,
+              routeId: RouteId,
+              amount: amount,
             },
           },
         }
