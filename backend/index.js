@@ -99,7 +99,7 @@ app.post("/verifyEmail", (req, res) => {
   }
   try {
     const otp = randomNumber(1000, 9999);
-    console.log(otp);
+    // console.log(otp);
     const randomOTP = otp + 2025;
     const email = req.body.signupEmail;
     const Email = sendMail(email, otp);
