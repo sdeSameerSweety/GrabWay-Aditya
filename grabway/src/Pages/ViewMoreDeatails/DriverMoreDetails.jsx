@@ -75,8 +75,10 @@ const DriverDetails = () => {
           location.state.customers[i].destinationLocation[0].text.split(",")[1],
         details: "Frequent traveler to Puri",
         profileImage: "assets/images/user.png",
+        price: location.state.customers[i].price,
       };
       retlist.push(tmpset);
+      console.log("cutomers", retlist);
     }
     return retlist;
   }
@@ -103,7 +105,7 @@ const DriverDetails = () => {
       driverData.VehicleNumber.slice(-4),
     carType: "Sedan",
     totalSeats: location.state.seats,
-    totalFare: "₹500",
+    totalFare: location.state.price,
     profileImage: getPpic(),
     rating: 4.9,
   };
@@ -122,7 +124,7 @@ const DriverDetails = () => {
     passengers: getCutomers(),
   };
 
-  // console.log(route.pickupTime);
+  console.log(location.state);
 
   return (
     <Box
@@ -162,9 +164,9 @@ const DriverDetails = () => {
         <Text textOverflow="ellipsis" fontSize={{ base: "md", md: "sm" }}>
           Total Seats: {driver.totalSeats}
         </Text>
-        <Text textOverflow="ellipsis" fontSize={{ base: "md", md: "sm" }}>
+        {/* <Text textOverflow="ellipsis" fontSize={{ base: "md", md: "sm" }}>
           Total Fare: {driver.totalFare}
-        </Text>
+        </Text> */}
       </Box>
       {/* Driver Profile */}
       <div className="profile-header">
@@ -210,6 +212,7 @@ const DriverDetails = () => {
                   <p>Start: {passenger.phone}</p>
                   <p>From: {passenger.from}</p>
                   <p>To: {passenger.to}</p>
+                  <p>Package Price: ₹ {passenger.price}</p>
                   <Divider my={1} borderColor="gray.300" />
                   <p>{passenger.details}</p>
                 </VStack>
