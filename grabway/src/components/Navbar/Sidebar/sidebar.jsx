@@ -13,7 +13,7 @@ export default function Sidebar({
   setCounter,
 }) {
   const datauser = JSON.parse(localStorage.getItem("grabwayUser"));
-  console.log(datauser);
+  // console.log(datauser);
   const { userEmail, setUserEmail, setRunContext } = useContext(UserContext);
   const [sidebarClass, setSidebarClass] = useState("sidebar");
   const toggleClass = () => {
