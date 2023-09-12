@@ -1,4 +1,30 @@
 <div align="center">
+<<<<<<< HEAD
+
+<img  src="https://github.com/addymistrel/Homeify/assets/102992848/01571eb1-96ae-412f-a073-f027537c7fec"  alt="Homeify"  height="150">
+
+[See Live Coming Soon!]
+
+# GrabWay
+
+<div align="center">
+      <img src="https://forthebadge.com/images/badges/built-with-love.svg" />
+      <img src="https://forthebadge.com/images/badges/uses-brains.svg" />
+      <img src="https://forthebadge.com/images/badges/powered-by-responsibility.svg" />
+      <br>
+ </div>
+
+---
+
+</div>
+
+<h1 align="center">About Homeify</h1>
+
+## Summary
+
+GrabWay is a cutting-edge ride-sharing application developed with React.js and powered by Google Maps API, designed to make commuting more efficient, cost-effective, and environmentally friendly. With RideShareX, you can easily find and share rides with others who are traveling in similar routes, reducing traffic congestion and your transportation costs.
+
+=======
 
 <img  src="https://github.com/addymistrel/Homeify/assets/102992848/01571eb1-96ae-412f-a073-f027537c7fec"  alt="Homeify"  height="150">
 
@@ -24,6 +50,7 @@
 It is a Fully Responsive Shopping Website a Similar Product of Pepperfry.com. It is backend integrated and fully authenticated using React Js.
 We have Used the best version and UI components from several fields along with the power of React JS to make it fully user friendly._Accessed By anyone from Anywhere_.
 
+>>>>>>> d4ec882aa2355e0aefb51979c82e30a7a6062a2c
 ## Features
 
 #### Frontend
@@ -49,6 +76,10 @@ The Means which we used to store data is MongoDB through express-JS API calls.
     - [Installation](#installation)
     - [Running the app locally](#running-the-app-locally)
 
+<<<<<<< HEAD
+
+=======
+>>>>>>> d4ec882aa2355e0aefb51979c82e30a7a6062a2c
 ## Codebase
 
 ### Technologies
@@ -86,8 +117,13 @@ Homiefy/
         ├── components  #All Related Components
               ├── Main           #Main UI Rendered Pages
               ├── Personal       #Eaxh Personal developer related components
+<<<<<<< HEAD
+        
+    
+=======
 
 
+>>>>>>> d4ec882aa2355e0aefb51979c82e30a7a6062a2c
 
 ├── server #Backend api and Mogo Schemas
       ├── Schema #All Colletions Models
@@ -100,7 +136,10 @@ Homiefy/
 ### First time setup
 
 ### FRONTEND
+<<<<<<< HEAD
+=======
 
+>>>>>>> d4ec882aa2355e0aefb51979c82e30a7a6062a2c
 The first step to running Homeify locally is downloading the code by cloning the repository:
 
 ```sh
@@ -160,7 +199,11 @@ npm start
 ```
 
 Facing Difficulty in Frontend Server [VISIT]([https://youtu.be/-ERWlp828kY))
+<<<<<<< HEAD
+Facing Difficulty in Backend Server [VISIT]([https://youtu.be/y4qqQeUDCBQ](https://youtu.be/CgoD3HX1lWY))
+=======
 Facing Difficulty in Backend Server [VISIT](<[https://youtu.be/y4qqQeUDCBQ](https://youtu.be/CgoD3HX1lWY)>)
+>>>>>>> d4ec882aa2355e0aefb51979c82e30a7a6062a2c
 
 <div  align="center"><img  height="200px"  src="https://user-images.githubusercontent.com/77617189/192947926-37284128-9965-46a4-b29b-c75e47b2f76b.svg" /></div>
 
