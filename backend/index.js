@@ -30,10 +30,10 @@ const oAuth2Client = new google.auth.OAuth2(
 oAuth2Client.setCredentials({ refresh_token: REFERESH_TOKEN });
 
 //environment variables
-const MONGO_URL = process.env.MONGO_URL;
-const PUBLIC_URL = "http://localhost:3000";
-const PORT = process.env.PORT;
-const jwtSecretKey = process.env.JWT_SECRET;
+const MONGO_URL = "mongodb+srv://grabwayhelpdesk:grabwayhelpdesk@grabway.blqc8ny.mongodb.net/";
+const PUBLIC_URL = "https://grabway.vercel.app";
+const PORT = 8080;
+const jwtSecretKey = "VeryImportantSecret";
 
 const app = express();
 app.use(cookieParser());
