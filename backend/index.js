@@ -3,9 +3,9 @@ const cors = require("cors");
 const fs = require("fs");
 const { mongoose, models } = require("mongoose");
 const jwt = require("jsonwebtoken");
-require("dotenv").config();
 const cookieParser = require("cookie-parser");
 const bcrypt = require("bcryptjs");
+const Razorpay = require("razorpay");
 const UserModel = require("./Schema/User");
 const DriverModel = require("./Schema/Driver");
 const EmailModel = require("./Schema/Email");
@@ -29,10 +29,10 @@ const oAuth2Client = new google.auth.OAuth2(
 oAuth2Client.setCredentials({ refresh_token: REFERESH_TOKEN });
 
 //environment variables
-const MONGO_URL = process.env.MONGO_URL;
-const PUBLIC_URL = "http://localhost:3000";
-const PORT = process.env.PORT;
-const jwtSecretKey = process.env.JWT_SECRET;
+const MONGO_URL = "mongodb+srv://grabwayhelpdesk:grabwayhelpdesk@grabway.blqc8ny.mongodb.net/";
+const PUBLIC_URL = "https://grabway.vercel.app";
+const PORT = 8080;
+const jwtSecretKey = "VeryImportantSecret";
 
 const app = express();
 app.use(cookieParser());
@@ -1387,6 +1387,28 @@ app.post("/getdriverdetailsfromemail", async (req, res) => {
     console.log("server Error in get drivers details from email");
     res.status(500).json("Internal Server error");
   }
+});
+
+app.post("/razorpay", async (req, res) => {
+  const amt = req.body.amt;
+  // console.log("amount", amt);
+  let instance = new Razorpay({
+    key_id: "rzp_test_pM0vDUp05pvdwo",
+    key_secret: "ssogMc4ga1crRhuQdoJPe0wa",
+  });
+
+  var options = {
+    amount: amt * 100,
+    currency: "INR",
+    receipt: "order_rcptid_11",
+  };
+
+  instance.orders.create(options, function (err, order) {
+    if (err) {
+      return res.status(500).json("Server Error");
+    }
+    return res.status(200).json(order);
+  });
 });
 
 app.listen(PORT, () => {
