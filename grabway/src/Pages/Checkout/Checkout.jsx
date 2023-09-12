@@ -129,9 +129,9 @@ const Checkout = () => {
     rzp.open();
   };
 
-  async function bookrazor() {
+  async function bookrazor(amt) {
     const response = await axios
-      .post("/razorpay")
+      .post("/razorpay", { amt })
       .then((res) => {
         console.log(res.data, "Aditya");
         handlerazorpay(res.data);
@@ -148,7 +148,7 @@ const Checkout = () => {
         isClosable: true,
       });
     } else {
-      if (paymentSelected === 1) bookrazor();
+      if (paymentSelected === 1) bookrazor(Math.floor(amount + taxOnAmount));
       else bookNow();
     }
   }
