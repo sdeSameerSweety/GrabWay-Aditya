@@ -3,7 +3,6 @@ const cors = require("cors");
 const fs = require("fs");
 const { mongoose, models } = require("mongoose");
 const jwt = require("jsonwebtoken");
-require("dotenv").config();
 const cookieParser = require("cookie-parser");
 const bcrypt = require("bcryptjs");
 const Razorpay = require("razorpay");
