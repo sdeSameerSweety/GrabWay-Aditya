@@ -13,6 +13,7 @@ export default function StatusBar() {
   const [help, setHelp] = useState("help");
   const { setRunContext } = useContext(UserContext);
   const navigate = useNavigate();
+  const usdata = JSON.parse(localStorage.getItem("grabwayUser"));
 
   const handleSignout = () => {
     //console.log("Signout Successfull");
@@ -168,7 +169,14 @@ export default function StatusBar() {
             <span class="tooltip-more">Support</span>
           </li>
           <li>
-            <a href="#">
+            <a
+              href="#"
+              onClick={() => {
+                usdata.userType === "user"
+                  ? navigate("/userPackages")
+                  : navigate("/driverpackage");
+              }}
+            >
               <i class="bx bx-cart-alt"></i>
               <span class="links_name-more">Packages</span>
             </a>
