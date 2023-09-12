@@ -113,9 +113,10 @@ const Checkout = () => {
   }
 
   const handlerazorpay = (data) => {
+    console.log("aditya", data);
     const options = {
       key: "rzp_test_pM0vDUp05pvdwo",
-      amount: 50000,
+      amount: data.amount,
       currency: "INR",
       name: "GrabWay Checkout",
       description: "Pay to proceed",

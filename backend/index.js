@@ -1391,13 +1391,15 @@ app.post("/getdriverdetailsfromemail", async (req, res) => {
 });
 
 app.post("/razorpay", async (req, res) => {
+  const amt = req.body.amt;
+  console.log("amount", amt);
   let instance = new Razorpay({
     key_id: "rzp_test_pM0vDUp05pvdwo",
     key_secret: "ssogMc4ga1crRhuQdoJPe0wa",
   });
 
   var options = {
-    amount: 50000,
+    amount: amt * 100,
     currency: "INR",
     receipt: "order_rcptid_11",
   };
