@@ -32,10 +32,10 @@ import ErrorNotFound from "./Pages/404NotFound/ErrorNotFound";
 import DriverDetails from "./Pages/ViewMoreDeatails/DriverMoreDetails";
 import UserBooked from "./Pages/UserBookedRouteDetails/UserBooked";
 import DriverPackage from "./Pages/UserPackages/driverPackages";
-axios.defaults.baseURL = "http://localhost:8080";
+axios.defaults.baseURL = "https://grabway-backend.onrender.com";
 axios.defaults.withCredentials = true;
 // import NearbyMap from "./components/Map/NearbyMap";
-axios.defaults.baseURL = "http://localhost:8080";
+axios.defaults.baseURL = "https://grabway-backend.onrender.com";
 axios.defaults.withCredentials = true;
 function App() {
   const [windowSize, setWindowSize] = useState(window.innerWidth);
