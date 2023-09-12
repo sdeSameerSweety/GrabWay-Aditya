@@ -1,181 +1,197 @@
-# GrabWay
+<div align="center">
 
-GrabWay is a cutting-edge ride-sharing application developed with React.js and powered by Google Maps API, designed to make commuting more efficient, cost-effective, and environmentally friendly. With RideShareX, you can easily find and share rides with others who are traveling in similar routes, reducing traffic congestion and your transportation costs.
+<img  src="https://github.com/addymistrel/Homeify/assets/102992848/01571eb1-96ae-412f-a073-f027537c7fec"  alt="Homeify"  height="150">
 
+[See Live Coming Soon!]
 
+### _Shopping_, Website
 
-## Acknowledgements
+<div align="center">
+      <img src="https://forthebadge.com/images/badges/built-with-love.svg" />
+      <img src="https://forthebadge.com/images/badges/uses-brains.svg" />
+      <img src="https://forthebadge.com/images/badges/powered-by-responsibility.svg" />
+      <br>
+ </div>
 
- - [Awesome Readme Templates](https://awesomeopensource.com/project/elangosundar/awesome-README-templates)
- - [Awesome README](https://github.com/matiassingers/awesome-readme)
- - [How to write a Good readme](https://bulldogjob.com/news/449-how-to-write-a-good-readme-for-your-github-project)
+---
 
+</div>
 
-## API Reference
+<h1 align="center">About Homeify</h1>
 
-#### Get all items
+## Summary
 
-```http
-  GET /api/items
-```
-
-| Parameter | Type     | Description                |
-| :-------- | :------- | :------------------------- |
-| `api_key` | `string` | **Required**. Your API key |
-
-#### Get item
-
-```http
-  GET /api/items/${id}
-```
-
-| Parameter | Type     | Description                       |
-| :-------- | :------- | :-------------------------------- |
-| `id`      | `string` | **Required**. Id of item to fetch |
-
-#### add(num1, num2)
-
-Takes two numbers and returns the sum.
-
-
-## Appendix
-
-Any additional information goes here
-
-
-## Authors
-
-- [@octokatherine](https://www.github.com/octokatherine)
-
-
-## Badges
-
-Add badges from somewhere like: [shields.io](https://shields.io/)
-
-[![MIT License](https://img.shields.io/badge/License-MIT-green.svg)](https://choosealicense.com/licenses/mit/)
-[![GPLv3 License](https://img.shields.io/badge/License-GPL%20v3-yellow.svg)](https://opensource.org/licenses/)
-[![AGPL License](https://img.shields.io/badge/license-AGPL-blue.svg)](http://www.gnu.org/licenses/agpl-3.0)
-
-## Color Reference
-
-| Color             | Hex                                                                |
-| ----------------- | ------------------------------------------------------------------ |
-| Example Color | ![#0a192f](https://via.placeholder.com/10/0a192f?text=+) #0a192f |
-| Example Color | ![#f8f8f8](https://via.placeholder.com/10/f8f8f8?text=+) #f8f8f8 |
-| Example Color | ![#00b48a](https://via.placeholder.com/10/00b48a?text=+) #00b48a |
-| Example Color | ![#00d1a0](https://via.placeholder.com/10/00b48a?text=+) #00d1a0 |
-
-
-## Contributing
-
-Contributions are always welcome!
-
-See `contributing.md` for ways to get started.
-
-Please adhere to this project's `code of conduct`.
-
-
-## Demo
-
-Insert gif or link to demo
-
-
-## Deployment
-
-To deploy this project run
-
-```bash
-  npm run deploy
-```
-
-
-## Documentation
-
-[Documentation](https://linktodocumentation)
-
-
-## Environment Variables
-
-To run this project, you will need to add the following environment variables to your .env file
-
-`API_KEY`
-
-`ANOTHER_API_KEY`
-
-
-## FAQ
-
-#### Question 1
-
-Answer 1
-
-#### Question 2
-
-Answer 2
-
+It is a Fully Responsive Shopping Website a Similar Product of Pepperfry.com. It is backend integrated and fully authenticated using React Js.
+We have Used the best version and UI components from several fields along with the power of React JS to make it fully user friendly._Accessed By anyone from Anywhere_.
 
 ## Features
 
-- Light/dark mode toggle
-- Live previews
-- Fullscreen mode
-- Cross platform
+#### Frontend
 
+It's Frontend is fully made up of Tailwind and React JS Frameworks.
+
+#### Backend
+
+The Means which we used to store data is MongoDB through express-JS API calls.
+
+# Docs
+
+- Table of Contents
+
+  - [Codebase](#codebase)
+
+    - [Technologies](#technologies)
+    - [Folder Structure](#folder-structure)
+
+  - [Project Setup](#project-setup)
+
+    - [First time setup](#first-time-setup)
+    - [Installation](#installation)
+    - [Running the app locally](#running-the-app-locally)
+
+## Codebase
+
+### Technologies
+
+With the ground rules out of the way, let's talk about the coarse architecture of this mono repo:
+
+Here is a list of all the big technologies we use:
+
+<div align="center">
+      <img  src="./homeify/public/assets/images/node.png"  alt="HTML"  width="100"  height="100"/>
+      <img  src="./homeify/public/assets/images/css.png"  alt="CSS"  width="100"  height="100"/>
+      <img  src="./homeify/public/assets/images/js.png"  alt="Javascript"  width="100"  height="100"/>
+      <img  src="./homeify/public/assets/images/react.png"  alt="Javascript"  width="100"  height="100"/>
+      <img  src="https://github.com/addymistrel/B-Donate/assets/102992848/d8453d8a-a62d-4553-a8aa-46b84a252765"  alt="Javascript"  width="100"  height="100"/>
+</div>
+
+<div align="center">
+      <br/>
+      <img  src="./homeify/public/assets/images/mongo.png"  alt="HTML"  width="100"  height="100"/>
+      <img  src="https://github.com/Official-Akash/Responsive-Footer/assets/102992848/4e0e84c7-4bdf-488e-8b13-3a58262d82eb"  alt="Javascript"  width="100"  height="100"/>
+</div>
+
+### Folder structure
+
+```sh
+
+Homiefy/
+
+├── homeify # Files used on the frontend
+      ├── public
+            ├── assets          #Contains all Images and Videos used
+              ├── Images
+              ├── Videos
+    ├── src #Contains all React FronEnd Files
+        ├── components  #All Related Components
+              ├── Main           #Main UI Rendered Pages
+              ├── Personal       #Eaxh Personal developer related components
+
+
+
+├── server #Backend api and Mogo Schemas
+      ├── Schema #All Colletions Models
+
+
+```
+
+## Project Setup
+
+### First time setup
+
+### FRONTEND
+
+The first step to running Homeify locally is downloading the code by cloning the repository:
+
+```sh
+
+git clone https://github.com/addymistrel/Homeify.git
+
+```
+
+### Installation
+
+Homeify has a single installation step:
+
+- **Install the dependencies**:
+
+```sh
+
+cd homeify
+npm install
+
+```
+
+You've now finished installing everything! Let's start :100:
+
+Ps: if you're getting error installing the dependencies, try --force command along with npm install. For example
+
+```sh
+
+npm install --force
+
+```
+
+Now you're ready to run the app locally and sign into your local instance!
+
+### BACKEND
+
+```sh
+cd server
+npm install (or npm install --force)
+```
+
+### Running the app locally
+
+#### Start the servers and Land on the Page
+
+To Start the Mongo-server for Backend run
+
+```sh
+cd server
+node index.js (or nodemon)
+```
+
+Then Start The FrontEnd
+
+```
+cd homeify
+npm start
+```
+
+Facing Difficulty in Frontend Server [VISIT]([https://youtu.be/-ERWlp828kY))
+Facing Difficulty in Backend Server [VISIT](<[https://youtu.be/y4qqQeUDCBQ](https://youtu.be/CgoD3HX1lWY)>)
+
+<div  align="center"><img  height="200px"  src="https://user-images.githubusercontent.com/77617189/192947926-37284128-9965-46a4-b29b-c75e47b2f76b.svg" /></div>
+
+## Homeify Workflow
+
+<img src='https://github.com/addymistrel/B-Donate/assets/102992848/be93d250-59b0-476b-8634-0e8df62e0c45' width='920'>
+
+## Screenshots
+
+<img src='./homeify/public/assets/images/ss2.png' width='920'>
+<img src='./homeify/public/assets/images/ss3.png' width='920'>
 
 ## Feedback
 
-If you have any feedback, please reach out to us at fake@fake.com
+If you have any feedback or suggestions please reach out to the Project-Maintainer [Aditya Kumar](https://github.com/addymistrel)
 
+## 👩🏽‍💻 Contributing
 
-## 🚀 About Me
-I'm a full stack developer...
+- Contributions make the open source community such an amazing place to learn, inspire, and create.
+- Any contributions you make are greatly appreciated.
 
+<br>
 
-# Hi, I'm Katherine! 👋
+<div align="center">
 
+## Thanks to all Collaborators 💪
 
-## 🔗 Links
-[![portfolio](https://img.shields.io/badge/my_portfolio-000?style=for-the-badge&logo=ko-fi&logoColor=white)](https://katherineoelsner.com/)
-[![linkedin](https://img.shields.io/badge/linkedin-0A66C2?style=for-the-badge&logo=linkedin&logoColor=white)](https://www.linkedin.com/)
-[![twitter](https://img.shields.io/badge/twitter-1DA1F2?style=for-the-badge&logo=twitter&logoColor=white)](https://twitter.com/)
+Thanks a lot for spending your time helping B-Donate grow. Thanks a lot! Keep rocking 🍻
 
+[![Collaborators](https://contrib.rocks/image?repo=addymistrel/Homeify)](https://github.com/addymistrel/Homeify/graphs/contributors)
 
-## Other Common Github Profile Sections
-👩‍💻 I'm currently working on...
-
-🧠 I'm currently learning...
-
-👯‍♀️ I'm looking to collaborate on...
-
-🤔 I'm looking for help with...
-
-💬 Ask me about...
-
-📫 How to reach me...
-
-😄 Pronouns...
-
-⚡️ Fun fact...
-
-
-## 🛠 Skills
-Javascript, HTML, CSS...
-
-
-## Installation
-
-Install my-project with npm
-
-```bash
-  npm install my-project
-  cd my-project
-```
-    
-## Screenshots
-
-![App Screenshot](https://via.placeholder.com/468x300?text=App+Screenshot+Here)
-
-
-## Support
-
-For support, email fake@fake.com or join our Slack channel.
+<div align="left">
+For further queries and whereabouts you can communicate and reach out to the owner through <a href="https://www.linkedin.com/in/addymistrel/">Linkedin</a> & <a href="https://mail.google.com/mail/u/0/#inbox">email</a>
+</div>
