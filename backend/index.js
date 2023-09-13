@@ -29,7 +29,8 @@ const oAuth2Client = new google.auth.OAuth2(
 oAuth2Client.setCredentials({ refresh_token: REFERESH_TOKEN });
 
 //environment variables
-const MONGO_URL = "mongodb+srv://grabwayhelpdesk:grabwayhelpdesk@grabway.blqc8ny.mongodb.net/";
+const MONGO_URL =
+  "mongodb+srv://grabwayhelpdesk:grabwayhelpdesk@grabway.blqc8ny.mongodb.net/";
 const PUBLIC_URL = "https://grabway.vercel.app";
 const PORT = 8080;
 const jwtSecretKey = "VeryImportantSecret";
@@ -501,6 +502,7 @@ app.post("/routeDriverRegistration", async (req, res) => {
   const destinationStartTime = formData.destinationStartTime;
   const destinationEndTime = formData.destinationEndTime;
   const seats = formData.seats;
+  const price = formData.price;
   if (formData) {
     try {
       const updatedResponse = await DriverModel.updateOne(
@@ -522,6 +524,7 @@ app.post("/routeDriverRegistration", async (req, res) => {
               destinationTime: [
                 { start: destinationStartTime, end: destinationEndTime },
               ],
+              price: price,
             },
           },
         }

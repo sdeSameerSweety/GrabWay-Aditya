@@ -600,7 +600,10 @@ function MyComponent({ nonceVal }, { route, state }) {
                         </p>
                         <div class="flex justify-center items-baseline my-8">
                           <span class="mr-2 text-5xl font-extrabold">
-                            ₹3000
+                            {amount && (
+                              <>₹{Math.floor(amount - 0.05 * amount)}/user</>
+                            )}
+                            {!amount && <>Calculating...</>}
                           </span>
                           <span class="text-gray-500">/month</span>
                         </div>
@@ -633,7 +636,7 @@ function MyComponent({ nonceVal }, { route, state }) {
                         </p>
                         <div class="flex justify-center items-baseline my-8">
                           <span class="mr-2 text-5xl font-extrabold">
-                            ₹5000
+                            ₹XXXX
                           </span>
                           <span class="text-gray-500">/month</span>
                         </div>
@@ -666,7 +669,7 @@ function MyComponent({ nonceVal }, { route, state }) {
                         </p>
                         <div class="flex justify-center items-baseline my-8">
                           <span class="mr-2 text-5xl font-extrabold">
-                            ₹8000
+                            ₹XXXX
                           </span>
                           <span class="text-gray-500">/month</span>
                         </div>
