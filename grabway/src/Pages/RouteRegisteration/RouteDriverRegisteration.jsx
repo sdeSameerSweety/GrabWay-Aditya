@@ -22,16 +22,17 @@ import axios from "axios";
 import FormAnimation from "../../components/AllAnimations/FormAnimation";
 const RouteDriverRegisteration = () => {
   const location = useLocation();
+  console.log(location);
   const navigate = useNavigate();
   const [email, setEmail] = useState(null);
   const { setRunContext } = useContext(UserContext); //dont remove this
   const toast = useToast(); //dont remove this
-  const originText = location.state.state.source;
-  const originLat = location.state.state.sourceCord.lat;
-  const originLong = location.state.state.sourceCord.lng;
-  const destinationText = location.state.state.destination;
-  const destinationLat = location.state.state.destinationCord.lat;
-  const destinationLong = location.state.state.destinationCord.lng;
+  const originText = location.state.data.state.source;
+  const originLat = location.state.data.state.sourceCord.lat;
+  const originLong = location.state.data.state.sourceCord.lng;
+  const destinationText = location.state.data.state.destination;
+  const destinationLat = location.state.data.state.destinationCord.lat;
+  const destinationLong = location.state.data.state.destinationCord.lng;
   const [originStartTime, setOriginStartTime] = useState(null);
   const [destinationStartTime, setDestinationStartTime] = useState(null);
   const [originEndTime, setOriginEndTime] = useState(null);
@@ -58,16 +59,16 @@ const RouteDriverRegisteration = () => {
 
   //console.log(location);
 
-  // //console.log(location.state.state);
+  // //console.log(location.state.data.state);
 
   const formData = {
     email,
-    originText: location.state.state.source,
-    originLat: location.state.state.sourceCord.lat,
-    originLong: location.state.state.sourceCord.lng,
-    destinationText: location.state.state.destination,
-    destinationLat: location.state.state.destinationCord.lat,
-    destinationLong: location.state.state.destinationCord.lng,
+    originText: location.state.data.state.source,
+    originLat: location.state.data.state.sourceCord.lat,
+    originLong: location.state.data.state.sourceCord.lng,
+    destinationText: location.state.data.state.destination,
+    destinationLat: location.state.data.state.destinationCord.lat,
+    destinationLong: location.state.data.state.destinationCord.lng,
     originStartTime,
     originEndTime,
     destinationStartTime,
