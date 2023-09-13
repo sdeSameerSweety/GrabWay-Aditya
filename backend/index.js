@@ -35,7 +35,7 @@ const PUBLIC_URL = "https://grabway.vercel.app";
 const PORT = 8080;
 const jwtSecretKey = "VeryImportantSecret";
 
-const app = express();
+const app = express(); 
 app.use(cookieParser());
 app.use(express.json());
 app.use(
