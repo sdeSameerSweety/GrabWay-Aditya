@@ -48,6 +48,7 @@ const RouteSchema = new mongoose.Schema({
   originTime: [RouteTime],
   destinationTime: [RouteTime],
   customers: [CustomerSchema],
+  price: { type: Number },
 });
 
 const RideHistorySchema = new mongoose.Schema({

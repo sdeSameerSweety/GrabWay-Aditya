@@ -74,7 +74,9 @@ const RouteDriverRegisteration = () => {
     destinationStartTime,
     destinationEndTime,
     seats,
+    price: location.state.amount,
   };
+  console.log(formData.price);
 
   // //console.log(formData);
 
@@ -100,9 +102,9 @@ const RouteDriverRegisteration = () => {
             isClosable: true,
             position: "top-right",
           });
-
           // Redirect to driver homepage
-          window.location.href = "/driverHomepage";
+          navigate("/");
+          window.location.reload(false);
         }
       } catch (err) {
         console.error(err);

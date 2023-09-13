@@ -502,6 +502,7 @@ app.post("/routeDriverRegistration", async (req, res) => {
   const destinationStartTime = formData.destinationStartTime;
   const destinationEndTime = formData.destinationEndTime;
   const seats = formData.seats;
+  const price = formData.price;
   if (formData) {
     try {
       const updatedResponse = await DriverModel.updateOne(
@@ -523,6 +524,7 @@ app.post("/routeDriverRegistration", async (req, res) => {
               destinationTime: [
                 { start: destinationStartTime, end: destinationEndTime },
               ],
+              price: price,
             },
           },
         }
