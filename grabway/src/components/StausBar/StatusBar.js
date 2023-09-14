@@ -84,7 +84,11 @@ export default function StatusBar() {
                 </span>
               </li>
             </Link>
-            <Link to="#">
+            <Link
+              to={
+                usdata.userType === "user" ? "/userPackages" : "/driverpackage"
+              }
+            >
               <li className={about} data-where="about">
                 <span
                   class="material-icons-outlined"
@@ -97,7 +101,7 @@ export default function StatusBar() {
                     setOpenSide(false);
                   }}
                 >
-                  trending_up
+                  shopping_cart
                 </span>
               </li>
             </Link>
@@ -110,7 +114,8 @@ export default function StatusBar() {
                   setServices("services");
                   setAbout("about");
                   setHelp("help active");
-                  setOpenSide(true);
+                  if (openSide) setOpenSide(false);
+                  else setOpenSide(true);
                 }}
               >
                 menu
@@ -169,15 +174,8 @@ export default function StatusBar() {
             <span class="tooltip-more">Support</span>
           </li>
           <li>
-            <a
-              href="#"
-              onClick={() => {
-                usdata.userType === "user"
-                  ? navigate("/userPackages")
-                  : navigate("/driverpackage");
-              }}
-            >
-              <i class="bx bx-cart-alt"></i>
+            <a href="#">
+              <i class="bx bx-trending-up"></i>
               <span class="links_name-more">Packages</span>
             </a>
             <span class="tooltip-more">Packages</span>
