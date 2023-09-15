@@ -2,8 +2,8 @@
 
 ### GrabWay
 
-<img  src="![logo192](https://github.com/addymistrel/GrabWay/assets/91611270/78dfaeef-96b4-451b-93d8-f04511ff775a)
-"  alt="GrabWay"  height="150">
+<img  src="![logo](https://github.com/addymistrel/GrabWay/assets/91611270/cea9cfc4-f755-40c2-8192-2f8594d3bec0)
+" alt="GrabWay"  height="150">
 
 Live Preview Link[https://grabway.vercel.app/]
 
@@ -81,8 +81,6 @@ The first step to running Homeify locally is downloading the code by cloning the
 ```sh
 
 git clone https://github.com/addymistrel/GrabWay.git
-
-
 ```
 
 
