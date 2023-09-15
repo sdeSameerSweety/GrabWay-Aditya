@@ -1,41 +1,32 @@
 <div align="center">
-
-
-<h1> GrabWay </h1>
-
+    <h1>GrabWay</h1>
+</div>
 
 ## 🔗 Live Link
 
-[![Link] (https://grabway.vercel.app/)
+[Link](https://grabway.vercel.app/)
 
-
-<h3 align="center">About GrabWay</h3>
+<h2 align="center">About GrabWay</h2>
 
 ## Summary
 
-GrabWay is a cutting-edge ride-sharing application developed with React.js and powered by Google Maps API, designed to make commuting more efficient, cost-effective, and environmentally friendly. With RideShareX, you can easily find and share rides with others who are traveling in similar routes, reducing traffic congestion and your transportation costs.
-
+GrabWay is a cutting-edge ride-sharing application developed with React.js and powered by Google Maps API, designed to make commuting more efficient, cost-effective, and environmentally friendly. With RideShareX, you can easily find and share rides with others who are traveling on similar routes, reducing traffic congestion and your transportation costs.
 
 #### Frontend
 
-It's Frontend is fully made up of Tailwind and React JS Frameworks with help of ChakraUI.
+Its frontend is fully built using Tailwind and React JS frameworks with the help of Chakra UI.
 
 #### Backend
 
-The Means which we used to store data is MongoDB through express-JS API calls.
-
+We use MongoDB to store data through Express.js API calls.
 
 ## Codebase
 
 ### Technologies
 
-With the ground rules out of the way, let's talk about the coarse architecture of this repo:
-
-Here is a list of all the big technologies we use:
-
+Here is a list of all the major technologies we use:
 
 <h2 align="center">
-
 <p align="center">
     <img src="https://img.shields.io/badge/React-20232A?style=for-the-badge&logo=react&logoColor=61DAFB"
         alt="React.js" />
@@ -55,15 +46,13 @@ Here is a list of all the big technologies we use:
         alt="Chakra UI" />
 </p>
 
-
 ## Project Setup
-
 
 ### FRONTEND
 
-To get started, first make sure that you have [NodeJS](https://nodejs.org/) installed (version 8 or higher). 
+To get started, make sure you have [NodeJS](https://nodejs.org/) installed (version 8 or higher). 
 
-The first step to running GrabWay locally is downloading the code by cloning the repository:
+The first step to run GrabWay locally is to download the code by cloning the repository:
 
 ```sh
 
