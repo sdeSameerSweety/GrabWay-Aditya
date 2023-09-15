@@ -96,25 +96,9 @@ npm start
 
 ```
 
-You've now finished installing everything! Let's start :100:
 
-Ps: if you're getting error installing the dependencies, try --force command along with npm install. For example
-
-```sh
-
-npm install --force
-
-```
-
-Now you're ready to run the app locally and sign into your local instance!
 
 ### BACKEND
-
-<!-- ```sh
-cd server
-npm install (or npm install --force)
-``` -->
-
 
 
 #### Start the servers and Land on the Page
@@ -128,6 +112,18 @@ npm i
 node index.js 
 
 ```
+
+You've now finished installing everything! Let's start :100:
+
+Ps: if you're getting error installing the dependencies, try --force command along with npm install. For example
+
+```sh
+
+npm install --force
+
+```
+
+Now you're ready to run the app locally and sign into your local instance!
 ### Running the app locally
 
 Facing Difficulty in Frontend Server [VISIT]([https://youtu.be/-ERWlp828kY))
@@ -136,8 +132,7 @@ Facing Difficulty in Backend Server [VISIT](<[https://youtu.be/y4qqQeUDCBQ](http
 <div  align="center"><img  height="200px"  src="https://user-images.githubusercontent.com/77617189/192947926-37284128-9965-46a4-b29b-c75e47b2f76b.svg" /></div>
 
 
-## Screenshots
-
+<!-- ## Screenshots -->
 
 
 ## Feedback
@@ -157,7 +152,6 @@ If you have any feedback or suggestions please reach out to the Project-Maintain
 
 Thanks a lot for spending your time helping B-Donate grow. Thanks a lot! Keep rocking 🍻
 
-[![Collaborators](https://contrib.rocks/image?repo=addymistrel/Homeify)](https://github.com/addymistrel/Homeify/graphs/contributors)
 
 <div align="left">
 For further queries and whereabouts you can communicate and reach out to the owner through <a href="https://www.linkedin.com/in/addymistrel/">Linkedin</a> & <a href="https://mail.google.com/mail/u/0/#inbox">email</a>
