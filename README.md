@@ -71,7 +71,7 @@ Here is a list of all the big technologies we use:
 
 To get started, first make sure that you have [NodeJS](https://nodejs.org/) installed (version 8 or higher). 
 
-The first step to running Homeify locally is downloading the code by cloning the repository:
+The first step to running GrabWay locally is downloading the code by cloning the repository:
 
 ```sh
 
