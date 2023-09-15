@@ -5,8 +5,9 @@
 <img  src="![logo](https://github.com/addymistrel/GrabWay/assets/91611270/cea9cfc4-f755-40c2-8192-2f8594d3bec0)
 " alt="GrabWay"  height="150">
 
-Live Preview Link[https://grabway.vercel.app/]
+## 🔗 Links
 
+[![portfolio](https://img.shields.io/badge/my_portfolio-000?style=for-the-badge&logo=ko-fi&logoColor=white)](https://katherineoelsner.com/)
 
 
 <div align="center">
