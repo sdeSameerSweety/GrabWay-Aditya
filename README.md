@@ -1,10 +1,8 @@
 <div align="center">
     <h1>GrabWay</h1>
+[GrabWay](https://grabway.vercel.app/)
 </div>
 
-## 🔗 Live Link
-
-[Link](https://grabway.vercel.app/)
 
 <h2 align="center">About GrabWay</h2>
 
