@@ -2,11 +2,11 @@
 
 ### GrabWay
 
-<img  src="" alt="GrabWayLogo"  height="150">
+<img  src="" alt="GrabWay"  height="150">
 
 ## 🔗 Live Link
 
-[![GrabWay](https://img.freepik.com/free-vector/black-convertible-car_53876-64027.jpg?w=1060&t=st=1694808382~exp=1694808982~hmac=596cd928bc63743aa0b25ac10ba2bad3c4077e04adfdcc210ab233d3e4e7ece8)](https://grabway.vercel.app/)
+[![GrabWay] (https://grabway.vercel.app/)
 
 
 <h1 align="center">About GrabWay</h1>
