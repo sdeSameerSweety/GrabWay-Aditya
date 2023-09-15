@@ -75,11 +75,15 @@ Here is a list of all the big technologies we use:
 
 
 ### FRONTEND
+
+To get started, first make sure that you have [NodeJS](https://nodejs.org/) installed (version 8 or higher). 
+
 The first step to running Homeify locally is downloading the code by cloning the repository:
 
 ```sh
 
 git clone https://github.com/addymistrel/GrabWay.git
+
 ```
 
 
@@ -125,6 +129,7 @@ npm install --force
 Now you're ready to run the app locally and sign into your local instance!
 ### Running the app locally
 
+
 ```sh
 
 http://localhost:3000/
@@ -151,11 +156,8 @@ If you have any feedback or suggestions please reach out to the Project-Maintain
 
 <div align="center">
 
+
+
 ## Thanks to all Collaborators 💪
 
 Thanks a lot for spending your time helping B-Donate grow. Thanks a lot! Keep rocking 🍻
-
-
-<div align="left">
-For further queries and whereabouts you can communicate and reach out to the owner through <a href="https://www.linkedin.com/in/addymistrel/">Linkedin</a> & <a href="https://mail.google.com/mail/u/0/#inbox">email</a>
-</div>
