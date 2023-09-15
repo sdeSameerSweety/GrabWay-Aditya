@@ -2,7 +2,8 @@
 
 ### GrabWay
 
-<img  src="../GrabWay/grabway/public/logo.png"  alt="GrabWay"  height="150">
+<img  src="![logo192](https://github.com/addymistrel/GrabWay/assets/91611270/78dfaeef-96b4-451b-93d8-f04511ff775a)
+"  alt="GrabWay"  height="150">
 
 Live Preview Link[https://grabway.vercel.app/]
 
