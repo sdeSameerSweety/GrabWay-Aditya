@@ -23,7 +23,29 @@ Live Preview Link[https://grabway.vercel.app/]
 
 GrabWay is a cutting-edge ride-sharing application developed with React.js and powered by Google Maps API, designed to make commuting more efficient, cost-effective, and environmentally friendly. With RideShareX, you can easily find and share rides with others who are traveling in similar routes, reducing traffic congestion and your transportation costs.
 
-## Features
+## Tech Stack Used
+
+<h2 align="center">
+
+<p align="center">
+    <img src="https://img.shields.io/badge/React-20232A?style=for-the-badge&logo=react&logoColor=61DAFB"
+        alt="React.js" />
+    <img src="https://img.shields.io/badge/CSS3-1572B6?style=for-the-badge&logo=css3&logoColor=white" alt="CSS3" />
+    <img src="https://img.shields.io/badge/Tailwind_CSS-38B2AC?style=for-the-badge&logo=tailwind-css&logoColor=white"
+        alt="Tailwind CSS" />
+    <img src="https://img.shields.io/badge/JavaScript-323330?style=for-the-badge&logo=javascript&logoColor=F7DF1E"
+        alt="JavaScript" />
+    <img src="https://img.shields.io/badge/Node.js-339933?style=for-the-badge&logo=nodedotjs&logoColor=white"
+        alt="Node.js" />
+    <img src="https://img.shields.io/badge/Express.js-000000?style=for-the-badge&logo=express&logoColor=white"
+        alt="Express.js" />
+    <img src="https://img.shields.io/badge/MongoDB-4EA94B?style=for-the-badge&logo=mongodb&logoColor=white"
+        alt="MongoDB" />
+    <img src="https://img.shields.io/badge/npm-CB3837?style=for-the-badge&logo=npm&logoColor=white" alt="npm" />
+    <img src="https://img.shields.io/badge/Chakra%20UI-3bc7bd?style=for-the-badge&logo=chakraui&logoColor=white"
+        alt="Chakra UI" />
+</p>
+
 
 #### Frontend
 
