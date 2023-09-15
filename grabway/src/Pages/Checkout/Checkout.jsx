@@ -318,7 +318,7 @@ const Checkout = () => {
                           <div className="flex w-[100%] justify-between items-center text-lg border-b-2 border-[#00000089] pb-4">
                             GST
                             <span className="text-lg text-[#020202b7]">
-                              {taxOnAmount}
+                              {Math.floor(taxOnAmount)}
                             </span>
                           </div>
                           <div className="flex w-[100%] justify-between items-center text-2xl font-semibold mt-[5%]">
