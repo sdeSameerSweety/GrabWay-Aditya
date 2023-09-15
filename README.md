@@ -23,7 +23,24 @@ Live Preview Link[https://grabway.vercel.app/]
 
 GrabWay is a cutting-edge ride-sharing application developed with React.js and powered by Google Maps API, designed to make commuting more efficient, cost-effective, and environmentally friendly. With RideShareX, you can easily find and share rides with others who are traveling in similar routes, reducing traffic congestion and your transportation costs.
 
-## Tech Stack Used
+
+#### Frontend
+
+It's Frontend is fully made up of Tailwind and React JS Frameworks with help of ChakraUI.
+
+#### Backend
+
+The Means which we used to store data is MongoDB through express-JS API calls.
+
+
+## Codebase
+
+### Technologies
+
+With the ground rules out of the way, let's talk about the coarse architecture of this repo:
+
+Here is a list of all the big technologies we use:
+
 
 <h2 align="center">
 
@@ -45,52 +62,6 @@ GrabWay is a cutting-edge ride-sharing application developed with React.js and p
     <img src="https://img.shields.io/badge/Chakra%20UI-3bc7bd?style=for-the-badge&logo=chakraui&logoColor=white"
         alt="Chakra UI" />
 </p>
-
-
-#### Frontend
-
-It's Frontend is fully made up of Tailwind and React JS Frameworks with help of ChakraUI.
-
-#### Backend
-
-The Means which we used to store data is MongoDB through express-JS API calls.
-
-# Docs
-
-- Table of Contents
-
-  - [Codebase](#codebase)
-
-    - [Technologies](#technologies)
-    - [Folder Structure](#folder-structure)
-
-  - [Project Setup](#project-setup)
-
-    - [First time setup](#first-time-setup)
-    - [Installation](#installation)
-    - [Running the app locally](#running-the-app-locally)
-## Codebase
-
-### Technologies
-
-With the ground rules out of the way, let's talk about the coarse architecture of this mono repo:
-
-Here is a list of all the big technologies we use:
-
-<div align="center">
-      <img  src="./homeify/public/assets/images/node.png"  alt="HTML"  width="100"  height="100"/>
-      <img  src="./homeify/public/assets/images/css.png"  alt="CSS"  width="100"  height="100"/>
-      <img  src="./homeify/public/assets/images/js.png"  alt="Javascript"  width="100"  height="100"/>
-      <img  src="./homeify/public/assets/images/react.png"  alt="Javascript"  width="100"  height="100"/>
-      <img  src="https://github.com/addymistrel/B-Donate/assets/102992848/d8453d8a-a62d-4553-a8aa-46b84a252765"  alt="Javascript"  width="100"  height="100"/>
-</div>
-
-<div align="center">
-      <br/>
-      <img  src="./homeify/public/assets/images/mongo.png"  alt="HTML"  width="100"  height="100"/>
-      <img  src="https://github.com/Official-Akash/Responsive-Footer/assets/102992848/4e0e84c7-4bdf-488e-8b13-3a58262d82eb"  alt="Javascript"  width="100"  height="100"/>
-</div>
-
 
 
 ## Project Setup
