@@ -73,7 +73,6 @@ Here is a list of all the big technologies we use:
 
 ## Project Setup
 
-### First time setup
 
 ### FRONTEND
 The first step to running Homeify locally is downloading the code by cloning the repository:
@@ -126,13 +125,17 @@ npm install --force
 Now you're ready to run the app locally and sign into your local instance!
 ### Running the app locally
 
-Facing Difficulty in Frontend Server [VISIT]([https://youtu.be/-ERWlp828kY))
-Facing Difficulty in Backend Server [VISIT](<[https://youtu.be/y4qqQeUDCBQ](https://youtu.be/CgoD3HX1lWY)>)
+```sh
+
+http://localhost:3000/
+
+```
+<!-- Facing Difficulty in Frontend Server [VISIT]([https://youtu.be/-ERWlp828kY))
+Facing Difficulty in Backend Server [VISIT](<[https://youtu.be/y4qqQeUDCBQ](https://youtu.be/CgoD3HX1lWY)>) -->
 
 <div  align="center"><img  height="200px"  src="https://user-images.githubusercontent.com/77617189/192947926-37284128-9965-46a4-b29b-c75e47b2f76b.svg" /></div>
 
 
-<!-- ## Screenshots -->
 
 
 ## Feedback
