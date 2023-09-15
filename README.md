@@ -2,21 +2,12 @@
 
 ### GrabWay
 
-<img  src="![logo](https://github.com/addymistrel/GrabWay/assets/91611270/cea9cfc4-f755-40c2-8192-2f8594d3bec0)
-" alt="GrabWay"  height="150">
+<img  src="" alt="GrabWayLogo"  height="150">
 
 ## 🔗 Live Link
 
-[![GrabWay]()](https://grabway.vercel.app/)
+[![GrabWay](https://img.freepik.com/free-vector/black-convertible-car_53876-64027.jpg?w=1060&t=st=1694808382~exp=1694808982~hmac=596cd928bc63743aa0b25ac10ba2bad3c4077e04adfdcc210ab233d3e4e7ece8)](https://grabway.vercel.app/)
 
-
-<!-- <div align="center">
-      <img src="https://forthebadge.com/images/badges/built-with-love.svg" />
-      <img src="https://forthebadge.com/images/badges/uses-brains.svg" />
-      <img src="https://forthebadge.com/images/badges/powered-by-responsibility.svg" />
-      <br>
- </div>
-</div> -->
 
 <h1 align="center">About GrabWay</h1>
 
