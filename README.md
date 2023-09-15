@@ -1,15 +1,15 @@
 <div align="center">
 
-### GrabWay
 
-<img  src="" alt="GrabWay"  height="150">
+<h1> GrabWay </h1>
+
 
 ## 🔗 Live Link
 
-[![GrabWay] (https://grabway.vercel.app/)
+[![Link] (https://grabway.vercel.app/)
 
 
-<h1 align="center">About GrabWay</h1>
+<h3 align="center">About GrabWay</h3>
 
 ## Summary
 
