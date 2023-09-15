@@ -69,29 +69,7 @@ Here is a list of all the big technologies we use:
       <img  src="https://github.com/Official-Akash/Responsive-Footer/assets/102992848/4e0e84c7-4bdf-488e-8b13-3a58262d82eb"  alt="Javascript"  width="100"  height="100"/>
 </div>
 
-### Folder structure
 
-```sh
-
-Homiefy/
-
-├── homeify # Files used on the frontend
-      ├── public
-            ├── assets          #Contains all Images and Videos used
-              ├── Images
-              ├── Videos
-    ├── src #Contains all React FronEnd Files
-        ├── components  #All Related Components
-              ├── Main           #Main UI Rendered Pages
-              ├── Personal       #Eaxh Personal developer related components
-
-
-
-├── server #Backend api and Mogo Schemas
-      ├── Schema #All Colletions Models
-
-
-```
 
 ## Project Setup
 
@@ -102,20 +80,21 @@ The first step to running Homeify locally is downloading the code by cloning the
 
 ```sh
 
-git clone https://github.com/addymistrel/Homeify.git
+git clone https://github.com/addymistrel/GrabWay.git
+
 
 ```
 
-### Installation
 
-Homeify has a single installation step:
+
 
 - **Install the dependencies**:
 
 ```sh
 
-cd homeify
-npm install
+cd grabway
+npm i
+npm start
 
 ```
 
@@ -133,42 +112,35 @@ Now you're ready to run the app locally and sign into your local instance!
 
 ### BACKEND
 
-```sh
+<!-- ```sh
 cd server
 npm install (or npm install --force)
-```
+``` -->
 
-### Running the app locally
+
 
 #### Start the servers and Land on the Page
 
-To Start the Mongo-server for Backend run
+
 
 ```sh
-cd server
-node index.js (or nodemon)
-```
 
-Then Start The FrontEnd
+cd backend
+npm i
+node index.js 
 
 ```
-cd homeify
-npm start
-```
+### Running the app locally
 
 Facing Difficulty in Frontend Server [VISIT]([https://youtu.be/-ERWlp828kY))
 Facing Difficulty in Backend Server [VISIT](<[https://youtu.be/y4qqQeUDCBQ](https://youtu.be/CgoD3HX1lWY)>)
 
 <div  align="center"><img  height="200px"  src="https://user-images.githubusercontent.com/77617189/192947926-37284128-9965-46a4-b29b-c75e47b2f76b.svg" /></div>
 
-## Homeify Workflow
-
-<img src='https://github.com/addymistrel/B-Donate/assets/102992848/be93d250-59b0-476b-8634-0e8df62e0c45' width='920'>
 
 ## Screenshots
 
-<img src='./homeify/public/assets/images/ss2.png' width='920'>
-<img src='./homeify/public/assets/images/ss3.png' width='920'>
+
 
 ## Feedback
 
