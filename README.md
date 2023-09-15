@@ -7,16 +7,16 @@
 
 ## 🔗 Live Link
 
-[![GrabWay](https://img.shields.io/badge/my_portfolio-000?style=for-the-badge&logo=ko-fi&logoColor=white)](https://grabway.vercel.app/)
+[![GrabWay]()](https://grabway.vercel.app/)
 
 
-<div align="center">
+<!-- <div align="center">
       <img src="https://forthebadge.com/images/badges/built-with-love.svg" />
       <img src="https://forthebadge.com/images/badges/uses-brains.svg" />
       <img src="https://forthebadge.com/images/badges/powered-by-responsibility.svg" />
       <br>
  </div>
-</div>
+</div> -->
 
 <h1 align="center">About GrabWay</h1>
 
