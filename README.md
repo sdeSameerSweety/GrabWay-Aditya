@@ -1,10 +1,12 @@
 <div align="center">
 
-<img  src="https://github.com/addymistrel/Homeify/assets/102992848/01571eb1-96ae-412f-a073-f027537c7fec"  alt="Homeify"  height="150">
+### GrabWay
 
-[See Live Coming Soon!]
+<img  src="../GrabWay/grabway/public/logo.png"  alt="GrabWay"  height="150">
 
-### _Shopping_, Website
+Live Preview Link[https://grabway.vercel.app/]
+
+
 
 <div align="center">
       <img src="https://forthebadge.com/images/badges/built-with-love.svg" />
@@ -12,23 +14,19 @@
       <img src="https://forthebadge.com/images/badges/powered-by-responsibility.svg" />
       <br>
  </div>
-
----
-
 </div>
 
-<h1 align="center">About Homeify</h1>
+<h1 align="center">About GrabWay</h1>
 
 ## Summary
 
-It is a Fully Responsive Shopping Website a Similar Product of Pepperfry.com. It is backend integrated and fully authenticated using React Js.
-We have Used the best version and UI components from several fields along with the power of React JS to make it fully user friendly._Accessed By anyone from Anywhere_.
+GrabWay is a cutting-edge ride-sharing application developed with React.js and powered by Google Maps API, designed to make commuting more efficient, cost-effective, and environmentally friendly. With RideShareX, you can easily find and share rides with others who are traveling in similar routes, reducing traffic congestion and your transportation costs.
 
 ## Features
 
 #### Frontend
 
-It's Frontend is fully made up of Tailwind and React JS Frameworks.
+It's Frontend is fully made up of Tailwind and React JS Frameworks with help of ChakraUI.
 
 #### Backend
 
