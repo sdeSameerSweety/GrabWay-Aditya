@@ -40,7 +40,7 @@ const Checkout = () => {
   const pickupTime = UserQuery.originStartTime;
   const dropTime = UserQuery.destinationStartTime;
   const amount = UserQuery.amount;
-  const taxOnAmount = UserQuery.amount * 0.12;
+  const taxOnAmount = Math.floor(UserQuery.amount * 0.12);
 
   // const handlePayment = async (params) => {
   //   // const order = await createOrder(params); //  Create order on your backend
