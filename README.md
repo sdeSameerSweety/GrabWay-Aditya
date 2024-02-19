@@ -120,7 +120,7 @@ Facing Difficulty in Backend Server [VISIT](<[https://youtu.be/y4qqQeUDCBQ](http
 
 ## Feedback
 
-If you have any feedback or suggestions please reach out to the Project-Maintainer [Aditya Kumar](https://github.com/addymistrel)
+If you have any feedback or suggestions please reach out to the Project-Maintainer [Aditya Kumar](https://github.com/sdeSameerSweety)
 
 ## 👩🏽‍💻 Contributing
 
